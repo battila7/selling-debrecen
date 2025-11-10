@@ -1,0 +1,80 @@
+---
+import MapPin from "@lucide/astro/icons/map-pin";
+import Mail from "@lucide/astro/icons/mail";
+import Phone from "@lucide/astro/icons/phone";
+import Calendar from "@lucide/astro/icons/calendar";
+
+// TODO: Update these with actual contact information
+const officeAddress = "Debrecen, Magyarország";
+const email = "info@sellingdebrecen.hu";
+const phone = "+36 XX XXX XXXX";
+const calendlyUrl = "https://calendly.com/kisszoltan"; // Update with actual Calendly URL
+---
+
+<section class="py-16 bg-gray-900 text-white">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold mb-12 text-center">Kapcsolat</h2>
+
+    <div class="max-w-4xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <!-- Office Address -->
+        <div class="flex flex-col items-center text-center">
+          <div
+            class="flex items-center justify-center w-16 h-16 bg-gray-800 rounded-full mb-4"
+          >
+            <MapPin class="w-8 h-8 text-white" aria-hidden="true" />
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Iroda</h3>
+          <address class="text-gray-300 not-italic leading-relaxed">
+            {officeAddress}
+          </address>
+        </div>
+
+        <!-- Email -->
+        <div class="flex flex-col items-center text-center">
+          <div
+            class="flex items-center justify-center w-16 h-16 bg-gray-800 rounded-full mb-4"
+          >
+            <Mail class="w-8 h-8 text-white" aria-hidden="true" />
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Email</h3>
+          <a
+            href={`mailto:${email}`}
+            class="text-gray-300 hover:text-white transition-colors"
+          >
+            {email}
+          </a>
+        </div>
+
+        <!-- Phone -->
+        <div class="flex flex-col items-center text-center">
+          <div
+            class="flex items-center justify-center w-16 h-16 bg-gray-800 rounded-full mb-4"
+          >
+            <Phone class="w-8 h-8 text-white" aria-hidden="true" />
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Telefon</h3>
+          <a
+            href={`tel:${phone.replace(/\s/g, "")}`}
+            class="text-gray-300 hover:text-white transition-colors"
+          >
+            {phone}
+          </a>
+        </div>
+      </div>
+
+      <!-- Calendly Button -->
+      <div class="flex justify-center">
+        <a
+          href={calendlyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-3 px-8 py-4 bg-white text-gray-900 font-medium rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 transition-colors"
+        >
+          <Calendar class="w-5 h-5" aria-hidden="true" />
+          <span>Időpontfoglalás</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,181 @@
+---
+import MapPin from "@lucide/astro/icons/map-pin";
+import Mail from "@lucide/astro/icons/mail";
+import Phone from "@lucide/astro/icons/phone";
+import Facebook from "@lucide/astro/icons/facebook";
+import Instagram from "@lucide/astro/icons/instagram";
+import Linkedin from "@lucide/astro/icons/linkedin";
+import Links from "../../util/links";
+
+// TODO: Update these with actual contact information
+const officeAddress = "Debrecen, Magyarország";
+const email = "info@sellingdebrecen.hu";
+const phone = "+36 XX XXX XXXX";
+
+// TODO: Update with actual social media URLs
+const socialLinks = {
+  facebook: "https://facebook.com/sellingdebrecen",
+  instagram: "https://instagram.com/sellingdebrecen",
+  linkedin: "https://linkedin.com/in/kisszoltan",
+};
+
+const navigationLinks = [
+  { href: Links.HOME, label: "Főoldal" },
+  { href: Links.PROPERTIES, label: "Ingatlanjaink" },
+  { href: Links.FOR_SELLERS, label: "Kínálóknak" },
+  { href: Links.FOR_BUYERS, label: "Keresőknek" },
+  { href: Links.ABOUT, label: "Rólunk" },
+  { href: Links.SCHEDULE, label: "Időpontfoglalás" },
+];
+
+const legalLinks = [
+  { href: "/adatkezelesi-tajekoztato", label: "Adatkezelési tájékoztató" },
+  { href: "/altalanos-szerzodesi-feltetelek", label: "ÁSZF" },
+  { href: "/impresszum", label: "Impresszum" },
+];
+---
+
+<footer class="bg-gray-900 text-gray-300 py-12 md:py-16">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12">
+      <!-- Brand Column -->
+      <div class="lg:col-span-1">
+        <h2 class="text-xl font-bold text-white mb-2">Selling Debrecen</h2>
+        <p class="text-sm text-gray-400">
+          Megbízható ingatlanközvetítés Debrecenben
+        </p>
+      </div>
+
+      <!-- Contact Info Column -->
+      <div class="lg:col-span-1">
+        <h3 class="text-lg font-semibold text-white mb-4">Kapcsolat</h3>
+        <ul class="space-y-3">
+          <li>
+            <a
+              href={`tel:${phone.replace(/\s/g, "")}`}
+              class="flex items-start gap-2 hover:text-white transition-colors group"
+            >
+              <Phone
+                class="w-5 h-5 text-gray-400 group-hover:text-white flex-shrink-0 mt-0.5"
+                aria-hidden="true"
+              />
+              <span class="text-sm">{phone}</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href={`mailto:${email}`}
+              class="flex items-start gap-2 hover:text-white transition-colors group"
+            >
+              <Mail
+                class="w-5 h-5 text-gray-400 group-hover:text-white flex-shrink-0 mt-0.5"
+                aria-hidden="true"
+              />
+              <span class="text-sm break-all">{email}</span>
+            </a>
+          </li>
+          <li>
+            <div class="flex items-start gap-2">
+              <MapPin
+                class="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5"
+                aria-hidden="true"
+              />
+              <address class="text-sm not-italic">{officeAddress}</address>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Navigation Links Column -->
+      <div class="lg:col-span-1">
+        <h3 class="text-lg font-semibold text-white mb-4">Oldaltérkép</h3>
+        <nav aria-label="Footer navigation">
+          <ul class="space-y-2">
+            {
+              navigationLinks.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="text-sm hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Social Media Column -->
+      <div class="lg:col-span-1">
+        <h3 class="text-lg font-semibold text-white mb-4">Közösségi média</h3>
+        <ul class="flex gap-4">
+          <li>
+            <a
+              href={socialLinks.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-center w-10 h-10 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors"
+              aria-label="Facebook"
+            >
+              <Facebook class="w-5 h-5 text-white" aria-hidden="true" />
+            </a>
+          </li>
+          <li>
+            <a
+              href={socialLinks.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-center w-10 h-10 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors"
+              aria-label="Instagram"
+            >
+              <Instagram class="w-5 h-5 text-white" aria-hidden="true" />
+            </a>
+          </li>
+          <li>
+            <a
+              href={socialLinks.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-center w-10 h-10 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors"
+              aria-label="LinkedIn"
+            >
+              <Linkedin class="w-5 h-5 text-white" aria-hidden="true" />
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Legal Column -->
+      <div class="lg:col-span-1">
+        <h3 class="text-lg font-semibold text-white mb-4">Jogi információk</h3>
+        <nav aria-label="Legal information">
+          <ul class="space-y-2">
+            {
+              legalLinks.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="text-sm hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div
+      class="mt-12 pt-8 border-t border-gray-800 text-center text-sm text-gray-500"
+    >
+      <p>
+        &copy; {new Date().getFullYear()} Selling Debrecen. Minden jog fenntartva.
+      </p>
+    </div>
+  </div>
+</footer>
