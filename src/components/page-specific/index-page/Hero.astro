@@ -1,5 +1,6 @@
 ---
 import heroBackground from "../../../images/hero-background.jpg";
+import Links from "../../../util/links";
 ---
 
 <section
@@ -15,4 +16,54 @@ import heroBackground from "../../../images/hero-background.jpg";
       Prémium ingatlanok Debrecenben és környékén
     </p>
   </div>
+
+  <header
+  x-data="{ scrolled: true }"
+  :class="scrolled ? 'bg-navy/70 backdrop-blur-sm border-b border-camel/70' : 'bg-transparent'"
+  class="transition-colors duration-300"
+>
+  <nav class="container mx-auto px-4 py-4">
+    <!-- Desktop Navigation disabled -->
+    <div class="hidden md:flex items-center justify-between">
+      <!-- Logo -->
+      <a href={Links.HOME} class="text-white text-xl font-semibold">
+        Selling Debrecen
+      </a>
+
+      <!-- Menu Items -->
+      <div class="flex items-center gap-8">
+        <a
+          href={Links.PROPERTIES}
+          class="text-white hover:text-gray-300 transition-colors"
+        >
+          Ingatlanjaink
+        </a>
+        <a
+          href={Links.FOR_SELLERS}
+          class="text-white hover:text-gray-300 transition-colors"
+        >
+          Kínálóknak
+        </a>
+        <a
+          href={Links.FOR_BUYERS}
+          class="text-white hover:text-gray-300 transition-colors"
+        >
+          Keresőknek
+        </a>
+        <a
+          href={Links.ABOUT}
+          class="text-white hover:text-gray-300 transition-colors"
+        >
+          Rólunk
+        </a>
+        <a
+          href={Links.SCHEDULE}
+          class="bg-white text-black px-4 py-2 rounded hover:bg-gray-100 transition-colors"
+        >
+          Időpontfoglalás
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
 </section>

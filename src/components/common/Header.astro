@@ -7,6 +7,7 @@ const mobileMenuButtonId = "mobile-menu-button";
 const mobileMenuOverlayId = "mobile-menu-overlay";
 const hamburgerIconId = "hamburger-icon";
 const xIconId = "x-icon";
+const showDesktopNavigation = Astro.url.pathname !== "/";
 ---
 
 <header
@@ -16,12 +17,12 @@ const xIconId = "x-icon";
       scrolled = window.scrollY > 50;
     });
   "
-  :class="scrolled ? 'bg-black' : 'bg-transparent'"
-  class="fixed top-0 left-0 right-0 z-[100] transition-colors duration-300"
+  :class="scrolled ? 'bg-navy/70 backdrop-blur-sm border-b border-camel/70' : 'bg-transparent'"
+  class={(showDesktopNavigation ? "" : "block md:hidden") + " fixed top-0 left-0 right-0 z-[100] transition-colors duration-300"}
 >
   <nav class="container mx-auto px-4 py-4">
-    <!-- Desktop Navigation -->
-    <div class="hidden md:flex items-center justify-between">
+    <!-- Desktop Navigation disabled -->
+    {showDesktopNavigation && (<div class="hidden md:flex items-center justify-between">
       <!-- Logo -->
       <a href={Links.HOME} class="text-white text-xl font-semibold">
         Selling Debrecen
@@ -60,7 +61,7 @@ const xIconId = "x-icon";
           Időpontfoglalás
         </a>
       </div>
-    </div>
+    </div>)}
 
     <!-- Mobile Navigation -->
     <div class="md:hidden flex items-center justify-between">
@@ -73,7 +74,7 @@ const xIconId = "x-icon";
         <!-- Schedule Button -->
         <a
           href={Links.SCHEDULE}
-          class="bg-white text-black px-4 py-2 rounded text-sm hover:bg-gray-100 transition-colors"
+          class="font-system-ui bg-camel text-white px-4 py-2 rounded text-sm hover:bg-gray-100 tracking-wider transition-colors"
         >
           Időpontfoglalás
         </a>
