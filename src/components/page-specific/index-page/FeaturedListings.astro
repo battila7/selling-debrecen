@@ -1,0 +1,73 @@
+---
+import ListingCard, { type Listing } from "./ListingCard.astro";
+import listingPlaceholder from "../../../images/listing-placeholder.jpg";
+
+// Mock data - this can be replaced with a content collection later
+const featuredListings: Listing[] = [
+  {
+    title: "Elegáns családi ház",
+    address: "Debrecen, Belváros",
+    price: "125.000.000 Ft",
+    image: listingPlaceholder.src,
+    rooms: 5,
+    area: 180,
+    propertyType: "Családi ház",
+  },
+  {
+    title: "Modern lakás",
+    address: "Debrecen, Egyetem tér",
+    price: "45.000.000 Ft",
+    image: listingPlaceholder.src,
+    rooms: 2,
+    area: 65,
+    propertyType: "Lakás",
+  },
+  {
+    title: "Prémium villa",
+    address: "Debrecen, Nagyerdő",
+    price: "280.000.000 Ft",
+    image: listingPlaceholder.src,
+    rooms: 7,
+    area: 320,
+    propertyType: "Villa",
+  },
+  {
+    title: "Tégla családi ház",
+    address: "Debrecen, Tócóskert",
+    price: "95.000.000 Ft",
+    image: listingPlaceholder.src,
+    rooms: 4,
+    area: 140,
+    propertyType: "Családi ház",
+  },
+  {
+    title: "Panorámás lakás",
+    address: "Debrecen, Doberdó utca",
+    price: "52.000.000 Ft",
+    image: listingPlaceholder.src,
+    rooms: 3,
+    area: 85,
+    propertyType: "Lakás",
+  },
+  {
+    title: "Kertesház",
+    address: "Debrecen, Széchenyi utca",
+    price: "78.000.000 Ft",
+    image: listingPlaceholder.src,
+    rooms: 4,
+    area: 120,
+    propertyType: "Családi ház",
+  },
+];
+---
+
+<section class="py-16 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold text-gray-900 mb-12 text-center">
+      Kiemelt ingatlanjaink
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {featuredListings.map((listing) => <ListingCard listing={listing} />)}
+    </div>
+  </div>
+</section>
