@@ -1,0 +1,5 @@
+.astro
+.vscode
+README.md
+*.yaml
+*.yml
