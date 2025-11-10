@@ -9,4 +9,27 @@
   --color-forest-dark: #234736;
   --color-navy: #0e1c4f;
   --color-charcoal: #1a1a1a;
+
+  --font-system-ui:
+    system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --font-neo-grotesque:
+    Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+  --font-didone:
+    Didot, "Bodoni MT", "Noto Serif Display", "URW Palladio L", P052, Sylfaen,
+    serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+  --font-geometric-humanist:
+    Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-old-style:
+    "Iowan Old Style", "Palatino Linotype", "URW Palladio L", "P052", serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+:root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

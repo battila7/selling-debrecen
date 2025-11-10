@@ -1,0 +1,78 @@
+---
+description: "Old-Money Styling Guide"
+globs: ["**/*.html", "**/*.astro", "**/*.css"]
+---
+
+You are designing and implementing the frontend for a LUXURY "old-money" STYLE REAL ESTATE WEBSITE.
+
+Follow these rules EXACTLY for ALL UI, layout, and styling work.
+
+## Overall aesthetic
+
+- Aim for: understated, timeless, old-money / quiet-luxury vibe suitable for a high-end real estate agent.
+- Visual keywords: elegant, heritage, classic, calm, trustworthy, minimal but warm.
+- Let property photography be the "loud" element; the UI chrome should be subtle and reserved.
+
+## Color palette (ABSOLUTELY NO GREENS)
+
+Use a **restricted palette** based on warm neutrals, navy, and optional burgundy. Do not invent new colors unless they clearly fit into these families.
+
+**Base / backgrounds**
+- Primary page background: soft warm off-white  
+  - Example: `#F3EFE8` or `#FAF4E9`
+- Secondary panel/card backgrounds (search boxes, listing cards, content sections): warm stone / taupe  
+  - Example: `#BBA591` or a slightly lighter/desaturated variant
+
+**Accents**
+- Primary accent color (buttons, main CTAs, important highlights): deep heritage navy  
+  - Example: `#0E1C4F`
+- Secondary accent (used sparingly for emphasis, tags, or section headers): rich burgundy / wine  
+  - Example: `#6E1E2A` or `#7F1F3D`
+- Optional subtle gold-beige accent for lines, icons, or small details  
+  - Example: `#C19A6B`
+
+**Text colors**
+- Main body text: very dark charcoal, not pure black  
+  - Example: `#1A1A1A` or `#2C2C2C`
+- Muted secondary text (meta info, labels): medium warm gray  
+  - Example: `#6C6460`
+- On dark backgrounds (navy or burgundy sections): use white or slightly off-white for readability.
+
+## Layout & components
+
+- Use generous spacing and white space; layouts should feel airy and calm.
+- Prefer simple grids and clear hierarchy over busy decoration.
+- Cards:
+  - Soft corners (small to medium border-radius, not pill-shaped).
+  - Very subtle borders in taupe or light gray, or soft shadow—never harsh black borders.
+- Sectioning:
+  - Alternate between cream background and very light taupe background sections to create gentle structure.
+  - Occasional full-width navy or burgundy strips for “hero”, “about the agent”, or stats sections.
+
+## Typography
+
+- Headings:
+  - Use a classic, elegant serif font (see the global css config) for H1–H3.
+  - Title case or all caps with slightly increased letter-spacing is encouraged for key headings.
+- Body text:
+  - Use a clean, neutral sans-serif for paragraphs and labels.
+  - Line height should be comfortable and slightly generous to preserve the airy feeling.
+- Avoid playful, rounded, or ultra-modern futuristic fonts.
+
+## Real-estate specific guidance
+
+- Hero section:
+  - Full-bleed property or city imagery.
+  - Overlay text and search controls using navy or slightly translucent navy over the image with white text.
+  - Keep overlays minimal and clean—no bright color blocks.
+
+## Do / Don’t summary
+
+- DO: warm neutrals, navy, burgundy, gentle gold-beige accents.
+- DO: restrained, editorial look; plenty of space; minimal chrome.
+- DO: serif headings + sans-serif body; calm, high-end feeling.
+
+- DO NOT: introduce bright, saturated UI colors.
+- DO NOT: use heavy gradients, neon glows, or playful cartoonish elements.
+
+Always prefer the option that feels more heritage, classic, and quiet-luxury, even if it means fewer colors or simpler layouts.
