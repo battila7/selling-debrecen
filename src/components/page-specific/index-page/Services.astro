@@ -1,0 +1,157 @@
+---
+import TrendingUp from "@lucide/astro/icons/trending-up";
+import Camera from "@lucide/astro/icons/camera";
+import FileText from "@lucide/astro/icons/file-text";
+import Handshake from "@lucide/astro/icons/handshake";
+import Search from "@lucide/astro/icons/search";
+import MapPin from "@lucide/astro/icons/map-pin";
+import Shield from "@lucide/astro/icons/shield";
+import Key from "@lucide/astro/icons/key";
+import Links from "../../../util/links";
+import type { AstroComponent } from "@lucide/astro";
+
+interface Service {
+  title: string;
+  description: string;
+  icon: AstroComponent;
+}
+
+const sellerServices: Service[] = [
+  {
+    title: "Ingatlan értékelés",
+    description:
+      "Professzionális értékelés az optimális eladási ár meghatározásához",
+    icon: TrendingUp,
+  },
+  {
+    title: "Fotózás és marketing",
+    description: "Professzionális fotózás és hatékony marketing stratégia",
+    icon: Camera,
+  },
+  {
+    title: "Ügyintézés",
+    description: "Teljes körű ügyintézés a dokumentumoktól a szerződéskötésig",
+    icon: FileText,
+  },
+  {
+    title: "Érdeklődők kezelése",
+    description: "Megbízható érdeklődők kiválasztása és megfelelő kommunikáció",
+    icon: Handshake,
+  },
+];
+
+const buyerServices: Service[] = [
+  {
+    title: "Ingatlan keresés",
+    description: "Személyre szabott keresés az Ön igényei szerint",
+    icon: Search,
+  },
+  {
+    title: "Környék ismertetés",
+    description: "Részletes információk a környékről és infrastruktúráról",
+    icon: MapPin,
+  },
+  {
+    title: "Biztonságos vásárlás",
+    description: "Teljes körű ellenőrzés és jogi védelem a vásárlás során",
+    icon: Shield,
+  },
+  {
+    title: "Kulcs átadás",
+    description: "Zökkenőmentes átadás-átvétel és bejelentkezési segítség",
+    icon: Key,
+  },
+];
+---
+
+<section class="py-16 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold text-gray-900 mb-16 text-center">
+      Szolgáltatásaink
+    </h2>
+
+    <!-- Services for Sellers -->
+    <div class="mb-20">
+      <div class="max-w-3xl mx-auto mb-12">
+        <h3 class="text-3xl font-semibold text-gray-900 mb-6 text-center">
+          Eladóknak és bérbeadóknak
+        </h3>
+        <p class="text-lg text-gray-700 leading-relaxed text-center">
+          Ha ingatlanját szeretné értékesíteni, szakértő segítségünkkel a lehető
+          legjobb áron és a legrövidebb idő alatt adhatja el. Teljes körű
+          szolgáltatást nyújtunk az értékeléstől a szerződéskötésig.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {
+          sellerServices.map((service) => {
+            const Icon = service.icon;
+            return (
+              <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4 mx-auto">
+                  <Icon class="w-8 h-8 text-gray-700" aria-hidden="true" />
+                </div>
+                <h4 class="text-xl font-semibold text-gray-900 mb-3 text-center">
+                  {service.title}
+                </h4>
+                <p class="text-gray-600 text-center leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
+            );
+          })
+        }
+      </div>
+      <div class="flex justify-center mt-12">
+        <a
+          href={Links.FOR_SELLERS}
+          class="px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
+        >
+          További információ
+        </a>
+      </div>
+    </div>
+
+    <!-- Services for Buyers -->
+    <div class="mb-20">
+      <div class="max-w-3xl mx-auto mb-12">
+        <h3 class="text-3xl font-semibold text-gray-900 mb-6 text-center">
+          Keresőknek
+        </h3>
+        <p class="text-lg text-gray-700 leading-relaxed text-center">
+          Álmaik otthonának megtalálásában segítünk. Széles választékunkból
+          választhatnak, és minden lépésben mellettük állunk a vásárlás
+          folyamatában.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {
+          buyerServices.map((service) => {
+            const Icon = service.icon;
+            return (
+              <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4 mx-auto">
+                  <Icon class="w-8 h-8 text-gray-700" aria-hidden="true" />
+                </div>
+                <h4 class="text-xl font-semibold text-gray-900 mb-3 text-center">
+                  {service.title}
+                </h4>
+                <p class="text-gray-600 text-center leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
+            );
+          })
+        }
+      </div>
+      <div class="flex justify-center mt-12">
+        <a
+          href={Links.FOR_BUYERS}
+          class="px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
+        >
+          További információ
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
