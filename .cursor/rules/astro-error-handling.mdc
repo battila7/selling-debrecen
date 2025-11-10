@@ -1,0 +1,553 @@
+---
+description: "Astro Error Handling"
+---
+# Astro Error Handling
+
+Best practices for handling errors gracefully in Astro applications.
+
+<rule>
+name: astro_error_handling
+description: Standards for error handling and edge cases in Astro
+filters:
+  - type: file_extension
+    pattern: "\\.astro$"
+
+actions:
+  - type: suggest
+    message: |
+      Follow these error handling best practices for Astro:
+
+      ## Data Fetching Errors
+
+      ### Handle Failed API Calls
+      ```astro
+      ---
+      let posts = [];
+      let error = null;
+      
+      try {
+        const response = await fetch('https://api.example.com/posts');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        posts = await response.json();
+      } catch (e) {
+        error = e instanceof Error ? e.message : 'An error occurred';
+        console.error('Failed to fetch posts:', e);
+      }
+      ---
+      
+      {error ? (
+        <div class="error" role="alert">
+          <p>Failed to load posts: {error}</p>
+          <button onclick="window.location.reload()">Retry</button>
+        </div>
+      ) : (
+        <ul>
+          {posts.map(post => (
+            <li>{post.title}</li>
+          ))}
+        </ul>
+      )}
+      ```
+
+      ### Timeout Handling
+      ```astro
+      ---
+      async function fetchWithTimeout(url: string, timeout = 5000) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), timeout);
+        
+        try {
+          const response = await fetch(url, { signal: controller.signal });
+          clearTimeout(timeoutId);
+          return response;
+        } catch (error) {
+          if (error instanceof Error && error.name === 'AbortError') {
+            throw new Error('Request timeout');
+          }
+          throw error;
+        }
+      }
+      
+      let data;
+      let error;
+      
+      try {
+        const response = await fetchWithTimeout('https://api.example.com/data');
+        data = await response.json();
+      } catch (e) {
+        error = e instanceof Error ? e.message : 'Unknown error';
+      }
+      ---
+      ```
+
+      ## Content Collection Errors
+
+      ### Handle Missing Entries
+      ```astro
+      ---
+      // pages/blog/[slug].astro
+      import { getEntry } from 'astro:content';
+      
+      const { slug } = Astro.params;
+      
+      // ✅ GOOD: Check if entry exists
+      const post = await getEntry('blog', slug);
+      
+      if (!post) {
+        return Astro.redirect('/404', 404);
+      }
+      
+      // Additional validation
+      if (post.data.draft && import.meta.env.PROD) {
+        return Astro.redirect('/404', 404);
+      }
+      
+      const { Content } = await post.render();
+      ---
+      
+      <article>
+        <h1>{post.data.title}</h1>
+        <Content />
+      </article>
+      ```
+
+      ### Handle Render Errors
+      ```astro
+      ---
+      const { post } = Astro.props;
+      
+      let Content;
+      let renderError;
+      
+      try {
+        ({ Content } = await post.render());
+      } catch (e) {
+        renderError = e instanceof Error ? e.message : 'Failed to render content';
+        console.error('Content render error:', e);
+      }
+      ---
+      
+      {renderError ? (
+        <div class="error">
+          <h2>Content Error</h2>
+          <p>{renderError}</p>
+        </div>
+      ) : Content && (
+        <Content />
+      )}
+      ```
+
+      ## Image Errors
+
+      ### Handle Missing Images
+      ```astro
+      ---
+      import { Image } from 'astro:assets';
+      
+      interface Props {
+        src: ImageMetadata | string;
+        alt: string;
+        fallbackSrc?: string;
+      }
+      
+      const { 
+        src, 
+        alt, 
+        fallbackSrc = '/images/placeholder.jpg' 
+      } = Astro.props;
+      ---
+      
+      <Image
+        src={src}
+        alt={alt}
+        onError={(e) => {
+          e.currentTarget.src = fallbackSrc;
+        }}
+      />
+      
+      <script>
+        // Handle image load errors client-side
+        document.querySelectorAll('img').forEach(img => {
+          img.addEventListener('error', function(this: HTMLImageElement) {
+            if (!this.dataset.errorHandled) {
+              this.dataset.errorHandled = 'true';
+              this.src = '/images/placeholder.jpg';
+              this.alt = 'Image failed to load';
+            }
+          });
+        });
+      </script>
+      ```
+
+      ## Form Validation
+
+      ### Server-Side Validation
+      ```astro
+      ---
+      // pages/api/submit.ts
+      import type { APIRoute } from 'astro';
+      
+      export const POST: APIRoute = async ({ request }) => {
+        try {
+          const data = await request.formData();
+          const email = data.get('email');
+          
+          // Validate
+          if (!email || typeof email !== 'string') {
+            return new Response(
+              JSON.stringify({ error: 'Email is required' }),
+              { status: 400, headers: { 'Content-Type': 'application/json' } }
+            );
+          }
+          
+          // Email validation
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            return new Response(
+              JSON.stringify({ error: 'Invalid email format' }),
+              { status: 400, headers: { 'Content-Type': 'application/json' } }
+            );
+          }
+          
+          // Process...
+          return new Response(
+            JSON.stringify({ success: true }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } }
+          );
+          
+        } catch (error) {
+          console.error('Form submission error:', error);
+          return new Response(
+            JSON.stringify({ error: 'Internal server error' }),
+            { status: 500, headers: { 'Content-Type': 'application/json' } }
+          );
+        }
+      };
+      ---
+      ```
+
+      ### Client-Side Validation
+      ```astro
+      <form id="contact-form">
+        <div>
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            aria-required="true"
+            aria-describedby="email-error"
+          />
+          <span id="email-error" class="error" role="alert"></span>
+        </div>
+        
+        <button type="submit">Submit</button>
+      </form>
+      
+      <script>
+        const form = document.getElementById('contact-form') as HTMLFormElement;
+        const emailInput = document.getElementById('email') as HTMLInputElement;
+        const emailError = document.getElementById('email-error');
+        
+        form?.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          // Clear previous errors
+          if (emailError) emailError.textContent = '';
+          
+          // Validate
+          if (!emailInput.value) {
+            if (emailError) emailError.textContent = 'Email is required';
+            emailInput.focus();
+            return;
+          }
+          
+          try {
+            const response = await fetch('/api/submit', {
+              method: 'POST',
+              body: new FormData(form)
+            });
+            
+            const result = await response.json();
+            
+            if (!response.ok) {
+              throw new Error(result.error || 'Submission failed');
+            }
+            
+            // Success handling
+            alert('Form submitted successfully!');
+            form.reset();
+            
+          } catch (error) {
+            if (emailError) {
+              emailError.textContent = error instanceof Error 
+                ? error.message 
+                : 'An error occurred';
+            }
+          }
+        });
+      </script>
+      ```
+
+      ## Environment Variable Errors
+
+      ### Validate Required Environment Variables
+      ```astro
+      ---
+      // Check required env vars at build time
+      const requiredEnvVars = [
+        'PUBLIC_API_URL',
+        'API_KEY'
+      ] as const;
+      
+      const missingVars = requiredEnvVars.filter(
+        varName => !import.meta.env[varName]
+      );
+      
+      if (missingVars.length > 0) {
+        throw new Error(
+          `Missing required environment variables: ${missingVars.join(', ')}`
+        );
+      }
+      
+      const API_URL = import.meta.env.PUBLIC_API_URL;
+      const API_KEY = import.meta.env.API_KEY;
+      ---
+      ```
+
+      ## Custom Error Pages
+
+      ### 404 Page
+      ```astro
+      ---
+      // pages/404.astro
+      import BaseLayout from '../layouts/BaseLayout.astro';
+      ---
+      
+      <BaseLayout title="Page Not Found">
+        <div class="error-page">
+          <h1>404</h1>
+          <p>Oops! The page you're looking for doesn't exist.</p>
+          
+          <nav>
+            <a href="/">Go Home</a>
+            <a href="/blog">View Blog</a>
+            <a href="/contact">Contact Us</a>
+          </nav>
+        </div>
+      </BaseLayout>
+      
+      <style>
+        .error-page {
+          text-align: center;
+          padding: 4rem 2rem;
+        }
+        
+        h1 {
+          font-size: 6rem;
+          margin: 0;
+          color: var(--color-error);
+        }
+      </style>
+      ```
+
+      ### 500 Error Page
+      ```astro
+      ---
+      // pages/500.astro
+      import BaseLayout from '../layouts/BaseLayout.astro';
+      ---
+      
+      <BaseLayout title="Server Error">
+        <div class="error-page">
+          <h1>500</h1>
+          <p>Something went wrong on our end.</p>
+          <p>Please try again later.</p>
+          
+          <button onclick="window.location.reload()">
+            Reload Page
+          </button>
+        </div>
+      </BaseLayout>
+      ```
+
+      ## Error Boundaries
+
+      ### Component-Level Error Handling
+      ```astro
+      ---
+      // components/SafeComponent.astro
+      interface Props {
+        fallback?: string;
+      }
+      
+      const { fallback = 'Failed to load component' } = Astro.props;
+      
+      let error = null;
+      let hasContent = true;
+      
+      try {
+        // Check if slot has content
+        hasContent = Astro.slots.has('default');
+      } catch (e) {
+        error = e;
+        console.error('Component error:', e);
+      }
+      ---
+      
+      {error || !hasContent ? (
+        <div class="component-error">
+          <p>{fallback}</p>
+        </div>
+      ) : (
+        <slot />
+      )}
+      ```
+
+      ## Logging and Monitoring
+
+      ### Structured Error Logging
+      ```astro
+      ---
+      interface ErrorLog {
+        timestamp: string;
+        level: 'error' | 'warn' | 'info';
+        message: string;
+        context?: Record<string, unknown>;
+      }
+      
+      function logError(message: string, context?: Record<string, unknown>) {
+        const log: ErrorLog = {
+          timestamp: new Date().toISOString(),
+          level: 'error',
+          message,
+          context
+        };
+        
+        console.error(JSON.stringify(log));
+        
+        // Send to monitoring service in production
+        if (import.meta.env.PROD) {
+          fetch('/api/log', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(log)
+          }).catch(console.error);
+        }
+      }
+      
+      try {
+        // Risky operation
+        const data = await fetchData();
+      } catch (error) {
+        logError('Failed to fetch data', {
+          url: Astro.url.pathname,
+          error: error instanceof Error ? error.message : 'Unknown error'
+        });
+      }
+      ---
+      ```
+
+      ## Graceful Degradation
+
+      ### Progressive Enhancement
+      ```astro
+      ---
+      let data;
+      let error;
+      
+      try {
+        data = await fetchEnhancedFeature();
+      } catch (e) {
+        error = e;
+        // Fall back to basic version
+        data = await fetchBasicFeature();
+      }
+      ---
+      
+      {error && (
+        <div class="notice">
+          Some features are temporarily unavailable
+        </div>
+      )}
+      
+      <div>
+        {/* Basic version works even if enhanced fails */}
+        <slot />
+      </div>
+      ```
+
+      ## Type-Safe Error Handling
+
+      ### Custom Error Types
+      ```typescript
+      // utils/errors.ts
+      export class APIError extends Error {
+        constructor(
+          message: string,
+          public statusCode: number,
+          public endpoint: string
+        ) {
+          super(message);
+          this.name = 'APIError';
+        }
+      }
+      
+      export class ValidationError extends Error {
+        constructor(
+          message: string,
+          public field: string
+        ) {
+          super(message);
+          this.name = 'ValidationError';
+        }
+      }
+      ```
+
+      ```astro
+      ---
+      import { APIError, ValidationError } from '../utils/errors';
+      
+      try {
+        const response = await fetch('/api/data');
+        if (!response.ok) {
+          throw new APIError(
+            'Failed to fetch',
+            response.status,
+            '/api/data'
+          );
+        }
+      } catch (error) {
+        if (error instanceof APIError) {
+          console.error(`API Error ${error.statusCode}: ${error.message}`);
+        } else if (error instanceof ValidationError) {
+          console.error(`Validation Error on ${error.field}: ${error.message}`);
+        } else {
+          console.error('Unknown error:', error);
+        }
+      }
+      ---
+      ```
+
+examples:
+  - input: |
+      # Bad: No error handling
+      const data = await fetch('/api/data').then(r => r.json());
+      
+      # Good: Proper error handling
+      let data;
+      let error;
+      try {
+        const res = await fetch('/api/data');
+        if (!res.ok) throw new Error('Failed');
+        data = await res.json();
+      } catch (e) {
+        error = e instanceof Error ? e.message : 'Error';
+      }
+    output: "Robust error handling in Astro"
+</rule>

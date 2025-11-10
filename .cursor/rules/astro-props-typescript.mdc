@@ -1,0 +1,197 @@
+---
+description: "Astro Props and TypeScript"
+---
+# Astro Props and TypeScript
+
+Best practices for defining and using props with TypeScript in Astro components.
+
+<rule>
+name: astro_props_typescript
+description: Standards for type-safe props in Astro components
+filters:
+  - type: file_extension
+    pattern: "\\.astro$"
+  - type: content
+    pattern: "Astro\\.props"
+
+actions:
+  - type: suggest
+    message: |
+      Follow these best practices for props in Astro components:
+
+      ## Always Define Props Interface
+
+      ```astro
+      ---
+      // ✅ GOOD: Explicit interface
+      interface Props {
+        title: string;
+        count?: number;
+        items: Array<{ id: string; name: string }>;
+      }
+      
+      const { title, count = 0, items } = Astro.props;
+      ---
+      
+      // ❌ BAD: No type definition
+      const { title, count, items } = Astro.props;
+      ```
+
+      ## Props Best Practices
+
+      1. **Always export the interface** (for documentation):
+         ```typescript
+         export interface Props {
+           // ...
+         }
+         ```
+
+      2. **Use descriptive names**:
+         ```typescript
+         // ✅ GOOD
+         interface Props {
+           blogTitle: string;
+           publishedDate: Date;
+         }
+         
+         // ❌ BAD
+         interface Props {
+           title: string;
+           date: Date;
+         }
+         ```
+
+      3. **Provide defaults in destructuring**:
+         ```typescript
+         const { 
+           title, 
+           theme = 'light',
+           showHeader = true 
+         } = Astro.props;
+         ```
+
+      4. **Use union types for variants**:
+         ```typescript
+         interface Props {
+           variant: 'primary' | 'secondary' | 'danger';
+           size: 'sm' | 'md' | 'lg';
+         }
+         ```
+
+      5. **Complex types in separate files**:
+         ```typescript
+         // types/product.ts
+         export interface Product {
+           id: string;
+           name: string;
+           price: number;
+         }
+         
+         // components/ProductCard.astro
+         import type { Product } from '../types/product';
+         
+         interface Props {
+           product: Product;
+         }
+         ```
+
+      6. **Use generic utility types**:
+         ```typescript
+         interface Props {
+           items: Array<string>;
+           metadata: Record<string, unknown>;
+           onClick?: () => void;
+         }
+         ```
+
+      7. **Document complex props**:
+         ```typescript
+         interface Props {
+           /** The main heading text displayed at the top */
+           title: string;
+           /** Optional CSS class names to apply to the container */
+           className?: string;
+           /** Callback fired when the user clicks the action button */
+           onAction?: (id: string) => void;
+         }
+         ```
+
+      ## Common Patterns
+
+      ### Optional Props with Conditionals
+      ```astro
+      ---
+      interface Props {
+        title: string;
+        subtitle?: string;
+        icon?: string;
+      }
+      
+      const { title, subtitle, icon } = Astro.props;
+      ---
+      
+      <div>
+        {icon && <img src={icon} alt="" />}
+        <h1>{title}</h1>
+        {subtitle && <p>{subtitle}</p>}
+      </div>
+      ```
+
+      ### Array Props
+      ```astro
+      ---
+      interface NavItem {
+        label: string;
+        href: string;
+      }
+      
+      interface Props {
+        items: NavItem[];
+      }
+      
+      const { items } = Astro.props;
+      ---
+      
+      <nav>
+        {items.map(item => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </nav>
+      ```
+
+      ### Extending Base Props
+      ```astro
+      ---
+      import type { HTMLAttributes } from 'astro/types';
+      
+      interface Props extends HTMLAttributes<'div'> {
+        title: string;
+      }
+      
+      const { title, class: className, ...rest } = Astro.props;
+      ---
+      
+      <div class={className} {...rest}>
+        <h1>{title}</h1>
+      </div>
+      ```
+
+examples:
+  - input: |
+      # Bad: No types, no defaults
+      ---
+      const { title, items } = Astro.props;
+      ---
+      
+      # Good: Typed with defaults
+      ---
+      interface Props {
+        title: string;
+        items: string[];
+        theme?: 'light' | 'dark';
+      }
+      
+      const { title, items, theme = 'light' } = Astro.props;
+      ---
+    output: "Type-safe Astro component with proper props"
+</rule>

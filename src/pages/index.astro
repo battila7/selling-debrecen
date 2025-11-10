@@ -1,16 +1,8 @@
 ---
-
+import SitePageLayout from "../layouts/SitePageLayout.astro";
+import Hero from "../components/page-specific/index-page/Hero.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Selling Debrecen</title>
-  </head>
-  <body>
-    <h1>Selling Debrecen</h1>
-  </body>
-</html>
+<SitePageLayout title="Selling Debrecen" description="Ingatlanok Debrecenben">
+  <Hero />
+</SitePageLayout>

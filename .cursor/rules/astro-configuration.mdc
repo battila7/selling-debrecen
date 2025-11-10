@@ -1,0 +1,601 @@
+---
+description: "Astro Configuration"
+---
+# Astro Configuration
+
+Best practices for configuring Astro projects via astro.config.mjs.
+
+<rule>
+name: astro_configuration
+description: Standards for Astro configuration and build settings
+filters:
+  - type: file_path
+    pattern: "astro\\.config\\.(mjs|ts)$"
+
+actions:
+  - type: suggest
+    message: |
+      Follow these configuration best practices for Astro projects:
+
+      ## Basic Configuration
+
+      ### Minimal Static Site Setup
+      ```javascript
+      // astro.config.mjs
+      import { defineConfig } from 'astro/config';
+      
+      export default defineConfig({
+        // ✅ GOOD: Essential settings for static sites
+        site: 'https://example.com',
+        output: 'static',
+        
+        build: {
+          format: 'directory', // /about/ instead of /about.html
+        }
+      });
+      ```
+
+      ## Output Modes
+
+      ### Static Site Generation (Default)
+      ```javascript
+      export default defineConfig({
+        // ✅ GOOD: Static output (default)
+        output: 'static',
+        
+        // All pages pre-rendered at build time
+        // No server required
+        // Deploy anywhere: Netlify, Vercel, GitHub Pages, S3, etc.
+      });
+      ```
+
+      ### Server-Side Rendering
+      ```javascript
+      import { defineConfig } from 'astro/config';
+      import node from '@astrojs/node';
+      
+      export default defineConfig({
+        output: 'server',
+        adapter: node({
+          mode: 'standalone'
+        }),
+        
+        // All pages rendered on-demand
+        // Requires server/serverless environment
+      });
+      ```
+
+      ### Hybrid Mode
+      ```javascript
+      import { defineConfig } from 'astro/config';
+      import netlify from '@astrojs/netlify';
+      
+      export default defineConfig({
+        output: 'hybrid',
+        adapter: netlify(),
+        
+        // Pages are static by default
+        // Opt-in to SSR with: export const prerender = false;
+      });
+      ```
+
+      ## Site Configuration
+
+      ### Base URL and Site
+      ```javascript
+      export default defineConfig({
+        // ✅ GOOD: Set site for absolute URLs
+        site: 'https://example.com',
+        
+        // For subpath deployments (e.g., GitHub Pages)
+        base: '/my-repo',
+        
+        // Trailing slash preference
+        trailingSlash: 'always', // or 'never' or 'ignore'
+      });
+      ```
+
+      ## Build Configuration
+
+      ### Output Directory
+      ```javascript
+      export default defineConfig({
+        // ✅ GOOD: Customize output directory
+        outDir: './dist',
+        
+        build: {
+          // Asset directory name
+          assets: '_astro',
+          
+          // Server entry point (for SSR)
+          serverEntry: 'entry.mjs',
+          
+          // Inline stylesheets optimization
+          inlineStylesheets: 'auto', // or 'always' or 'never'
+        }
+      });
+      ```
+
+      ### Format and Routing
+      ```javascript
+      export default defineConfig({
+        build: {
+          // ✅ GOOD: Directory format for cleaner URLs
+          format: 'directory',
+          // /about.astro → /about/index.html → https://example.com/about/
+          
+          // Alternative: file format
+          // format: 'file',
+          // /about.astro → /about.html → https://example.com/about.html
+        }
+      });
+      ```
+
+      ## Integrations
+
+      ### Common Integrations for Static Sites
+      ```javascript
+      import { defineConfig } from 'astro/config';
+      import tailwind from '@astrojs/tailwind';
+      import sitemap from '@astrojs/sitemap';
+      import mdx from '@astrojs/mdx';
+      
+      export default defineConfig({
+        site: 'https://example.com',
+        
+        integrations: [
+          // ✅ GOOD: Tailwind for styling
+          tailwind(),
+          
+          // ✅ GOOD: Automatic sitemap generation
+          sitemap(),
+          
+          // ✅ GOOD: MDX for content
+          mdx()
+        ]
+      });
+      ```
+
+      ### Sitemap Configuration
+      ```javascript
+      import sitemap from '@astrojs/sitemap';
+      
+      export default defineConfig({
+        site: 'https://example.com',
+        
+        integrations: [
+          sitemap({
+            // Exclude certain pages
+            filter: (page) => !page.includes('/admin/'),
+            
+            // Custom priority and changefreq
+            customPages: [
+              'https://example.com/custom-page'
+            ],
+            
+            // i18n support
+            i18n: {
+              defaultLocale: 'en',
+              locales: {
+                en: 'en-US',
+                fr: 'fr-CA'
+              }
+            }
+          })
+        ]
+      });
+      ```
+
+      ## Markdown and MDX
+
+      ### Markdown Configuration
+      ```javascript
+      import { defineConfig } from 'astro/config';
+      
+      export default defineConfig({
+        markdown: {
+          // Syntax highlighting
+          syntaxHighlight: 'shiki', // or 'prism' or false
+          
+          // Shiki theme
+          shikiConfig: {
+            theme: 'github-dark',
+            wrap: true
+          },
+          
+          // Markdown plugins (remark/rehype)
+          remarkPlugins: [],
+          rehypePlugins: [],
+          
+          // Draft pages
+          drafts: true, // Show pages with draft: true in frontmatter
+        }
+      });
+      ```
+
+      ### MDX Configuration
+      ```javascript
+      import mdx from '@astrojs/mdx';
+      import remarkGfm from 'remark-gfm';
+      import rehypeSlug from 'rehype-slug';
+      
+      export default defineConfig({
+        integrations: [
+          mdx()
+        ],
+        
+        markdown: {
+          remarkPlugins: [
+            // ✅ GOOD: GitHub Flavored Markdown
+            remarkGfm
+          ],
+          rehypePlugins: [
+            // ✅ GOOD: Add IDs to headings
+            rehypeSlug
+          ]
+        }
+      });
+      ```
+
+      ## Image Optimization
+
+      ### Image Service
+      ```javascript
+      import { defineConfig } from 'astro/config';
+      
+      export default defineConfig({
+        image: {
+          // ✅ GOOD: Default sharp service for local images
+          service: {
+            entrypoint: 'astro/assets/services/sharp'
+          },
+          
+          // Configure remote image domains
+          remotePatterns: [
+            {
+              protocol: 'https',
+              hostname: '**.example.com'
+            }
+          ]
+        }
+      });
+      ```
+
+      ## Routing
+
+      ### Custom Routes
+      ```javascript
+      export default defineConfig({
+        // ✅ GOOD: Custom 404 page
+        // Create src/pages/404.astro
+        
+        // Trailing slash behavior
+        trailingSlash: 'always',
+        
+        // Redirect old URLs
+        redirects: {
+          '/old-page': '/new-page',
+          '/blog/[slug]': '/articles/[slug]',
+          '/old-url': {
+            status: 301,
+            destination: '/new-url'
+          }
+        }
+      });
+      ```
+
+      ## Vite Configuration
+
+      ### Custom Vite Settings
+      ```javascript
+      import { defineConfig } from 'astro/config';
+      
+      export default defineConfig({
+        vite: {
+          // ✅ GOOD: Custom Vite configuration
+          build: {
+            // Rollup options
+            rollupOptions: {
+              output: {
+                // Customize chunk names
+                manualChunks: {
+                  'vendor': ['react', 'react-dom']
+                }
+              }
+            }
+          },
+          
+          // Development server
+          server: {
+            port: 3000,
+            host: true
+          },
+          
+          // Define global constants
+          define: {
+            '__BUILD_DATE__': JSON.stringify(new Date().toISOString())
+          }
+        }
+      });
+      ```
+
+      ## Environment Variables
+
+      ### Public vs Private Variables
+      ```javascript
+      // .env
+      PUBLIC_API_URL=https://api.example.com
+      API_SECRET_KEY=secret123
+      ```
+
+      ```astro
+      ---
+      // ✅ GOOD: PUBLIC_ prefix for client-side access
+      const apiUrl = import.meta.env.PUBLIC_API_URL;
+      
+      // ✅ GOOD: No prefix for server-only access
+      const secretKey = import.meta.env.API_SECRET_KEY;
+      ---
+      
+      <script>
+        // ❌ BAD: API_SECRET_KEY not available here
+        // Only PUBLIC_ variables available client-side
+        console.log(import.meta.env.PUBLIC_API_URL);
+      </script>
+      ```
+
+      ### Environment-Specific Config
+      ```javascript
+      // astro.config.mjs
+      import { defineConfig } from 'astro/config';
+      
+      const isProd = process.env.NODE_ENV === 'production';
+      
+      export default defineConfig({
+        site: isProd 
+          ? 'https://example.com' 
+          : 'http://localhost:4321',
+        
+        build: {
+          // ✅ GOOD: Environment-specific settings
+          inlineStylesheets: isProd ? 'auto' : 'never'
+        }
+      });
+      ```
+
+      ## Adapter Configuration
+
+      ### Netlify
+      ```javascript
+      import { defineConfig } from 'astro/config';
+      import netlify from '@astrojs/netlify';
+      
+      export default defineConfig({
+        output: 'static', // or 'server' or 'hybrid'
+        adapter: netlify({
+          // Edge functions
+          edgeMiddleware: true
+        })
+      });
+      ```
+
+      ### Vercel
+      ```javascript
+      import { defineConfig } from 'astro/config';
+      import vercel from '@astrojs/vercel/static';
+      
+      export default defineConfig({
+        output: 'static',
+        adapter: vercel({
+          // Analytics
+          analytics: true,
+          
+          // Image optimization
+          imageService: true
+        })
+      });
+      ```
+
+      ### Cloudflare Pages
+      ```javascript
+      import { defineConfig } from 'astro/config';
+      import cloudflare from '@astrojs/cloudflare';
+      
+      export default defineConfig({
+        output: 'static',
+        adapter: cloudflare({
+          mode: 'directory'
+        })
+      });
+      ```
+
+      ## Internationalization (i18n)
+
+      ### Basic i18n Setup
+      ```javascript
+      export default defineConfig({
+        i18n: {
+          defaultLocale: 'en',
+          locales: ['en', 'fr', 'de'],
+          
+          routing: {
+            prefixDefaultLocale: false,
+            // URLs: /, /fr, /de (not /en, /fr, /de)
+          }
+        }
+      });
+      ```
+
+      ### Custom Locale Paths
+      ```javascript
+      export default defineConfig({
+        i18n: {
+          defaultLocale: 'en',
+          locales: ['en', 'es', 'pt-BR'],
+          
+          routing: {
+            prefixDefaultLocale: true,
+            // URLs: /en, /es, /pt-BR
+          }
+        }
+      });
+      ```
+
+      ## Developer Experience
+
+      ### Development Server
+      ```javascript
+      export default defineConfig({
+        server: {
+          port: 4321,
+          host: true, // Listen on all addresses
+          open: true  // Open browser on start
+        }
+      });
+      ```
+
+      ### Preview Server
+      ```javascript
+      export default defineConfig({
+        preview: {
+          port: 8080,
+          host: true
+        }
+      });
+      ```
+
+      ## Complete Example: Static Blog
+
+      ```javascript
+      // astro.config.mjs
+      import { defineConfig } from 'astro/config';
+      import tailwind from '@astrojs/tailwind';
+      import sitemap from '@astrojs/sitemap';
+      import mdx from '@astrojs/mdx';
+      import remarkGfm from 'remark-gfm';
+      import rehypeSlug from 'rehype-slug';
+      import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+      
+      export default defineConfig({
+        // ✅ GOOD: Complete static site configuration
+        site: 'https://myblog.com',
+        output: 'static',
+        
+        build: {
+          format: 'directory',
+          assets: '_assets'
+        },
+        
+        integrations: [
+          tailwind({
+            applyBaseStyles: false
+          }),
+          sitemap({
+            filter: (page) => !page.includes('/draft/')
+          }),
+          mdx()
+        ],
+        
+        markdown: {
+          syntaxHighlight: 'shiki',
+          shikiConfig: {
+            theme: 'nord',
+            wrap: true
+          },
+          remarkPlugins: [remarkGfm],
+          rehypePlugins: [
+            rehypeSlug,
+            [rehypeAutolinkHeadings, { behavior: 'append' }]
+          ]
+        },
+        
+        image: {
+          service: {
+            entrypoint: 'astro/assets/services/sharp'
+          }
+        },
+        
+        vite: {
+          server: {
+            port: 3000
+          }
+        }
+      });
+      ```
+
+      ## Best Practices
+
+      ### 1. Always Set Site URL
+      ```javascript
+      // ✅ GOOD: Required for absolute URLs, sitemaps, RSS
+      export default defineConfig({
+        site: 'https://example.com'
+      });
+      ```
+
+      ### 2. Use Directory Format
+      ```javascript
+      // ✅ GOOD: Cleaner URLs without .html
+      export default defineConfig({
+        build: {
+          format: 'directory'
+        }
+      });
+      ```
+
+      ### 3. Enable Sitemap
+      ```javascript
+      // ✅ GOOD: Essential for SEO
+      import sitemap from '@astrojs/sitemap';
+      
+      export default defineConfig({
+        site: 'https://example.com',
+        integrations: [sitemap()]
+      });
+      ```
+
+      ### 4. Configure Image Optimization
+      ```javascript
+      // ✅ GOOD: Optimize images by default
+      export default defineConfig({
+        image: {
+          service: {
+            entrypoint: 'astro/assets/services/sharp'
+          }
+        }
+      });
+      ```
+
+      ### 5. Use TypeScript Config
+      ```typescript
+      // astro.config.ts
+      import { defineConfig } from 'astro/config';
+      import type { AstroUserConfig } from 'astro/config';
+      
+      // ✅ GOOD: Type-safe configuration
+      export default defineConfig({
+        // TypeScript will catch configuration errors
+        site: 'https://example.com',
+        output: 'static'
+      } satisfies AstroUserConfig);
+      ```
+
+examples:
+  - input: |
+      # Bad: Minimal config
+      export default {};
+      
+      # Good: Complete static site config
+      import { defineConfig } from 'astro/config';
+      import sitemap from '@astrojs/sitemap';
+      
+      export default defineConfig({
+        site: 'https://example.com',
+        output: 'static',
+        integrations: [sitemap()],
+        build: {
+          format: 'directory'
+        }
+      });
+    output: "Properly configured Astro project"
+</rule>

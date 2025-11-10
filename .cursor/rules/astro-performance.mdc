@@ -1,0 +1,397 @@
+---
+description: "Astro Performance"
+---
+# Astro Performance Optimization
+
+Best practices for optimizing Astro site performance and build times.
+
+<rule>
+name: astro_performance
+description: Standards for optimizing Astro applications for speed and efficiency
+filters:
+  - type: file_extension
+    pattern: "\\.astro$"
+
+actions:
+  - type: suggest
+    message: |
+      Follow these performance best practices for Astro:
+
+      ## Core Performance Principles
+
+      1. **Ship Zero JS by Default** - Only add client JS when needed
+      2. **Static First** - Generate static HTML whenever possible
+      3. **Lazy Load Everything** - Defer non-critical resources
+      4. **Optimize Assets** - Images, fonts, and other media
+
+      ## Image Optimization
+
+      ### Use Astro's Image Component
+      ```astro
+      ---
+      import { Image } from 'astro:assets';
+      import heroImage from '../assets/hero.jpg';
+      ---
+      
+      <!-- ✅ GOOD: Automatic optimization -->
+      <Image 
+        src={heroImage} 
+        alt="Hero image"
+        width={1200}
+        height={600}
+        loading="lazy"
+        decoding="async"
+      />
+      
+      <!-- ❌ BAD: No optimization -->
+      <img src="/images/hero.jpg" alt="Hero image" />
+      ```
+
+      ### Remote Images
+      ```astro
+      ---
+      import { Image } from 'astro:assets';
+      ---
+      
+      <Image 
+        src="https://example.com/image.jpg"
+        alt="Remote image"
+        width={800}
+        height={400}
+        inferSize
+      />
+      ```
+
+      ### Responsive Images
+      ```astro
+      ---
+      import { Picture } from 'astro:assets';
+      import image from '../assets/photo.jpg';
+      ---
+      
+      <Picture 
+        src={image}
+        alt="Responsive image"
+        widths={[400, 800, 1200]}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
+        formats={['avif', 'webp', 'jpg']}
+      />
+      ```
+
+      ## Client-Side JavaScript Optimization
+
+      ### Minimize Hydration
+      ```astro
+      ---
+      // ✅ GOOD: Most components are static
+      import StaticHeader from '../components/StaticHeader.astro';
+      import StaticContent from '../components/StaticContent.astro';
+      import InteractiveWidget from '../components/InteractiveWidget';
+      ---
+      
+      <StaticHeader />
+      <StaticContent />
+      <!-- Only this needs JS -->
+      <InteractiveWidget client:visible />
+      ```
+
+      ### Use Efficient Directives
+      ```astro
+      <!-- ✅ GOOD: Prioritized loading -->
+      <CriticalComponent client:load />
+      <ImportantComponent client:idle />
+      <BelowFold client:visible />
+      <MobileOnly client:media="(max-width: 768px)" />
+      
+      <!-- ❌ BAD: Everything loads immediately -->
+      <Component1 client:load />
+      <Component2 client:load />
+      <Component3 client:load />
+      ```
+
+      ### Code Splitting
+      ```astro
+      ---
+      // ✅ GOOD: Dynamic imports for large modules
+      const heavyModule = import.meta.env.PROD 
+        ? await import('../utils/heavy-production')
+        : await import('../utils/heavy-dev');
+      ---
+      ```
+
+      ## Data Fetching Optimization
+
+      ### Fetch at Build Time
+      ```astro
+      ---
+      // ✅ GOOD: Fetch during build (SSG)
+      const posts = await fetch('https://api.example.com/posts')
+        .then(res => res.json());
+      ---
+      
+      {posts.map(post => (
+        <article>{post.title}</article>
+      ))}
+      ```
+
+      ### Cache API Responses
+      ```astro
+      ---
+      // ✅ GOOD: Cache expensive operations
+      const getCachedData = async () => {
+        const cached = await cache.get('data');
+        if (cached) return cached;
+        
+        const fresh = await fetchData();
+        await cache.set('data', fresh, { ttl: 3600 });
+        return fresh;
+      };
+      
+      const data = await getCachedData();
+      ---
+      ```
+
+      ### Parallel Data Fetching
+      ```astro
+      ---
+      // ✅ GOOD: Fetch in parallel
+      const [posts, authors, categories] = await Promise.all([
+        fetchPosts(),
+        fetchAuthors(),
+        fetchCategories()
+      ]);
+      
+      // ❌ BAD: Sequential fetching
+      const posts = await fetchPosts();
+      const authors = await fetchAuthors();
+      const categories = await fetchCategories();
+      ---
+      ```
+
+      ## CSS Optimization
+
+      ### Scoped Styles
+      ```astro
+      <!-- ✅ GOOD: Automatically scoped and optimized -->
+      <style>
+        .component {
+          /* Astro handles optimization */
+        }
+      </style>
+      ```
+
+      ### Critical CSS
+      ```astro
+      ---
+      // Extract critical CSS for above-the-fold content
+      ---
+      
+      <style is:inline>
+        /* Critical styles only */
+        body { margin: 0; }
+        .hero { min-height: 100vh; }
+      </style>
+      
+      <style>
+        /* Non-critical styles */
+        .footer { /* ... */ }
+      </style>
+      ```
+
+      ### Conditional CSS Loading
+      ```astro
+      ---
+      const needsComplexStyles = someCondition;
+      ---
+      
+      {needsComplexStyles && (
+        <link rel="stylesheet" href="/complex-styles.css" />
+      )}
+      ```
+
+      ## Font Optimization
+
+      ### Preload Critical Fonts
+      ```astro
+      <head>
+        <link 
+          rel="preload" 
+          href="/fonts/inter-var.woff2" 
+          as="font" 
+          type="font/woff2" 
+          crossorigin 
+        />
+      </head>
+      ```
+
+      ### Use System Fonts
+      ```astro
+      <style>
+        body {
+          /* ✅ GOOD: Fast, no download needed */
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 
+            'Segoe UI', sans-serif;
+        }
+      </style>
+      ```
+
+      ## Build Optimization
+
+      ### Static Site Generation (SSG)
+      ```astro
+      ---
+      // pages/blog/[slug].astro
+      
+      // ✅ GOOD: Pre-render all posts at build time
+      export async function getStaticPaths() {
+        const posts = await fetchAllPosts();
+        return posts.map(post => ({
+          params: { slug: post.slug },
+          props: { post }
+        }));
+      }
+      
+      const { post } = Astro.props;
+      ---
+      ```
+
+      ### Incremental Static Regeneration
+      ```astro
+      ---
+      // ✅ GOOD: Use hybrid rendering when needed
+      export const prerender = false; // SSR for this page
+      
+      // Or selectively cache
+      export const prerender = true;
+      ---
+      ```
+
+      ## Resource Hints
+
+      ### Preconnect to External Domains
+      ```astro
+      <head>
+        <link rel="preconnect" href="https://api.example.com" />
+        <link rel="dns-prefetch" href="https://cdn.example.com" />
+      </head>
+      ```
+
+      ### Prefetch Next Pages
+      ```astro
+      ---
+      // Prefetch links for instant navigation
+      ---
+      
+      <a href="/next-page" rel="prefetch">Next Page</a>
+      ```
+
+      ## Script Optimization
+
+      ### Defer Non-Critical Scripts
+      ```astro
+      <!-- ✅ GOOD: Defer non-critical scripts -->
+      <script src="/analytics.js" defer></script>
+      
+      <!-- ✅ GOOD: Async for independent scripts -->
+      <script src="/ads.js" async></script>
+      ```
+
+      ### Inline Critical Scripts
+      ```astro
+      <!-- ✅ GOOD: Inline small, critical scripts -->
+      <script is:inline>
+        // Theme detection
+        const theme = localStorage.getItem('theme') || 'light';
+        document.documentElement.classList.add(theme);
+      </script>
+      ```
+
+      ## Lazy Loading Content
+
+      ### Images Below the Fold
+      ```astro
+      <Image 
+        src={image}
+        alt="Below fold"
+        loading="lazy"
+        decoding="async"
+      />
+      ```
+
+      ### Components
+      ```astro
+      <HeavyComponent client:visible />
+      ```
+
+      ### Iframes
+      ```astro
+      <iframe 
+        src="https://youtube.com/embed/..."
+        loading="lazy"
+        title="Video"
+      />
+      ```
+
+      ## Monitoring Performance
+
+      ### Add Performance Marks
+      ```astro
+      <script>
+        // Mark important events
+        performance.mark('hero-rendered');
+        
+        // Measure custom metrics
+        performance.measure('app-init', 'navigationStart', 'hero-rendered');
+      </script>
+      ```
+
+      ## Common Pitfalls to Avoid
+
+      ```astro
+      <!-- ❌ BAD: Loading huge libraries -->
+      <script src="https://cdn.com/huge-library.js" client:load />
+      
+      <!-- ✅ GOOD: Import only what you need -->
+      <script>
+        import { onlyWhatINeed } from 'library';
+      </script>
+      
+      <!-- ❌ BAD: Unoptimized images -->
+      <img src="/huge-image.jpg" />
+      
+      <!-- ✅ GOOD: Optimized with Image component -->
+      <Image src={image} alt="Optimized" />
+      
+      <!-- ❌ BAD: Blocking scripts in head -->
+      <script src="/blocking.js"></script>
+      
+      <!-- ✅ GOOD: Deferred or async -->
+      <script src="/deferred.js" defer></script>
+      ```
+
+      ## Performance Checklist
+
+      - [ ] Images optimized with `<Image>` component
+      - [ ] Minimal client-side JavaScript
+      - [ ] Efficient hydration strategy (client:visible, client:idle)
+      - [ ] Static generation when possible
+      - [ ] Fonts optimized or using system fonts
+      - [ ] Critical CSS inlined
+      - [ ] External resources preconnected
+      - [ ] Below-the-fold content lazy loaded
+      - [ ] API calls cached appropriately
+      - [ ] Bundle size monitored
+
+examples:
+  - input: |
+      # Bad: Unoptimized
+      <img src="/big.jpg" />
+      <Component client:load />
+      <script src="/heavy.js"></script>
+      
+      # Good: Optimized
+      <Image src={img} loading="lazy" />
+      <Component client:visible />
+      <script src="/light.js" defer></script>
+    output: "Performance-optimized Astro code"
+</rule>

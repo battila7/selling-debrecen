@@ -1,0 +1,481 @@
+---
+description: "Astro Content Collections"
+---
+# Astro Content Collections
+
+Best practices for using Astro's Content Collections API for managing content.
+
+<rule>
+name: astro_content_collections
+description: Standards for working with Content Collections in Astro
+filters:
+  - type: file_extension
+    pattern: "\\.astro$"
+  - type: content
+    pattern: "getCollection|getEntry"
+
+actions:
+  - type: suggest
+    message: |
+      Follow these best practices for Content Collections in Astro:
+
+      ## Content Collection Setup
+
+      ### Define Collection Schema
+      ```typescript
+      // src/content/config.ts
+      import { defineCollection, z } from 'astro:content';
+      
+      const blogCollection = defineCollection({
+        type: 'content',
+        schema: z.object({
+          title: z.string(),
+          description: z.string(),
+          publishedDate: z.date(),
+          updatedDate: z.date().optional(),
+          author: z.string(),
+          tags: z.array(z.string()).default([]),
+          image: z.string().optional(),
+          draft: z.boolean().default(false),
+          featured: z.boolean().default(false)
+        })
+      });
+      
+      const authorsCollection = defineCollection({
+        type: 'data',
+        schema: z.object({
+          name: z.string(),
+          bio: z.string(),
+          avatar: z.string(),
+          social: z.object({
+            twitter: z.string().optional(),
+            github: z.string().optional(),
+            website: z.string().optional()
+          }).optional()
+        })
+      });
+      
+      export const collections = {
+        'blog': blogCollection,
+        'authors': authorsCollection
+      };
+      ```
+
+      ## Querying Collections
+
+      ### Get All Entries
+      ```astro
+      ---
+      import { getCollection } from 'astro:content';
+      
+      // ✅ GOOD: Get all published posts
+      const allPosts = await getCollection('blog', ({ data }) => {
+        return data.draft !== true;
+      });
+      
+      // Sort by date
+      const sortedPosts = allPosts.sort(
+        (a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf()
+      );
+      ---
+      
+      {sortedPosts.map(post => (
+        <article>
+          <h2>{post.data.title}</h2>
+          <p>{post.data.description}</p>
+          <a href={`/blog/${post.slug}`}>Read more</a>
+        </article>
+      ))}
+      ```
+
+      ### Get Single Entry
+      ```astro
+      ---
+      // pages/blog/[slug].astro
+      import { getEntry } from 'astro:content';
+      
+      const { slug } = Astro.params;
+      
+      // ✅ GOOD: Get single entry with type safety
+      const post = await getEntry('blog', slug);
+      
+      if (!post) {
+        return Astro.redirect('/404');
+      }
+      
+      const { Content } = await post.render();
+      ---
+      
+      <article>
+        <h1>{post.data.title}</h1>
+        <time datetime={post.data.publishedDate.toISOString()}>
+          {post.data.publishedDate.toLocaleDateString()}
+        </time>
+        <Content />
+      </article>
+      ```
+
+      ### Generate Static Paths
+      ```astro
+      ---
+      // pages/blog/[...slug].astro
+      import { getCollection } from 'astro:content';
+      import type { CollectionEntry } from 'astro:content';
+      
+      export async function getStaticPaths() {
+        const posts = await getCollection('blog', ({ data }) => {
+          return import.meta.env.PROD ? data.draft !== true : true;
+        });
+        
+        return posts.map(post => ({
+          params: { slug: post.slug },
+          props: { post }
+        }));
+      }
+      
+      interface Props {
+        post: CollectionEntry<'blog'>;
+      }
+      
+      const { post } = Astro.props;
+      const { Content, headings } = await post.render();
+      ---
+      
+      <article>
+        <h1>{post.data.title}</h1>
+        <Content />
+      </article>
+      ```
+
+      ## Advanced Schema Patterns
+
+      ### References Between Collections
+      ```typescript
+      // src/content/config.ts
+      import { defineCollection, reference, z } from 'astro:content';
+      
+      const authors = defineCollection({
+        type: 'data',
+        schema: z.object({
+          name: z.string(),
+          bio: z.string()
+        })
+      });
+      
+      const blog = defineCollection({
+        type: 'content',
+        schema: z.object({
+          title: z.string(),
+          // ✅ GOOD: Reference another collection
+          author: reference('authors'),
+          relatedPosts: z.array(reference('blog')).optional()
+        })
+      });
+      
+      export const collections = { blog, authors };
+      ```
+
+      ```astro
+      ---
+      import { getEntry } from 'astro:content';
+      
+      const post = await getEntry('blog', slug);
+      
+      // ✅ GOOD: Get referenced author
+      const author = await getEntry(post.data.author);
+      
+      // ✅ GOOD: Get related posts
+      const relatedPosts = post.data.relatedPosts 
+        ? await Promise.all(
+            post.data.relatedPosts.map(ref => getEntry(ref))
+          )
+        : [];
+      ---
+      
+      <article>
+        <h1>{post.data.title}</h1>
+        <p>By {author.data.name}</p>
+        <Content />
+        
+        {relatedPosts.length > 0 && (
+          <section>
+            <h2>Related Posts</h2>
+            {relatedPosts.map(related => (
+              <a href={`/blog/${related.slug}`}>
+                {related.data.title}
+              </a>
+            ))}
+          </section>
+        )}
+      </article>
+      ```
+
+      ### Custom Transformations
+      ```typescript
+      // src/content/config.ts
+      const blog = defineCollection({
+        type: 'content',
+        schema: z.object({
+          title: z.string(),
+          publishedDate: z
+            .string()
+            .or(z.date())
+            .transform((val) => new Date(val)),
+          tags: z
+            .string()
+            .transform((str) => str.split(',').map(tag => tag.trim()))
+            .or(z.array(z.string()))
+        })
+      });
+      ```
+
+      ## Working with Markdown Content
+
+      ### Render Content
+      ```astro
+      ---
+      const { post } = Astro.props;
+      const { Content, headings } = await post.render();
+      ---
+      
+      <!-- Render markdown as components -->
+      <Content />
+      
+      <!-- Access headings for TOC -->
+      <nav>
+        <h2>Table of Contents</h2>
+        <ul>
+          {headings.map(heading => (
+            <li class={`toc-${heading.depth}`}>
+              <a href={`#${heading.slug}`}>{heading.text}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      ```
+
+      ### Custom Components in MDX
+      ```mdx
+      ---
+      title: My Blog Post
+      ---
+      import CustomComponent from '../../components/CustomComponent.astro';
+      
+      # My Blog Post
+      
+      Regular markdown content.
+      
+      <CustomComponent prop="value" />
+      
+      More markdown content.
+      ```
+
+      ## Filtering and Sorting
+
+      ### Filter by Tags
+      ```astro
+      ---
+      import { getCollection } from 'astro:content';
+      
+      const { tag } = Astro.params;
+      
+      const posts = await getCollection('blog', ({ data }) => {
+        return data.tags.includes(tag) && !data.draft;
+      });
+      ---
+      ```
+
+      ### Pagination
+      ```astro
+      ---
+      // pages/blog/[...page].astro
+      import { getCollection } from 'astro:content';
+      import type { GetStaticPaths, Page } from 'astro';
+      
+      export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+        const posts = await getCollection('blog', ({ data }) => !data.draft);
+        const sortedPosts = posts.sort(
+          (a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf()
+        );
+        
+        return paginate(sortedPosts, { pageSize: 10 });
+      };
+      
+      interface Props {
+        page: Page<CollectionEntry<'blog'>>;
+      }
+      
+      const { page } = Astro.props;
+      ---
+      
+      {page.data.map(post => (
+        <article>{post.data.title}</article>
+      ))}
+      
+      <nav>
+        {page.url.prev && <a href={page.url.prev}>Previous</a>}
+        <span>Page {page.currentPage} of {page.lastPage}</span>
+        {page.url.next && <a href={page.url.next}>Next</a>}
+      </nav>
+      ```
+
+      ## Data Collections (JSON/YAML)
+
+      ```typescript
+      // src/content/config.ts
+      const products = defineCollection({
+        type: 'data',
+        schema: z.object({
+          name: z.string(),
+          price: z.number(),
+          description: z.string(),
+          inStock: z.boolean().default(true),
+          categories: z.array(z.string())
+        })
+      });
+      ```
+
+      ```astro
+      ---
+      import { getCollection } from 'astro:content';
+      
+      const products = await getCollection('products', ({ data }) => {
+        return data.inStock;
+      });
+      ---
+      
+      {products.map(product => (
+        <div>
+          <h3>{product.data.name}</h3>
+          <p>${product.data.price}</p>
+          <p>{product.data.description}</p>
+        </div>
+      ))}
+      ```
+
+      ## Type Safety
+
+      ### Using Collection Types
+      ```astro
+      ---
+      import type { CollectionEntry } from 'astro:content';
+      
+      interface Props {
+        post: CollectionEntry<'blog'>;
+        author: CollectionEntry<'authors'>;
+      }
+      
+      const { post, author } = Astro.props;
+      
+      // ✅ GOOD: Fully typed
+      const title: string = post.data.title;
+      const authorName: string = author.data.name;
+      ---
+      ```
+
+      ### Reusable Components with Collection Types
+      ```astro
+      ---
+      // components/BlogCard.astro
+      import type { CollectionEntry } from 'astro:content';
+      
+      interface Props {
+        post: CollectionEntry<'blog'>;
+        showExcerpt?: boolean;
+      }
+      
+      const { post, showExcerpt = true } = Astro.props;
+      ---
+      
+      <article class="blog-card">
+        <h2>{post.data.title}</h2>
+        {showExcerpt && <p>{post.data.description}</p>}
+        <a href={`/blog/${post.slug}`}>Read more</a>
+      </article>
+      ```
+
+      ## Best Practices
+
+      ### 1. Always Filter Drafts in Production
+      ```astro
+      ---
+      const posts = await getCollection('blog', ({ data }) => {
+        // ✅ GOOD: Hide drafts in production
+        return import.meta.env.PROD ? !data.draft : true;
+      });
+      ---
+      ```
+
+      ### 2. Cache Expensive Queries
+      ```astro
+      ---
+      // For frequently accessed data, consider caching
+      let allPosts: CollectionEntry<'blog'>[];
+      
+      async function getCachedPosts() {
+        if (!allPosts) {
+          allPosts = await getCollection('blog');
+        }
+        return allPosts;
+      }
+      ---
+      ```
+
+      ### 3. Use References for Relationships
+      ```typescript
+      // ✅ GOOD: Use reference() for relationships
+      const blog = defineCollection({
+        schema: z.object({
+          author: reference('authors'),
+          category: reference('categories')
+        })
+      });
+      
+      // ❌ BAD: String references (no type safety)
+      const blog = defineCollection({
+        schema: z.object({
+          author: z.string(),
+          category: z.string()
+        })
+      });
+      ```
+
+      ### 4. Validate All Frontmatter
+      ```typescript
+      // ✅ GOOD: Strict schema with validation
+      const blog = defineCollection({
+        schema: z.object({
+          title: z.string().min(1).max(100),
+          description: z.string().min(10).max(200),
+          publishedDate: z.date(),
+          email: z.string().email().optional(),
+          url: z.string().url().optional()
+        })
+      });
+      ```
+
+      ### 5. Organize Content Logically
+      ```
+      src/content/
+      ├── blog/
+      │   ├── 2024/
+      │   │   ├── post-1.md
+      │   │   └── post-2.md
+      │   └── 2023/
+      │       └── post-3.md
+      ├── authors/
+      │   ├── john-doe.json
+      │   └── jane-smith.json
+      └── config.ts
+      ```
+
+examples:
+  - input: |
+      # Bad: No schema, no type safety
+      const posts = await Astro.glob('../posts/*.md');
+      
+      # Good: Content Collections with schema
+      import { getCollection } from 'astro:content';
+      const posts = await getCollection('blog', ({ data }) => !data.draft);
+    output: "Type-safe content management with Content Collections"
+</rule>

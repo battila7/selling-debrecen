@@ -1,0 +1,13 @@
+---
+alwaysApply: true
+description: Working with specs.
+---
+# Working with specs
+
+Specs contain functional and non-functional requirements.
+
+They have two statuses:
+- `todo`
+- `done`
+
+Once implemented, the status should be set to `done`.

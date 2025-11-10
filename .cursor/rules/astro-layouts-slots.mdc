@@ -1,0 +1,431 @@
+---
+description: "Astro Layouts and Slots"
+---
+# Astro Layouts and Slots
+
+Best practices for creating and using layouts with slots in Astro.
+
+<rule>
+name: astro_layouts_slots
+description: Standards for layout components and slot composition
+filters:
+  - type: file_extension
+    pattern: "\\.astro$"
+  - type: content
+    pattern: "<slot"
+
+actions:
+  - type: suggest
+    message: |
+      Follow these best practices for layouts and slots in Astro:
+
+      ## Layout Components
+
+      Layouts are Astro components that provide page structure and can be reused.
+
+      ### Basic Layout Pattern
+      ```astro
+      ---
+      // layouts/BaseLayout.astro
+      interface Props {
+        title: string;
+        description?: string;
+      }
+      
+      const { title, description } = Astro.props;
+      ---
+      
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>{title}</title>
+          {description && <meta name="description" content={description} />}
+        </head>
+        <body>
+          <slot />
+        </body>
+      </html>
+      ```
+
+      ### Using Layouts in Pages
+      ```astro
+      ---
+      // pages/index.astro
+      import BaseLayout from '../layouts/BaseLayout.astro';
+      ---
+      
+      <BaseLayout title="Home" description="Welcome to our site">
+        <h1>Welcome!</h1>
+        <p>This is the home page.</p>
+      </BaseLayout>
+      ```
+
+      ## Named Slots
+
+      Use named slots for multiple content areas.
+
+      ### Layout with Named Slots
+      ```astro
+      ---
+      // layouts/PageLayout.astro
+      interface Props {
+        title: string;
+      }
+      
+      const { title } = Astro.props;
+      ---
+      
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8" />
+          <title>{title}</title>
+          <slot name="head" />
+        </head>
+        <body>
+          <header>
+            <slot name="header" />
+          </header>
+          
+          <main>
+            <slot />
+          </main>
+          
+          <aside>
+            <slot name="sidebar" />
+          </aside>
+          
+          <footer>
+            <slot name="footer">
+              <!-- Default footer content -->
+              <p>&copy; 2024 Company Name</p>
+            </slot>
+          </footer>
+        </body>
+      </html>
+      ```
+
+      ### Using Named Slots
+      ```astro
+      ---
+      import PageLayout from '../layouts/PageLayout.astro';
+      ---
+      
+      <PageLayout title="Article Page">
+        <!-- Default slot -->
+        <h1>Article Title</h1>
+        <p>Article content...</p>
+        
+        <!-- Named slots -->
+        <Fragment slot="head">
+          <link rel="stylesheet" href="/article.css" />
+        </Fragment>
+        
+        <Fragment slot="header">
+          <nav>Navigation</nav>
+        </Fragment>
+        
+        <Fragment slot="sidebar">
+          <div>Table of Contents</div>
+        </Fragment>
+      </PageLayout>
+      ```
+
+      ## Slot Best Practices
+
+      ### 1. Provide Default Slot Content
+      ```astro
+      <slot name="cta">
+        <!-- ✅ GOOD: Fallback content -->
+        <button>Learn More</button>
+      </slot>
+      
+      <!-- ❌ BAD: No fallback, could be empty -->
+      <slot name="cta" />
+      ```
+
+      ### 2. Check for Slot Content
+      ```astro
+      ---
+      const hasHeader = Astro.slots.has('header');
+      const headerContent = await Astro.slots.render('header');
+      ---
+      
+      {hasHeader && (
+        <header>
+          <slot name="header" />
+        </header>
+      )}
+      ```
+
+      ### 3. Nested Layouts
+      ```astro
+      ---
+      // layouts/BaseLayout.astro
+      interface Props {
+        title: string;
+      }
+      const { title } = Astro.props;
+      ---
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>{title}</title>
+        </head>
+        <body>
+          <slot />
+        </body>
+      </html>
+      ```
+
+      ```astro
+      ---
+      // layouts/BlogLayout.astro
+      import BaseLayout from './BaseLayout.astro';
+      
+      interface Props {
+        title: string;
+        author: string;
+        date: Date;
+      }
+      
+      const { title, author, date } = Astro.props;
+      ---
+      
+      <BaseLayout title={title}>
+        <article>
+          <header>
+            <h1>{title}</h1>
+            <p>By {author} on {date.toLocaleDateString()}</p>
+          </header>
+          
+          <slot />
+          
+          <footer>
+            <slot name="author-bio" />
+          </footer>
+        </article>
+      </BaseLayout>
+      ```
+
+      ### 4. Component Composition with Slots
+      ```astro
+      ---
+      // components/Card.astro
+      interface Props {
+        variant?: 'default' | 'highlighted';
+      }
+      
+      const { variant = 'default' } = Astro.props;
+      ---
+      
+      <div class={`card card-${variant}`}>
+        <div class="card-header">
+          <slot name="header" />
+        </div>
+        
+        <div class="card-body">
+          <slot />
+        </div>
+        
+        {Astro.slots.has('footer') && (
+          <div class="card-footer">
+            <slot name="footer" />
+          </div>
+        )}
+      </div>
+      ```
+
+      ### 5. Slot with Fragment
+      ```astro
+      ---
+      import Card from '../components/Card.astro';
+      ---
+      
+      <Card>
+        <!-- ✅ GOOD: Use Fragment for multiple elements in named slot -->
+        <Fragment slot="header">
+          <h2>Card Title</h2>
+          <span class="badge">New</span>
+        </Fragment>
+        
+        <!-- Default slot -->
+        <p>Card content goes here.</p>
+        
+        <Fragment slot="footer">
+          <button>Action 1</button>
+          <button>Action 2</button>
+        </Fragment>
+      </Card>
+      ```
+
+      ## Layout Patterns
+
+      ### Full-Page Layout
+      ```astro
+      ---
+      // layouts/MainLayout.astro
+      import Header from '../components/Header.astro';
+      import Footer from '../components/Footer.astro';
+      
+      interface Props {
+        title: string;
+        description?: string;
+      }
+      
+      const { title, description } = Astro.props;
+      ---
+      
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width" />
+          <title>{title}</title>
+          {description && <meta name="description" content={description} />}
+          <slot name="seo" />
+        </head>
+        <body>
+          <Header />
+          
+          <main>
+            <slot />
+          </main>
+          
+          <Footer />
+          
+          <slot name="scripts" />
+        </body>
+      </html>
+      ```
+
+      ### Section Layout
+      ```astro
+      ---
+      // components/Section.astro
+      interface Props {
+        title?: string;
+        id?: string;
+        class?: string;
+      }
+      
+      const { title, id, class: className } = Astro.props;
+      ---
+      
+      <section id={id} class={className}>
+        {title && (
+          <header>
+            <h2>{title}</h2>
+            <slot name="header" />
+          </header>
+        )}
+        
+        <div class="section-content">
+          <slot />
+        </div>
+        
+        {Astro.slots.has('aside') && (
+          <aside>
+            <slot name="aside" />
+          </aside>
+        )}
+      </section>
+      ```
+
+      ## Advanced Slot Techniques
+
+      ### Render Slots Programmatically
+      ```astro
+      ---
+      const slotContent = await Astro.slots.render('default');
+      const processedContent = slotContent.toUpperCase();
+      ---
+      
+      <div set:html={processedContent} />
+      ```
+
+      ### Conditional Layouts
+      ```astro
+      ---
+      // pages/article/[slug].astro
+      import FullWidthLayout from '../../layouts/FullWidthLayout.astro';
+      import SidebarLayout from '../../layouts/SidebarLayout.astro';
+      
+      const { slug } = Astro.params;
+      const article = await getArticle(slug);
+      
+      const Layout = article.fullWidth ? FullWidthLayout : SidebarLayout;
+      ---
+      
+      <Layout title={article.title}>
+        <article>
+          <h1>{article.title}</h1>
+          <div set:html={article.content} />
+        </article>
+      </Layout>
+      ```
+
+      ## Common Patterns
+
+      ### SEO-Friendly Layout
+      ```astro
+      ---
+      interface Props {
+        title: string;
+        description: string;
+        image?: string;
+        type?: 'website' | 'article';
+      }
+      
+      const { 
+        title, 
+        description, 
+        image = '/default-og.jpg',
+        type = 'website'
+      } = Astro.props;
+      
+      const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+      ---
+      
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width" />
+          <link rel="canonical" href={canonicalURL} />
+          
+          <title>{title}</title>
+          <meta name="description" content={description} />
+          
+          <!-- Open Graph -->
+          <meta property="og:type" content={type} />
+          <meta property="og:title" content={title} />
+          <meta property="og:description" content={description} />
+          <meta property="og:image" content={new URL(image, Astro.site)} />
+          
+          <!-- Additional head content -->
+          <slot name="head" />
+        </head>
+        <body>
+          <slot />
+        </body>
+      </html>
+      ```
+
+examples:
+  - input: |
+      # Bad: No layout reuse, no slots
+      <html><head><title>Page</title></head>
+      <body><div>Content</div></body></html>
+      
+      # Good: Reusable layout with slots
+      <BaseLayout title="Page">
+        <Fragment slot="head">
+          <link rel="stylesheet" href="/custom.css" />
+        </Fragment>
+        <div>Content</div>
+      </BaseLayout>
+    output: "Reusable layout with proper slot usage"
+</rule>

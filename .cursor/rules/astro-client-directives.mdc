@@ -1,0 +1,219 @@
+---
+description: "Astro Client Directives"
+---
+# Astro Client Directives
+
+Best practices for using client-side interactivity in Astro with client directives.
+
+<rule>
+name: astro_client_directives
+description: Standards for client-side JavaScript and hydration in Astro
+filters:
+  - type: file_extension
+    pattern: "\\.astro$"
+  - type: content
+    pattern: "client:"
+
+actions:
+  - type: suggest
+    message: |
+      Follow these best practices for client-side interactivity in Astro:
+
+      ## Client Directive Strategy
+
+      Astro ships **zero JavaScript by default**. Only add client-side JS when needed.
+
+      ### Available Directives
+
+      1. **client:load** - Hydrate immediately on page load
+         ```astro
+         <InteractiveWidget client:load />
+         ```
+         Use for: Above-the-fold interactive components
+
+      2. **client:idle** - Hydrate when the browser is idle
+         ```astro
+         <ChatWidget client:idle />
+         ```
+         Use for: Important but not critical interactive elements
+
+      3. **client:visible** - Hydrate when component enters viewport
+         ```astro
+         <ImageCarousel client:visible />
+         ```
+         Use for: Below-the-fold interactive components
+
+      4. **client:media** - Hydrate when media query matches
+         ```astro
+         <MobileMenu client:media="(max-width: 768px)" />
+         ```
+         Use for: Responsive components
+
+      5. **client:only** - Skip server rendering entirely
+         ```astro
+         <ClientOnlyComponent client:only="react" />
+         ```
+         Use for: Components that depend on browser APIs
+
+      ## Best Practices
+
+      ### 1. Prefer Static by Default
+      ```astro
+      <!-- ✅ GOOD: Static content, no JS -->
+      <article>
+        <h1>{title}</h1>
+        <p>{content}</p>
+      </article>
+      
+      <!-- ❌ BAD: Unnecessary client-side rendering -->
+      <StaticArticle client:load title={title} content={content} />
+      ```
+
+      ### 2. Use the Most Efficient Directive
+      ```astro
+      <!-- ✅ GOOD: Lazy load below-the-fold -->
+      <CommentSection client:visible />
+      
+      <!-- ❌ BAD: Loads immediately even if not visible -->
+      <CommentSection client:load />
+      ```
+
+      ### 3. Minimize Client-Side JS
+      ```astro
+      ---
+      // ✅ GOOD: Heavy logic in frontmatter (server-side)
+      const processedData = items
+        .filter(item => item.active)
+        .map(item => ({
+          id: item.id,
+          display: `${item.name} - ${item.category}`
+        }));
+      ---
+      
+      <!-- Pass only necessary data to client -->
+      <InteractiveList client:visible items={processedData} />
+      ```
+
+      ### 4. Alpine.js for Simple Interactions
+      ```astro
+      <!-- ✅ GOOD: Use Alpine.js for simple interactions -->
+      <div x-data="{ open: false }">
+        <button @click="open = !open">Toggle</button>
+        <div x-show="open">Content</div>
+      </div>
+      
+      <!-- ❌ BAD: Don't import React for simple toggles -->
+      <ToggleButton client:load />
+      ```
+
+      ### 5. Share State Carefully
+      ```astro
+      <!-- ✅ GOOD: Use nano stores for shared state -->
+      ---
+      import Counter from '../components/Counter';
+      ---
+      <Counter client:load />
+      <Counter client:load />
+      <!-- Both share the same store -->
+      
+      <!-- ❌ BAD: Passing state via props creates isolated instances -->
+      ```
+
+      ### 6. Pass Props Efficiently
+      ```astro
+      ---
+      interface Props {
+        items: Array<{ id: string; name: string }>;
+      }
+      
+      // ✅ GOOD: Serialize data server-side
+      const serializedItems = JSON.stringify(items);
+      ---
+      
+      <!-- Pass serialized data to avoid hydration mismatches -->
+      <ItemList client:visible items={items} />
+      ```
+
+      ## Common Patterns
+
+      ### Progressive Enhancement
+      ```astro
+      ---
+      // Component works without JS, enhanced with JS
+      ---
+      <form method="POST" action="/api/submit">
+        <input type="text" name="email" required />
+        <button type="submit">Submit</button>
+      </form>
+      
+      <!-- Add client-side validation only when needed -->
+      <script>
+        document.querySelector('form')?.addEventListener('submit', (e) => {
+          // Enhanced validation
+        });
+      </script>
+      ```
+
+      ### Conditional Client Rendering
+      ```astro
+      ---
+      const isInteractive = Astro.url.searchParams.has('interactive');
+      ---
+      
+      {isInteractive ? (
+        <InteractiveMap client:load />
+      ) : (
+        <StaticMapImage />
+      )}
+      ```
+
+      ### Script Optimization
+      ```astro
+      <!-- ✅ GOOD: Inline critical scripts -->
+      <script is:inline>
+        // Small, critical code
+        document.documentElement.classList.add('js');
+      </script>
+      
+      <!-- ✅ GOOD: Module scripts for non-critical -->
+      <script>
+        // Astro automatically bundles and optimizes
+        import { initAnalytics } from './analytics';
+        initAnalytics();
+      </script>
+      ```
+
+      ## Framework Components
+
+      When using UI framework components (React, Vue, Svelte, etc.):
+
+      1. **Choose the lightest framework** for your needs
+      2. **Limit framework component scope** - Use Astro components by default
+      3. **Avoid mixing frameworks** unless absolutely necessary
+      4. **Use client:only sparingly** - Prefer SSR when possible
+
+      ```astro
+      ---
+      // ✅ GOOD: Mix Astro with framework components strategically
+      import Header from '../components/Header.astro'; // Static
+      import InteractiveChart from '../components/Chart.react'; // React
+      ---
+      
+      <Header />
+      <InteractiveChart client:visible data={chartData} />
+      ```
+
+examples:
+  - input: |
+      # Bad: Everything client-side
+      <Header client:load />
+      <Content client:load />
+      <Footer client:load />
+      
+      # Good: Minimal client-side JS
+      <Header />
+      <Content />
+      <InteractiveWidget client:visible />
+      <Footer />
+    output: "Optimized hydration strategy"
+</rule>

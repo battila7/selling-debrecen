@@ -1,0 +1,2044 @@
+---
+description: "Semantic HTML and Accessibility Best Practices"
+---
+# Semantic HTML and Accessibility
+
+**Core Principle: Bad ARIA is worse than no ARIA. Always prefer native HTML semantics over ARIA.**
+
+Expert-level guidance for writing accessible, semantic HTML that works for all users.
+
+<rule>
+name: semantic_html_first
+description: Always use semantic HTML elements before considering ARIA
+filters:
+  - type: file_extension
+    pattern: "\\.(html|astro|jsx|tsx|vue|svelte)$"
+
+actions:
+  - type: enforce
+    message: |
+      ## The First Rule of ARIA
+      
+      **If you can use a native HTML element or attribute with the semantics and behavior you require, do so instead of re-purposing an element and adding ARIA.**
+      
+      ### Native HTML > ARIA Every Time
+      
+      ```html
+      <!-- ✅ EXCELLENT: Native button -->
+      <button type="button">Click me</button>
+      
+      <!-- ❌ BAD: DIV with ARIA trying to be a button -->
+      <div role="button" tabindex="0" onclick="handleClick()">Click me</div>
+      
+      <!-- ✅ EXCELLENT: Native checkbox -->
+      <label>
+        <input type="checkbox" name="agree">
+        I agree to the terms
+      </label>
+      
+      <!-- ❌ BAD: Custom checkbox with ARIA -->
+      <div role="checkbox" aria-checked="false" tabindex="0">
+        I agree to the terms
+      </div>
+      
+      <!-- ✅ EXCELLENT: Native link -->
+      <a href="/about">About us</a>
+      
+      <!-- ❌ BAD: Button styled as link -->
+      <button onclick="location.href='/about'">About us</button>
+      ```
+
+examples:
+  - input: |
+      <!-- Bad -->
+      <div role="button" onclick="submit()">Submit</div>
+    output: |
+      <!-- Good -->
+      <button type="submit">Submit</button>
+</rule>
+
+<rule>
+name: document_structure_semantics
+description: Use proper document structure with semantic landmarks
+filters:
+  - type: file_extension
+    pattern: "\\.(html|astro|jsx|tsx|vue|svelte)$"
+
+actions:
+  - type: enforce
+    message: |
+      ## Document Structure & Landmarks
+      
+      ### Essential Semantic Structure
+      
+      Every page should have a clear semantic structure using HTML5 landmarks:
+      
+      ```html
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Descriptive Page Title</title>
+      </head>
+      <body>
+        <!-- Skip link MUST be first focusable element -->
+        <a href="#main" class="skip-link">Skip to main content</a>
+        
+        <!-- ✅ GOOD: Single header landmark -->
+        <header>
+          <nav aria-label="Main navigation">
+            <!-- Primary site navigation -->
+          </nav>
+        </header>
+        
+        <!-- ✅ GOOD: Single main landmark (required!) -->
+        <main id="main">
+          <!-- Page's main content -->
+          <h1>Page Title</h1>
+          
+          <article>
+            <h2>Article Title</h2>
+            <!-- Article content -->
+          </article>
+          
+          <section aria-labelledby="section-heading">
+            <h2 id="section-heading">Section Title</h2>
+            <!-- Section content -->
+          </section>
+        </main>
+        
+        <!-- ✅ GOOD: Complementary content -->
+        <aside aria-label="Related content">
+          <!-- Sidebar content -->
+        </aside>
+        
+        <!-- ✅ GOOD: Single footer landmark -->
+        <footer>
+          <nav aria-label="Footer navigation">
+            <!-- Secondary navigation -->
+          </nav>
+        </footer>
+      </body>
+      </html>
+      ```
+      
+      ### Landmark Rules
+      
+      1. **Every page MUST have exactly ONE `<main>` landmark**
+      2. **Use `<header>` for site/section headers** (banner role when top-level)
+      3. **Use `<footer>` for site/section footers** (contentinfo role when top-level)
+      4. **Use `<nav>` for navigation sections** (navigation role)
+      5. **Use `<aside>` for complementary content** (complementary role)
+      6. **Label multiple landmarks of same type** with `aria-label` or `aria-labelledby`
+      
+      ### Multiple Navigation Examples
+      
+      ```html
+      <!-- ✅ GOOD: Multiple nav elements with unique labels -->
+      <header>
+        <nav aria-label="Main navigation">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+          </ul>
+        </nav>
+      </header>
+      
+      <main>
+        <!-- Page content -->
+      </main>
+      
+      <footer>
+        <nav aria-label="Legal and policies">
+          <ul>
+            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="/terms">Terms</a></li>
+          </ul>
+        </nav>
+        
+        <nav aria-label="Social media">
+          <ul>
+            <li><a href="https://twitter.com">Twitter</a></li>
+            <li><a href="https://facebook.com">Facebook</a></li>
+          </ul>
+        </nav>
+      </footer>
+      ```
+
+examples:
+  - input: |
+      <div class="header">
+        <div class="nav">Links</div>
+      </div>
+      <div class="content">Content</div>
+    output: |
+      <header>
+        <nav aria-label="Main navigation">Links</nav>
+      </header>
+      <main>Content</main>
+</rule>
+
+<rule>
+name: heading_hierarchy
+description: Maintain proper heading hierarchy for document outline
+filters:
+  - type: file_extension
+    pattern: "\\.(html|astro|jsx|tsx|vue|svelte)$"
+
+actions:
+  - type: enforce
+    message: |
+      ## Heading Hierarchy
+      
+      ### Critical Rules
+      
+      1. **Every page MUST have exactly ONE `<h1>`** (the page title)
+      2. **Never skip heading levels** (h1 → h2 → h3, not h1 → h3)
+      3. **Headings define document structure**, not visual size
+      4. **Use CSS for visual styling**, not heading levels
+      
+      ```html
+      <!-- ✅ EXCELLENT: Proper hierarchy -->
+      <main>
+        <h1>Main Page Title</h1>
+        
+        <section>
+          <h2>First Section</h2>
+          <p>Content...</p>
+          
+          <h3>Subsection A</h3>
+          <p>Content...</p>
+          
+          <h3>Subsection B</h3>
+          <p>Content...</p>
+        </section>
+        
+        <section>
+          <h2>Second Section</h2>
+          <p>Content...</p>
+          
+          <h3>Subsection C</h3>
+          <p>Content...</p>
+          
+          <h4>Sub-subsection</h4>
+          <p>Content...</p>
+        </section>
+      </main>
+      
+      <!-- ❌ TERRIBLE: Skipped levels and multiple h1s -->
+      <main>
+        <h1>Page Title</h1>
+        <h1>Another Top Level?</h1>  <!-- ❌ Multiple h1s -->
+        
+        <h3>Skipped h2!</h3>  <!-- ❌ Skipped level -->
+        <p>Content...</p>
+        
+        <h5>Way too deep!</h5>  <!-- ❌ Skipped h3 and h4 -->
+      </main>
+      
+      <!-- ❌ BAD: Using headings for styling -->
+      <h3 class="small-text">Should be styled with CSS</h3>
+      
+      <!-- ✅ GOOD: Semantic heading + CSS styling -->
+      <h2 class="text-sm">Semantically correct, visually small</h2>
+      ```
+      
+      ### Visual Size vs Semantic Level
+      
+      ```css
+      /* ✅ GOOD: Control visual appearance with CSS */
+      .large-h2 {
+        font-size: 2.5rem;
+        font-weight: bold;
+      }
+      
+      .small-h2 {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      ```
+      
+      ```html
+      <!-- ✅ GOOD: Semantic level preserved, visual appearance adjusted -->
+      <h2 class="large-h2">Visually large H2</h2>
+      <h2 class="small-h2">Visually small H2</h2>
+      ```
+
+examples:
+  - input: |
+      <h1>Title</h1>
+      <h4>Skipped levels</h4>
+    output: |
+      <h1>Title</h1>
+      <h2>Proper hierarchy</h2>
+</rule>
+
+<rule>
+name: aria_usage_guidelines
+description: Use ARIA correctly or not at all - bad ARIA is worse than no ARIA
+filters:
+  - type: file_extension
+    pattern: "\\.(html|astro|jsx|tsx|vue|svelte)$"
+
+actions:
+  - type: enforce
+    message: |
+      ## ARIA Usage: When and How
+      
+      ### The Five Rules of ARIA
+      
+      1. **Don't use ARIA** if you can use native HTML
+      2. **Don't change native semantics** unless you have no choice
+      3. **All interactive ARIA controls must be keyboard accessible**
+      4. **Don't use `role="presentation"` or `aria-hidden="true"` on focusable elements**
+      5. **All interactive elements must have an accessible name**
+      
+      ### Rule 1: Don't Use ARIA If Native HTML Works
+      
+      ```html
+      <!-- ❌ BAD: ARIA on div -->
+      <div role="button" tabindex="0" 
+           onkeydown="if(event.key==='Enter')click()">
+        Submit
+      </div>
+      
+      <!-- ✅ GOOD: Native button -->
+      <button type="submit">Submit</button>
+      
+      <!-- ❌ BAD: ARIA navigation -->
+      <div role="navigation">
+        <div role="list">
+          <div role="listitem"><a href="/">Home</a></div>
+        </div>
+      </div>
+      
+      <!-- ✅ GOOD: Native HTML -->
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+        </ul>
+      </nav>
+      ```
+      
+      ### Rule 2: Don't Change Native Semantics
+      
+      ```html
+      <!-- ❌ TERRIBLE: Changing button semantics -->
+      <button role="heading" aria-level="1">
+        This is confusing and wrong
+      </button>
+      
+      <!-- ❌ BAD: Overriding native heading -->
+      <h1 role="button">Also wrong</h1>
+      
+      <!-- ✅ GOOD: Use correct element -->
+      <h1>Proper heading</h1>
+      <button>Proper button</button>
+      ```
+      
+      ### Rule 3: Keyboard Accessibility is MANDATORY
+      
+      ```html
+      <!-- ❌ BAD: Clickable div without keyboard support -->
+      <div role="button" onclick="doSomething()">
+        Click me
+      </div>
+      
+      <!-- ✅ ACCEPTABLE: If you MUST use div, full keyboard support required -->
+      <div role="button" tabindex="0" 
+           onclick="doSomething()"
+           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();doSomething();}">
+        Click me
+      </div>
+      
+      <!-- ✅ BEST: Just use a button -->
+      <button type="button" onclick="doSomething()">
+        Click me
+      </button>
+      ```
+      
+      ### Rule 4: Don't Hide Focusable Elements
+      
+      ```html
+      <!-- ❌ TERRIBLE: Hiding focusable content -->
+      <button aria-hidden="true">
+        I can be focused but screen readers ignore me!
+      </button>
+      
+      <!-- ❌ BAD: Presentation on interactive element -->
+      <a href="/page" role="presentation">
+        Confusing and wrong
+      </a>
+      
+      <!-- ✅ GOOD: aria-hidden on decorative, non-focusable content -->
+      <button>
+        <span aria-hidden="true">🔍</span>
+        <span>Search</span>
+      </button>
+      
+      <!-- ✅ GOOD: Hiding decorative images -->
+      <img src="decorative.png" alt="" role="presentation">
+      ```
+      
+      ### Rule 5: Accessible Names are Required
+      
+      ```html
+      <!-- ❌ BAD: Button with no accessible name -->
+      <button>
+        <img src="icon.svg">
+      </button>
+      
+      <!-- ✅ GOOD: aria-label provides name -->
+      <button aria-label="Close dialog">
+        <img src="close.svg" alt="">
+      </button>
+      
+      <!-- ✅ GOOD: Visual text provides name -->
+      <button>
+        <img src="close.svg" alt="">
+        Close
+      </button>
+      
+      <!-- ✅ GOOD: aria-labelledby references existing text -->
+      <button aria-labelledby="close-text">
+        <span id="close-text">Close</span>
+      </button>
+      ```
+      
+      ### Common ARIA Mistakes
+      
+      ```html
+      <!-- ❌ BAD: Redundant role on native element -->
+      <button role="button">Submit</button>
+      <nav role="navigation">Links</nav>
+      
+      <!-- ✅ GOOD: Let native semantics work -->
+      <button>Submit</button>
+      <nav>Links</nav>
+      
+      <!-- ❌ BAD: aria-label on div (divs don't have names) -->
+      <div aria-label="This does nothing">Content</div>
+      
+      <!-- ✅ GOOD: aria-label on landmark -->
+      <nav aria-label="Main navigation">Links</nav>
+      
+      <!-- ❌ BAD: Empty aria-label -->
+      <button aria-label="">Click</button>
+      
+      <!-- ✅ GOOD: Descriptive label or visible text -->
+      <button aria-label="Close dialog">×</button>
+      <button>Close dialog</button>
+      ```
+
+examples:
+  - input: |
+      <div role="button" onclick="submit()">Submit</div>
+    output: |
+      <button type="submit">Submit</button>
+</rule>
+
+<rule>
+name: form_accessibility
+description: Create accessible forms with proper labels and error handling
+filters:
+  - type: file_extension
+    pattern: "\\.(html|astro|jsx|tsx|vue|svelte)$"
+
+actions:
+  - type: enforce
+    message: |
+      ## Form Accessibility
+      
+      ### Every Input Needs a Label
+      
+      ```html
+      <!-- ✅ EXCELLENT: Explicit label association -->
+      <label for="email">Email address</label>
+      <input type="email" id="email" name="email" required>
+      
+      <!-- ✅ GOOD: Implicit label association -->
+      <label>
+        Email address
+        <input type="email" name="email" required>
+      </label>
+      
+      <!-- ❌ BAD: No label -->
+      <input type="email" placeholder="Email">
+      
+      <!-- ❌ BAD: Placeholder is NOT a label -->
+      <input type="email" name="email" placeholder="Enter your email">
+      
+      <!-- ✅ GOOD: Placeholder in addition to label -->
+      <label for="email">Email address</label>
+      <input type="email" id="email" name="email" 
+             placeholder="you@example.com">
+      ```
+      
+      ### Required Fields
+      
+      ```html
+      <!-- ✅ EXCELLENT: Multiple indicators -->
+      <label for="name">
+        Full name
+        <abbr title="required" aria-label="required">*</abbr>
+      </label>
+      <input type="text" id="name" name="name" 
+             required aria-required="true">
+      
+      <!-- ✅ GOOD: Visual and semantic indicators -->
+      <label for="email">
+        Email <span class="required">(required)</span>
+      </label>
+      <input type="email" id="email" name="email" required>
+      ```
+      
+      ### Fieldsets and Legends
+      
+      ```html
+      <!-- ✅ EXCELLENT: Grouped related inputs -->
+      <fieldset>
+        <legend>Shipping address</legend>
+        
+        <label for="street">Street address</label>
+        <input type="text" id="street" name="street">
+        
+        <label for="city">City</label>
+        <input type="text" id="city" name="city">
+        
+        <label for="zip">ZIP code</label>
+        <input type="text" id="zip" name="zip">
+      </fieldset>
+      
+      <!-- ✅ EXCELLENT: Radio button groups -->
+      <fieldset>
+        <legend>Shipping method</legend>
+        
+        <label>
+          <input type="radio" name="shipping" value="standard">
+          Standard (5-7 days)
+        </label>
+        
+        <label>
+          <input type="radio" name="shipping" value="express">
+          Express (2-3 days)
+        </label>
+      </fieldset>
+      ```
+      
+      ### Error Messages
+      
+      ```html
+      <!-- ✅ EXCELLENT: Accessible error messages -->
+      <label for="username">Username</label>
+      <input type="text" 
+             id="username" 
+             name="username"
+             aria-invalid="true"
+             aria-describedby="username-error">
+      <span id="username-error" role="alert" class="error">
+        Username must be at least 3 characters
+      </span>
+      
+      <!-- ✅ GOOD: Error summary at top of form -->
+      <div role="alert" class="error-summary">
+        <h2>There are 2 errors in this form:</h2>
+        <ul>
+          <li><a href="#username">Username is required</a></li>
+          <li><a href="#email">Email format is invalid</a></li>
+        </ul>
+      </div>
+      ```
+      
+      ### Help Text
+      
+      ```html
+      <!-- ✅ EXCELLENT: Associated help text -->
+      <label for="password">Password</label>
+      <input type="password" 
+             id="password" 
+             name="password"
+             aria-describedby="password-help">
+      <small id="password-help">
+        Must be at least 8 characters with one number and one symbol
+      </small>
+      
+      <!-- ✅ GOOD: Multiple descriptions -->
+      <label for="card">Credit card</label>
+      <input type="text" 
+             id="card" 
+             name="card"
+             aria-describedby="card-help card-security">
+      <small id="card-help">
+        Enter your 16-digit card number
+      </small>
+      <small id="card-security">
+        We never store your full card number
+      </small>
+      ```
+      
+      ### Autocomplete Attributes
+      
+      ```html
+      <!-- ✅ EXCELLENT: Autocomplete for better UX -->
+      <label for="name">Full name</label>
+      <input type="text" id="name" name="name" autocomplete="name">
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" autocomplete="email">
+      
+      <label for="tel">Phone</label>
+      <input type="tel" id="tel" name="tel" autocomplete="tel">
+      
+      <label for="address">Street address</label>
+      <input type="text" id="address" name="address" 
+             autocomplete="street-address">
+      ```
+
+examples:
+  - input: |
+      <input type="text" placeholder="Name">
+    output: |
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name">
+</rule>
+
+<rule>
+name: link_button_distinction
+description: Use links for navigation, buttons for actions
+filters:
+  - type: file_extension
+    pattern: "\\.(html|astro|jsx|tsx|vue|svelte)$"
+
+actions:
+  - type: enforce
+    message: |
+      ## Links vs Buttons
+      
+      ### The Golden Rule
+      
+      - **Links (`<a>`)**: Navigate to a new page or location
+      - **Buttons (`<button>`)**: Perform an action or submit a form
+      
+      ### Correct Usage
+      
+      ```html
+      <!-- ✅ GOOD: Links for navigation -->
+      <a href="/products">View products</a>
+      <a href="/about">About us</a>
+      <a href="#section">Jump to section</a>
+      <a href="document.pdf" download>Download PDF</a>
+      
+      <!-- ✅ GOOD: Buttons for actions -->
+      <button type="button" onclick="openModal()">Open dialog</button>
+      <button type="submit">Submit form</button>
+      <button type="button" onclick="toggleMenu()">Toggle menu</button>
+      <button type="button" onclick="addToCart()">Add to cart</button>
+      ```
+      
+      ### Common Mistakes
+      
+      ```html
+      <!-- ❌ BAD: Link that performs action -->
+      <a href="#" onclick="deleteItem()">Delete</a>
+      <a href="javascript:void(0)" onclick="openModal()">Open</a>
+      
+      <!-- ✅ GOOD: Button for action -->
+      <button type="button" onclick="deleteItem()">Delete</button>
+      <button type="button" onclick="openModal()">Open</button>
+      
+      <!-- ❌ BAD: Button for navigation -->
+      <button onclick="location.href='/products'">Products</button>
+      
+      <!-- ✅ GOOD: Link for navigation -->
+      <a href="/products">Products</a>
+      
+      <!-- ❌ TERRIBLE: Link with no href -->
+      <a onclick="doSomething()">Click me</a>
+      
+      <!-- ✅ GOOD: Button for action -->
+      <button type="button" onclick="doSomething()">Click me</button>
+      ```
+      
+      ### Button Types
+      
+      ```html
+      <!-- ✅ GOOD: Explicit button types -->
+      <form>
+        <!-- Submit button: submits the form -->
+        <button type="submit">Submit</button>
+        
+        <!-- Reset button: resets form fields -->
+        <button type="reset">Reset</button>
+        
+        <!-- Regular button: does nothing by default -->
+        <button type="button" onclick="doSomething()">
+          Custom action
+        </button>
+      </form>
+      
+      <!-- ⚠️ WARNING: Default button type is "submit" in forms -->
+      <form>
+        <!-- This will submit the form even without type="submit"! -->
+        <button>I submit the form!</button>
+        
+        <!-- Always be explicit -->
+        <button type="button">I do NOT submit</button>
+      </form>
+      ```
+      
+      ### Link Accessibility
+      
+      ```html
+      <!-- ✅ GOOD: Descriptive link text -->
+      <a href="/privacy-policy">Read our privacy policy</a>
+      <a href="/report.pdf">Download 2024 annual report (PDF, 2.3MB)</a>
+      
+      <!-- ❌ BAD: Non-descriptive links -->
+      <a href="/privacy-policy">Click here</a>
+      <a href="/report.pdf">Download</a>
+      <p>Read more about our services <a href="/services">here</a></p>
+      
+      <!-- ✅ GOOD: Context in link text -->
+      <p><a href="/services">Read more about our services</a></p>
+      
+      <!-- ✅ GOOD: Same-page links -->
+      <a href="#main-content">Skip to main content</a>
+      
+      <!-- ✅ GOOD: External links with warning -->
+      <a href="https://example.com" 
+         target="_blank" 
+         rel="noopener noreferrer">
+        Visit example.com
+        <span class="sr-only">(opens in new tab)</span>
+      </a>
+      ```
+
+examples:
+  - input: |
+      <a href="#" onclick="submit()">Submit</a>
+    output: |
+      <button type="submit">Submit</button>
+</rule>
+
+<rule>
+name: image_accessibility
+description: Provide appropriate alt text for all images
+filters:
+  - type: file_extension
+    pattern: "\\.(html|astro|jsx|tsx|vue|svelte)$"
+
+actions:
+  - type: enforce
+    message: |
+      ## Image Accessibility
+      
+      ### Alt Text Decision Tree
+      
+      1. **Is the image meaningful/informative?** → Descriptive alt text
+      2. **Is the image decorative only?** → Empty alt (`alt=""`)
+      3. **Is the image complex (chart, diagram)?** → Alt text + long description
+      4. **Is the image a link/button?** → Describe the destination/action
+      
+      ### Informative Images
+      
+      ```html
+      <!-- ✅ EXCELLENT: Descriptive alt text -->
+      <img src="golden-retriever.jpg" 
+           alt="Golden retriever puppy playing with a red ball in grass">
+      
+      <!-- ✅ GOOD: Product image -->
+      <img src="shoe.jpg" 
+           alt="Nike Air Max 90 running shoe in white and red, side view">
+      
+      <!-- ❌ BAD: Redundant or poor alt text -->
+      <img src="dog.jpg" alt="Image of dog">
+      <img src="dog.jpg" alt="dog.jpg">
+      <img src="dog.jpg" alt="Photo">
+      
+      <!-- ❌ TERRIBLE: No alt attribute -->
+      <img src="important.jpg">
+      ```
+      
+      ### Decorative Images
+      
+      ```html
+      <!-- ✅ GOOD: Empty alt for decorative images -->
+      <img src="decorative-divider.svg" alt="" role="presentation">
+      <img src="background-pattern.png" alt="">
+      
+      <!-- CSS background images are automatically decorative -->
+      <div style="background-image: url(decorative.jpg)">
+        Content
+      </div>
+      ```
+      
+      ### Complex Images
+      
+      ```html
+      <!-- ✅ EXCELLENT: Chart with figure and figcaption -->
+      <figure>
+        <img src="sales-chart.png" 
+             alt="Bar chart showing quarterly sales data">
+        <figcaption>
+          Sales increased from $2M in Q1 to $3.5M in Q4, 
+          with the largest growth occurring in Q3 at $3.2M.
+        </figcaption>
+      </figure>
+      
+      <!-- ✅ GOOD: Diagram with extended description -->
+      <img src="architecture.png" 
+           alt="System architecture diagram"
+           aria-describedby="arch-description">
+      <div id="arch-description">
+        <p>The system consists of three layers:</p>
+        <ul>
+          <li>Presentation layer: Web and mobile clients</li>
+          <li>Application layer: API gateway and microservices</li>
+          <li>Data layer: PostgreSQL database and Redis cache</li>
+        </ul>
+      </div>
+      ```
+      
+      ### Images in Links/Buttons
+      
+      ```html
+      <!-- ✅ EXCELLENT: Image link with alt describing destination -->
+      <a href="/home">
+        <img src="logo.svg" alt="Company name home page">
+      </a>
+      
+      <!-- ✅ GOOD: Icon button with descriptive alt -->
+      <button type="button">
+        <img src="close.svg" alt="Close dialog">
+      </button>
+      
+      <!-- ✅ GOOD: Logo with site name -->
+      <a href="/">
+        <img src="logo.svg" alt="Acme Corporation">
+      </a>
+      
+      <!-- ❌ BAD: Link image with no alt -->
+      <a href="/products">
+        <img src="products-icon.svg">
+      </a>
+      
+      <!-- ❌ BAD: Redundant text and alt -->
+      <a href="/products">
+        <img src="icon.svg" alt="Products">
+        Products
+      </a>
+      
+      <!-- ✅ BETTER: Empty alt when text is present -->
+      <a href="/products">
+        <img src="icon.svg" alt="">
+        Products
+      </a>
+      ```
+      
+      ### SVG Accessibility
+      
+      ```html
+      <!-- ✅ EXCELLENT: Accessible SVG -->
+      <svg role="img" aria-labelledby="icon-title">
+        <title id="icon-title">Search</title>
+        <path d="..."/>
+      </svg>
+      
+      <!-- ✅ GOOD: Decorative SVG -->
+      <svg aria-hidden="true" focusable="false">
+        <path d="..."/>
+      </svg>
+      
+      <!-- ✅ GOOD: Inline SVG with desc -->
+      <svg role="img" aria-labelledby="chart-title chart-desc">
+        <title id="chart-title">Sales data</title>
+        <desc id="chart-desc">
+          A bar chart showing sales increasing from 
+          January to December
+        </desc>
+        <!-- chart content -->
+      </svg>
+      ```
+
+examples:
+  - input: |
+      <img src="product.jpg">
+      <img src="decorative.jpg" alt="decorative image">
+    output: |
+      <img src="product.jpg" alt="Detailed product description">
+      <img src="decorative.jpg" alt="">
+</rule>
+
+<rule>
+name: keyboard_accessibility
+description: Ensure all interactive elements are keyboard accessible
+filters:
+  - type: file_extension
+    pattern: "\\.(html|astro|jsx|tsx|vue|svelte)$"
+
+actions:
+  - type: enforce
+    message: |
+      ## Keyboard Accessibility
+      
+      ### Focus Management Fundamentals
+      
+      1. **All interactive elements must be reachable via Tab**
+      2. **Focus order must be logical (follow visual order)**
+      3. **Focus indicators must be visible**
+      4. **Never remove focus outline without providing alternative**
+      
+      ### Focusable Elements
+      
+      ```html
+      <!-- ✅ GOOD: Naturally focusable elements -->
+      <a href="/page">Link</a>
+      <button>Button</button>
+      <input type="text">
+      <select><option>Option</option></select>
+      <textarea></textarea>
+      <details><summary>Summary</summary></details>
+      
+      <!-- ⚠️ WARNING: These are NOT naturally focusable -->
+      <div>Not focusable</div>
+      <span>Not focusable</span>
+      <p>Not focusable</p>
+      ```
+      
+      ### Tabindex Usage
+      
+      ```html
+      <!-- ✅ GOOD: tabindex="0" adds to natural tab order -->
+      <div role="button" tabindex="0" 
+           onkeydown="handleKeyDown(event)">
+        Custom button (use real button instead!)
+      </div>
+      
+      <!-- ✅ GOOD: tabindex="-1" for programmatic focus only -->
+      <div id="message" tabindex="-1">
+        Error message that we'll focus programmatically
+      </div>
+      
+      <script>
+        // Focus the message programmatically
+        document.getElementById('message').focus();
+      </script>
+      
+      <!-- ❌ BAD: Positive tabindex (breaks natural order) -->
+      <button tabindex="1">First?</button>
+      <button tabindex="2">Second?</button>
+      <a href="/page">Third? No, I'm actually first!</a>
+      
+      <!-- ✅ GOOD: Let natural order work -->
+      <button>First (natural)</button>
+      <button>Second (natural)</button>
+      <a href="/page">Third (natural)</a>
+      ```
+      
+      ### Keyboard Event Handling
+      
+      ```html
+      <!-- ✅ EXCELLENT: Proper keyboard support for custom widget -->
+      <div role="button" 
+           tabindex="0"
+           onclick="handleClick()"
+           onkeydown="handleKeyDown(event)">
+        Custom button
+      </div>
+      
+      <script>
+        function handleKeyDown(event) {
+          // Both Enter and Space should activate buttons
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault(); // Prevent page scroll on Space
+            handleClick();
+          }
+        }
+        
+        function handleClick() {
+          // Action logic
+        }
+      </script>
+      
+      <!-- ✅ BETTER: Just use a real button -->
+      <button onclick="handleClick()">
+        Real button
+      </button>
+      ```
+      
+      ### Focus Indicators
+      
+      ```css
+      /* ❌ TERRIBLE: Removing focus outline */
+      *:focus {
+        outline: none;
+      }
+      
+      /* ✅ GOOD: Custom focus styles */
+      *:focus {
+        outline: 2px solid #0066cc;
+        outline-offset: 2px;
+      }
+      
+      /* ✅ EXCELLENT: Different styles for mouse and keyboard */
+      *:focus {
+        outline: 2px solid #0066cc;
+        outline-offset: 2px;
+      }
+      
+      *:focus:not(:focus-visible) {
+        outline: none;
+      }
+      
+      *:focus-visible {
+        outline: 2px solid #0066cc;
+        outline-offset: 2px;
+      }
+      
+      /* ✅ GOOD: High contrast focus */
+      button:focus-visible {
+        outline: 3px solid #000;
+        outline-offset: 2px;
+        box-shadow: 0 0 0 5px rgba(0, 102, 204, 0.3);
+      }
+      ```
+      
+      ### Skip Links
+      
+      ```html
+      <!-- ✅ EXCELLENT: Skip link as first focusable element -->
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #000;
+            color: #fff;
+            padding: 8px 16px;
+            text-decoration: none;
+            z-index: 100;
+          }
+          
+          .skip-link:focus {
+            top: 0;
+          }
+        </style>
+      </head>
+      <body>
+        <a href="#main-content" class="skip-link">
+          Skip to main content
+        </a>
+        
+        <header>
+          <!-- Navigation etc -->
+        </header>
+        
+        <main id="main-content" tabindex="-1">
+          <h1>Page Title</h1>
+          <!-- Main content -->
+        </main>
+      </body>
+      </html>
+      ```
+      
+      ### Focus Trapping (Modals/Dialogs)
+      
+      ```html
+      <!-- ✅ GOOD: Modal with focus trap -->
+      <div role="dialog" 
+           aria-modal="true" 
+           aria-labelledby="dialog-title">
+        <h2 id="dialog-title">Confirm action</h2>
+        <p>Are you sure?</p>
+        <button type="button" id="confirm">Confirm</button>
+        <button type="button" id="cancel">Cancel</button>
+      </div>
+      
+      <script>
+        // When dialog opens:
+        // 1. Save currently focused element
+        const previousFocus = document.activeElement;
+        
+        // 2. Focus first element in dialog
+        document.getElementById('confirm').focus();
+        
+        // 3. Trap focus within dialog
+        const dialog = document.querySelector('[role="dialog"]');
+        const focusableElements = dialog.querySelectorAll(
+          'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+        
+        dialog.addEventListener('keydown', (e) => {
+          if (e.key === 'Tab') {
+            if (e.shiftKey) {
+              if (document.activeElement === firstElement) {
+                e.preventDefault();
+                lastElement.focus();
+              }
+            } else {
+              if (document.activeElement === lastElement) {
+                e.preventDefault();
+                firstElement.focus();
+              }
+            }
+          }
+          
+          // Close on Escape
+          if (e.key === 'Escape') {
+            closeDialog();
+          }
+        });
+        
+        // When dialog closes:
+        function closeDialog() {
+          // Return focus to previously focused element
+          previousFocus.focus();
+        }
+      </script>
+      ```
+
+examples:
+  - input: |
+      <div onclick="action()">Clickable div</div>
+    output: |
+      <button type="button" onclick="action()">Accessible button</button>
+</rule>
+
+<rule>
+name: tables_accessibility
+description: Create accessible data tables with proper markup
+filters:
+  - type: file_extension
+    pattern: "\\.(html|astro|jsx|tsx|vue|svelte)$"
+
+actions:
+  - type: enforce
+    message: |
+      ## Table Accessibility
+      
+      ### Tables for Data ONLY
+      
+      **CRITICAL: Never use tables for layout. Only use tables for tabular data.**
+      
+      ### Simple Data Table
+      
+      ```html
+      <!-- ✅ EXCELLENT: Accessible data table -->
+      <table>
+        <caption>2024 Quarterly Revenue</caption>
+        <thead>
+          <tr>
+            <th scope="col">Quarter</th>
+            <th scope="col">Revenue</th>
+            <th scope="col">Growth</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Q1</th>
+            <td>$2.5M</td>
+            <td>+12%</td>
+          </tr>
+          <tr>
+            <th scope="row">Q2</th>
+            <td>$2.8M</td>
+            <td>+15%</td>
+          </tr>
+          <tr>
+            <th scope="row">Q3</th>
+            <td>$3.1M</td>
+            <td>+18%</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="row">Total</th>
+            <td>$8.4M</td>
+            <td>+15%</td>
+          </tr>
+        </tfoot>
+      </table>
+      ```
+      
+      ### Table Caption
+      
+      ```html
+      <!-- ✅ GOOD: Caption describes table -->
+      <table>
+        <caption>Employee roster for December 2024</caption>
+        <!-- table content -->
+      </table>
+      
+      <!-- ✅ GOOD: Visually hidden caption with summary -->
+      <table>
+        <caption class="sr-only">
+          Product comparison showing features, prices, and ratings 
+          for three laptop models
+        </caption>
+        <!-- table content -->
+      </table>
+      
+      <!-- ❌ BAD: No caption -->
+      <table>
+        <!-- How do users know what this table is about? -->
+      </table>
+      ```
+      
+      ### Table Headers with Scope
+      
+      ```html
+      <!-- ✅ GOOD: Column headers -->
+      <table>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Age</th>
+          <th scope="col">City</th>
+        </tr>
+        <tr>
+          <td>Alice</td>
+          <td>30</td>
+          <td>Boston</td>
+        </tr>
+      </table>
+      
+      <!-- ✅ GOOD: Row headers -->
+      <table>
+        <tr>
+          <th scope="row">Monday</th>
+          <td>9 AM - 5 PM</td>
+        </tr>
+        <tr>
+          <th scope="row">Tuesday</th>
+          <td>9 AM - 5 PM</td>
+        </tr>
+      </table>
+      ```
+      
+      ### Complex Tables
+      
+      ```html
+      <!-- ✅ EXCELLENT: Complex table with headers attribute -->
+      <table>
+        <caption>Sales by region and product category</caption>
+        <thead>
+          <tr>
+            <th id="region" scope="col">Region</th>
+            <th id="electronics" scope="col">Electronics</th>
+            <th id="clothing" scope="col">Clothing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th id="north" scope="row">North</th>
+            <td headers="region north electronics">$2.5M</td>
+            <td headers="region north clothing">$1.8M</td>
+          </tr>
+          <tr>
+            <th id="south" scope="row">South</th>
+            <td headers="region south electronics">$3.1M</td>
+            <td headers="region south clothing">$2.2M</td>
+          </tr>
+        </tbody>
+      </table>
+      ```
+      
+      ### Responsive Tables
+      
+      ```html
+      <!-- ✅ GOOD: Scrollable table on mobile -->
+      <div role="region" 
+           aria-labelledby="table-caption" 
+           tabindex="0"
+           class="table-scroll">
+        <table>
+          <caption id="table-caption">Quarterly sales data</caption>
+          <!-- table content -->
+        </table>
+      </div>
+      
+      <style>
+        .table-scroll {
+          overflow-x: auto;
+          max-width: 100%;
+        }
+        
+        /* Indicate scrollability */
+        .table-scroll:focus {
+          outline: 2px solid #0066cc;
+        }
+      </style>
+      ```
+
+examples:
+  - input: |
+      <table>
+        <tr><td>Name</td><td>Age</td></tr>
+        <tr><td>Alice</td><td>30</td></tr>
+      </table>
+    output: |
+      <table>
+        <caption>User information</caption>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Alice</td>
+            <td>30</td>
+          </tr>
+        </tbody>
+      </table>
+</rule>
+
+<rule>
+name: lists_accessibility
+description: Use semantic list markup for lists of items
+filters:
+  - type: file_extension
+    pattern: "\\.(html|astro|jsx|tsx|vue|svelte)$"
+
+actions:
+  - type: suggest
+    message: |
+      ## List Accessibility
+      
+      ### When to Use Lists
+      
+      - Navigation menus
+      - Sets of links
+      - Steps in a process
+      - Feature lists
+      - Breadcrumbs
+      - Tags or categories
+      
+      ### Unordered Lists
+      
+      ```html
+      <!-- ✅ GOOD: Semantic unordered list -->
+      <ul>
+        <li>First item</li>
+        <li>Second item</li>
+        <li>Third item</li>
+      </ul>
+      
+      <!-- ❌ BAD: Divs instead of list -->
+      <div class="list">
+        <div class="item">First item</div>
+        <div class="item">Second item</div>
+        <div class="item">Third item</div>
+      </div>
+      ```
+      
+      ### Ordered Lists
+      
+      ```html
+      <!-- ✅ GOOD: Numbered list for sequential items -->
+      <ol>
+        <li>Preheat oven to 350°F</li>
+        <li>Mix dry ingredients</li>
+        <li>Add wet ingredients</li>
+        <li>Bake for 25 minutes</li>
+      </ol>
+      
+      <!-- ✅ GOOD: Custom start number -->
+      <ol start="5">
+        <li>Step 5</li>
+        <li>Step 6</li>
+      </ol>
+      
+      <!-- ✅ GOOD: Reversed list -->
+      <ol reversed>
+        <li>Third place</li>
+        <li>Second place</li>
+        <li>First place</li>
+      </ol>
+      ```
+      
+      ### Description Lists
+      
+      ```html
+      <!-- ✅ EXCELLENT: Key-value pairs -->
+      <dl>
+        <dt>Name</dt>
+        <dd>John Smith</dd>
+        
+        <dt>Email</dt>
+        <dd>john@example.com</dd>
+        
+        <dt>Phone</dt>
+        <dd>555-0123</dd>
+      </dl>
+      
+      <!-- ✅ GOOD: Glossary -->
+      <dl>
+        <dt>HTML</dt>
+        <dd>HyperText Markup Language</dd>
+        
+        <dt>CSS</dt>
+        <dd>Cascading Style Sheets</dd>
+      </dl>
+      
+      <!-- ✅ GOOD: Multiple values -->
+      <dl>
+        <dt>Authors</dt>
+        <dd>Jane Doe</dd>
+        <dd>John Smith</dd>
+        
+        <dt>Published</dt>
+        <dd>January 2024</dd>
+      </dl>
+      ```
+      
+      ### Navigation Lists
+      
+      ```html
+      <!-- ✅ EXCELLENT: Semantic navigation -->
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/products">Products</a></li>
+          <li>
+            <a href="/services">Services</a>
+            <ul>
+              <li><a href="/services/consulting">Consulting</a></li>
+              <li><a href="/services/training">Training</a></li>
+            </ul>
+          </li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+      ```
+      
+      ### Breadcrumbs
+      
+      ```html
+      <!-- ✅ EXCELLENT: Accessible breadcrumbs -->
+      <nav aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><a href="/products">Products</a></li>
+          <li><a href="/products/laptops">Laptops</a></li>
+          <li aria-current="page">Dell XPS 13</li>
+        </ol>
+      </nav>
+      ```
+
+examples:
+  - input: |
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    output: |
+      <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </ul>
+</rule>
+
+<rule>
+name: color_contrast_accessibility
+description: Ensure sufficient color contrast for text
+filters:
+  - type: file_extension
+    pattern: "\\.(html|css|astro|jsx|tsx|vue|svelte)$"
+
+actions:
+  - type: enforce
+    message: |
+      ## Color Contrast
+      
+      ### WCAG Contrast Requirements
+      
+      **Level AA (Minimum):**
+      - Normal text (< 24px): 4.5:1
+      - Large text (≥ 24px or ≥ 19px bold): 3:1
+      - UI components and graphics: 3:1
+      
+      **Level AAA (Enhanced):**
+      - Normal text: 7:1
+      - Large text: 4.5:1
+      
+      ### Good Contrast Examples
+      
+      ```css
+      /* ✅ GOOD: High contrast text */
+      .text-primary {
+        color: #1a1a1a; /* Very dark gray */
+        background: #ffffff; /* White */
+        /* Contrast ratio: 19:1 (AAA) */
+      }
+      
+      .text-inverted {
+        color: #ffffff; /* White */
+        background: #2c3e50; /* Dark blue */
+        /* Contrast ratio: 12.6:1 (AAA) */
+      }
+      
+      /* ✅ GOOD: Large text with adequate contrast */
+      .heading {
+        font-size: 32px;
+        color: #555555; /* Medium gray */
+        background: #ffffff; /* White */
+        /* Contrast ratio: 7.4:1 (AA for large text) */
+      }
+      
+      /* ❌ BAD: Insufficient contrast */
+      .low-contrast {
+        color: #999999; /* Light gray */
+        background: #ffffff; /* White */
+        /* Contrast ratio: 2.8:1 (FAILS) */
+      }
+      
+      .very-low-contrast {
+        color: #cccccc; /* Very light gray */
+        background: #ffffff; /* White */
+        /* Contrast ratio: 1.6:1 (FAILS BADLY) */
+      }
+      ```
+      
+      ### Don't Rely on Color Alone
+      
+      ```html
+      <!-- ❌ BAD: Color only for meaning -->
+      <p style="color: red;">Error occurred</p>
+      <p style="color: green;">Success!</p>
+      
+      <!-- ✅ GOOD: Color plus icon/text -->
+      <p class="error">
+        <svg aria-hidden="true" class="icon-error">
+          <use href="#icon-warning"/>
+        </svg>
+        <strong>Error:</strong> Password must be at least 8 characters
+      </p>
+      
+      <p class="success">
+        <svg aria-hidden="true" class="icon-success">
+          <use href="#icon-check"/>
+        </svg>
+        <strong>Success:</strong> Your account has been created
+      </p>
+      
+      <!-- ✅ GOOD: Form validation with multiple indicators -->
+      <input type="email" 
+             aria-invalid="true"
+             class="input-error">
+      <span class="error-message" role="alert">
+        <svg aria-hidden="true">
+          <use href="#icon-warning"/>
+        </svg>
+        Please enter a valid email address
+      </span>
+      ```
+      
+      ### Link Contrast
+      
+      ```css
+      /* ✅ GOOD: Links distinguishable from text */
+      body {
+        color: #333333;
+      }
+      
+      a {
+        color: #0066cc; /* Blue links */
+        text-decoration: underline;
+      }
+      
+      a:hover, a:focus {
+        color: #004499; /* Darker blue */
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+      }
+      
+      /* ❌ BAD: Links hard to distinguish */
+      a {
+        color: inherit; /* Same color as text */
+        text-decoration: none; /* No underline */
+      }
+      
+      /* ✅ ACCEPTABLE: No underline but high contrast AND other indicator */
+      a {
+        color: #0066cc; /* High contrast blue */
+        text-decoration: none;
+        border-bottom: 2px solid currentColor;
+      }
+      ```
+      
+      ### Testing Tools
+      
+      ```html
+      <!--
+        Test contrast ratios:
+        - WebAIM Contrast Checker: https://webaim.org/resources/contrastchecker/
+        - Chrome DevTools: Inspect element → Color picker shows contrast ratio
+        - axe DevTools browser extension
+        - WAVE browser extension
+      -->
+      ```
+
+examples:
+  - input: |
+      <style>
+        .text { color: #ccc; background: white; }
+      </style>
+    output: |
+      <style>
+        .text { color: #333; background: white; }
+        /* Ensure 4.5:1 contrast ratio minimum */
+      </style>
+</rule>
+
+<rule>
+name: live_regions_accessibility
+description: Announce dynamic content changes to screen readers
+filters:
+  - type: file_extension
+    pattern: "\\.(html|astro|jsx|tsx|vue|svelte)$"
+
+actions:
+  - type: suggest
+    message: |
+      ## Live Regions and Dynamic Content
+      
+      ### ARIA Live Regions
+      
+      Use live regions to announce dynamic content changes to screen readers.
+      
+      ```html
+      <!-- ✅ GOOD: Polite announcement (doesn't interrupt) -->
+      <div role="status" aria-live="polite" aria-atomic="true">
+        <p>5 items in cart</p>
+      </div>
+      
+      <!-- ✅ GOOD: Assertive announcement (interrupts) -->
+      <div role="alert" aria-live="assertive">
+        <p>Error: Payment failed. Please try again.</p>
+      </div>
+      
+      <!-- ✅ GOOD: Off region (no announcement) -->
+      <div aria-live="off">
+        <p>This won't be announced</p>
+      </div>
+      ```
+      
+      ### Common Patterns
+      
+      ```html
+      <!-- ✅ EXCELLENT: Form validation -->
+      <form>
+        <label for="email">Email</label>
+        <input type="email" 
+               id="email" 
+               aria-invalid="false"
+               aria-describedby="email-error">
+        
+        <!-- Screen reader announces when error appears -->
+        <span id="email-error" role="alert" class="error">
+          <!-- Dynamically insert error message here -->
+        </span>
+      </form>
+      
+      <!-- ✅ EXCELLENT: Loading states -->
+      <div role="status" aria-live="polite" aria-busy="true">
+        <p>Loading...</p>
+      </div>
+      
+      <!-- After loading completes -->
+      <div role="status" aria-live="polite" aria-busy="false">
+        <p>Content loaded</p>
+      </div>
+      
+      <!-- ✅ EXCELLENT: Search results count -->
+      <div role="status" aria-live="polite" aria-atomic="true">
+        <p>Found 42 results</p>
+      </div>
+      
+      <!-- ✅ EXCELLENT: Success message -->
+      <div role="status" aria-live="polite">
+        <p>Settings saved successfully</p>
+      </div>
+      ```
+      
+      ### ARIA Atomic
+      
+      ```html
+      <!-- ✅ GOOD: aria-atomic="true" reads entire region -->
+      <div role="timer" aria-live="polite" aria-atomic="true">
+        <span>Time remaining:</span>
+        <span>5:23</span>
+      </div>
+      <!-- Announces: "Time remaining: 5:23" -->
+      
+      <!-- ⚠️ WARNING: aria-atomic="false" reads only changes -->
+      <div role="timer" aria-live="polite" aria-atomic="false">
+        <span>Time remaining:</span>
+        <span>5:22</span>
+      </div>
+      <!-- Announces only: "5:22" (potentially confusing) -->
+      ```
+      
+      ### Visual + Screen Reader Content
+      
+      ```html
+      <!-- ✅ EXCELLENT: Both visual spinner and announcement -->
+      <div class="loading-container">
+        <!-- Visual loading indicator -->
+        <div class="spinner" aria-hidden="true"></div>
+        
+        <!-- Screen reader announcement -->
+        <div role="status" aria-live="polite" class="sr-only">
+          Loading content, please wait...
+        </div>
+      </div>
+      ```
+
+examples:
+  - input: |
+      <div id="status">Loading...</div>
+    output: |
+      <div role="status" aria-live="polite">Loading...</div>
+</rule>
+
+<rule>
+name: hidden_content_accessibility
+description: Properly hide content from users and assistive technology
+filters:
+  - type: file_extension
+    pattern: "\\.(html|astro|jsx|tsx|vue|svelte)$"
+
+actions:
+  - type: enforce
+    message: |
+      ## Hiding Content Accessibly
+      
+      ### Different Ways to Hide Content
+      
+      | Method | Visually Hidden | Screen Reader Hidden | Focusable | Use Case |
+      |--------|----------------|---------------------|-----------|----------|
+      | `aria-hidden="true"` | No | Yes | ⚠️ Should be No* | Decorative content |
+      | `.sr-only` class | Yes | No | No | Screen reader only text |
+      | `hidden` attribute | Yes | Yes | No | Completely hidden |
+      | `display: none` | Yes | Yes | No | Completely hidden |
+      | `visibility: hidden` | Yes | Yes | No | Completely hidden |
+      | `opacity: 0` | Yes | No | Yes | ⚠️ Risky |
+      
+      *Never use `aria-hidden="true"` on focusable elements!
+      
+      ### ARIA Hidden (Decorative Content)
+      
+      ```html
+      <!-- ✅ GOOD: Hide decorative icons -->
+      <button>
+        <svg aria-hidden="true" focusable="false">
+          <use href="#icon-search"/>
+        </svg>
+        Search
+      </button>
+      
+      <!-- ✅ GOOD: Hide decorative emoji -->
+      <h2>
+        <span aria-hidden="true">🎉</span>
+        Congratulations!
+      </h2>
+      
+      <!-- ❌ TERRIBLE: Hiding focusable content -->
+      <button aria-hidden="true">
+        I can be focused but screen readers ignore me!
+      </button>
+      
+      <!-- ❌ TERRIBLE: Hiding important content -->
+      <nav aria-hidden="true">
+        <a href="/">Home</a>
+      </nav>
+      ```
+      
+      ### Screen Reader Only (Visually Hidden)
+      
+      ```html
+      <style>
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border-width: 0;
+        }
+      </style>
+      
+      <!-- ✅ EXCELLENT: Screen reader only text -->
+      <button>
+        <svg aria-hidden="true">
+          <use href="#icon-close"/>
+        </svg>
+        <span class="sr-only">Close dialog</span>
+      </button>
+      
+      <!-- ✅ EXCELLENT: Additional context -->
+      <a href="/article">
+        Read more
+        <span class="sr-only">about semantic HTML best practices</span>
+      </a>
+      
+      <!-- ✅ EXCELLENT: Form field instructions -->
+      <label for="password">Password</label>
+      <input type="password" id="password" 
+             aria-describedby="password-requirements">
+      <span id="password-requirements" class="sr-only">
+        Must be at least 8 characters with one number and one symbol
+      </span>
+      <span class="visible-hint">Min. 8 characters</span>
+      ```
+      
+      ### Hidden Attribute (Completely Hidden)
+      
+      ```html
+      <!-- ✅ GOOD: Conditionally shown content -->
+      <div id="advanced-options" hidden>
+        <h3>Advanced Options</h3>
+        <!-- Options -->
+      </div>
+      
+      <button type="button" onclick="toggleAdvanced()">
+        Show advanced options
+      </button>
+      
+      <script>
+        function toggleAdvanced() {
+          const options = document.getElementById('advanced-options');
+          const isHidden = options.hasAttribute('hidden');
+          
+          if (isHidden) {
+            options.removeAttribute('hidden');
+            options.querySelector('h3').focus();
+          } else {
+            options.setAttribute('hidden', '');
+          }
+        }
+      </script>
+      
+      <!-- ✅ EQUIVALENT: CSS display none -->
+      <style>
+        .hidden {
+          display: none;
+        }
+      </style>
+      
+      <div class="hidden">
+        Completely hidden content
+      </div>
+      ```
+      
+      ### Inert Attribute
+      
+      ```html
+      <!-- ✅ EXCELLENT: Disable interaction with background -->
+      <div id="main-content" inert>
+        <nav>
+          <a href="/">Home</a>
+        </a>
+        <!-- Content is visible but not interactive -->
+      </div>
+      
+      <div role="dialog" aria-modal="true">
+        <h2>Active Modal</h2>
+        <button>Close</button>
+      </div>
+      
+      <script>
+        // When modal opens
+        document.getElementById('main-content').setAttribute('inert', '');
+        
+        // When modal closes
+        document.getElementById('main-content').removeAttribute('inert');
+      </script>
+      ```
+
+examples:
+  - input: |
+      <button><img src="icon.svg"></button>
+      <button aria-hidden="true">Click</button>
+    output: |
+      <button>
+        <img src="icon.svg" alt="" aria-hidden="true">
+        <span class="sr-only">Descriptive text</span>
+      </button>
+      <button>Click</button>
+</rule>
+
+<rule>
+name: motion_accessibility
+description: Respect user motion preferences
+filters:
+  - type: file_extension
+    pattern: "\\.(html|css|astro|jsx|tsx|vue|svelte)$"
+
+actions:
+  - type: enforce
+    message: |
+      ## Motion and Animation Accessibility
+      
+      ### Respect prefers-reduced-motion
+      
+      ```css
+      /* ✅ EXCELLENT: Safe default with reduced motion option */
+      .animated-element {
+        animation: slide-in 0.3s ease-out;
+        transition: transform 0.3s ease;
+      }
+      
+      @media (prefers-reduced-motion: reduce) {
+        .animated-element {
+          animation: none;
+          transition: none;
+        }
+      }
+      
+      /* ✅ GOOD: Instant transitions for reduced motion */
+      .slide-panel {
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      @media (prefers-reduced-motion: reduce) {
+        .slide-panel {
+          transition-duration: 0.01s;
+        }
+      }
+      
+      /* ✅ EXCELLENT: Only essential motion remains */
+      .modal {
+        animation: fade-and-scale 0.4s ease-out;
+      }
+      
+      @media (prefers-reduced-motion: reduce) {
+        .modal {
+          animation: fade-only 0.15s ease-out;
+        }
+      }
+      
+      @keyframes fade-and-scale {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      
+      @keyframes fade-only {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      ```
+      
+      ### Safe Motion Practices
+      
+      ```css
+      /* ✅ GOOD: Subtle, slow animations */
+      .fade-in {
+        animation: fade 0.3s ease-in;
+      }
+      
+      /* ⚠️ WARNING: Fast, jarring animations */
+      .spin {
+        animation: spin 0.1s linear;
+      }
+      
+      /* ❌ BAD: Infinite spinning (can trigger nausea) */
+      .loading-spinner {
+        animation: spin 1s linear infinite;
+      }
+      
+      /* ✅ BETTER: Conditional infinite animation */
+      .loading-spinner {
+        animation: spin 1s linear infinite;
+      }
+      
+      @media (prefers-reduced-motion: reduce) {
+        .loading-spinner {
+          animation: none;
+          /* Show static loading indicator instead */
+          opacity: 0.6;
+        }
+      }
+      ```
+      
+      ### Parallax and Scroll Effects
+      
+      ```css
+      /* ✅ GOOD: Disable parallax for sensitive users */
+      .parallax-layer {
+        transform: translateY(var(--parallax-offset));
+        transition: transform 0.3s ease-out;
+      }
+      
+      @media (prefers-reduced-motion: reduce) {
+        .parallax-layer {
+          transform: none !important;
+          transition: none;
+        }
+      }
+      ```
+      
+      ### JavaScript Motion
+      
+      ```javascript
+      // ✅ EXCELLENT: Check user preference
+      const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
+      
+      function scrollToElement(element) {
+        if (prefersReducedMotion) {
+          // Instant scroll
+          element.scrollIntoView();
+        } else {
+          // Smooth scroll
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+      
+      // ✅ GOOD: Listen for preference changes
+      const motionMediaQuery = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      );
+      
+      motionMediaQuery.addEventListener('change', (e) => {
+        if (e.matches) {
+          // User enabled reduced motion
+          disableAnimations();
+        } else {
+          // User disabled reduced motion
+          enableAnimations();
+        }
+      });
+      ```
+
+examples:
+  - input: |
+      <style>
+        .animated { animation: spin 1s infinite; }
+      </style>
+    output: |
+      <style>
+        .animated { animation: spin 1s infinite; }
+        
+        @media (prefers-reduced-motion: reduce) {
+          .animated { animation: none; }
+        }
+      </style>
+</rule>

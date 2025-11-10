@@ -1,0 +1,186 @@
+---
+description: "Astro SEO"
+---
+# Astro SEO Best Practices
+
+Best practices for implementing SEO in Astro sites.
+
+<rule>
+name: astro_seo
+description: Standards for search engine optimization in Astro applications
+filters:
+  - type: file_extension
+    pattern: "\\.astro$"
+  - type: content
+    pattern: "<head>"
+
+actions:
+  - type: suggest
+    message: |
+      Follow these SEO best practices for Astro:
+
+      ## Essential Meta Tags
+
+      ### Basic SEO Layout
+      ```astro
+      ---
+      // layouts/SEOLayout.astro
+      interface Props {
+        title: string;
+        description: string;
+        image?: string;
+        canonical?: string;
+        noindex?: boolean;
+        nofollow?: boolean;
+      }
+      
+      const { 
+        title, 
+        description,
+        image = '/default-og-image.jpg',
+        canonical,
+        noindex = false,
+        nofollow = false
+      } = Astro.props;
+      
+      const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site);
+      const imageURL = new URL(image, Astro.site);
+      ---
+      
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          
+          <!-- Primary Meta Tags -->
+          <title>{title}</title>
+          <meta name="title" content={title} />
+          <meta name="description" content={description} />
+          <link rel="canonical" href={canonicalURL} />
+          
+          {(noindex || nofollow) && (
+            <meta 
+              name="robots" 
+              content={`${noindex ? 'noindex' : 'index'},${nofollow ? 'nofollow' : 'follow'}`} 
+            />
+          )}
+          
+          <!-- Open Graph / Facebook -->
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content={canonicalURL} />
+          <meta property="og:title" content={title} />
+          <meta property="og:description" content={description} />
+          <meta property="og:image" content={imageURL} />
+          
+          <!-- Twitter -->
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:url" content={canonicalURL} />
+          <meta name="twitter:title" content={title} />
+          <meta name="twitter:description" content={description} />
+          <meta name="twitter:image" content={imageURL} />
+          
+          <slot name="head" />
+        </head>
+        <body>
+          <slot />
+        </body>
+      </html>
+      ```
+
+      ## Structured Data (JSON-LD)
+
+      ### Article Schema
+      ```astro
+      ---
+      interface ArticleProps {
+        title: string;
+        description: string;
+        author: string;
+        publishedDate: Date;
+        modifiedDate?: Date;
+        image: string;
+      }
+      
+      const { 
+        title, 
+        description, 
+        author, 
+        publishedDate, 
+        modifiedDate,
+        image 
+      } = Astro.props;
+      
+      const schema = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: title,
+        description: description,
+        author: {
+          "@type": "Person",
+          name: author
+        },
+        datePublished: publishedDate.toISOString(),
+        ...(modifiedDate && { dateModified: modifiedDate.toISOString() }),
+        image: new URL(image, Astro.site).toString()
+      };
+      ---
+      
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      ```
+
+      ## Sitemap and Robots
+
+      Astro automatically generates sitemaps with the @astrojs/sitemap integration.
+
+      ```javascript
+      // astro.config.mjs
+      import { defineConfig } from 'astro/config';
+      import sitemap from '@astrojs/sitemap';
+      
+      export default defineConfig({
+        site: 'https://example.com',
+        integrations: [sitemap()]
+      });
+      ```
+
+      ## Semantic HTML
+
+      ### Use Proper Heading Hierarchy
+      ```astro
+      <!-- ✅ GOOD: Proper hierarchy -->
+      <article>
+        <h1>Main Title</h1>
+        <section>
+          <h2>Section Title</h2>
+          <h3>Subsection Title</h3>
+        </section>
+      </article>
+      
+      <!-- ❌ BAD: Skipping levels -->
+      <article>
+        <h1>Main Title</h1>
+        <h4>Wrong Level</h4>
+      </article>
+      ```
+
+examples:
+  - input: |
+      # Bad: No SEO optimization
+      <html>
+        <head><title>Page</title></head>
+        <body><div>Content</div></body>
+      </html>
+      
+      # Good: Comprehensive SEO
+      <html lang="en">
+        <head>
+          <title>Optimized Page Title</title>
+          <meta name="description" content="..." />
+          <link rel="canonical" href="..." />
+          <meta property="og:title" content="..." />
+        </head>
+        <body><article>Content</article></body>
+      </html>
+    output: "SEO-optimized Astro page"
+</rule>

@@ -1,0 +1,501 @@
+---
+description: "Astro Routing"
+---
+# Astro Routing
+
+Best practices for file-based routing and dynamic routes in Astro.
+
+<rule>
+name: astro_routing
+description: Standards for implementing routing patterns in Astro static sites
+filters:
+  - type: file_path
+    pattern: "src/pages/"
+  - type: file_extension
+    pattern: "\\.astro$"
+
+actions:
+  - type: suggest
+    message: |
+      Follow these routing best practices for Astro static sites:
+
+      ## File-Based Routing
+
+      Astro uses file-based routing where files in `src/pages/` become routes.
+
+      ### Static Routes
+      ```
+      src/pages/
+      ├── index.astro              → /
+      ├── about.astro              → /about
+      ├── contact.astro            → /contact
+      ├── blog/
+      │   ├── index.astro          → /blog
+      │   └── first-post.astro     → /blog/first-post
+      └── products/
+          └── [id].astro           → /products/:id (dynamic)
+      ```
+
+      ### Page Component Structure
+      ```astro
+      ---
+      // src/pages/about.astro
+      import Layout from '../layouts/Layout.astro';
+      
+      // Access route information
+      const { url, params } = Astro;
+      const pathname = url.pathname;
+      ---
+      
+      <Layout title="About">
+        <h1>About Us</h1>
+        <p>Current path: {pathname}</p>
+      </Layout>
+      ```
+
+      ## Dynamic Routes
+
+      ### Single Dynamic Segment
+      ```astro
+      ---
+      // src/pages/blog/[slug].astro
+      import { getCollection } from 'astro:content';
+      import type { GetStaticPaths } from 'astro';
+      
+      export const getStaticPaths = (async () => {
+        const posts = await getCollection('blog');
+        return posts.map(post => ({
+          params: { slug: post.slug },
+          props: { post }
+        }));
+      }) satisfies GetStaticPaths;
+      
+      const { post } = Astro.props;
+      ---
+      
+      <h1>{post.data.title}</h1>
+      ```
+
+      ### Multiple Dynamic Segments
+      ```astro
+      ---
+      // src/pages/blog/[year]/[month]/[slug].astro
+      import type { GetStaticPaths } from 'astro';
+      
+      export const getStaticPaths = (async () => {
+        const posts = await getCollection('blog');
+        return posts.map(post => {
+          const date = post.data.publishedDate;
+          return {
+            params: { 
+              year: date.getFullYear().toString(),
+              month: (date.getMonth() + 1).toString().padStart(2, '0'),
+              slug: post.slug
+            },
+            props: { post }
+          };
+        });
+      }) satisfies GetStaticPaths;
+      
+      const { year, month, slug } = Astro.params;
+      const { post } = Astro.props;
+      ---
+      
+      <h1>{post.data.title}</h1>
+      <time>{year}-{month}</time>
+      ```
+
+      ## Rest Parameters (Catch-All Routes)
+
+      ### Basic Catch-All
+      ```astro
+      ---
+      // src/pages/docs/[...slug].astro
+      // Matches: /docs/a, /docs/a/b, /docs/a/b/c
+      
+      export async function getStaticPaths() {
+        const pages = [
+          { slug: 'intro' },
+          { slug: 'guides/getting-started' },
+          { slug: 'guides/advanced/deployment' }
+        ];
+        
+        return pages.map(page => ({
+          params: { slug: page.slug },
+          props: { page }
+        }));
+      }
+      
+      const { slug } = Astro.params;
+      // slug will be: "intro", "guides/getting-started", etc.
+      ---
+      
+      <h1>Docs: {slug}</h1>
+      ```
+
+      ### Optional Catch-All (Including Index)
+      ```astro
+      ---
+      // src/pages/[...path].astro
+      // Matches: /, /a, /a/b, /a/b/c
+      
+      export async function getStaticPaths() {
+        return [
+          { params: { path: undefined } },  // Matches /
+          { params: { path: 'about' } },    // Matches /about
+          { params: { path: 'docs/intro' } } // Matches /docs/intro
+        ];
+      }
+      ---
+      ```
+
+      ## Pagination
+
+      ### Paginated List
+      ```astro
+      ---
+      // src/pages/blog/[...page].astro
+      import { getCollection } from 'astro:content';
+      import type { GetStaticPaths, Page } from 'astro';
+      import type { CollectionEntry } from 'astro:content';
+      
+      export const getStaticPaths = (async ({ paginate }) => {
+        const posts = await getCollection('blog', ({ data }) => !data.draft);
+        const sortedPosts = posts.sort(
+          (a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf()
+        );
+        
+        // Creates routes: /blog, /blog/2, /blog/3, etc.
+        return paginate(sortedPosts, { pageSize: 10 });
+      }) satisfies GetStaticPaths;
+      
+      interface Props {
+        page: Page<CollectionEntry<'blog'>>;
+      }
+      
+      const { page } = Astro.props;
+      ---
+      
+      <div>
+        {page.data.map(post => (
+          <article>
+            <h2>{post.data.title}</h2>
+            <a href={`/blog/${post.slug}`}>Read more</a>
+          </article>
+        ))}
+        
+        <nav class="pagination">
+          {page.url.prev && <a href={page.url.prev}>← Previous</a>}
+          <span>Page {page.currentPage} of {page.lastPage}</span>
+          {page.url.next && <a href={page.url.next}>Next →</a>}
+        </nav>
+      </div>
+      ```
+
+      ### Paginated with Category Filter
+      ```astro
+      ---
+      // src/pages/blog/category/[category]/[...page].astro
+      import type { GetStaticPaths } from 'astro';
+      
+      export const getStaticPaths = (async ({ paginate }) => {
+        const posts = await getCollection('blog');
+        
+        // Group by category
+        const categories = [...new Set(posts.flatMap(p => p.data.categories))];
+        
+        return categories.flatMap(category => {
+          const filteredPosts = posts.filter(
+            post => post.data.categories.includes(category)
+          );
+          
+          return paginate(filteredPosts, {
+            params: { category },
+            pageSize: 10
+          });
+        });
+      }) satisfies GetStaticPaths;
+      
+      const { page } = Astro.props;
+      const { category } = Astro.params;
+      ---
+      
+      <h1>Posts in {category}</h1>
+      {page.data.map(post => (
+        <article>{post.data.title}</article>
+      ))}
+      ```
+
+      ## Redirects
+
+      ### Permanent Redirect
+      ```astro
+      ---
+      // src/pages/old-url.astro
+      return Astro.redirect('/new-url', 301);
+      ---
+      ```
+
+      ### Conditional Redirect
+      ```astro
+      ---
+      const post = await getEntry('blog', Astro.params.slug);
+      
+      if (!post) {
+        return Astro.redirect('/404', 404);
+      }
+      
+      if (post.data.draft && import.meta.env.PROD) {
+        return Astro.redirect('/blog', 302);
+      }
+      ---
+      ```
+
+      ### External Redirect
+      ```astro
+      ---
+      // Redirect to external URL
+      return Astro.redirect('https://example.com', 302);
+      ---
+      ```
+
+      ## Priority and Specificity
+
+      Routes are matched in order of specificity:
+
+      1. **Static routes** (highest priority)
+      2. **Dynamic routes with single segment**
+      3. **Rest parameters**
+      4. **Catch-all routes** (lowest priority)
+
+      ```
+      src/pages/
+      ├── products/index.astro        # /products (matches first)
+      ├── products/featured.astro     # /products/featured (matches first)
+      ├── products/[id].astro         # /products/:id (matches after static)
+      └── products/[...slug].astro    # /products/* (matches last)
+      ```
+
+      ## Navigation Helpers
+
+      ### Active Link Detection
+      ```astro
+      ---
+      interface NavLinkProps {
+        href: string;
+        text: string;
+      }
+      
+      const { href, text } = Astro.props;
+      const isActive = Astro.url.pathname === href ||
+                      Astro.url.pathname.startsWith(href + '/');
+      ---
+      
+      <a 
+        href={href}
+        class:list={['nav-link', { active: isActive }]}
+        aria-current={isActive ? 'page' : undefined}
+      >
+        {text}
+      </a>
+      ```
+
+      ### Breadcrumbs
+      ```astro
+      ---
+      const paths = Astro.url.pathname.split('/').filter(Boolean);
+      const breadcrumbs = paths.map((path, i) => ({
+        label: path.replace(/-/g, ' '),
+        href: '/' + paths.slice(0, i + 1).join('/')
+      }));
+      ---
+      
+      <nav aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          {breadcrumbs.map((crumb, i) => (
+            <li>
+              {i === breadcrumbs.length - 1 ? (
+                <span aria-current="page">{crumb.label}</span>
+              ) : (
+                <a href={crumb.href}>{crumb.label}</a>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+      ```
+
+      ## 404 Pages
+
+      ### Custom 404
+      ```astro
+      ---
+      // src/pages/404.astro
+      import Layout from '../layouts/Layout.astro';
+      
+      const suggestions = [
+        { href: '/', text: 'Home' },
+        { href: '/blog', text: 'Blog' },
+        { href: '/contact', text: 'Contact' }
+      ];
+      ---
+      
+      <Layout title="404 - Page Not Found">
+        <h1>404 - Page Not Found</h1>
+        <p>The page you're looking for doesn't exist.</p>
+        
+        <nav>
+          <h2>Try these pages:</h2>
+          <ul>
+            {suggestions.map(link => (
+              <li><a href={link.href}>{link.text}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </Layout>
+      ```
+
+      ## Query Parameters
+
+      ### Reading Query Params
+      ```astro
+      ---
+      const searchQuery = Astro.url.searchParams.get('q');
+      const page = parseInt(Astro.url.searchParams.get('page') || '1');
+      const filters = Astro.url.searchParams.getAll('filter');
+      ---
+      
+      <form>
+        <input 
+          type="search" 
+          name="q" 
+          value={searchQuery || ''} 
+        />
+        <button type="submit">Search</button>
+      </form>
+      ```
+
+      ## Best Practices
+
+      ### 1. Use Type-Safe Params
+      ```astro
+      ---
+      // ✅ GOOD: Type-safe with GetStaticPaths
+      import type { GetStaticPaths } from 'astro';
+      
+      export const getStaticPaths = (async () => {
+        return [
+          { params: { id: '1' }, props: { data: {} } }
+        ];
+      }) satisfies GetStaticPaths;
+      
+      // TypeScript knows the shape of params and props
+      const { id } = Astro.params;
+      const { data } = Astro.props;
+      ---
+      ```
+
+      ### 2. Handle Missing Content Gracefully
+      ```astro
+      ---
+      import { getEntry } from 'astro:content';
+      
+      const entry = await getEntry('blog', Astro.params.slug);
+      
+      // ✅ GOOD: Handle missing content
+      if (!entry) {
+        return Astro.redirect('/404', 404);
+      }
+      ---
+      ```
+
+      ### 3. Normalize URLs
+      ```astro
+      ---
+      // ✅ GOOD: Consistent trailing slashes
+      const normalizedPath = Astro.url.pathname.endsWith('/') 
+        ? Astro.url.pathname 
+        : Astro.url.pathname + '/';
+      ---
+      ```
+
+      ### 4. Group Related Routes
+      ```
+      src/pages/
+      ├── blog/
+      │   ├── index.astro          # Blog listing
+      │   ├── [slug].astro         # Single post
+      │   ├── tag/
+      │   │   └── [tag].astro      # Posts by tag
+      │   └── category/
+      │       └── [category].astro # Posts by category
+      ```
+
+      ### 5. Use Consistent Naming
+      ```
+      ✅ GOOD:
+      src/pages/
+      ├── products/
+      │   ├── [id].astro
+      │   └── [id]/reviews.astro
+
+      ❌ BAD: Inconsistent parameter names
+      src/pages/
+      ├── products/
+      │   ├── [productId].astro
+      │   └── [id]/reviews.astro
+      ```
+
+      ## Common Pitfalls
+
+      ```astro
+      <!-- ❌ BAD: Missing getStaticPaths -->
+      ---
+      // src/pages/blog/[slug].astro
+      const { slug } = Astro.params;
+      ---
+      
+      <!-- ✅ GOOD: Define getStaticPaths -->
+      ---
+      export async function getStaticPaths() {
+        return [
+          { params: { slug: 'post-1' } }
+        ];
+      }
+      const { slug } = Astro.params;
+      ---
+      ```
+
+      ```astro
+      <!-- ❌ BAD: Using params without validation -->
+      ---
+      const id = parseInt(Astro.params.id); // Could be NaN
+      ---
+      
+      <!-- ✅ GOOD: Validate params -->
+      ---
+      const id = parseInt(Astro.params.id);
+      if (isNaN(id)) {
+        return Astro.redirect('/404', 404);
+      }
+      ---
+      ```
+
+examples:
+  - input: |
+      # Bad: No getStaticPaths for dynamic route
+      // src/pages/blog/[slug].astro
+      const { slug } = Astro.params;
+      
+      # Good: Proper static path generation
+      // src/pages/blog/[slug].astro
+      export async function getStaticPaths() {
+        const posts = await getCollection('blog');
+        return posts.map(post => ({
+          params: { slug: post.slug },
+          props: { post }
+        }));
+      }
+    output: "Properly configured static routes"
+</rule>

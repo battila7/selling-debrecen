@@ -1,0 +1,816 @@
+# Tailwind CSS Best Practices
+
+Guidelines and best practices for authoring HTML with Tailwind CSS to ensure maintainable, performant, and accessible code.
+
+<rule>
+name: tailwind_class_organization
+description: Organize Tailwind classes in a consistent, readable order
+filters:
+  - type: file_extension
+    pattern: "\\.(astro|html|jsx|tsx)$"
+
+actions:
+  - type: suggest
+    message: |
+      Organize Tailwind classes in this order for maximum readability:
+
+      1. Layout & Positioning (display, position, top/right/bottom/left, z-index)
+      2. Box Model (width, height, margin, padding)
+      3. Typography (font, text size, weight, color, line-height, letter-spacing)
+      4. Visual (background, border, shadow, opacity)
+      5. Transforms & Animations
+      6. Responsive Modifiers (sm:, md:, lg:, xl:, 2xl:)
+      7. State Modifiers (hover:, focus:, active:, disabled:)
+      8. Dark Mode (dark:)
+
+      Example:
+      ```html
+      <div class="
+        flex items-center justify-between
+        w-full max-w-4xl mx-auto p-4
+        text-lg font-semibold text-gray-900
+        bg-white border border-gray-200 rounded-lg shadow-sm
+        transition-all duration-200
+        md:p-6 lg:p-8
+        hover:shadow-md focus:ring-2
+        dark:bg-gray-800 dark:text-gray-100
+      ">
+        Content
+      </div>
+      ```
+
+examples:
+  - input: |
+      <!-- Bad: Random order, hard to scan -->
+      <button class="hover:bg-blue-700 text-white p-4 bg-blue-600 rounded font-bold dark:bg-blue-800">
+        Click me
+      </button>
+    output: |
+      <!-- Good: Organized order -->
+      <button class="
+        p-4
+        font-bold text-white
+        bg-blue-600 rounded
+        hover:bg-blue-700
+        dark:bg-blue-800
+      ">
+        Click me
+      </button>
+</rule>
+
+<rule>
+name: tailwind_responsive_design
+description: Use mobile-first responsive design with Tailwind breakpoints
+filters:
+  - type: file_extension
+    pattern: "\\.(astro|html|jsx|tsx)$"
+
+actions:
+  - type: enforce
+    message: |
+      Always use mobile-first responsive design:
+
+      1. Start with base (mobile) styles - NO prefix
+      2. Add larger breakpoints progressively (sm:, md:, lg:, xl:, 2xl:)
+      3. Never use max-width breakpoints or custom breakpoints unless absolutely necessary
+
+      Breakpoints:
+      - sm: 640px   (small tablets)
+      - md: 768px   (tablets)
+      - lg: 1024px  (laptops)
+      - xl: 1280px  (desktops)
+      - 2xl: 1536px (large desktops)
+
+      Example:
+      ```html
+      <!-- Mobile-first: base → tablet → desktop -->
+      <div class="
+        grid grid-cols-1
+        gap-4
+        md:grid-cols-2 md:gap-6
+        lg:grid-cols-3 lg:gap-8
+      ">
+        Content
+      </div>
+      ```
+
+      Common patterns:
+      - Text sizing: text-sm md:text-base lg:text-lg
+      - Padding: p-4 md:p-6 lg:p-8
+      - Grid columns: grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+      - Hidden elements: hidden md:block
+
+examples:
+  - input: |
+      <!-- Bad: Desktop-first thinking -->
+      <div class="grid-cols-3 sm:grid-cols-1">
+    output: |
+      <!-- Good: Mobile-first -->
+      <div class="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+</rule>
+
+<rule>
+name: tailwind_avoid_arbitrary_values
+description: Prefer standard Tailwind utilities over arbitrary values
+filters:
+  - type: file_extension
+    pattern: "\\.(astro|html|jsx|tsx)$"
+  - type: content
+    pattern: "\\[.*?\\]"
+
+actions:
+  - type: warn
+    message: |
+      Avoid arbitrary values (e.g., w-[247px]) unless absolutely necessary:
+
+      Why:
+      - Breaks design consistency
+      - Harder to maintain
+      - Defeats purpose of design system
+      - Not responsive-friendly
+
+      Instead:
+      1. Use standard Tailwind spacing scale (0, 0.5, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, etc.)
+      2. Extend theme in tailwind.config if you need custom values
+      3. Use percentage/viewport units (w-1/2, w-full, w-screen)
+
+      Acceptable arbitrary value use cases:
+      - One-off edge cases that won't be reused
+      - Dynamic values from props/state
+      - Very specific design requirements
+
+examples:
+  - input: |
+      <!-- Bad: Arbitrary values everywhere -->
+      <div class="w-[247px] h-[83px] mt-[15px] text-[17px]">
+    output: |
+      <!-- Good: Standard utilities -->
+      <div class="w-64 h-20 mt-4 text-lg">
+
+      <!-- Or if truly custom, extend config -->
+      <!-- tailwind.config.js -->
+      module.exports = {
+        theme: {
+          extend: {
+            spacing: {
+              'custom': '247px'
+            }
+          }
+        }
+      }
+</rule>
+
+<rule>
+name: tailwind_component_extraction
+description: Extract repeated utility patterns into components
+filters:
+  - type: file_extension
+    pattern: "\\.(astro|html|jsx|tsx)$"
+
+actions:
+  - type: suggest
+    message: |
+      When you see utility classes repeated 3+ times, extract into a component:
+
+      Decision tree:
+      1. Used once? → Inline utilities
+      2. Used 2-3 times? → Consider component if complex
+      3. Used 3+ times? → ALWAYS extract to component
+
+      DON'T use @apply in CSS:
+      - Defeats Tailwind's purpose
+      - Harder to customize
+      - Loses IDE autocomplete
+      - Increases CSS bundle size
+
+      DO create components:
+      ```astro
+      ---
+      // components/common/Button.astro
+      interface Props {
+        variant?: 'primary' | 'secondary';
+        size?: 'sm' | 'md' | 'lg';
+      }
+
+      const { variant = 'primary', size = 'md' } = Astro.props;
+
+      const baseClasses = 'inline-flex items-center justify-center font-semibold rounded transition-colors focus:outline-none focus:ring-2';
+      
+      const variantClasses = {
+        primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
+        secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500'
+      };
+      
+      const sizeClasses = {
+        sm: 'px-3 py-1.5 text-sm',
+        md: 'px-4 py-2 text-base',
+        lg: 'px-6 py-3 text-lg'
+      };
+      
+      const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]}`;
+      ---
+
+      <button class={classes}>
+        <slot />
+      </button>
+      ```
+
+examples:
+  - input: |
+      <!-- Bad: Repeated utilities everywhere -->
+      <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">One</button>
+      <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Two</button>
+      <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Three</button>
+    output: |
+      <!-- Good: Extracted component -->
+      <Button>One</Button>
+      <Button>Two</Button>
+      <Button>Three</Button>
+</rule>
+
+<rule>
+name: tailwind_accessibility
+description: Always include accessibility utilities with interactive elements
+filters:
+  - type: file_extension
+    pattern: "\\.(astro|html|jsx|tsx)$"
+  - type: content
+    pattern: "<(button|a|input|select|textarea)"
+
+actions:
+  - type: enforce
+    message: |
+      Always include accessibility utilities for interactive elements:
+
+      Required for ALL interactive elements:
+      1. Focus indicators: focus:ring-2 focus:ring-offset-2 focus:ring-[color]
+      2. Focus outline: focus:outline-none (if using ring) OR visible outline
+      3. Sufficient contrast ratios (WCAG AA minimum: 4.5:1 for text, 3:1 for UI)
+      4. Keyboard navigation support
+      5. Disabled states: disabled:opacity-50 disabled:cursor-not-allowed
+
+      Buttons:
+      ```html
+      <button class="
+        px-4 py-2
+        bg-blue-600 text-white
+        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+        disabled:opacity-50 disabled:cursor-not-allowed
+      ">
+        Action
+      </button>
+      ```
+
+      Links (that look like buttons):
+      ```html
+      <a href="/page" class="
+        inline-block px-4 py-2
+        bg-blue-600 text-white
+        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+        hover:underline-offset-2
+      ">
+        Link
+      </a>
+      ```
+
+      Form inputs:
+      ```html
+      <input class="
+        w-full px-3 py-2
+        border border-gray-300 rounded
+        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+        disabled:bg-gray-100 disabled:cursor-not-allowed
+      " />
+      ```
+
+      Interactive cards:
+      ```html
+      <div tabindex="0" class="
+        p-4 border rounded
+        cursor-pointer
+        focus:outline-none focus:ring-2 focus:ring-blue-500
+        hover:shadow-lg
+      ">
+        Content
+      </div>
+      ```
+
+examples:
+  - input: |
+      <!-- Bad: No focus indicators -->
+      <button class="px-4 py-2 bg-blue-600 text-white rounded">
+        Click me
+      </button>
+    output: |
+      <!-- Good: Proper accessibility -->
+      <button class="
+        px-4 py-2
+        bg-blue-600 text-white rounded
+        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+        hover:bg-blue-700
+        disabled:opacity-50 disabled:cursor-not-allowed
+      ">
+        Click me
+      </button>
+</rule>
+
+<rule>
+name: tailwind_color_consistency
+description: Use semantic color scales consistently
+filters:
+  - type: file_extension
+    pattern: "\\.(astro|html|jsx|tsx)$"
+
+actions:
+  - type: suggest
+    message: |
+      Use Tailwind's color scales consistently and semantically:
+
+      Color scale: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950
+
+      Semantic usage:
+      - 50-200:  Backgrounds, subtle highlights
+      - 300-400: Borders, disabled states
+      - 500-600: Default brand colors, primary actions
+      - 700-800: Hover states, emphasis
+      - 900-950: Text, high contrast elements
+
+      Common patterns:
+      ```html
+      <!-- Primary button -->
+      <button class="bg-blue-600 hover:bg-blue-700 text-white">
+        Action
+      </button>
+
+      <!-- Card with border -->
+      <div class="bg-white border border-gray-300">
+        Content
+      </div>
+
+      <!-- Alert backgrounds -->
+      <div class="bg-red-50 border border-red-200 text-red-800">
+        Error message
+      </div>
+
+      <!-- Text hierarchy -->
+      <h1 class="text-gray-900">Heading</h1>
+      <p class="text-gray-700">Body text</p>
+      <span class="text-gray-500">Secondary text</span>
+      ```
+
+      Dark mode pairing:
+      - Light bg-white → dark:bg-gray-900
+      - Light text-gray-900 → dark:text-gray-100
+      - Light border-gray-300 → dark:border-gray-700
+      - Light bg-gray-50 → dark:bg-gray-800
+
+examples:
+  - input: |
+      <!-- Bad: Inconsistent scale usage -->
+      <button class="bg-blue-400 hover:bg-blue-900">
+    output: |
+      <!-- Good: Consistent scale usage -->
+      <button class="bg-blue-600 hover:bg-blue-700">
+</rule>
+
+<rule>
+name: tailwind_spacing_consistency
+description: Use consistent spacing scale throughout the application
+filters:
+  - type: file_extension
+    pattern: "\\.(astro|html|jsx|tsx)$"
+
+actions:
+  - type: suggest
+    message: |
+      Use Tailwind's spacing scale consistently (based on 0.25rem / 4px increments):
+
+      Scale: 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 72, 80, 96
+
+      Common spacing patterns:
+      - Tight spacing: gap-1, gap-2 (4px, 8px)
+      - Default spacing: gap-4, p-4 (16px)
+      - Comfortable spacing: gap-6, gap-8 (24px, 32px)
+      - Section spacing: mt-12, mt-16 (48px, 64px)
+      - Page spacing: py-20, py-24 (80px, 96px)
+
+      Responsive spacing pattern:
+      ```html
+      <!-- Cards grid -->
+      <div class="grid gap-4 md:gap-6 lg:gap-8">
+
+      <!-- Section padding -->
+      <section class="px-4 py-12 md:px-6 md:py-16 lg:px-8 lg:py-20">
+
+      <!-- Container -->
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      ```
+
+      Typography spacing:
+      ```html
+      <div class="space-y-4">
+        <h1 class="mb-2">Heading</h1>
+        <p class="mb-4">Paragraph</p>
+        <p>Another paragraph</p>
+      </div>
+      ```
+
+      Don't mix spacing approaches:
+      - Use space-y-* for vertical stacks
+      - Use gap-* for grids and flexbox
+      - Use mb-* only when breaking from rhythm
+
+examples:
+  - input: |
+      <!-- Bad: Inconsistent spacing -->
+      <div class="mt-3 mb-5 px-7">
+    output: |
+      <!-- Good: Consistent scale -->
+      <div class="my-4 px-8">
+</rule>
+
+<rule>
+name: tailwind_performance
+description: Optimize Tailwind usage for performance
+filters:
+  - type: file_extension
+    pattern: "\\.(astro|html|jsx|tsx)$"
+
+actions:
+  - type: suggest
+    message: |
+      Follow these performance best practices:
+
+      1. Avoid dynamic class generation:
+      ```javascript
+      // Bad: Dynamic class generation (won't be purged correctly)
+      const color = 'blue';
+      <div class={`bg-${color}-600`}> // DON'T DO THIS
+
+      // Good: Complete class names
+      const bgColor = isActive ? 'bg-blue-600' : 'bg-gray-600';
+      <div class={bgColor}>
+
+      // Good: Map to complete class names
+      const colors = {
+        blue: 'bg-blue-600',
+        red: 'bg-red-600',
+        green: 'bg-green-600'
+      };
+      <div class={colors[color]}>
+      ```
+
+      2. Use the safelist for truly dynamic classes:
+      ```javascript
+      // tailwind.config.js
+      module.exports = {
+        safelist: [
+          'bg-blue-600',
+          'bg-red-600',
+          'bg-green-600'
+        ]
+      }
+      ```
+
+      3. Avoid unnecessary responsive variants:
+      ```html
+      <!-- Bad: Every size variant when not needed -->
+      <div class="text-base sm:text-base md:text-base lg:text-lg xl:text-lg">
+
+      <!-- Good: Only where sizes change -->
+      <div class="text-base lg:text-lg">
+      ```
+
+      4. Group repeated utilities:
+      ```html
+      <!-- Consider extraction if used frequently -->
+      <div class="flex items-center justify-center">
+        <!-- This pattern is common, consider a utility or component -->
+      </div>
+      ```
+
+      5. Minimize use of @layer and @apply:
+      - These prevent tree-shaking
+      - Keep custom CSS minimal
+      - Prefer components over custom CSS classes
+
+examples:
+  - input: |
+      <!-- Bad: Dynamic class names -->
+      <div class={`bg-${color}-600`}>
+    output: |
+      <!-- Good: Complete class names from map -->
+      const bgClass = colorMap[color] || 'bg-gray-600';
+      <div class={bgClass}>
+</rule>
+
+<rule>
+name: tailwind_dark_mode
+description: Implement dark mode consistently using Tailwind's dark mode utilities
+filters:
+  - type: file_extension
+    pattern: "\\.(astro|html|jsx|tsx)$"
+
+actions:
+  - type: suggest
+    message: |
+      Implement dark mode systematically:
+
+      1. Configure dark mode in tailwind.config.js:
+      ```javascript
+      module.exports = {
+        darkMode: 'class', // or 'media' for system preference
+      }
+      ```
+
+      2. Apply dark mode classes consistently:
+      ```html
+      <div class="
+        bg-white text-gray-900
+        dark:bg-gray-900 dark:text-gray-100
+      ">
+        Content
+      </div>
+      ```
+
+      3. Common dark mode patterns:
+      ```html
+      <!-- Background -->
+      bg-white dark:bg-gray-900
+      bg-gray-50 dark:bg-gray-800
+      bg-gray-100 dark:bg-gray-700
+
+      <!-- Text -->
+      text-gray-900 dark:text-gray-100
+      text-gray-700 dark:text-gray-300
+      text-gray-500 dark:text-gray-400
+
+      <!-- Borders -->
+      border-gray-300 dark:border-gray-700
+      divide-gray-200 dark:divide-gray-700
+
+      <!-- Interactive elements -->
+      bg-blue-600 hover:bg-blue-700
+      dark:bg-blue-500 dark:hover:bg-blue-600
+
+      <!-- Shadows (often disabled in dark mode) -->
+      shadow-lg dark:shadow-none
+      ```
+
+      4. Complete component example:
+      ```html
+      <div class="
+        p-6
+        bg-white border border-gray-200 rounded-lg shadow-md
+        dark:bg-gray-800 dark:border-gray-700 dark:shadow-xl
+      ">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100">
+          Title
+        </h2>
+        <p class="mt-2 text-gray-700 dark:text-gray-300">
+          Description text
+        </p>
+        <button class="
+          mt-4 px-4 py-2
+          bg-blue-600 text-white rounded
+          hover:bg-blue-700
+          focus:ring-2 focus:ring-blue-500
+          dark:bg-blue-500 dark:hover:bg-blue-600
+        ">
+          Action
+        </button>
+      </div>
+      ```
+
+      5. Test in both modes:
+      - Ensure sufficient contrast in both modes
+      - Check focus indicators are visible
+      - Verify images and icons work in both modes
+
+examples:
+  - input: |
+      <!-- Bad: Only light mode considered -->
+      <div class="bg-white text-gray-900 border border-gray-300">
+    output: |
+      <!-- Good: Dark mode included -->
+      <div class="
+        bg-white text-gray-900 border border-gray-300
+        dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700
+      ">
+</rule>
+
+<rule>
+name: tailwind_common_pitfalls
+description: Avoid common Tailwind CSS mistakes and anti-patterns
+filters:
+  - type: file_extension
+    pattern: "\\.(astro|html|jsx|tsx)$"
+
+actions:
+  - type: warn
+    message: |
+      Avoid these common Tailwind pitfalls:
+
+      1. Don't mix Tailwind with inline styles:
+      ```html
+      <!-- Bad -->
+      <div class="p-4" style="padding-top: 20px;">
+
+      <!-- Good -->
+      <div class="px-4 pb-4 pt-5">
+      ```
+
+      2. Don't use !important (use specificity instead):
+      ```html
+      <!-- Bad -->
+      <div class="!text-red-600">
+
+      <!-- Good - increase specificity or use inline styles if truly necessary -->
+      <div class="text-red-600">
+      ```
+
+      3. Don't forget to purge unused classes:
+      - Configure content paths correctly in tailwind.config.js
+      - Include all template file paths
+
+      4. Don't use arbitrary values when standard utilities exist:
+      ```html
+      <!-- Bad -->
+      <div class="w-[50%]">
+
+      <!-- Good -->
+      <div class="w-1/2">
+      ```
+
+      5. Don't break mobile-first approach:
+      ```html
+      <!-- Bad: Desktop classes as default -->
+      <div class="grid-cols-3 md:grid-cols-1">
+
+      <!-- Good: Mobile classes as default -->
+      <div class="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      ```
+
+      6. Don't use nested arbitrary properties:
+      ```html
+      <!-- Bad -->
+      <div class="[&>*]:p-4">
+
+      <!-- Good: Use a component or proper structure -->
+      <div class="divide-y">
+        <div class="p-4">Item 1</div>
+        <div class="p-4">Item 2</div>
+      </div>
+      ```
+
+      7. Don't forget hover/focus states:
+      ```html
+      <!-- Bad: No interactive states -->
+      <button class="bg-blue-600 text-white">
+
+      <!-- Good: Complete interactive states -->
+      <button class="
+        bg-blue-600 text-white
+        hover:bg-blue-700
+        focus:ring-2 focus:ring-blue-500
+        active:bg-blue-800
+      ">
+      ```
+
+      8. Don't use Tailwind for complex animations:
+      ```html
+      <!-- Bad: Complex animation in classes -->
+      <div class="animate-[wiggle_1s_ease-in-out_infinite]">
+
+      <!-- Good: Use CSS for complex animations -->
+      <div class="custom-animation">
+      <!-- Define @keyframes in CSS -->
+      ```
+
+examples:
+  - input: |
+      <!-- Common mistakes -->
+      <div class="w-[50%] grid-cols-3 md:grid-cols-1 !text-red-600">
+    output: |
+      <!-- Corrected -->
+      <div class="w-1/2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 text-red-600">
+</rule>
+
+<rule>
+name: tailwind_utility_patterns
+description: Common utility patterns and combinations that work well together
+filters:
+  - type: file_extension
+    pattern: "\\.(astro|html|jsx|tsx)$"
+
+actions:
+  - type: suggest
+    message: |
+      Use these proven utility patterns:
+
+      1. Centering patterns:
+      ```html
+      <!-- Horizontal center -->
+      <div class="mx-auto max-w-7xl">
+
+      <!-- Vertical and horizontal center -->
+      <div class="flex items-center justify-center min-h-screen">
+
+      <!-- Grid center -->
+      <div class="grid place-items-center min-h-screen">
+
+      <!-- Absolute center -->
+      <div class="absolute inset-0 flex items-center justify-center">
+      ```
+
+      2. Card patterns:
+      ```html
+      <!-- Basic card -->
+      <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-md">
+
+      <!-- Hoverable card -->
+      <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-md transition-shadow hover:shadow-lg">
+
+      <!-- Card with image -->
+      <div class="overflow-hidden bg-white rounded-lg shadow-md">
+        <img class="w-full h-48 object-cover" />
+        <div class="p-6">Content</div>
+      </div>
+      ```
+
+      3. Button patterns:
+      ```html
+      <!-- Primary button -->
+      <button class="px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+
+      <!-- Secondary button -->
+      <button class="px-4 py-2 bg-gray-200 text-gray-900 font-medium rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+
+      <!-- Outline button -->
+      <button class="px-4 py-2 border-2 border-blue-600 text-blue-600 font-medium rounded-lg hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+
+      <!-- Icon button -->
+      <button class="p-2 text-gray-600 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500">
+        <!-- Icon -->
+      </button>
+      ```
+
+      4. Input patterns:
+      ```html
+      <!-- Text input -->
+      <input class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+
+      <!-- Input with error -->
+      <input class="w-full px-3 py-2 border-2 border-red-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" />
+
+      <!-- Search input -->
+      <input class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      ```
+
+      5. Layout patterns:
+      ```html
+      <!-- Container with max width -->
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+      <!-- Two column layout -->
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+
+      <!-- Sidebar layout -->
+      <div class="flex flex-col lg:flex-row gap-8">
+        <aside class="w-full lg:w-64">Sidebar</aside>
+        <main class="flex-1">Content</main>
+      </div>
+
+      <!-- Stack with spacing -->
+      <div class="space-y-4">
+        <div>Item 1</div>
+        <div>Item 2</div>
+      </div>
+      ```
+
+      6. Image patterns:
+      ```html
+      <!-- Responsive image -->
+      <img class="w-full h-auto" />
+
+      <!-- Fixed aspect ratio -->
+      <div class="aspect-video w-full">
+        <img class="w-full h-full object-cover" />
+      </div>
+
+      <!-- Avatar -->
+      <img class="w-12 h-12 rounded-full object-cover" />
+
+      <!-- Hero image -->
+      <img class="w-full h-96 object-cover" />
+      ```
+
+examples:
+  - input: "Need to create a centered card layout"
+    output: |
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="w-full max-w-md p-6 bg-white border border-gray-200 rounded-lg shadow-md">
+          <!-- Card content -->
+        </div>
+      </div>
+</rule>

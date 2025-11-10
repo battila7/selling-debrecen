@@ -1,0 +1,29 @@
+---
+alwaysApply: true
+description: The tech stack used by this project.
+---
+# Stack
+
+The project uses the following tech stack:
+
+```
+Astro
+Alpine.js
+Tailwind
+DecapCMS
+Lucide icons
+```
+
+Avoid the use of the following technologies:
+
+```
+React
+Vue
+Bootstrap
+jQuery
+```
+
+Avoid manually generating icons. Use Lucide icons instead:
+```
+import Icon from "@lucide/astro/icons/icon"
+```

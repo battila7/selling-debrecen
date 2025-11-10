@@ -1,0 +1,30 @@
+---
+alwaysApply: true
+description: Project structure.
+---
+# Project Structure
+
+The structure of this project is as follows:
+
+```
+public: Assets that should not be managed or optimized by Astro.
+- admin: DecapCMS admin folder.
+  - config.yml: DecapCMS configuration.
+specs: Functional and nonfunctional requirements.
+src: The source code of the site.
+- assets: Contains assets (images and stuff) managed by DecapCMS.
+- components: Contains Astro components.
+  - common: Reusable components across the different pages.
+    - index.ts: Used to re-export components.
+  - page-specific: Components specific to one page.
+- content: Data and textual content that goes onto the site.
+- layouts: Astro layouts.
+  - SitePageLayout.ts: The default layout.
+- pages: The actual Astro pages of the site.
+- styles: Site CSS.
+  - global.css: The default, always included CSS file.
+- util: Helper code and logic.
+  - assets.ts: Loading image files from the assets directory.
+  - links.ts: Navigation-related stuff, so we don't have to type out the URLs again and again.
+  - markdown.ts: Markdown rendering. 
+```

@@ -1,0 +1,130 @@
+---
+description: "Astro Component Structure"
+---
+# Astro Component Structure
+
+Best practices for structuring Astro components and organizing code.
+
+<rule>
+name: astro_component_structure
+description: Standards for organizing Astro component files
+filters:
+  - type: file_extension
+    pattern: "\\.astro$"
+
+actions:
+  - type: suggest
+    message: |
+      Follow these structural best practices for Astro components:
+
+      ## Component File Structure
+
+      Every .astro file should follow this order:
+      
+      1. **Frontmatter (---)**
+         - Import statements
+         - TypeScript interfaces/types
+         - Component logic and data fetching
+         - Props destructuring
+      
+      2. **Template (HTML)**
+         - Semantic HTML
+         - Component composition
+      
+      3. **Styles (<style>)**
+         - Scoped by default
+         - Component-specific styles only
+
+      ## Example Structure
+
+      ```astro
+      ---
+      // 1. Type imports first
+      import type { ImageMetadata } from 'astro';
+      
+      // 2. Component imports
+      import BaseLayout from '../layouts/BaseLayout.astro';
+      import Card from '../components/Card.astro';
+      
+      // 3. Utility imports
+      import { formatDate } from '../utils/date';
+      
+      // 4. Type definitions
+      interface Props {
+        title: string;
+        description?: string;
+      }
+      
+      // 5. Props destructuring with defaults
+      const { 
+        title, 
+        description = 'Default description' 
+      } = Astro.props;
+      
+      // 6. Component logic
+      const formattedDate = formatDate(new Date());
+      
+      // 7. Data fetching (if needed)
+      const data = await fetch('https://api.example.com/data')
+        .then(res => res.json());
+      ---
+      
+      <!-- 8. Template -->
+      <BaseLayout title={title}>
+        <article>
+          <h1>{title}</h1>
+          {description && <p>{description}</p>}
+          <Card data={data} />
+        </article>
+      </BaseLayout>
+      
+      <!-- 9. Styles -->
+      <style>
+        article {
+          max-width: 800px;
+          margin: 0 auto;
+        }
+        
+        h1 {
+          font-size: 2rem;
+          margin-bottom: 1rem;
+        }
+      </style>
+      ```
+
+      ## Key Principles
+
+      1. **Single Responsibility**: Each component should do one thing well
+      2. **Composition over Complexity**: Break down large components
+      3. **Clear Imports**: Group imports logically (types, components, utils)
+      4. **Type Safety**: Always define Props interface for components
+      5. **Semantic HTML**: Use appropriate HTML elements
+      6. **Style Scoping**: Keep styles scoped to the component
+
+examples:
+  - input: |
+      # Bad: Mixed order, no types, unclear structure
+      ---
+      const title = Astro.props.title;
+      import Card from '../components/Card.astro';
+      const data = await fetch('...');
+      import { formatDate } from '../utils/date';
+      ---
+      <div>{title}</div>
+      
+      # Good: Organized structure with types
+      ---
+      import type { ImageMetadata } from 'astro';
+      import Card from '../components/Card.astro';
+      import { formatDate } from '../utils/date';
+      
+      interface Props {
+        title: string;
+      }
+      
+      const { title } = Astro.props;
+      const data = await fetch('...');
+      ---
+      <article>{title}</article>
+    output: "Well-structured Astro component"
+</rule>

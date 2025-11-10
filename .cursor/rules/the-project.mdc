@@ -1,0 +1,28 @@
+---
+alwaysApply: true
+description: "What the project is all about"
+---
+
+# The Project
+
+We're building a website for a real estate agent.
+
+## Nonfunctional Bits
+
+- Fast and optimized.
+- Responsive (looks great on every screen size).
+- Inclusive and accessible.
+- Uses the latest HTML and CSS features as well as Web APIs.
+- Uses as little JS as possible.
+
+## Style
+
+- Old-money, traditional.
+- Not flashy.
+
+## General Details
+
+- Language of the site: Hungarian
+- Name of the site: Selling Debrecen
+- Name of the agent: Kiss Zoltán
+- Area: Hungary, Debrecen
