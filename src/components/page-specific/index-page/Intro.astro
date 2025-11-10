@@ -1,0 +1,63 @@
+---
+import { Image } from "astro:assets";
+import agentPlaceholder from "../../../images/agent-placeholder.jpg";
+---
+
+<section class="py-16 bg-white">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold text-gray-900 mb-12 text-center">
+      Bemutatkozás
+    </h2>
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
+        <!-- Image on the left -->
+        <div class="w-full lg:w-1/3 flex-shrink-0">
+          <Image
+            src={agentPlaceholder}
+            alt="Kiss Zoltán - Ingatlanügynök"
+            class="w-full rounded-lg shadow-lg object-cover aspect-[3/4]"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        <!-- Intro text on the right -->
+        <div class="w-full lg:w-2/3 space-y-6">
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Üdvözöljük a Selling Debrecen oldalán! Én vagyok Kiss Zoltán,
+            tapasztalt ingatlanügynök, aki több mint egy évtizede segít
+            embereknek álmaik otthonát megtalálni Debrecenben és környékén.
+            Szakértelmem és elkötelezettségem révén számos sikeres üzletet
+            bonyolítottam le, és hosszú távú, megbízható kapcsolatokat építettem
+            ki ügyfeleimmel.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Hitvallásom, hogy minden ingatlan egyedi történetet rejt magában, és
+            minden ügyfél egyedi igényekkel rendelkezik. Ezért személyre szabott
+            megközelítést alkalmazok, figyelembe véve nemcsak a pénzügyi
+            lehetőségeket, hanem az életstílust, a jövőbeli terveket és az
+            érzelmi szempontokat is. Célom, hogy minden ügyfelem olyan ingatlant
+            találjon, amely nem csak egy lakás vagy ház, hanem valódi otthon.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Debrecen városának és környékének minden részletét ismerem, a
+            belvárosi lakásoktól a családi házakig, a modern újépítésű
+            ingatlanoktól a történelmi értékű ingatlanokig. Széles hálózattal
+            rendelkezem, amely lehetővé teszi, hogy gyorsan és hatékonyan
+            találjam meg az ideális ingatlant, legyen szó vásárlásról vagy
+            eladásról.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Ha Ön is álmodik egy új otthonról Debrecenben, vagy szeretné
+            értékesíteni jelenlegi ingatlanját, szívesen segítek. Várjuk
+            megkeresését, és együtt találjuk meg az Ön számára tökéletes
+            megoldást!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
