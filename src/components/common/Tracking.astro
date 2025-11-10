@@ -1,0 +1,18 @@
+---
+const shouldTrack = import.meta.env.PROD;
+
+// TODO: Add Umami website ID
+const umamiWebsiteId = "";
+---
+
+<Fragment>
+  {
+    shouldTrack && (
+      <script
+        defer
+        src="https://cloud.umami.is/script.js"
+        data-website-id={umamiWebsiteId}
+      />
+    )
+  }
+</Fragment>

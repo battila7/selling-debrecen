@@ -1,0 +1,36 @@
+---
+// import { getPageByUrl } from "../../open-graph";
+
+// const openGraphPage = getPageByUrl(Astro.url.pathname);
+
+// TODO: Implement page lookup
+const openGraphPage = {
+  title: "Selling Debrecen",
+  description: "Selling Debrecen",
+  absoluteImageUrl: (site: URL) => `${site.origin}/open-graph.png`,
+  absoluteUrl: (site: URL) => `${site.origin}/`,
+  kind: "website",
+  siteName: "Selling Debrecen",
+};
+---
+
+{
+  openGraphPage && (
+    <Fragment>
+      <meta property="og:title" content={openGraphPage.title} />
+      <meta property="og:description" content={openGraphPage.description} />
+      <meta
+        property="og:image"
+        content={openGraphPage.absoluteImageUrl(Astro.site!)}
+      />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta
+        property="og:url"
+        content={openGraphPage.absoluteUrl(Astro.site!)}
+      />
+      <meta property="og:type" content={openGraphPage.kind} />
+      <meta property="og:site_name" content="Selling Debrecen" />
+    </Fragment>
+  )
+}
