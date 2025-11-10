@@ -4,66 +4,114 @@ import Links from "../../../util/links";
 ---
 
 <section
-  class="relative flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat"
+  id="hero-section"
+  class="relative flex flex-col min-h-screen bg-cover bg-center bg-no-repeat"
   style={`background-image: url(${heroBackground.src});`}
 >
-  <div class="absolute inset-0 bg-black/40"></div>
-  <div class="relative z-10 text-center px-4">
-    <h1 class="font-didone italic text-5xl md:text-7xl text-white mb-4">
-      Selling Debrecen
-    </h1>
-    <p class="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">
-      Prémium ingatlanok Debrecenben és környékén
-    </p>
+  <div class="relative flex-1 flex items-center ps-20">
+    <div class="absolute inset-0 bg-cream/80"></div>
+    <div class="relative z-10 px-4">
+      <h1
+        class="font-didone italic text-6xl md:text-8xl text-navy mb-4 tracking-tight"
+      >
+        Selling Debrecen
+      </h1>
+      <p
+        class="font-old-style font-lighter text-xl md:text-3xl text-navy/90 max-w-2xl mx-auto"
+      >
+        Prémium ingatlanok Hajdú-Bihar megyében
+      </p>
+    </div>
   </div>
 
   <header
-  x-data="{ scrolled: true }"
-  :class="scrolled ? 'bg-navy/70 backdrop-blur-sm border-b border-camel/70' : 'bg-transparent'"
-  class="transition-colors duration-300"
->
-  <nav class="container mx-auto px-4 py-4">
-    <!-- Desktop Navigation disabled -->
-    <div class="hidden md:flex items-center justify-between">
-      <!-- Logo -->
-      <a href={Links.HOME} class="text-white text-xl font-semibold">
-        Selling Debrecen
-      </a>
+    id="hero-header"
+    x-data="{ isSticky: false }"
+    :class="isSticky ? 'fixed top-0 left-0 right-0' : 'relative'"
+    class="transition-all duration-300 z-50 bg-navy/80 backdrop-blur-sm border-b border-camel/70"
+  >
+    <nav class="container mx-auto px-4 py-4">
+      <!-- Desktop Navigation disabled -->
+      <div class="hidden md:flex items-center justify-between">
+        <!-- Logo -->
+        <a href={Links.HOME} class="text-white text-xl font-semibold">
+          Selling Debrecen
+        </a>
 
-      <!-- Menu Items -->
-      <div class="flex items-center gap-8">
-        <a
-          href={Links.PROPERTIES}
-          class="text-white hover:text-gray-300 transition-colors"
-        >
-          Ingatlanjaink
-        </a>
-        <a
-          href={Links.FOR_SELLERS}
-          class="text-white hover:text-gray-300 transition-colors"
-        >
-          Kínálóknak
-        </a>
-        <a
-          href={Links.FOR_BUYERS}
-          class="text-white hover:text-gray-300 transition-colors"
-        >
-          Keresőknek
-        </a>
-        <a
-          href={Links.ABOUT}
-          class="text-white hover:text-gray-300 transition-colors"
-        >
-          Rólunk
-        </a>
-        <a
-          href={Links.SCHEDULE}
-          class="bg-white text-black px-4 py-2 rounded hover:bg-gray-100 transition-colors"
-        >
-          Időpontfoglalás
-        </a>
+        <!-- Menu Items -->
+        <div class="flex items-center gap-8">
+          <a
+            href={Links.PROPERTIES}
+            class="text-white hover:text-gray-300 transition-colors"
+          >
+            Ingatlanjaink
+          </a>
+          <a
+            href={Links.FOR_SELLERS}
+            class="text-white hover:text-gray-300 transition-colors"
+          >
+            Kínálóknak
+          </a>
+          <a
+            href={Links.FOR_BUYERS}
+            class="text-white hover:text-gray-300 transition-colors"
+          >
+            Keresőknek
+          </a>
+          <a
+            href={Links.ABOUT}
+            class="text-white hover:text-gray-300 transition-colors"
+          >
+            Rólunk
+          </a>
+          <a
+            href={Links.SCHEDULE}
+            class="bg-white text-black px-4 py-2 rounded hover:bg-gray-100 transition-colors"
+          >
+            Időpontfoglalás
+          </a>
+        </div>
       </div>
-    </div>
-  </nav>
-</header>
+    </nav>
+  </header>
 </section>
+
+<script is:inline>
+  document.addEventListener("alpine:init", () => {
+    const heroSection = document.getElementById("hero-section");
+    const heroHeader = document.getElementById("hero-header");
+
+    if (!heroSection || !heroHeader) return;
+
+    let stickyPoint = null;
+    let isSticky = false;
+
+    const updateStickyState = () => {
+      // Calculate the sticky point on first scroll or if not set
+      if (stickyPoint === null) {
+        const headerRect = heroHeader.getBoundingClientRect();
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        stickyPoint = headerRect.top + scrollTop;
+      }
+
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const shouldBeSticky = scrollTop >= stickyPoint;
+
+      // Only update if state changed
+      if (shouldBeSticky !== isSticky) {
+        isSticky = shouldBeSticky;
+        const headerData = window.Alpine.$data(heroHeader);
+        if (headerData) {
+          headerData.isSticky = isSticky;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", updateStickyState, { passive: true });
+
+    // Initial check
+    updateStickyState();
+  });
+</script>
