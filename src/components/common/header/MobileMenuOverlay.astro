@@ -1,5 +1,8 @@
 ---
 import X from "@lucide/astro/icons/x";
+import Facebook from "../../../images/brands/facebook.svg";
+import Instagram from "../../../images/brands/instagram.svg";
+import Tiktok from "../../../images/brands/tiktok.svg";
 import Links from "../../../util/links";
 
 type Props = {
@@ -10,6 +13,15 @@ const { mobileMenuButtonId } = Astro.props;
 
 const mobileMenuOverlayId = "mobile-menu-overlay";
 const mobileMenuCloseButtonId = "mobile-menu-close-button";
+
+// TODO: Update with actual social media URLs
+const socialLinks = {
+  facebook: "https://facebook.com/sellingdebrecen",
+  instagram: "https://instagram.com/sellingdebrecen",
+  tiktok: "https://tiktok.com/@sellingdebrecen",
+};
+
+const calendlyUrl = "https://calendly.com/kisszoltan"; // Update with actual Calendly URL
 ---
 
 <div
@@ -17,44 +29,96 @@ const mobileMenuCloseButtonId = "mobile-menu-close-button";
   class="md:hidden fixed w-full h-full inset-0 bg-navy/80 backdrop-blur-sm z-[200] flex flex-col transform translate-x-full opacity-0 transition-all duration-300 ease-in-out"
 >
   <!-- Close Button -->
-  <div class="flex justify-end p-4">
+  <div class="flex justify-end p-6">
     <button
       id="mobile-menu-close-button"
-      class="text-white p-2"
+      class="text-white/90 hover:text-white p-2 transition-colors"
       aria-label="Close menu"
     >
-      <X class="w-6 h-6" />
+      <X class="w-7 h-7" />
     </button>
   </div>
 
-  <!-- Menu Items -->
+  <!-- Menu Content -->
   <div
-    class="flex flex-col gap-6 text-center flex-1 items-center justify-center"
+    class="flex flex-col flex-1 items-center justify-center px-8 pb-12 gap-12"
   >
+    <!-- Menu Items -->
+    <nav class="flex flex-col gap-6 text-center" aria-label="Mobile navigation">
+      <a
+        href={Links.PROPERTIES}
+        class="mobile-menu-link font-old-style text-white text-2xl tracking-wide"
+      >
+        Ingatlanjaink
+      </a>
+      <a
+        href={Links.FOR_SELLERS}
+        class="mobile-menu-link font-old-style text-white text-2xl tracking-wide"
+      >
+        Kínálóknak
+      </a>
+      <a
+        href={Links.FOR_BUYERS}
+        class="mobile-menu-link font-old-style text-white text-2xl tracking-wide"
+      >
+        Keresőknek
+      </a>
+      <a
+        href={Links.ABOUT}
+        class="mobile-menu-link font-old-style text-white text-2xl tracking-wide"
+      >
+        Rólunk
+      </a>
+    </nav>
+
+    <!-- Divider -->
+    <div class="w-24 h-px bg-white/20"></div>
+
+    <!-- Schedule Button -->
     <a
-      href={Links.PROPERTIES}
-      class="mobile-menu-link text-white hover:text-gray-300 transition-colors text-lg"
+      href={calendlyUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-white text-white font-system-ui text-sm tracking-widest uppercase hover:border-camel hover:bg-camel hover:text-navy transition-all duration-300"
     >
-      Ingatlanjaink
+      <span>Időpont Foglalása</span>
     </a>
-    <a
-      href={Links.FOR_SELLERS}
-      class="mobile-menu-link text-white hover:text-gray-300 transition-colors text-lg"
-    >
-      Kínálóknak
-    </a>
-    <a
-      href={Links.FOR_BUYERS}
-      class="mobile-menu-link text-white hover:text-gray-300 transition-colors text-lg"
-    >
-      Keresőknek
-    </a>
-    <a
-      href={Links.ABOUT}
-      class="mobile-menu-link text-white hover:text-gray-300 transition-colors text-lg"
-    >
-      Rólunk
-    </a>
+
+    <!-- Social Media Icons -->
+    <div class="flex flex-col items-center gap-4">
+      <p class="text-white/70 text-sm uppercase tracking-wider">
+        Kövessen minket
+      </p>
+      <div class="flex gap-4">
+        <a
+          href={socialLinks.facebook}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center w-12 h-12 bg-camel"
+          aria-label="Facebook"
+        >
+          <Facebook class="w-5 h-5 text-white" aria-hidden="true" />
+        </a>
+        <a
+          href={socialLinks.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center w-12 h-12 bg-camel"
+          aria-label="Instagram"
+        >
+          <Instagram class="w-5 h-5 text-white" aria-hidden="true" />
+        </a>
+        <a
+          href={socialLinks.tiktok}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center w-12 h-12 bg-camel"
+          aria-label="TikTok"
+        >
+          <Tiktok class="w-5 h-5 text-white" aria-hidden="true" />
+        </a>
+      </div>
+    </div>
   </div>
 </div>
 
