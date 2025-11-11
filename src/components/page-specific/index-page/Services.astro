@@ -9,6 +9,8 @@ import Shield from "@lucide/astro/icons/shield";
 import Key from "@lucide/astro/icons/key";
 import Links from "../../../util/links";
 import type { AstroComponent } from "@lucide/astro";
+import forSellersImage from "../../../images/for-sellers.jpg";
+import forBuyersImage from "../../../images/for-buyers-02.jpg";
 
 interface Service {
   title: string;
@@ -64,7 +66,7 @@ const buyerServices: Service[] = [
 ];
 ---
 
-<section class="py-20 bg-navy">
+<section class="pt-20 bg-navy overflow-hidden">
   <div class="container mx-auto px-4 max-w-8xl">
     <!-- Section Header -->
     <div class="mb-20">
@@ -81,33 +83,45 @@ const buyerServices: Service[] = [
         Professzionális megoldásokat kínálunk, amelyek minden lépésben támogatják Önt az ingatlanügyletek során.
       </p>
     </div>
+  </div>
 
-    <!-- Services for Sellers -->
-    <div class="mb-32">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-        <!-- Sticky Content -->
-        <div class="lg:col-span-4">
-          <div class="lg:sticky lg:top-24">
-            <h3 class="font-didone text-4xl md:text-5xl text-cream mb-6 tracking-wide">
-              Eladóknak és bérbeadóknak
-            </h3>
-            <div class="w-16 h-0.5 bg-camel mb-6"></div>
-            <p class="text-cream-soft text-lg leading-relaxed mb-8">
-              Ha ingatlanját szeretné értékesíteni, szakértő segítségünkkel a lehető
-              legjobb áron és a legrövidebb idő alatt adhatja el. Teljes körű
-              szolgáltatást nyújtunk az értékeléstől a szerződéskötésig.
-            </p>
-            <a
-              href={Links.FOR_SELLERS}
-              class="inline-block px-6 py-3 border-2 border-camel text-camel font-system-ui text-sm tracking-wide uppercase hover:bg-camel hover:text-navy transition-colors duration-300"
-            >
-              További információ
-            </a>
+  <!-- Services for Sellers -->
+  <div class="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
+    <div class="flex flex-col lg:flex-row">
+      <!-- Full-width Background Image Column extending to left edge -->
+      <div class="lg:w-5/12 relative min-h-[500px] lg:min-h-[700px]">
+        <div 
+          class="absolute inset-0 bg-cover bg-center"
+          style={`background-image: url(${forSellersImage.src});`}
+        >
+          <div class="absolute inset-0 bg-navy/75"></div>
+        </div>
+        <div class="relative h-full flex items-center justify-end">
+          <div class="w-full lg:max-w-xl px-4 lg:pr-12 xl:pr-16">
+            <div class="lg:sticky lg:top-24 py-16">
+              <h3 class="font-didone text-4xl md:text-5xl text-cream mb-6 tracking-wide">
+                Eladóknak és bérbeadóknak
+              </h3>
+              <div class="w-16 h-0.5 bg-camel mb-6"></div>
+              <p class="text-cream-soft text-lg leading-relaxed mb-8">
+                Ha ingatlanját szeretné értékesíteni, szakértő segítségünkkel a lehető
+                legjobb áron és a legrövidebb idő alatt adhatja el. Teljes körű
+                szolgáltatást nyújtunk az értékeléstől a szerződéskötésig.
+              </p>
+              <a
+                href={Links.FOR_SELLERS}
+                class="inline-block px-6 py-3 border-2 border-camel text-camel font-system-ui text-sm tracking-wide uppercase hover:bg-camel hover:text-navy transition-colors duration-300"
+              >
+                További információ
+              </a>
+            </div>
           </div>
         </div>
+      </div>
 
-        <!-- Services Grid -->
-        <div class="lg:col-span-8">
+      <!-- Services Grid -->
+      <div class="lg:w-7/12 bg-navy flex items-center py-16 px-4 lg:pl-12 xl:pl-16">
+        <div class="w-full max-w-4xl mx-auto lg:mx-0">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {
               sellerServices.map((service) => {
@@ -131,33 +145,45 @@ const buyerServices: Service[] = [
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Services for Buyers -->
-    <div>
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-        <!-- Sticky Content -->
-        <div class="lg:col-span-4">
-          <div class="lg:sticky lg:top-24">
-            <h3 class="font-didone text-4xl md:text-5xl text-cream mb-6 tracking-wide">
-              Keresőknek
-            </h3>
-            <div class="w-16 h-0.5 bg-camel mb-6"></div>
-            <p class="text-cream-soft text-lg leading-relaxed mb-8">
-              Álmaik otthonának megtalálásában segítünk. Széles választékunkból
-              választhatnak, és minden lépésben mellettük állunk a vásárlás
-              folyamatában.
-            </p>
-            <a
-              href={Links.FOR_BUYERS}
-              class="inline-block px-6 py-3 border-2 border-camel text-camel font-system-ui text-sm tracking-wide uppercase hover:bg-camel hover:text-navy transition-colors duration-300"
-            >
-              További információ
-            </a>
+  <!-- Services for Buyers -->
+  <div class="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
+    <div class="flex flex-col lg:flex-row">
+      <!-- Full-width Background Image Column extending to left edge -->
+      <div class="lg:w-5/12 relative min-h-[500px] lg:min-h-[700px]">
+        <div 
+          class="absolute inset-0 bg-cover bg-center"
+          style={`background-image: url(${forBuyersImage.src});`}
+        >
+          <div class="absolute inset-0 bg-navy/75"></div>
+        </div>
+        <div class="relative h-full flex items-center justify-end">
+          <div class="w-full lg:max-w-xl px-4 lg:pr-12 xl:pr-16">
+            <div class="lg:sticky lg:top-24 py-16">
+              <h3 class="font-didone text-4xl md:text-5xl text-cream mb-6 tracking-wide">
+                Keresőknek
+              </h3>
+              <div class="w-16 h-0.5 bg-camel mb-6"></div>
+              <p class="text-cream-soft text-lg leading-relaxed mb-8">
+                Álmaik otthonának megtalálásában segítünk. Széles választékunkból
+                választhatnak, és minden lépésben mellettük állunk a vásárlás
+                folyamatában.
+              </p>
+              <a
+                href={Links.FOR_BUYERS}
+                class="inline-block px-6 py-3 border-2 border-camel text-camel font-system-ui text-sm tracking-wide uppercase hover:bg-camel hover:text-navy transition-colors duration-300"
+              >
+                További információ
+              </a>
+            </div>
           </div>
         </div>
+      </div>
 
-        <!-- Services Grid -->
-        <div class="lg:col-span-8">
+      <!-- Services Grid -->
+      <div class="lg:w-7/12 bg-navy flex items-center py-16 px-4 lg:pl-12 xl:pl-16">
+        <div class="w-full max-w-4xl mx-auto lg:mx-0">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {
               buyerServices.map((service) => {
