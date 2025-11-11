@@ -8,13 +8,7 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   vite: {
     // Minification breaks the container class
-    plugins: [
-      tailwindcss({
-        optimize: {
-          minify: false,
-        },
-      }),
-    ],
+    plugins: [tailwindcss()],
   },
 
   integrations: [

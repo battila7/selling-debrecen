@@ -14,7 +14,7 @@ const showDesktopNavigation = Astro.url.pathname !== "/";
   class={(showDesktopNavigation ? "" : "block md:hidden") +
     " fixed top-0 left-0 right-0 z-[100] transition-colors duration-300 bg-transparent"}
 >
-  <nav class="container mx-auto px-4 py-4">
+  <nav class="container mx-auto px-6 lg:px-12 py-4">
     {
       showDesktopNavigation && (
         <div class="hidden md:flex items-center justify-between">
