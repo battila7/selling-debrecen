@@ -2,9 +2,10 @@
 import MapPin from "@lucide/astro/icons/map-pin";
 import Mail from "@lucide/astro/icons/mail";
 import Phone from "@lucide/astro/icons/phone";
-import Facebook from "@lucide/astro/icons/facebook";
-import Instagram from "@lucide/astro/icons/instagram";
-import Linkedin from "@lucide/astro/icons/linkedin";
+import Facebook from "../../images/brands/facebook.svg";
+import Instagram from "../../images/brands/instagram.svg";
+import Tiktok from "../../images/brands/tiktok.svg";
+import Logo from "../../images/selling-debrecen-logo.svg";
 import Links from "../../util/links";
 
 // TODO: Update these with actual contact information
@@ -16,7 +17,7 @@ const phone = "+36 XX XXX XXXX";
 const socialLinks = {
   facebook: "https://facebook.com/sellingdebrecen",
   instagram: "https://instagram.com/sellingdebrecen",
-  linkedin: "https://linkedin.com/in/kisszoltan",
+  tiktok: "https://tiktok.com/@sellingdebrecen",
 };
 
 const navigationLinks = [
@@ -35,52 +36,66 @@ const legalLinks = [
 ];
 ---
 
-<footer class="bg-gray-900 text-gray-300 py-12 md:py-16">
+<footer class="bg-cream border-t border-taupe/20 py-12 md:py-16">
   <div class="container mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12">
-      <!-- Brand Column -->
-      <div class="lg:col-span-1">
-        <h2 class="text-xl font-bold text-white mb-2">Selling Debrecen</h2>
-        <p class="text-sm text-gray-400">
-          Megbízható ingatlanközvetítés Debrecenben
-        </p>
-      </div>
+    <!-- Logo Section -->
+    <div class="mb-12 pb-8 border-b border-taupe/20">
+      <a
+        href={Links.HOME}
+        class="inline-block hover:opacity-80 transition-opacity"
+        aria-label="Selling Debrecen - Főoldal"
+      >
+        <Logo class="h-16 w-auto text-navy" aria-hidden="true" />
+      </a>
+      <p class="mt-4 text-charcoal/70 max-w-md leading-relaxed">
+        Megbízható ingatlanközvetítés Debrecenben
+      </p>
+    </div>
 
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
       <!-- Contact Info Column -->
       <div class="lg:col-span-1">
-        <h3 class="text-lg font-semibold text-white mb-4">Kapcsolat</h3>
-        <ul class="space-y-3">
+        <h3 class="font-old-style text-lg text-navy mb-6">Kapcsolat</h3>
+        <ul class="space-y-5">
           <li>
             <a
               href={`tel:${phone.replace(/\s/g, "")}`}
-              class="flex items-start gap-2 hover:text-white transition-colors group"
+              class="flex items-start gap-3"
             >
-              <Phone
-                class="w-5 h-5 text-gray-400 group-hover:text-white flex-shrink-0 mt-0.5"
-                aria-hidden="true"
-              />
-              <span class="text-sm">{phone}</span>
+              <div class="flex-shrink-0">
+                <div
+                  class="flex items-center justify-center w-12 h-12 bg-camel/10"
+                >
+                  <Phone class="w-5 h-5 text-camel" aria-hidden="true" />
+                </div>
+              </div>
+              <span class="text-charcoal mt-2.5">{phone}</span>
             </a>
           </li>
           <li>
-            <a
-              href={`mailto:${email}`}
-              class="flex items-start gap-2 hover:text-white transition-colors group"
-            >
-              <Mail
-                class="w-5 h-5 text-gray-400 group-hover:text-white flex-shrink-0 mt-0.5"
-                aria-hidden="true"
-              />
-              <span class="text-sm break-all">{email}</span>
+            <a href={`mailto:${email}`} class="flex items-start gap-3">
+              <div class="flex-shrink-0">
+                <div
+                  class="flex items-center justify-center w-12 h-12 bg-camel/10"
+                >
+                  <Mail class="w-5 h-5 text-camel" aria-hidden="true" />
+                </div>
+              </div>
+              <span class="text-charcoal mt-2.5 break-all">{email}</span>
             </a>
           </li>
           <li>
-            <div class="flex items-start gap-2">
-              <MapPin
-                class="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5"
-                aria-hidden="true"
-              />
-              <address class="text-sm not-italic">{officeAddress}</address>
+            <div class="flex items-start gap-3">
+              <div class="flex-shrink-0">
+                <div
+                  class="flex items-center justify-center w-12 h-12 bg-camel/10"
+                >
+                  <MapPin class="w-5 h-5 text-camel" aria-hidden="true" />
+                </div>
+              </div>
+              <address class="text-charcoal not-italic mt-2.5">
+                {officeAddress}
+              </address>
             </div>
           </li>
         </ul>
@@ -88,15 +103,15 @@ const legalLinks = [
 
       <!-- Navigation Links Column -->
       <div class="lg:col-span-1">
-        <h3 class="text-lg font-semibold text-white mb-4">Oldaltérkép</h3>
+        <h3 class="font-old-style text-lg text-navy mb-6">Oldaltérkép</h3>
         <nav aria-label="Footer navigation">
-          <ul class="space-y-2">
+          <ul class="space-y-3">
             {
               navigationLinks.map((link) => (
                 <li>
                   <a
                     href={link.href}
-                    class="text-sm hover:text-white transition-colors"
+                    class="text-charcoal hover:text-navy transition-colors"
                   >
                     {link.label}
                   </a>
@@ -109,17 +124,17 @@ const legalLinks = [
 
       <!-- Social Media Column -->
       <div class="lg:col-span-1">
-        <h3 class="text-lg font-semibold text-white mb-4">Közösségi média</h3>
+        <h3 class="font-old-style text-lg text-navy mb-6">Közösségi média</h3>
         <ul class="flex gap-4">
           <li>
             <a
               href={socialLinks.facebook}
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center justify-center w-10 h-10 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors"
+              class="flex items-center justify-center w-12 h-12 bg-camel/10 hover:bg-camel/20 transition-colors"
               aria-label="Facebook"
             >
-              <Facebook class="w-5 h-5 text-white" aria-hidden="true" />
+              <Facebook class="w-5 h-5 text-camel" aria-hidden="true" />
             </a>
           </li>
           <li>
@@ -127,21 +142,21 @@ const legalLinks = [
               href={socialLinks.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center justify-center w-10 h-10 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors"
+              class="flex items-center justify-center w-12 h-12 bg-camel/10 hover:bg-camel/20 transition-colors"
               aria-label="Instagram"
             >
-              <Instagram class="w-5 h-5 text-white" aria-hidden="true" />
+              <Instagram class="w-5 h-5 text-camel" aria-hidden="true" />
             </a>
           </li>
           <li>
             <a
-              href={socialLinks.linkedin}
+              href={socialLinks.tiktok}
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center justify-center w-10 h-10 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors"
-              aria-label="LinkedIn"
+              class="flex items-center justify-center w-12 h-12 bg-camel/10 hover:bg-camel/20 transition-colors"
+              aria-label="TikTok"
             >
-              <Linkedin class="w-5 h-5 text-white" aria-hidden="true" />
+              <Tiktok class="w-5 h-5 text-camel" aria-hidden="true" />
             </a>
           </li>
         </ul>
@@ -149,15 +164,15 @@ const legalLinks = [
 
       <!-- Legal Column -->
       <div class="lg:col-span-1">
-        <h3 class="text-lg font-semibold text-white mb-4">Jogi információk</h3>
+        <h3 class="font-old-style text-lg text-navy mb-6">Jogi információk</h3>
         <nav aria-label="Legal information">
-          <ul class="space-y-2">
+          <ul class="space-y-3">
             {
               legalLinks.map((link) => (
                 <li>
                   <a
                     href={link.href}
-                    class="text-sm hover:text-white transition-colors"
+                    class="text-charcoal hover:text-navy transition-colors"
                   >
                     {link.label}
                   </a>
@@ -171,7 +186,7 @@ const legalLinks = [
 
     <!-- Bottom Bar -->
     <div
-      class="mt-12 pt-8 border-t border-gray-800 text-center text-sm text-gray-500"
+      class="mt-12 pt-8 border-t border-taupe/20 text-center text-sm text-charcoal/60"
     >
       <p>
         &copy; {new Date().getFullYear()} Selling Debrecen. Minden jog fenntartva.
