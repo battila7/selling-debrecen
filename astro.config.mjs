@@ -5,15 +5,20 @@ import tailwindcss from "@tailwindcss/vite";
 
 import sitemap from "@astrojs/sitemap";
 
-import playformCompress from "@playform/compress";
-
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
 
-  integrations: [sitemap(), playformCompress()],
-  compressHTML: true,
+  integrations: [
+    sitemap(),
+    (await import("@playform/compress")).default({
+      CSS: false,
+      HTML: false,
+      JavaScript: false,
+    }),
+  ],
+  compressHTML: false,
   output: "static",
   site: "https://selling-debrecen.hu",
 });
