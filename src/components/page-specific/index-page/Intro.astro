@@ -1,16 +1,12 @@
 ---
 import { Image } from "astro:assets";
 import agentPlaceholder from "../../../images/agent-placeholder.jpg";
+import { HeadingCentered } from "../../common";
 ---
 
 <section class="py-20 lg:py-24 border-t border-camel/30 bg-cream-soft">
   <div class="container mx-auto px-6 lg:px-8">
-    <div class="mb-16 lg:mb-20 text-center">
-      <h2 class="font-didone text-5xl md:text-6xl text-navy mb-4 tracking-wide">
-        Bemutatkozás
-      </h2>
-      <div class="w-24 h-0.5 bg-camel mx-auto"></div>
-    </div>
+    <HeadingCentered title="Bemutatkozás" />
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
         <!-- Image on the left -->

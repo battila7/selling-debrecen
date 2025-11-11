@@ -2,6 +2,7 @@
 import ListingCard, { type Listing } from "./ListingCard.astro";
 import listingPlaceholder from "../../../images/listing-placeholder.jpg";
 import Links from "../../../util/links";
+import { HeadingLeftAligned } from "../../common";
 
 // Mock data - this can be replaced with a content collection later
 const featuredListings: Listing[] = [
@@ -64,27 +65,20 @@ const featuredListings: Listing[] = [
 
 <section class="py-20 bg-cream-soft">
   <div class="container mx-auto px-4 max-w-8xl">
-    <div class="mb-10">
-      <p
-        class="font-geometric-humanist text-base font-semibold text-camel uppercase tracking-wider mb-4"
-      >
-        A Selling Debrecen ajánlata
-      </p>
-      <h2 class="font-didone text-5xl md:text-6xl text-navy mb-4 tracking-wide">
-        Kiemelt ingatlanjaink
-      </h2>
-      <div class="w-24 h-0.5 bg-camel mt-5 mb-5"></div>
-      <p class="text-charcoal text-xl max-w-3xl leading-relaxed">
-        Fedezze fel válogatott ingatlanjaink különleges kínálatát. Minden
-        ingatlan gondosan kiválasztott, hogy az Ön igényeinek megfelelő otthont
-        találhassa meg Debrecenben.
-      </p>
-    </div>
+    <HeadingLeftAligned
+      title="Kiemelt ingatlanjaink"
+      titleColor="text-navy"
+      descriptionColor="text-charcoal"
+      subtitle="A Selling Debrecen ajánlata"
+      description="Fedezze fel válogatott ingatlanjaink különleges kínálatát. Minden ingatlan gondosan kiválasztott, hogy az Ön igényeinek megfelelő otthont találhassa meg Debrecenben."
+    />
+
     <div
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 lg:gap-x-12 gap-y-8 lg:gap-y-10"
     >
       {featuredListings.map((listing) => <ListingCard listing={listing} />)}
     </div>
+
     <div class="mt-16 text-center">
       <a
         href={Links.PROPERTIES}

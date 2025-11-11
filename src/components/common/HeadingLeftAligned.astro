@@ -1,0 +1,33 @@
+---
+type Props = {
+  title: string;
+  titleColor: string;
+  description: string;
+  descriptionColor: string;
+  subtitle?: string;
+};
+
+const { title, titleColor, description, descriptionColor, subtitle } =
+  Astro.props;
+---
+
+<div class="mb-10">
+  {
+    subtitle && (
+      <p class="font-geometric-humanist text-base font-semibold text-camel uppercase tracking-wider mb-4">
+        {subtitle}
+      </p>
+    )
+  }
+  <h2
+    class={`font-didone text-5xl md:text-6xl ${titleColor} mb-4 tracking-wide`}
+  >
+    {title}
+  </h2>
+  <div class="w-24 h-0.5 bg-camel mt-5 mb-5"></div>
+  <p
+    class={`text-charcoal text-xl max-w-3xl leading-relaxed ${descriptionColor}`}
+  >
+    {description}
+  </p>
+</div>

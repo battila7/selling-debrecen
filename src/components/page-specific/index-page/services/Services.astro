@@ -11,6 +11,7 @@ import Links from "../../../../util/links";
 import forSellersImage from "../../../../images/for-sellers.jpg";
 import forBuyersImage from "../../../../images/for-buyers-02.jpg";
 import Side, { type Service } from "./Side.astro";
+import { HeadingLeftAligned } from "../../../common";
 
 const sellerServices: Service[] = [
   {
@@ -62,23 +63,13 @@ const buyerServices: Service[] = [
 
 <section class="pt-20 bg-navy overflow-hidden">
   <div class="container mx-auto px-4 max-w-8xl">
-    <!-- Section Header -->
-    <div class="mb-20">
-      <p
-        class="font-geometric-humanist text-base font-semibold text-camel uppercase tracking-wider mb-4"
-      >
-        Átfogó szolgáltatások
-      </p>
-      <h2
-        class="font-didone text-5xl md:text-6xl text-cream mb-4 tracking-wide"
-      >
-        Amit kínálunk
-      </h2>
-      <div class="w-24 h-0.5 bg-camel mt-5 mb-5"></div>
-      <p class="text-cream-soft text-xl max-w-3xl leading-relaxed">
-        Professzionális megoldásokkal támogatjuk Önt az ingatlanügyletek során.
-      </p>
-    </div>
+    <HeadingLeftAligned
+      title="Amit kínálunk"
+      titleColor="text-cream"
+      descriptionColor="text-cream-soft"
+      subtitle="Átfogó szolgáltatások"
+      description="Professzionális megoldásokkal támogatjuk Önt az ingatlanügyletek során."
+    />
   </div>
 
   <Side
