@@ -1,0 +1,101 @@
+---
+import TrendingUp from "@lucide/astro/icons/trending-up";
+import Camera from "@lucide/astro/icons/camera";
+import FileText from "@lucide/astro/icons/file-text";
+import Handshake from "@lucide/astro/icons/handshake";
+import Search from "@lucide/astro/icons/search";
+import MapPin from "@lucide/astro/icons/map-pin";
+import Shield from "@lucide/astro/icons/shield";
+import Key from "@lucide/astro/icons/key";
+import Links from "../../../../util/links";
+import forSellersImage from "../../../../images/for-sellers.jpg";
+import forBuyersImage from "../../../../images/for-buyers-02.jpg";
+import Side, { type Service } from "./Side.astro";
+
+const sellerServices: Service[] = [
+  {
+    title: "Ingatlan értékelés",
+    description:
+      "Professzionális értékelés az optimális eladási ár meghatározásához",
+    icon: TrendingUp,
+  },
+  {
+    title: "Fotózás és marketing",
+    description: "Professzionális fotózás és hatékony marketing stratégia",
+    icon: Camera,
+  },
+  {
+    title: "Ügyintézés",
+    description: "Teljes körű ügyintézés a dokumentumoktól a szerződéskötésig",
+    icon: FileText,
+  },
+  {
+    title: "Érdeklődők kezelése",
+    description: "Megbízható érdeklődők kiválasztása és megfelelő kommunikáció",
+    icon: Handshake,
+  },
+];
+
+const buyerServices: Service[] = [
+  {
+    title: "Ingatlan keresés",
+    description: "Személyre szabott keresés az Ön igényei szerint",
+    icon: Search,
+  },
+  {
+    title: "Környék ismertetés",
+    description: "Részletes információk a környékről és infrastruktúráról",
+    icon: MapPin,
+  },
+  {
+    title: "Biztonságos vásárlás",
+    description: "Teljes körű ellenőrzés és jogi védelem a vásárlás során",
+    icon: Shield,
+  },
+  {
+    title: "Kulcs átadás",
+    description: "Zökkenőmentes átadás-átvétel és bejelentkezési segítség",
+    icon: Key,
+  },
+];
+---
+
+<section class="pt-20 bg-navy overflow-hidden">
+  <div class="container mx-auto px-4 max-w-8xl">
+    <!-- Section Header -->
+    <div class="mb-20">
+      <p
+        class="font-geometric-humanist text-base font-semibold text-camel uppercase tracking-wider mb-4"
+      >
+        Átfogó szolgáltatások
+      </p>
+      <h2
+        class="font-didone text-5xl md:text-6xl text-cream mb-4 tracking-wide"
+      >
+        Amit kínálunk
+      </h2>
+      <div class="w-24 h-0.5 bg-camel mt-5 mb-5"></div>
+      <p class="text-cream-soft text-xl max-w-3xl leading-relaxed">
+        Professzionális megoldásokkal támogatjuk Önt az ingatlanügyletek során.
+      </p>
+    </div>
+  </div>
+
+  <Side
+    image={forSellersImage}
+    title="Eladóknak és bérbeadóknak"
+    description="Ha ingatlanját szeretné értékesíteni, szakértő segítségünkkel a lehető legjobb áron és a legrövidebb idő alatt adhatja el. Teljes körű szolgáltatást nyújtunk az értékeléstől a szerződéskötésig."
+    link={Links.FOR_SELLERS}
+    linkText="Eladni, kiadni szeretnék"
+    services={sellerServices}
+  />
+
+  <Side
+    image={forBuyersImage}
+    title="Keresőknek"
+    description="Álmaik otthonának megtalálásában segítünk. Széles választékunkból választhatnak, és minden lépésben mellettük állunk a vásárlás folyamatában."
+    link={Links.FOR_BUYERS}
+    linkText="Ingatlant keresek"
+    services={buyerServices}
+  />
+</section>

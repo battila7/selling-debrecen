@@ -1,0 +1,25 @@
+---
+import type { AstroComponent } from "@lucide/astro";
+
+type Props = {
+  icon: AstroComponent;
+  title: string;
+  description: string;
+};
+
+const { icon, title, description } = Astro.props;
+
+const Icon = icon;
+---
+
+<div class="bg-navy-light border border-taupe/20 p-8">
+  <div class="flex items-center justify-center w-16 h-16 bg-camel/10 mb-6">
+    <Icon class="w-8 h-8 text-camel" aria-hidden="true" />
+  </div>
+  <h4 class="font-old-style text-2xl text-cream mb-3">
+    {title}
+  </h4>
+  <p class="text-cream-soft leading-relaxed">
+    {description}
+  </p>
+</div>
