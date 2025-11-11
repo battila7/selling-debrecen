@@ -1,0 +1,141 @@
+---
+import X from "@lucide/astro/icons/x";
+import Links from "../../../util/links";
+
+type Props = {
+  mobileMenuButtonId: string;
+};
+
+const { mobileMenuButtonId } = Astro.props;
+
+const mobileMenuOverlayId = "mobile-menu-overlay";
+const mobileMenuCloseButtonId = "mobile-menu-close-button";
+---
+
+<div
+  id={mobileMenuOverlayId}
+  class="md:hidden fixed w-full h-full inset-0 bg-navy/80 backdrop-blur-sm z-[200] flex flex-col transform translate-x-full opacity-0 transition-all duration-300 ease-in-out"
+>
+  <!-- Close Button -->
+  <div class="flex justify-end p-4">
+    <button
+      id="mobile-menu-close-button"
+      class="text-white p-2"
+      aria-label="Close menu"
+    >
+      <X class="w-6 h-6" />
+    </button>
+  </div>
+
+  <!-- Menu Items -->
+  <div
+    class="flex flex-col gap-6 text-center flex-1 items-center justify-center"
+  >
+    <a
+      href={Links.PROPERTIES}
+      class="mobile-menu-link text-white hover:text-gray-300 transition-colors text-lg"
+    >
+      Ingatlanjaink
+    </a>
+    <a
+      href={Links.FOR_SELLERS}
+      class="mobile-menu-link text-white hover:text-gray-300 transition-colors text-lg"
+    >
+      Kínálóknak
+    </a>
+    <a
+      href={Links.FOR_BUYERS}
+      class="mobile-menu-link text-white hover:text-gray-300 transition-colors text-lg"
+    >
+      Keresőknek
+    </a>
+    <a
+      href={Links.ABOUT}
+      class="mobile-menu-link text-white hover:text-gray-300 transition-colors text-lg"
+    >
+      Rólunk
+    </a>
+  </div>
+</div>
+
+<script
+  data-mobile-menu-button-id={mobileMenuButtonId}
+  data-mobile-menu-close-button-id={mobileMenuCloseButtonId}
+  data-mobile-menu-overlay-id={mobileMenuOverlayId}
+>
+  (function initMobileMenu() {
+    const dataset = document.currentScript.dataset;
+
+    document.addEventListener("DOMContentLoaded", function mobileMenuInit() {
+      const mobileMenuButton = document.getElementById(
+        dataset.mobileMenuButtonId,
+      );
+      const mobileMenuOverlay = document.getElementById(
+        dataset.mobileMenuOverlayId,
+      );
+      const mobileMenuLogo = document.getElementById("mobile-menu-logo");
+
+      if (!mobileMenuButton || !mobileMenuOverlay || !mobileMenuLogo) {
+        return;
+      }
+
+      const closeButton = document.getElementById(
+        dataset.mobileMenuCloseButtonId,
+      );
+
+      let isMenuOpen = false;
+
+      function toggleMenu() {
+        isMenuOpen = !isMenuOpen;
+
+        if (isMenuOpen) {
+          // Show overlay
+          mobileMenuOverlay.classList.remove("translate-x-full", "opacity-0");
+          mobileMenuOverlay.classList.add("translate-x-0", "opacity-100");
+
+          // Prevent body scroll
+          document.body.style.overflow = "hidden";
+        } else {
+          // Hide overlay
+          mobileMenuOverlay.classList.remove("translate-x-0", "opacity-100");
+          mobileMenuOverlay.classList.add("translate-x-full", "opacity-0");
+
+          // Restore body scroll
+          document.body.style.overflow = "";
+        }
+      }
+
+      // Toggle menu on button click
+      mobileMenuButton.addEventListener("click", toggleMenu);
+
+      // Close menu on close button click
+      if (closeButton) {
+        closeButton.addEventListener("click", toggleMenu);
+      }
+
+      // Close menu when clicking on links
+      const menuLinks = mobileMenuOverlay.querySelectorAll(".mobile-menu-link");
+      menuLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (isMenuOpen) {
+            toggleMenu();
+          }
+        });
+      });
+
+      // Close menu when clicking outside
+      mobileMenuOverlay.addEventListener("click", (e) => {
+        if (e.target === mobileMenuOverlay) {
+          toggleMenu();
+        }
+      });
+
+      // Close menu on escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && isMenuOpen) {
+          toggleMenu();
+        }
+      });
+    });
+  })();
+</script>
