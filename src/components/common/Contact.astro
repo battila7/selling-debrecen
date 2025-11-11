@@ -2,7 +2,8 @@
 import MapPin from "@lucide/astro/icons/map-pin";
 import Mail from "@lucide/astro/icons/mail";
 import Phone from "@lucide/astro/icons/phone";
-import Calendar from "@lucide/astro/icons/calendar";
+import Clock from "@lucide/astro/icons/clock";
+import Check from "@lucide/astro/icons/check";
 
 // TODO: Update these with actual contact information
 const officeAddress = "Debrecen, Magyarország";
@@ -11,69 +12,194 @@ const phone = "+36 XX XXX XXXX";
 const calendlyUrl = "https://calendly.com/kisszoltan"; // Update with actual Calendly URL
 ---
 
-<section class="py-16 bg-gray-900 text-white">
+<section class="py-20 bg-cream-soft">
   <div class="container mx-auto px-4">
-    <h2 class="text-4xl font-bold mb-12 text-center">Kapcsolat</h2>
-
-    <div class="max-w-4xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-        <!-- Office Address -->
-        <div class="flex flex-col items-center text-center">
-          <div
-            class="flex items-center justify-center w-16 h-16 bg-gray-800 rounded-full mb-4"
-          >
-            <MapPin class="w-8 h-8 text-white" aria-hidden="true" />
-          </div>
-          <h3 class="text-lg font-semibold mb-2">Iroda</h3>
-          <address class="text-gray-300 not-italic leading-relaxed">
-            {officeAddress}
-          </address>
-        </div>
-
-        <!-- Email -->
-        <div class="flex flex-col items-center text-center">
-          <div
-            class="flex items-center justify-center w-16 h-16 bg-gray-800 rounded-full mb-4"
-          >
-            <Mail class="w-8 h-8 text-white" aria-hidden="true" />
-          </div>
-          <h3 class="text-lg font-semibold mb-2">Email</h3>
-          <a
-            href={`mailto:${email}`}
-            class="text-gray-300 hover:text-white transition-colors"
-          >
-            {email}
-          </a>
-        </div>
-
-        <!-- Phone -->
-        <div class="flex flex-col items-center text-center">
-          <div
-            class="flex items-center justify-center w-16 h-16 bg-gray-800 rounded-full mb-4"
-          >
-            <Phone class="w-8 h-8 text-white" aria-hidden="true" />
-          </div>
-          <h3 class="text-lg font-semibold mb-2">Telefon</h3>
-          <a
-            href={`tel:${phone.replace(/\s/g, "")}`}
-            class="text-gray-300 hover:text-white transition-colors"
-          >
-            {phone}
-          </a>
-        </div>
+    <div class="max-w-6xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-16 lg:mb-20">
+        <h2
+          class="font-didone text-5xl md:text-6xl text-navy mb-4 tracking-wide"
+        >
+          Lépjen kapcsolatba velünk
+        </h2>
+        <div class="w-24 h-0.5 bg-camel mx-auto mb-8"></div>
       </div>
 
-      <!-- Calendly Button -->
-      <div class="flex justify-center">
-        <a
-          href={calendlyUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-3 px-8 py-4 bg-white text-gray-900 font-medium rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 transition-colors"
+      <div class="grid lg:grid-cols-2 gap-8 mb-12">
+        <!-- Contact Information Card -->
+        <div class="order-2 lg:order-1 bg-white border border-taupe/20 p-10">
+          <h3 class="font-serif text-2xl font-medium mb-8 text-navy">
+            Elérhetőségek
+          </h3>
+
+          <div class="space-y-8">
+            <!-- Office Address -->
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div
+                  class="flex items-center justify-center w-16 h-16 bg-camel/10"
+                >
+                  <MapPin class="w-8 h-8 text-camel" aria-hidden="true" />
+                </div>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-charcoal mb-2">Iroda</h4>
+                <address class="text-charcoal/70 not-italic leading-relaxed">
+                  {officeAddress}
+                </address>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div
+                  class="flex items-center justify-center w-16 h-16 bg-camel/10"
+                >
+                  <Mail class="w-8 h-8 text-camel" aria-hidden="true" />
+                </div>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-charcoal mb-2">Email</h4>
+                <a
+                  href={`mailto:${email}`}
+                  class="text-navy hover:text-camel transition-colors underline decoration-1 underline-offset-2"
+                >
+                  {email}
+                </a>
+              </div>
+            </div>
+
+            <!-- Phone -->
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div
+                  class="flex items-center justify-center w-16 h-16 bg-camel/10"
+                >
+                  <Phone class="w-8 h-8 text-camel" aria-hidden="true" />
+                </div>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-charcoal mb-2">Telefon</h4>
+                <a
+                  href={`tel:${phone.replace(/\s/g, "")}`}
+                  class="text-navy hover:text-camel transition-colors underline decoration-1 underline-offset-2"
+                >
+                  {phone}
+                </a>
+              </div>
+            </div>
+
+            <!-- Office Hours -->
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div
+                  class="flex items-center justify-center w-16 h-16 bg-camel/10"
+                >
+                  <Clock class="w-8 h-8 text-camel" aria-hidden="true" />
+                </div>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-charcoal mb-2">Nyitvatartás</h4>
+                <div class="text-charcoal/70 leading-relaxed space-y-1">
+                  <p>Hétfő–Péntek: 9:00–18:00</p>
+                  <p>Szombat: 10:00–14:00</p>
+                  <p class="text-sm mt-2 italic">
+                    Hétvégén előzetes egyeztetés alapján
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Meeting Scheduler Card -->
+        <div
+          class="order-1 lg:order-2 bg-navy p-10 text-white flex flex-col justify-between"
         >
-          <Calendar class="w-5 h-5" aria-hidden="true" />
-          <span>Időpontfoglalás</span>
-        </a>
+          <div>
+            <h3 class="font-serif text-2xl font-medium mb-6">
+              Egyeztessen időpontot
+            </h3>
+            <p class="text-white/90 leading-relaxed mb-8">
+              Foglaljon időpontot egy személyes vagy online konzultációra, ahol
+              részletesen megbeszélhetjük az Ön ingatlannal kapcsolatos céljait
+              és elvárásait.
+            </p>
+
+            <ul class="space-y-4 mb-10">
+              <li class="flex items-start gap-4 group">
+                <div class="flex-shrink-0 mt-0.5">
+                  <div
+                    class="flex items-center justify-center w-6 h-6 border-2 border-camel/60 bg-camel/10"
+                  >
+                    <Check
+                      class="w-4 h-4 text-camel stroke-[3]"
+                      aria-hidden="true"
+                    />
+                  </div>
+                </div>
+                <span class="text-white/95 leading-relaxed"
+                  >Ingyenes konzultáció</span
+                >
+              </li>
+              <li class="flex items-start gap-4 group">
+                <div class="flex-shrink-0 mt-0.5">
+                  <div
+                    class="flex items-center justify-center w-6 h-6 border-2 border-camel/60 bg-camel/10"
+                  >
+                    <Check
+                      class="w-4 h-4 text-camel stroke-[3]"
+                      aria-hidden="true"
+                    />
+                  </div>
+                </div>
+                <span class="text-white/95 leading-relaxed"
+                  >Személyre szabott tanácsadás</span
+                >
+              </li>
+              <li class="flex items-start gap-4 group">
+                <div class="flex-shrink-0 mt-0.5">
+                  <div
+                    class="flex items-center justify-center w-6 h-6 border-2 border-camel/60 bg-camel/10"
+                  >
+                    <Check
+                      class="w-4 h-4 text-camel stroke-[3]"
+                      aria-hidden="true"
+                    />
+                  </div>
+                </div>
+                <span class="text-white/95 leading-relaxed"
+                  >Piaci értékbecslés</span
+                >
+              </li>
+              <li class="flex items-start gap-4 group">
+                <div class="flex-shrink-0 mt-0.5">
+                  <div
+                    class="flex items-center justify-center w-6 h-6 border-2 border-camel/60 bg-camel/10"
+                  >
+                    <Check
+                      class="w-4 h-4 text-camel stroke-[3]"
+                      aria-hidden="true"
+                    />
+                  </div>
+                </div>
+                <span class="text-white/95 leading-relaxed"
+                  >Átfogó stratégiatervezés</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <a
+            href={calendlyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-white text-white font-system-ui tracking-wide uppercase hover:border-camel hover:bg-camel hover:text-navy transition-colors duration-300"
+          >
+            <span>Időpont Foglalása</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
