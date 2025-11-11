@@ -2,71 +2,74 @@
 import Links from "../../util/links";
 import X from "@lucide/astro/icons/x";
 import Menu from "@lucide/astro/icons/menu";
+import SellingDebrecenLogo from "../../images/selling-debrecen-logo.svg";
 
 const mobileMenuButtonId = "mobile-menu-button";
 const mobileMenuOverlayId = "mobile-menu-overlay";
 const hamburgerIconId = "hamburger-icon";
 const xIconId = "x-icon";
+const headerId = "site-header";
 const showDesktopNavigation = Astro.url.pathname !== "/";
 ---
 
 <header
-  x-data="{ scrolled: false }"
-  x-init="
-    window.addEventListener('scroll', () => {
-      scrolled = window.scrollY > 50;
-    });
-  "
-  :class="scrolled ? 'bg-navy/70 backdrop-blur-sm border-b border-camel/70' : 'bg-transparent'"
-  class={(showDesktopNavigation ? "" : "block md:hidden") + " fixed top-0 left-0 right-0 z-[100] transition-colors duration-300"}
+  id={headerId}
+  class={(showDesktopNavigation ? "" : "block md:hidden") +
+    " fixed top-0 left-0 right-0 z-[100] transition-colors duration-300 bg-transparent"}
 >
   <nav class="container mx-auto px-4 py-4">
-    <!-- Desktop Navigation disabled -->
-    {showDesktopNavigation && (<div class="hidden md:flex items-center justify-between">
-      <!-- Logo -->
-      <a href={Links.HOME} class="text-white text-xl font-semibold">
-        Selling Debrecen
-      </a>
+    {
+      showDesktopNavigation && (
+        <div class="hidden md:flex items-center justify-between">
+          <a href={Links.HOME} class="text-white text-xl font-semibold">
+            Selling Debrecen
+          </a>
 
-      <!-- Menu Items -->
-      <div class="flex items-center gap-8">
-        <a
-          href={Links.PROPERTIES}
-          class="text-white hover:text-gray-300 transition-colors"
-        >
-          Ingatlanjaink
-        </a>
-        <a
-          href={Links.FOR_SELLERS}
-          class="text-white hover:text-gray-300 transition-colors"
-        >
-          Kínálóknak
-        </a>
-        <a
-          href={Links.FOR_BUYERS}
-          class="text-white hover:text-gray-300 transition-colors"
-        >
-          Keresőknek
-        </a>
-        <a
-          href={Links.ABOUT}
-          class="text-white hover:text-gray-300 transition-colors"
-        >
-          Rólunk
-        </a>
-        <a
-          href={Links.SCHEDULE}
-          class="bg-white text-black px-4 py-2 rounded hover:bg-gray-100 transition-colors"
-        >
-          Időpontfoglalás
-        </a>
-      </div>
-    </div>)}
+          <div class="flex items-center gap-8">
+            <a
+              href={Links.PROPERTIES}
+              class="text-white hover:text-gray-300 transition-colors"
+            >
+              Ingatlanjaink
+            </a>
+            <a
+              href={Links.FOR_SELLERS}
+              class="text-white hover:text-gray-300 transition-colors"
+            >
+              Kínálóknak
+            </a>
+            <a
+              href={Links.FOR_BUYERS}
+              class="text-white hover:text-gray-300 transition-colors"
+            >
+              Keresőknek
+            </a>
+            <a
+              href={Links.ABOUT}
+              class="text-white hover:text-gray-300 transition-colors"
+            >
+              Rólunk
+            </a>
+            <a
+              href={Links.SCHEDULE}
+              class="bg-white text-black px-4 py-2 rounded hover:bg-gray-100 transition-colors"
+            >
+              Időpontfoglalás
+            </a>
+          </div>
+        </div>
+      )
+    }
 
     <!-- Mobile Navigation -->
     <div class="md:hidden flex items-center justify-between">
       <!-- Logo -->
-      <a href={Links.HOME} class="text-white text-xl font-semibold">
+      <a
+        id="mobile-menu-logo"
+        href={Links.HOME}
+        class="opacity-0 flex items-center gap-4 text-white text-xl font-semibold transition-all duration-300"
+      >
+        <SellingDebrecenLogo class="h-10 md:h-10 text-white inline-block" />
         Selling Debrecen
       </a>
 
@@ -96,55 +99,96 @@ const showDesktopNavigation = Astro.url.pathname !== "/";
         </button>
       </div>
     </div>
-
-    <!-- Mobile Drawer Menu -->
-    <div
-      id={mobileMenuOverlayId}
-      class="md:hidden fixed inset-0 bg-black z-[200] flex flex-col transform translate-x-full opacity-0 transition-all duration-300 ease-in-out"
-    >
-      <!-- Close Button -->
-      <div class="flex justify-end p-4">
-        <button
-          id="mobile-menu-close-button"
-          class="text-white p-2"
-          aria-label="Close menu"
-        >
-          <X class="w-6 h-6" />
-        </button>
-      </div>
-
-      <!-- Menu Items -->
-      <div
-        class="flex flex-col gap-6 text-center flex-1 items-center justify-center"
-      >
-        <a
-          href={Links.PROPERTIES}
-          class="mobile-menu-link text-white hover:text-gray-300 transition-colors text-lg"
-        >
-          Ingatlanjaink
-        </a>
-        <a
-          href={Links.FOR_SELLERS}
-          class="mobile-menu-link text-white hover:text-gray-300 transition-colors text-lg"
-        >
-          Kínálóknak
-        </a>
-        <a
-          href={Links.FOR_BUYERS}
-          class="mobile-menu-link text-white hover:text-gray-300 transition-colors text-lg"
-        >
-          Keresőknek
-        </a>
-        <a
-          href={Links.ABOUT}
-          class="mobile-menu-link text-white hover:text-gray-300 transition-colors text-lg"
-        >
-          Rólunk
-        </a>
-      </div>
-    </div>
   </nav>
 </header>
+
+<!-- Mobile Drawer Menu -->
+<div
+  id={mobileMenuOverlayId}
+  class="md:hidden fixed w-full h-full inset-0 bg-navy/80 backdrop-blur-sm z-[200] flex flex-col transform translate-x-full opacity-0 transition-all duration-300 ease-in-out"
+>
+  <!-- Close Button -->
+  <div class="flex justify-end p-4">
+    <button
+      id="mobile-menu-close-button"
+      class="text-white p-2"
+      aria-label="Close menu"
+    >
+      <X class="w-6 h-6" />
+    </button>
+  </div>
+
+  <!-- Menu Items -->
+  <div
+    class="flex flex-col gap-6 text-center flex-1 items-center justify-center"
+  >
+    <a
+      href={Links.PROPERTIES}
+      class="mobile-menu-link text-white hover:text-gray-300 transition-colors text-lg"
+    >
+      Ingatlanjaink
+    </a>
+    <a
+      href={Links.FOR_SELLERS}
+      class="mobile-menu-link text-white hover:text-gray-300 transition-colors text-lg"
+    >
+      Kínálóknak
+    </a>
+    <a
+      href={Links.FOR_BUYERS}
+      class="mobile-menu-link text-white hover:text-gray-300 transition-colors text-lg"
+    >
+      Keresőknek
+    </a>
+    <a
+      href={Links.ABOUT}
+      class="mobile-menu-link text-white hover:text-gray-300 transition-colors text-lg"
+    >
+      Rólunk
+    </a>
+  </div>
+</div>
+
+<script data-header-id={headerId}>
+  (function initHeaderScroll() {
+    const dataset = document.currentScript.dataset;
+
+    document.addEventListener("DOMContentLoaded", function headerScrollInit() {
+      const header = document.getElementById(dataset.headerId);
+      const mobileMenuLogo = document.getElementById("mobile-menu-logo");
+
+      if (!header || !mobileMenuLogo) {
+        return;
+      }
+
+      function handleScroll() {
+        if (window.scrollY > 50) {
+          header.classList.add(
+            "bg-navy/70",
+            "backdrop-blur-sm",
+            "border-b",
+            "border-camel/70",
+          );
+          header.classList.remove("bg-transparent");
+          mobileMenuLogo.classList.remove("opacity-0");
+          mobileMenuLogo.classList.add("opacity-100");
+        } else {
+          header.classList.remove(
+            "bg-navy/70",
+            "backdrop-blur-sm",
+            "border-b",
+            "border-camel/70",
+          );
+          header.classList.add("bg-transparent");
+          mobileMenuLogo.classList.remove("opacity-100");
+          mobileMenuLogo.classList.add("opacity-0");
+        }
+      }
+
+      window.addEventListener("scroll", handleScroll);
+    });
+  })();
+</script>
 
 <script
   data-mobile-menu-button-id={mobileMenuButtonId}
@@ -162,8 +206,9 @@ const showDesktopNavigation = Astro.url.pathname !== "/";
       const mobileMenuOverlay = document.getElementById(
         dataset.mobileMenuOverlayId,
       );
+      const mobileMenuLogo = document.getElementById("mobile-menu-logo");
 
-      if (!mobileMenuButton || !mobileMenuOverlay) {
+      if (!mobileMenuButton || !mobileMenuOverlay || !mobileMenuLogo) {
         return;
       }
 

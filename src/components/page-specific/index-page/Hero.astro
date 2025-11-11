@@ -1,26 +1,51 @@
 ---
+import heroBackgroundVideo from "../../../images/hero-background-video.mp4";
 import heroBackground from "../../../images/hero-background.jpg";
 import Links from "../../../util/links";
+import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
 ---
+
+<style>
+  .push-to-the-right {
+    translate: calc(50% - var(--spacing) * 4) 0;
+  }
+</style>
 
 <section
   id="hero-section"
-  class="relative flex flex-col min-h-screen bg-cover bg-center bg-no-repeat"
-  style={`background-image: url(${heroBackground.src});`}
+  class="relative flex flex-col min-h-screen overflow-hidden"
 >
-  <div class="relative flex-1 flex items-center ps-20">
-    <div class="absolute inset-0 bg-cream/80"></div>
-    <div class="relative z-10 px-4">
-      <h1
-        class="font-didone italic text-6xl md:text-8xl text-navy mb-4 tracking-tight"
-      >
-        Selling Debrecen
-      </h1>
-      <p
-        class="font-old-style font-lighter text-xl md:text-3xl text-navy/90 max-w-2xl mx-auto"
-      >
-        Prémium ingatlanok Hajdú-Bihar megyében
-      </p>
+  <!-- Background Video -->
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    poster={heroBackground.src}
+    class="absolute inset-0 w-full h-full object-cover z-0"
+    aria-hidden="true"
+  >
+    <source src={heroBackgroundVideo} type="video/mp4" />
+  </video>
+
+  <div class="relative flex-1 flex items-center ps-10 md:ps-20">
+    <div class="absolute inset-0 bg-cream/80 z-0"></div>
+    <div class="relative z-10 md:px-4">
+      <div class="w-full flex items-center gap-6">
+        <SellingDebrecenLogo class="h-34 md:h-34 text-navy" />
+        <hgroup>
+          <h1
+            class="font-didone italic text-5xl md:text-8xl text-navy tracking-tight"
+          >
+            Selling Debrecen
+          </h1>
+          <p
+            class="font-old-style font-lighter text-xl md:text-3xl text-navy/90"
+          >
+            Prémium ingatlanok Hajdú-Bihar megyében
+          </p>
+        </hgroup>
+      </div>
     </div>
   </div>
 
@@ -28,45 +53,52 @@ import Links from "../../../util/links";
     id="hero-header"
     x-data="{ isSticky: false }"
     :class="isSticky ? 'fixed top-0 left-0 right-0' : 'relative'"
-    class="transition-all duration-300 z-50 bg-navy/80 backdrop-blur-sm border-b border-camel/70"
+    class="hidden md:block transition-all duration-300 z-50 bg-navy/80 backdrop-blur-sm border-b border-camel/70"
   >
     <nav class="container mx-auto px-4 py-4">
-      <!-- Desktop Navigation disabled -->
-      <div class="hidden md:flex items-center justify-between">
-        <!-- Logo -->
-        <a href={Links.HOME} class="text-white text-xl font-semibold">
-          Selling Debrecen
+      <div
+        class="relative hidden md:flex items-center justify-between transition-all duration-500 ease-in-out"
+      >
+        <a
+          href={Links.HOME}
+          :class="isSticky ? 'opacity-100' : 'opacity-0'"
+          class="opacity-0 text-white text-xl flex items-center gap-4 transition-opacity duration-500"
+        >
+          <SellingDebrecenLogo class="h-10 md:h-10 text-white inline-block" />
+          <span class="text-white text-lg">Selling Debrecen</span>
         </a>
 
-        <!-- Menu Items -->
-        <div class="flex items-center gap-8">
+        <div
+          :class="isSticky ? 'push-to-the-right' : 'translate-x-[-50%]'"
+          class="text-sm absolute left-[50%] translate-x-[-50%] flex items-center gap-8 mx-auto transition-all duration-500"
+        >
           <a
             href={Links.PROPERTIES}
-            class="text-white hover:text-gray-300 transition-colors"
+            class="text-white hover:text-gray-300 transition-colors text-md"
           >
             Ingatlanjaink
           </a>
           <a
             href={Links.FOR_SELLERS}
-            class="text-white hover:text-gray-300 transition-colors"
+            class="text-white hover:text-gray-300 transition-colors text-md"
           >
             Kínálóknak
           </a>
           <a
             href={Links.FOR_BUYERS}
-            class="text-white hover:text-gray-300 transition-colors"
+            class="text-white hover:text-gray-300 transition-colors text-md"
           >
             Keresőknek
           </a>
           <a
             href={Links.ABOUT}
-            class="text-white hover:text-gray-300 transition-colors"
+            class="text-white hover:text-gray-300 transition-colors text-md"
           >
             Rólunk
           </a>
           <a
             href={Links.SCHEDULE}
-            class="bg-white text-black px-4 py-2 rounded hover:bg-gray-100 transition-colors"
+            class="bg-white text-black px-4 py-2 rounded hover:bg-gray-100 transition-colors text-md"
           >
             Időpontfoglalás
           </a>
