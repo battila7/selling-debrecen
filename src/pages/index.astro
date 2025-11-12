@@ -1,5 +1,5 @@
 ---
-import SitePageLayout from "../layouts/SitePageLayout.astro";
+import { BaseLayout } from "../layouts";
 import {
   Hero,
   FeaturedListings,
@@ -9,10 +9,10 @@ import {
 import { Contact } from "../components/common";
 ---
 
-<SitePageLayout title="Selling Debrecen" description="Ingatlanok Debrecenben">
+<BaseLayout title="Selling Debrecen" description="Ingatlanok Debrecenben">
   <Hero />
   <FeaturedListings />
   <Intro />
   <Services />
   <Contact />
-</SitePageLayout>
+</BaseLayout>

@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { Head, Header, Footer } from "../components/common";
+import { Head } from "../components/common";
 
 interface Props {
   title: string;
@@ -16,12 +16,6 @@ const lang = Astro.currentLocale ?? "hu";
 <html lang={lang} class="scroll-smooth">
   <Head title={title} description={description} />
   <body class="min-h-screen">
-    <Header />
-
-    <main>
-      <slot />
-    </main>
-
-    <Footer />
+    <slot />
   </body>
 </html>

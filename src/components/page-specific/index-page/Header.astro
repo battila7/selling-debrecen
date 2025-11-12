@@ -1,0 +1,102 @@
+---
+import Links from "../../../util/links";
+import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
+---
+
+<header
+  id="hero-header"
+  x-data="{ isSticky: false }"
+  :class="isSticky ? 'fixed top-0 left-0 right-0' : 'relative'"
+  class="hidden md:block transition-all duration-300 z-50 bg-navy/80 backdrop-blur-sm border-b border-camel/70"
+>
+  <nav class="container mx-auto px-6 lg:px-12 py-4">
+    <div
+      class="relative hidden md:flex items-center justify-between transition-all duration-500 ease-in-out"
+    >
+      <a
+        href={Links.HOME}
+        :class="isSticky ? 'opacity-100' : 'opacity-0'"
+        class="opacity-0 text-white text-xl flex items-center gap-4 transition-opacity duration-500"
+      >
+        <SellingDebrecenLogo class="h-10 md:h-10 text-white inline-block" />
+        <span class="text-white text-lg">Selling Debrecen</span>
+      </a>
+
+      <div
+        :class="isSticky ? 'push-to-the-right' : 'translate-x-[-50%]'"
+        class="text-sm absolute left-[50%] translate-x-[-50%] flex items-center gap-8 mx-auto transition-all duration-500"
+      >
+        <a
+          href={Links.PROPERTIES}
+          class="text-white hover:text-gray-300 transition-colors text-md"
+        >
+          Ingatlanjaink
+        </a>
+        <a
+          href={Links.FOR_SELLERS}
+          class="text-white hover:text-gray-300 transition-colors text-md"
+        >
+          Kínálóknak
+        </a>
+        <a
+          href={Links.FOR_BUYERS}
+          class="text-white hover:text-gray-300 transition-colors text-md"
+        >
+          Keresőknek
+        </a>
+        <a
+          href={Links.ABOUT}
+          class="text-white hover:text-gray-300 transition-colors text-md"
+        >
+          Rólunk
+        </a>
+        <a
+          href={Links.SCHEDULE}
+          class="bg-white text-charcoal px-4 py-2 rounded hover:bg-gray-100 transition-colors text-md"
+        >
+          Időpontfoglalás
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script is:inline>
+  document.addEventListener("alpine:init", () => {
+    const heroSection = document.getElementById("hero-section");
+    const heroHeader = document.getElementById("hero-header");
+
+    if (!heroSection || !heroHeader) return;
+
+    let stickyPoint = null;
+    let isSticky = false;
+
+    const updateStickyState = () => {
+      // Calculate the sticky point on first scroll or if not set
+      if (stickyPoint === null) {
+        const headerRect = heroHeader.getBoundingClientRect();
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        stickyPoint = headerRect.top + scrollTop;
+      }
+
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const shouldBeSticky = scrollTop >= stickyPoint;
+
+      // Only update if state changed
+      if (shouldBeSticky !== isSticky) {
+        isSticky = shouldBeSticky;
+        const headerData = window.Alpine.$data(heroHeader);
+        if (headerData) {
+          headerData.isSticky = isSticky;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", updateStickyState, { passive: true });
+
+    // Initial check
+    updateStickyState();
+  });
+</script>
