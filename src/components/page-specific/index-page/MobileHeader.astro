@@ -1,0 +1,93 @@
+---
+import Links from "../../../util/links";
+import Menu from "@lucide/astro/icons/menu";
+import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
+import MobileMenuOverlay from "../../common/header/MobileMenuOverlay.astro";
+
+const mobileMenuButtonId = "mobile-menu-button";
+const headerId = "site-header";
+---
+
+<header
+  id={headerId}
+  class="block md:hidden fixed top-0 left-0 right-0 z-[100] transition-colors duration-300 bg-transparent"
+>
+  <nav class="container mx-auto px-6 lg:px-12 py-4">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <a
+        id="mobile-menu-logo"
+        href={Links.HOME}
+        class="opacity-0 flex items-center gap-4 text-white text-xl font-semibold transition-all duration-300"
+      >
+        <SellingDebrecenLogo class="h-10 md:h-10 text-white inline-block" />
+        Selling Debrecen
+      </a>
+
+      <div class="flex items-center gap-4">
+        <!-- Schedule Button -->
+        <a
+          href={Links.SCHEDULE}
+          class="font-system-ui bg-white text-charcoal px-4 py-2 rounded text-sm hover:bg-gray-100 tracking-wider transition-colors"
+        >
+          Időpontfoglalás
+        </a>
+
+        <!-- Drawer Toggle Button -->
+        <button
+          id={mobileMenuButtonId}
+          class="text-white p-2 relative flex items-center justify-center"
+          aria-label="Toggle menu"
+        >
+          <Menu
+            class="w-6 h-6 absolute transition-all duration-300 ease-in-out opacity-100 rotate-0 scale-100"
+          />
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Drawer Menu -->
+<MobileMenuOverlay mobileMenuButtonId={mobileMenuButtonId} />
+
+<script data-header-id={headerId}>
+  (function initHeaderScroll() {
+    const dataset = document.currentScript.dataset;
+
+    document.addEventListener("DOMContentLoaded", function headerScrollInit() {
+      const header = document.getElementById(dataset.headerId);
+      const mobileMenuLogo = document.getElementById("mobile-menu-logo");
+
+      if (!header || !mobileMenuLogo) {
+        return;
+      }
+
+      function handleScroll() {
+        if (window.scrollY > 50) {
+          header.classList.add(
+            "bg-navy/70",
+            "backdrop-blur-sm",
+            "border-b",
+            "border-camel/70",
+          );
+          header.classList.remove("bg-transparent");
+          mobileMenuLogo.classList.remove("opacity-0");
+          mobileMenuLogo.classList.add("opacity-100");
+        } else {
+          header.classList.remove(
+            "bg-navy/70",
+            "backdrop-blur-sm",
+            "border-b",
+            "border-camel/70",
+          );
+          header.classList.add("bg-transparent");
+          mobileMenuLogo.classList.remove("opacity-100");
+          mobileMenuLogo.classList.add("opacity-0");
+        }
+      }
+
+      window.addEventListener("scroll", handleScroll);
+    });
+  })();
+</script>

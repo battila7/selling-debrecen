@@ -3,6 +3,38 @@ import Links from "../../../util/links";
 import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
 ---
 
+<style>
+  @media (width >= 40rem) {
+    .push-to-the-right {
+      translate: calc(20rem - 100% - var(--spacing) * 4) 0;
+    }
+  }
+
+  @media (width >= 48rem) {
+    .push-to-the-right {
+      translate: calc(24rem - 100% - var(--spacing) * 4) 0;
+    }
+  }
+
+  @media (width >= 64rem) {
+    .push-to-the-right {
+      translate: calc(32rem - 100% - var(--spacing) * 4) 0;
+    }
+  }
+
+  @media (width >= 80rem) {
+    .push-to-the-right {
+      translate: calc(40rem - 100% - var(--spacing) * 4) 0;
+    }
+  }
+
+  @media (width >= 96rem) {
+    .push-to-the-right {
+      translate: calc(48rem - 100% - var(--spacing) * 4) 0;
+    }
+  }
+</style>
+
 <header
   id="hero-header"
   x-data="{ isSticky: false }"

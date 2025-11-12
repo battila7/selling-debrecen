@@ -2,40 +2,8 @@
 import heroBackgroundVideo from "../../../images/hero-background-video.mp4";
 import heroBackgroundVideoPoster from "../../../images/hero-background-video-poster.jpg";
 import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
-import Header from "./Header.astro";
+import DesktopHeader from "./DesktopHeader.astro";
 ---
-
-<style>
-  @media (width >= 40rem) {
-    .push-to-the-right {
-      translate: calc(20rem - 100% - var(--spacing) * 4) 0;
-    }
-  }
-
-  @media (width >= 48rem) {
-    .push-to-the-right {
-      translate: calc(24rem - 100% - var(--spacing) * 4) 0;
-    }
-  }
-
-  @media (width >= 64rem) {
-    .push-to-the-right {
-      translate: calc(32rem - 100% - var(--spacing) * 4) 0;
-    }
-  }
-
-  @media (width >= 80rem) {
-    .push-to-the-right {
-      translate: calc(40rem - 100% - var(--spacing) * 4) 0;
-    }
-  }
-
-  @media (width >= 96rem) {
-    .push-to-the-right {
-      translate: calc(48rem - 100% - var(--spacing) * 4) 0;
-    }
-  }
-</style>
 
 <section
   id="hero-section"
@@ -75,5 +43,5 @@ import Header from "./Header.astro";
     </div>
   </div>
 
-  <Header />
+  <DesktopHeader />
 </section>
