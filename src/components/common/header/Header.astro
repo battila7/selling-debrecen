@@ -9,36 +9,37 @@ const mobileMenuButtonId = "mobile-menu-button";
 
 <header
   id="site-header"
-  class="sticky top-0 w-full z-[100] bg-navy/70 backdrop-blur-sm border-b border-camel/70"
+  class="sticky top-0 w-full z-[100] bg-navy/80 backdrop-blur-sm border-b border-camel/70"
 >
   <nav class="container mx-auto px-6 lg:px-12 py-4">
     <div class="hidden md:flex items-center justify-between">
-      <a href={Links.HOME} class="text-white text-xl font-semibold">
-        Selling Debrecen
+      <a href={Links.HOME} class="text-white text-xl flex items-center gap-4">
+        <SellingDebrecenLogo class="h-10 md:h-10 text-white inline-block" />
+        <span class="text-white text-lg">Selling Debrecen</span>
       </a>
 
-      <div class="flex items-center gap-8">
+      <div class="flex items-center gap-8 text-sm">
         <a
           href={Links.PROPERTIES}
-          class="text-white hover:text-gray-300 transition-colors"
+          class="text-white hover:text-gray-300 transition-colors text-md"
         >
           Ingatlanjaink
         </a>
         <a
           href={Links.FOR_SELLERS}
-          class="text-white hover:text-gray-300 transition-colors"
+          class="text-white hover:text-gray-300 transition-colors text-md"
         >
           Kínálóknak
         </a>
         <a
           href={Links.FOR_BUYERS}
-          class="text-white hover:text-gray-300 transition-colors"
+          class="text-white hover:text-gray-300 transition-colors text-md"
         >
           Keresőknek
         </a>
         <a
           href={Links.ABOUT}
-          class="text-white hover:text-gray-300 transition-colors"
+          class="text-white hover:text-gray-300 transition-colors text-md"
         >
           Rólunk
         </a>

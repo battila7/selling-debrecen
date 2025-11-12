@@ -6,40 +6,38 @@ import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
 <style>
   @media (width >= 40rem) {
     .push-to-the-right {
-      translate: calc(20rem - 100% - var(--spacing) * 4) 0;
+      translate: calc(20rem - 100% - var(--spacing) * 6) 0;
     }
   }
 
   @media (width >= 48rem) {
     .push-to-the-right {
-      translate: calc(24rem - 100% - var(--spacing) * 4) 0;
+      translate: calc(24rem - 100% - var(--spacing) * 6) 0;
     }
   }
 
   @media (width >= 64rem) {
     .push-to-the-right {
-      translate: calc(32rem - 100% - var(--spacing) * 4) 0;
+      translate: calc(32rem - 100% - var(--spacing) * 12) 0;
     }
   }
 
   @media (width >= 80rem) {
     .push-to-the-right {
-      translate: calc(40rem - 100% - var(--spacing) * 4) 0;
+      translate: calc(40rem - 100% - var(--spacing) * 12) 0;
     }
   }
 
   @media (width >= 96rem) {
     .push-to-the-right {
-      translate: calc(48rem - 100% - var(--spacing) * 4) 0;
+      translate: calc(48rem - 100% - var(--spacing) * 12) 0;
     }
   }
 </style>
 
 <header
   id="hero-header"
-  x-data="{ isSticky: false }"
-  :class="isSticky ? 'fixed top-0 left-0 right-0' : 'relative'"
-  class="hidden md:block transition-all duration-300 z-50 bg-navy/80 backdrop-blur-sm border-b border-camel/70"
+  class="hidden md:block relative transition-all duration-300 z-50 bg-navy/80 backdrop-blur-sm border-b border-camel/70"
 >
   <nav class="container mx-auto px-6 lg:px-12 py-4">
     <div
@@ -47,7 +45,7 @@ import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
     >
       <a
         href={Links.HOME}
-        :class="isSticky ? 'opacity-100' : 'opacity-0'"
+        id="logo-link"
         class="opacity-0 text-white text-xl flex items-center gap-4 transition-opacity duration-500"
       >
         <SellingDebrecenLogo class="h-10 md:h-10 text-white inline-block" />
@@ -55,7 +53,7 @@ import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
       </a>
 
       <div
-        :class="isSticky ? 'push-to-the-right' : 'translate-x-[-50%]'"
+        id="nav-links"
         class="text-sm absolute left-[50%] translate-x-[-50%] flex items-center gap-8 mx-auto transition-all duration-500"
       >
         <a
@@ -93,14 +91,15 @@ import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
   </nav>
 </header>
 
-<script is:inline>
-  document.addEventListener("alpine:init", () => {
-    const heroSection = document.getElementById("hero-section");
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
     const heroHeader = document.getElementById("hero-header");
+    const logoLink = document.getElementById("logo-link");
+    const navLinks = document.getElementById("nav-links");
 
-    if (!heroSection || !heroHeader) return;
+    if (!heroHeader || !logoLink || !navLinks) return;
 
-    let stickyPoint = null;
+    let stickyPoint: number | null = null;
     let isSticky = false;
 
     const updateStickyState = () => {
@@ -114,14 +113,26 @@ import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
 
       const scrollTop =
         window.pageYOffset || document.documentElement.scrollTop;
-      const shouldBeSticky = scrollTop >= stickyPoint;
+      const shouldBeSticky = scrollTop >= (stickyPoint ?? 0);
 
       // Only update if state changed
       if (shouldBeSticky !== isSticky) {
         isSticky = shouldBeSticky;
-        const headerData = window.Alpine.$data(heroHeader);
-        if (headerData) {
-          headerData.isSticky = isSticky;
+
+        if (isSticky) {
+          heroHeader.classList.remove("relative");
+          heroHeader.classList.add("fixed", "top-0", "left-0", "right-0");
+          logoLink.classList.remove("opacity-0");
+          logoLink.classList.add("opacity-100");
+          navLinks.classList.remove("translate-x-[-50%]");
+          navLinks.classList.add("push-to-the-right");
+        } else {
+          heroHeader.classList.remove("fixed", "top-0", "left-0", "right-0");
+          heroHeader.classList.add("relative");
+          logoLink.classList.remove("opacity-100");
+          logoLink.classList.add("opacity-0");
+          navLinks.classList.remove("push-to-the-right");
+          navLinks.classList.add("translate-x-[-50%]");
         }
       }
     };
