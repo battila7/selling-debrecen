@@ -1,10 +1,36 @@
 ---
 import { PageLayout } from "../layouts";
-import { Search } from "../components/page-specific/listings";
+import { Search, ListingCard } from "../components/page-specific/listings";
+import type { Listing } from "../components/page-specific/listings/ListingCard.astro";
+import listingPlaceholder from "../images/listing-placeholder.jpg";
+
+// Example listing data
+const exampleListing: Listing = {
+  title: "Elegáns családi ház a belvárosban",
+  address: "Debrecen, Belváros, Piac utca 45.",
+  price: "125.000.000 Ft",
+  image: listingPlaceholder.src,
+  rooms: 5,
+  area: 180,
+  propertyType: "Családi ház",
+  listingType: "Eladó",
+  description:
+    "Kiváló elhelyezkedésű, gondosan felújított családi ház a belváros szívében. Tágas szobák, modern konyha, összkomfortos fürdőszobák. Csendes, nyugodt környezet, közel minden szolgáltatáshoz.",
+  link: "#",
+};
 ---
 
 <PageLayout title="Ingatlanok" description="Ingatlanok Debrecenben">
   <Search />
 
-  <!-- Listing results will go here -->
+  <!-- Example listing card -->
+  <section class="py-16 bg-cream">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <ListingCard listing={exampleListing} />
+        <ListingCard listing={exampleListing} />
+        <ListingCard listing={exampleListing} />
+      </div>
+    </div>
+  </section>
 </PageLayout>
