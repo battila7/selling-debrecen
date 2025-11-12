@@ -1,0 +1,196 @@
+---
+import { Picture } from "astro:assets";
+import listingsBg from "../../../images/listings-bg-1.jpg";
+import SearchIcon from "@lucide/astro/icons/search";
+---
+
+<section
+  class="relative h-[32rem] md:h-[28rem] lg:h-[32rem] w-full overflow-hidden"
+>
+  <div class="absolute inset-0 z-0">
+    <Picture
+      src={listingsBg}
+      alt=""
+      formats={["webp"]}
+      class="w-full h-full object-cover"
+      widths={[400, 800, 1200, 1600, 2000]}
+      sizes="100vw"
+    />
+    <div class="absolute inset-0 bg-navy/80 backdrop-blur-[0px]"></div>
+  </div>
+
+  <div class="relative z-10 container mx-auto px-6 lg:px-12 h-full">
+    <div class="flex flex-col items-center justify-center h-full gap-8">
+      <hgroup class="text-center">
+        <h1
+          class="font-didone text-3xl md:text-4xl lg:text-5xl text-white tracking-wide mb-3 uppercase"
+        >
+          Ingatlanjaink
+        </h1>
+        <p class="text-white/90 text-base md:text-lg">
+          Találja meg álmai ingatlanát Debrecenben
+        </p>
+      </hgroup>
+
+      <!-- Search Bar -->
+      <div
+        class="w-full max-w-6xl bg-white rounded-lg shadow-2xl overflow-hidden"
+      >
+        <form
+          class="flex flex-col lg:flex-row items-stretch divide-y lg:divide-y-0 divide-x divide-taupe/30"
+        >
+          <div class="flex-1 min-w-0">
+            <fieldset class="h-full">
+              <legend class="sr-only">Vásárlás vagy bérlet</legend>
+              <div class="flex h-full">
+                <label class="flex-1 relative">
+                  <input
+                    type="radio"
+                    name="transaction"
+                    value="sale"
+                    checked
+                    class="peer sr-only"
+                  />
+                  <span
+                    class="flex items-center justify-center h-full px-4 py-4 lg:py-5 text-charcoal/60 cursor-pointer transition-all peer-checked:text-white peer-checked:bg-camel peer-checked:font-medium"
+                  >
+                    Eladó
+                  </span>
+                </label>
+                <div class="w-px bg-taupe/30"></div>
+                <label class="flex-1 relative">
+                  <input
+                    type="radio"
+                    name="transaction"
+                    value="rent"
+                    class="peer sr-only"
+                  />
+                  <span
+                    class="flex items-center justify-center h-full px-4 py-4 lg:py-5 text-charcoal/60 cursor-pointer transition-all peer-checked:text-white peer-checked:bg-camel peer-checked:font-medium"
+                  >
+                    Kiadó
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="flex-1 min-w-0">
+            <label class="block">
+              <span class="sr-only">Ingatlan típusa</span>
+              <select
+                name="propertyType"
+                class="w-full h-full px-4 py-4 lg:py-5 text-charcoal bg-transparent border-0 focus:outline-none transition-all cursor-pointer"
+              >
+                <option value="apartment">lakás</option>
+                <option value="house">ház</option>
+                <option value="plot">telek</option>
+                <option value="garage">garázs</option>
+                <option value="any">mindegy</option>
+              </select>
+            </label>
+          </div>
+
+          <!-- Location Input -->
+          <div class="flex-2 min-w-0">
+            <label class="block">
+              <span class="sr-only">Helyszín</span>
+              <input
+                type="text"
+                name="location"
+                placeholder="Helyszín"
+                class="w-full h-full px-4 py-4 lg:py-5 text-charcoal bg-transparent border-0 focus:outline-none transition-all placeholder:text-charcoal/50"
+              />
+            </label>
+          </div>
+
+          <!-- Price Range - Desktop: side by side, Mobile: stacked -->
+          <div class="flex-1 min-w-0 flex">
+            <div class="flex-1">
+              <label class="block">
+                <span class="sr-only">Min.</span>
+                <input
+                  type="text"
+                  name="priceMin"
+                  placeholder="Min."
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                  class="w-full h-full px-2 py-4 lg:py-5 text-charcoal bg-transparent border-0 focus:outline-none transition-all placeholder:text-charcoal/50"
+                />
+              </label>
+            </div>
+            <div class="flex items-center justify-center">
+              <span class="text-charcoal/50 text-lg"> - </span>
+            </div>
+            <div class="flex-1">
+              <label class="block">
+                <span class="sr-only">Max.</span>
+                <input
+                  type="text"
+                  name="priceMax"
+                  placeholder="Max."
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                  class="w-full h-full px-2 py-4 lg:py-5 text-charcoal bg-transparent border-0 focus:outline-none transition-all placeholder:text-charcoal/50"
+                />
+              </label>
+            </div>
+            <div
+              class="flex items-center justify-center pl-1 pr-2 text-charcoal"
+            >
+              millió Ft
+            </div>
+          </div>
+
+          <!-- Square Meters Range - Desktop: side by side, Mobile: stacked -->
+          <div class="flex-1 min-w-0 flex">
+            <div class="flex-1">
+              <label class="block">
+                <span class="sr-only">Min.</span>
+                <input
+                  type="text"
+                  name="sizeMin"
+                  placeholder="Min."
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                  class="w-full h-full px-2 py-4 lg:py-5 text-charcoal bg-transparent border-0 focus:outline-none transition-all placeholder:text-charcoal/50"
+                />
+              </label>
+            </div>
+            <div class="flex items-center justify-center text-charcoal">-</div>
+            <div class="flex-1">
+              <label class="block">
+                <span class="sr-only">Max.</span>
+                <input
+                  type="text"
+                  name="sizeMax"
+                  placeholder="Max."
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                  class="w-full h-full px-2 py-4 lg:py-5 text-charcoal bg-transparent border-0 focus:outline-none transition-all placeholder:text-charcoal/50"
+                />
+              </label>
+            </div>
+            <div
+              class="flex items-center justify-center pl-1 pr-2 text-charcoal"
+            >
+              m²
+            </div>
+          </div>
+
+          <!-- Search Button -->
+          <div class="lg:flex-none">
+            <button
+              type="submit"
+              class="w-full lg:w-auto h-full px-8 py-4 lg:py-5 bg-navy text-white font-medium hover:bg-navy/90 focus:outline-none transition-all flex items-center justify-center gap-2"
+              aria-label="Keresés"
+            >
+              <SearchIcon class="w-5 h-5" />
+              <span class="lg:sr-only">Keresés</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
