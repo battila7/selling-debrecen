@@ -6,6 +6,8 @@ import {
 } from "../components/page-specific/listings";
 import SearchIcon from "@lucide/astro/icons/search";
 import SearchX from "@lucide/astro/icons/search-x";
+import RefreshCw from "@lucide/astro/icons/refresh-cw";
+import MessageCircle from "@lucide/astro/icons/message-circle";
 ---
 
 <PageLayout
@@ -41,14 +43,84 @@ import SearchX from "@lucide/astro/icons/search-x";
       </div>
 
       <!-- Results state - shown when there are matching listings -->
-      <div
-        x-cloak
-        x-show="filteredListings.length > 0"
-        class="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-      >
-        <template x-for="listing in filteredListings">
-          <ListingCardAlpine clientSideListingProp="listing" />
-        </template>
+      <div x-cloak x-show="filteredListings.length > 0">
+        <div
+          class="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+        >
+          <template x-for="listing in filteredListings">
+            <ListingCardAlpine clientSideListingProp="listing" />
+          </template>
+        </div>
+
+        <!-- End marker - signals end of results -->
+        <div class="max-w-4xl mx-auto mt-20 mb-8">
+          <div class="w-32 mx-auto border-t border-taupe/40 mb-10"></div>
+
+          <p
+            class="font-old-style text-center text-xl md:text-2xl text-charcoal/60 mb-12 tracking-wide"
+          >
+            Elérte a találati lista végét
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
+            <!-- New Search Card -->
+            <button
+              type="button"
+              @click="scrollToSearch"
+              class="group cursor-pointer block text-left bg-cream-soft border-2 border-navy/20 p-8 hover:border-navy hover:bg-navy transition-all duration-700"
+            >
+              <div class="flex items-start gap-4">
+                <div
+                  class="flex-shrink-0 p-3 bg-navy/10 group-hover:bg-cream transition-colors duration-700"
+                >
+                  <RefreshCw class="w-8 h-8 text-navy group-hover:text-navy" />
+                </div>
+                <div class="flex-1">
+                  <h3
+                    class="font-old-style text-2xl text-navy group-hover:text-cream mb-3 tracking-wide transition-colors duration-700"
+                  >
+                    Új keresés
+                  </h3>
+                  <p
+                    class="font-system-ui text-sm text-charcoal/70 group-hover:text-cream/90 leading-relaxed transition-colors duration-700"
+                  >
+                    Módosítsa keresési feltételeit, és találja meg a tökéletes
+                    ingatlant új szempontok alapján.
+                  </p>
+                </div>
+              </div>
+            </button>
+
+            <!-- Contact Card -->
+            <a
+              href="/idopontfoglalas"
+              class="group cursor-pointer block text-left bg-cream-soft border-2 border-navy/20 p-8 hover:border-navy hover:bg-navy transition-all duration-700"
+            >
+              <div class="flex items-start gap-4">
+                <div
+                  class="flex-shrink-0 p-3 bg-navy/10 group-hover:bg-cream transition-colors duration-700"
+                >
+                  <MessageCircle
+                    class="w-8 h-8 text-navy group-hover:text-navy"
+                  />
+                </div>
+                <div class="flex-1">
+                  <h3
+                    class="font-old-style text-2xl text-navy group-hover:text-cream mb-3 tracking-wide transition-colors duration-700"
+                  >
+                    Időpontfoglalás
+                  </h3>
+                  <p
+                    class="font-system-ui text-sm text-charcoal/70 group-hover:text-cream/90 leading-relaxed transition-colors duration-700"
+                  >
+                    Ha nem találja a tökéletes ingatlant, ne habozzon, lépjen
+                    kapcsolatba velünk!
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
       </div>
 
       <!-- Empty state - shown when search yields no results -->
