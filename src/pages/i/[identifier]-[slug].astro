@@ -12,6 +12,7 @@ import Hash from "@lucide/astro/icons/hash";
 import Calendar from "@lucide/astro/icons/calendar";
 import Phone from "@lucide/astro/icons/phone";
 import Check from "@lucide/astro/icons/check";
+import Copy from "@lucide/astro/icons/copy";
 
 import type { GetStaticPaths } from "astro";
 
@@ -166,6 +167,28 @@ const transactionTypeLabels: Record<string, string> = {
                   Hivatkozási szám: {listing.id}
                 </p>
               </div>
+              <button
+                class="flex items-start gap-3 text-charcoal/70 hover:text-navy transition-colors duration-500 cursor-pointer"
+                type="button"
+                x-data=`{
+                  copied: false,
+                  link: '${listing.link}'
+                }`
+                x-on:click=`
+                  navigator.clipboard.writeText(link).then(() => {
+                    copied = true;
+                    setTimeout(() => copied = false, 2000);
+                  })
+                `
+              >
+                <Copy size={24} class="mt-1 flex-shrink-0" />
+                <p
+                  x-text="copied ? 'Másolva!' : 'Link másolása'"
+                  class="font-geometric-humanist text-lg tracking-wide"
+                >
+                  Link másolása
+                </p>
+              </button>
             </div>
           </div>
           <!-- Divider -->
