@@ -255,7 +255,7 @@ const transactionTypeLabels: Record<string, string> = {
       <!-- Navigation Buttons (hidden on mobile) -->
       {
         listing.images.length > 1 && (
-          <>
+          <Fragment>
             <button
               type="button"
               x-on:click="prev"
@@ -279,7 +279,7 @@ const transactionTypeLabels: Record<string, string> = {
                 class="text-navy transition-transform duration-300 group-hover:translate-x-1"
               />
             </button>
-          </>
+          </Fragment>
         )
       }
 
