@@ -1,11 +1,10 @@
 ---
-import type { ImageMetadata } from "astro";
 import ChevronLeft from "@lucide/astro/icons/chevron-left";
 import ChevronRight from "@lucide/astro/icons/chevron-right";
 import X from "@lucide/astro/icons/x";
 
 type Props = {
-  images: ImageMetadata[];
+  images: { src: string; alt: string }[];
 };
 
 const { images } = Astro.props;
@@ -23,24 +22,22 @@ const { images } = Astro.props;
     @touchstart="handleTouchStart"
     @touchend="handleTouchEnd"
   >
-    <!-- Images -->
-    {
-      images.map((image, index) => (
-        <img
-          src={image.src}
-          alt={image.alt}
-          class="absolute inset-0 w-full h-full object-cover cursor-zoom-in"
-          x-show={`currentIndex === ${index}`}
-          x-transition:enter="transition-opacity ease-in-out duration-500"
-          x-transition:enter-start="opacity-0"
-          x-transition:enter-end="opacity-100"
-          x-transition:leave="transition-opacity ease-in-out duration-500"
-          x-transition:leave-start="opacity-100"
-          x-transition:leave-end="opacity-0"
-          x-on:click={`openLightbox(${index})`}
-        />
-      ))
-    }
+    <!-- Images Container with Sliding Effect -->
+    <div
+      class="flex h-full transition-transform duration-300 ease-out"
+      :style="`transform: translateX(-${currentIndex * 100}%)`"
+    >
+      {
+        images.map((image, index) => (
+          <img
+            src={image.src}
+            alt={image.alt}
+            class="flex-shrink-0 w-full h-full object-cover cursor-zoom-in"
+            x-on:click={`openLightbox(${index})`}
+          />
+        ))
+      }
+    </div>
 
     <button
       type="button"
@@ -132,8 +129,6 @@ const { images } = Astro.props;
       <!-- Navigation and Image Container -->
       <div
         class="relative w-11/12 xl:w-4/5 h-[85vh] flex items-center justify-center"
-        @touchstart.stop="handleTouchStart"
-        @touchend.stop="handleTouchEnd"
       >
         <button
           type="button"
@@ -147,18 +142,29 @@ const { images } = Astro.props;
           />
         </button>
 
-        <!-- Image -->
-        {
-          images.map((image, index) => (
-            <img
-              x-show={`lightboxIndex === ${index}`}
-              src={image.src}
-              alt={image.alt}
-              class="max-w-full max-h-full object-contain select-none cursor-zoom-out"
-              style="display: none;"
-            />
-          ))
-        }
+        <!-- Images Container with Sliding Effect -->
+        <div
+          class="w-full h-full overflow-hidden"
+          @touchstart.stop="handleTouchStart"
+          @touchend.stop="handleTouchEnd"
+        >
+          <div
+            class="flex h-full items-center transition-transform duration-300 ease-out"
+            :style="`transform: translateX(-${lightboxIndex * 100}%)`"
+          >
+            {
+              images.map((image) => (
+                <div class="flex-shrink-0 w-full h-full flex items-center justify-center">
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    class="max-w-full max-h-full object-contain select-none cursor-zoom-out"
+                  />
+                </div>
+              ))
+            }
+          </div>
+        </div>
 
         <button
           type="button"
