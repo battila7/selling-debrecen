@@ -10,6 +10,9 @@ const listings = [
     imageAlt: "Elegáns családi ház a belvárosban",
     rooms: 5,
     area: 180,
+    terraceArea: 20,
+    gardenArea: 5,
+    floor: 1,
     propertyType: "house",
     transactionType: "sale",
     description:
@@ -27,6 +30,9 @@ const listings = [
     imageAlt: "Elegáns családi ház a belvárosban",
     rooms: 5,
     area: 180,
+    terraceArea: 20,
+    gardenArea: 5,
+    floor: 1,
     propertyType: "apartment",
     transactionType: "sale",
     description:

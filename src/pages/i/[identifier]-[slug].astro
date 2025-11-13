@@ -17,6 +17,13 @@ import Check from "@lucide/astro/icons/check";
 import Copy from "@lucide/astro/icons/copy";
 import SearchIcon from "@lucide/astro/icons/search";
 import MessageCircle from "@lucide/astro/icons/message-circle";
+import DoorOpen from "@lucide/astro/icons/door-open";
+import Sun from "@lucide/astro/icons/sun";
+import Trees from "@lucide/astro/icons/trees";
+import Layers from "@lucide/astro/icons/layers";
+import Store from "@lucide/astro/icons/store";
+import Bus from "@lucide/astro/icons/bus";
+import Tram from "@lucide/astro/icons/tram-front";
 import { Carousel } from "../../components/page-specific/listing-detail";
 
 import type { GetStaticPaths } from "astro";
@@ -40,13 +47,32 @@ export const getStaticPaths = (() => {
       ],
       rooms: 5,
       area: 180,
+      terraceArea: 20,
+      gardenArea: 5,
+      floor: 1,
+      floorPlanLink: "https://www.google.com",
       propertyType: "house",
       transactionType: "sale",
       description:
         "Kiváló elhelyezkedésű, gondosan felújított családi ház a belváros szívében. Tágas szobák, modern konyha, összkomfortos fürdőszobák. Csendes, nyugodt környezet, közel minden szolgáltatáshoz.",
       link: "",
       extra: "Hatalmas kert",
-      checklist: ["Hatalmas kert", "Két kocsibeálló", "Boltok a közelben"],
+      checklist: ["Hatalmas kert", "Két kocsibeálló"],
+      nearby: ["Aldi", "Lidl", "Bölcsöde"],
+      publicTransport: [
+        {
+          type: "bus",
+          name: "30Y",
+        },
+        {
+          type: "tram",
+          name: "1",
+        },
+        {
+          type: "tram",
+          name: "2",
+        },
+      ],
     },
     {
       id: "33",
@@ -63,13 +89,32 @@ export const getStaticPaths = (() => {
       ],
       rooms: 5,
       area: 180,
+      terraceArea: 20,
+      gardenArea: 5,
+      floorPlanLink: "https://www.google.com",
+      floor: 1,
       propertyType: "apartment",
       transactionType: "sale",
       description:
         "Kiváló elhelyezkedésű, gondosan felújított családi ház a belváros szívében. Tágas szobák, modern konyha, összkomfortos fürdőszobák. Csendes, nyugodt környezet, közel minden szolgáltatáshoz.",
       link: "",
       extra: "Hatalmas kert",
-      checklist: ["Hatalmas kert", "Két kocsibeálló", "Boltok a közelben"],
+      checklist: ["Hatalmas kert", "Két kocsibeálló"],
+      nearby: ["Aldi", "Lidl", "Bölcsöde"],
+      publicTransport: [
+        {
+          type: "bus",
+          name: "30Y",
+        },
+        {
+          type: "tram",
+          name: "1",
+        },
+        {
+          type: "tram",
+          name: "2",
+        },
+      ],
     },
   ];
 
@@ -100,12 +145,20 @@ interface Props {
     images: Array<{ src: string; alt: string }>;
     rooms: number;
     area: number;
+    terraceArea?: number;
+    gardenArea?: number;
+    floor?: number;
     propertyType: string;
     transactionType: string;
     description: string;
     link: string;
     extra: string;
     checklist: string[];
+    nearby: string[];
+    publicTransport: {
+      type: string;
+      name: string;
+    }[];
   };
 }
 
@@ -172,6 +225,127 @@ const propertyTypeLabels: Record<string, string> = {
               </button>
             </div>
           </div>
+
+          <!-- Property Details Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Area Card -->
+            <div
+              class="flex items-center gap-4 bg-cream-soft border-2 border-taupe/30 p-6"
+            >
+              <div class="bg-navy/10 p-4 flex-shrink-0">
+                <Maximize2 size={28} class="text-navy" />
+              </div>
+              <div>
+                <p
+                  class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1"
+                >
+                  Alapterület
+                </p>
+                <p class="font-old-style text-xl text-charcoal font-bold">
+                  {listing.area} m²
+                </p>
+              </div>
+            </div>
+
+            {
+              listing.terraceArea && (
+                <div class="flex items-center gap-4 bg-cream-soft border-2 border-taupe/30 p-6">
+                  <div class="bg-navy/10 p-4 flex-shrink-0">
+                    <Sun size={28} class="text-navy" />
+                  </div>
+                  <div>
+                    <p class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1">
+                      Terasz
+                    </p>
+                    <p class="font-old-style text-xl text-charcoal font-bold">
+                      {listing.terraceArea} m²
+                    </p>
+                  </div>
+                </div>
+              )
+            }
+
+            {
+              listing.gardenArea && (
+                <div class="flex items-center gap-4 bg-cream-soft border-2 border-taupe/30 p-6">
+                  <div class="bg-navy/10 p-4 flex-shrink-0">
+                    <Trees size={28} class="text-navy" />
+                  </div>
+                  <div>
+                    <p class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1">
+                      Kert
+                    </p>
+                    <p class="font-old-style text-xl text-charcoal font-bold">
+                      {listing.gardenArea} m²
+                    </p>
+                  </div>
+                </div>
+              )
+            }
+
+            <!-- Rooms Card -->
+            <div
+              class="flex items-center gap-4 bg-cream-soft border-2 border-taupe/30 p-6"
+            >
+              <div class="bg-navy/10 p-4 flex-shrink-0">
+                <DoorOpen size={28} class="text-navy" />
+              </div>
+              <div>
+                <p
+                  class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1"
+                >
+                  Szobák
+                </p>
+                <p class="font-old-style text-xl text-charcoal font-bold">
+                  {listing.rooms}
+                </p>
+              </div>
+            </div>
+
+            <!-- Property Type Card -->
+            <div
+              class="flex items-center gap-4 bg-cream-soft border-2 border-taupe/30 p-6"
+            >
+              <div class="bg-navy/10 p-4 flex-shrink-0">
+                {
+                  listing.propertyType === "house" ? (
+                    <House size={28} class="text-navy" />
+                  ) : (
+                    <Building2 size={28} class="text-navy" />
+                  )
+                }
+              </div>
+              <div>
+                <p
+                  class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1"
+                >
+                  Típus
+                </p>
+                <p class="font-old-style text-xl text-charcoal font-bold">
+                  {propertyTypeLabels[listing.propertyType]}
+                </p>
+              </div>
+            </div>
+
+            {
+              listing.floor !== undefined && (
+                <div class="flex items-center gap-4 bg-cream-soft border-2 border-taupe/30 p-6">
+                  <div class="bg-navy/10 p-4 flex-shrink-0">
+                    <Layers size={28} class="text-navy" />
+                  </div>
+                  <div>
+                    <p class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1">
+                      Emelet
+                    </p>
+                    <p class="font-old-style text-xl text-charcoal font-bold">
+                      {listing.floor}
+                    </p>
+                  </div>
+                </div>
+              )
+            }
+          </div>
+
           <!-- Divider -->
           <div class="border-t-2 border-taupe/40"></div>
 
@@ -197,20 +371,80 @@ const propertyTypeLabels: Record<string, string> = {
             >
               Főbb jellemzők
             </h2>
-            <ul class="space-y-4">
-              {
-                listing.checklist.map((item) => (
-                  <li class="flex items-start gap-4">
-                    <div class="bg-navy/10 p-2 mt-0.5 flex-shrink-0">
-                      <Check size={20} class="text-navy" />
-                    </div>
-                    <p class="font-system-ui text-lg text-charcoal/80 leading-relaxed">
-                      {item}
-                    </p>
-                  </li>
-                ))
-              }
-            </ul>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <!-- Checklist -->
+              <div>
+                <h3
+                  class="font-geometric-humanist text-sm text-charcoal/70 uppercase tracking-wider mb-4"
+                >
+                  Amiért jó választás
+                </h3>
+                <ul class="space-y-4">
+                  {
+                    listing.checklist.map((item) => (
+                      <li class="flex items-center gap-4">
+                        <div class="bg-navy/10 p-2 flex-shrink-0">
+                          <Check size={20} class="text-navy" />
+                        </div>
+                        <p class="font-system-ui text-lg text-charcoal/80 leading-relaxed">
+                          {item}
+                        </p>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+
+              <!-- Nearby -->
+              <div>
+                <h3
+                  class="font-geometric-humanist text-sm text-charcoal/70 uppercase tracking-wider mb-4"
+                >
+                  A közelben
+                </h3>
+                <ul class="space-y-4">
+                  {
+                    listing.nearby.map((place) => (
+                      <li class="flex items-center gap-4">
+                        <div class="bg-navy/10 p-2 flex-shrink-0">
+                          <Store size={20} class="text-navy" />
+                        </div>
+                        <p class="font-system-ui text-lg text-charcoal/80 leading-relaxed">
+                          {place}
+                        </p>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+
+              <!-- Public Transport -->
+              <div>
+                <h3
+                  class="font-geometric-humanist text-sm text-charcoal/70 uppercase tracking-wider mb-4"
+                >
+                  Tömegközlekedés
+                </h3>
+                <ul class="space-y-4">
+                  {
+                    listing.publicTransport.map((transport) => (
+                      <li class="flex items-center gap-4">
+                        <div class="bg-navy/10 p-2 flex-shrink-0">
+                          {transport.type === "bus" ? (
+                            <Bus size={20} class="text-navy" />
+                          ) : (
+                            <Tram size={20} class="text-navy" />
+                          )}
+                        </div>
+                        <p class="font-system-ui text-lg text-charcoal/80 leading-relaxed">
+                          {transport.name}
+                        </p>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -229,49 +463,6 @@ const propertyTypeLabels: Record<string, string> = {
               >
                 {formattedPrice}
               </p>
-            </div>
-
-            <!-- Property Details Card -->
-            <div
-              class="bg-cream-soft border-2 border-taupe/30 p-8 grid grid-cols-1 lg:grid-cols-2 gap-6"
-            >
-              <div class="flex items-center gap-4">
-                <div class="bg-navy/10 p-4">
-                  <Maximize2 size={32} class="text-navy" />
-                </div>
-                <div>
-                  <p
-                    class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1"
-                  >
-                    Alapterület
-                  </p>
-                  <p class="font-old-style text-xl text-charcoal font-bold">
-                    {listing.area} m²
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex items-center gap-4">
-                <div class="bg-navy/10 p-4">
-                  {
-                    listing.propertyType === "house" ? (
-                      <House size={32} class="text-navy" />
-                    ) : (
-                      <Building2 size={32} class="text-navy" />
-                    )
-                  }
-                </div>
-                <div>
-                  <p
-                    class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1"
-                  >
-                    Típus
-                  </p>
-                  <p class="font-old-style text-xl text-charcoal font-bold">
-                    {propertyTypeLabels[listing.propertyType]}
-                  </p>
-                </div>
-              </div>
             </div>
 
             <!-- Contact Card -->
