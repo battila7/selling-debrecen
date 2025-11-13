@@ -1,7 +1,8 @@
 import listingPlaceholder from "../images/listing-placeholder.jpg";
-
 const listings = [
   {
+    id: "32",
+    slug: "elegans-csaladi-haz-a-belvarosban",
     title: "Elegáns családi ház a belvárosban",
     address: "Debrecen, Belváros, Piac utca 45.",
     price: 125000000,
@@ -13,10 +14,12 @@ const listings = [
     transactionType: "sale",
     description:
       "Kiváló elhelyezkedésű, gondosan felújított családi ház a belváros szívében. Tágas szobák, modern konyha, összkomfortos fürdőszobák. Csendes, nyugodt környezet, közel minden szolgáltatáshoz.",
-    link: "#",
+    link: "",
     extra: "Hatalmas kert",
   },
   {
+    id: "33",
+    slug: "modern-lakas-a-belvarosban",
     title: "Modern lakás a belvárosban",
     address: "Debrecen, Belváros, Egyetem tér 12.",
     price: 45000000,
@@ -28,10 +31,14 @@ const listings = [
     transactionType: "sale",
     description:
       "Kiváló elhelyezkedésű, gondosan felújított családi ház a belváros szívében. Tágas szobák, modern konyha, összkomfortos fürdőszobák. Csendes, nyugodt környezet, közel minden szolgáltatáshoz.",
-    link: "#",
+    link: "",
     extra: "Hatalmas kert",
   },
 ];
+
+listings.forEach((listing) => {
+  listing.link = `/i/${listing.id}-${listing.slug}`;
+});
 
 export function GET({ request }) {
   const u = new URL(listingPlaceholder.src, request.url);

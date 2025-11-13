@@ -1,0 +1,327 @@
+---
+import listingPlaceholder from "../../images/listing-placeholder.jpg";
+import agentProfilePicture from "../../images/agent-profile-picture-placeholder.jpg";
+import { PageLayout } from "../../layouts";
+import { Image } from "astro:assets";
+
+import MapPin from "@lucide/astro/icons/map-pin";
+import House from "@lucide/astro/icons/house";
+import Maximize2 from "@lucide/astro/icons/maximize-2";
+import Building2 from "@lucide/astro/icons/building-2";
+import Hash from "@lucide/astro/icons/hash";
+import Calendar from "@lucide/astro/icons/calendar";
+import Phone from "@lucide/astro/icons/phone";
+import Check from "@lucide/astro/icons/check";
+
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (() => {
+  const listings = [
+    {
+      id: "32",
+      slug: "elegans-csaladi-haz-a-belvarosban",
+      title: "Elegáns családi ház a belvárosban",
+      address: "Debrecen, Belváros, Piac utca 45.",
+      price: 125000000,
+      image: listingPlaceholder.src,
+      imageAlt: "Elegáns családi ház a belvárosban",
+      rooms: 5,
+      area: 180,
+      propertyType: "house",
+      transactionType: "sale",
+      description:
+        "Kiváló elhelyezkedésű, gondosan felújított családi ház a belváros szívében. Tágas szobák, modern konyha, összkomfortos fürdőszobák. Csendes, nyugodt környezet, közel minden szolgáltatáshoz.",
+      link: "",
+      extra: "Hatalmas kert",
+      checklist: ["Hatalmas kert", "Két kocsibeálló", "Boltok a közelben"],
+    },
+    {
+      id: "33",
+      slug: "modern-lakas-a-belvarosban",
+      title: "Modern lakás a belvárosban",
+      address: "Debrecen, Belváros, Egyetem tér 12.",
+      price: 45000000,
+      image: listingPlaceholder.src,
+      imageAlt: "Elegáns családi ház a belvárosban",
+      rooms: 5,
+      area: 180,
+      propertyType: "apartment",
+      transactionType: "sale",
+      description:
+        "Kiváló elhelyezkedésű, gondosan felújított családi ház a belváros szívében. Tágas szobák, modern konyha, összkomfortos fürdőszobák. Csendes, nyugodt környezet, közel minden szolgáltatáshoz.",
+      link: "",
+      extra: "Hatalmas kert",
+      checklist: ["Hatalmas kert", "Két kocsibeálló", "Boltok a közelben"],
+    },
+  ];
+
+  listings.forEach((listing) => {
+    listing.link = `/i/${listing.id}-${listing.slug}`;
+  });
+
+  return listings.map((listing) => ({
+    params: {
+      identifier: listing.id,
+      slug: listing.slug,
+    },
+    props: {
+      listing,
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  listing: {
+    id: string;
+    slug: string;
+    title: string;
+    address: string;
+    price: number;
+    image: string;
+    imageAlt: string;
+    rooms: number;
+    area: number;
+    propertyType: string;
+    transactionType: string;
+    description: string;
+    link: string;
+    extra: string;
+    checklist: string[];
+  };
+}
+
+const { listing } = Astro.props;
+
+const formattedPrice = listing.price.toLocaleString("hu-HU") + " Ft";
+
+const propertyTypeLabels: Record<string, string> = {
+  house: "Családi ház",
+  apartment: "Lakás",
+};
+
+const transactionTypeLabels: Record<string, string> = {
+  sale: "Eladó",
+  rent: "Kiadó",
+};
+---
+
+<PageLayout title={listing.title} description={listing.description}>
+  <!--
+  <section class="bg-cream-soft border-b border-taupe/30 py-6">
+    <div class="container mx-auto px-6 lg:px-12">
+      <a
+        href="/ingatlanjaink"
+        class="inline-flex items-center gap-2 text-charcoal/70 hover:text-navy transition-colors duration-500 group"
+      >
+        <ArrowLeft
+          size={18}
+          class="transition-transform duration-500 group-hover:-translate-x-1"
+        />
+        <span
+          class="font-geometric-humanist text-sm tracking-wide uppercase font-semibold"
+        >
+          Vissza az ingatlanokhoz
+        </span>
+      </a>
+    </div>
+  </section>
+  -->
+
+  <!-- Hero Image Section -->
+  <section class="bg-charcoal">
+    <div
+      class="relative w-full aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/9] lg:aspect-[21/7] overflow-hidden"
+    >
+      <img
+        src={listing.image}
+        alt={listing.imageAlt}
+        class="w-full h-full object-cover"
+      />
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="bg-cream py-16">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <!-- Left Column - Main Details -->
+        <div class="order-2 lg:order-1 lg:col-span-2 space-y-12">
+          <!-- Title and Address -->
+          <div>
+            <h1
+              class="font-old-style text-4xl md:text-5xl text-charcoal mb-6 tracking-wide leading-tight"
+            >
+              {listing.title}
+            </h1>
+            <div class="flex flex-col lg:flex-row gap-3 lg:gap-6">
+              <div class="flex items-start gap-3 text-charcoal/70">
+                <MapPin size={24} class="mt-1 flex-shrink-0" />
+                <p class="font-geometric-humanist text-lg tracking-wide">
+                  {listing.address}
+                </p>
+              </div>
+              <div class="flex items-start gap-3 text-charcoal/70">
+                <Hash size={24} class="mt-1 flex-shrink-0" />
+                <p class="font-geometric-humanist text-lg tracking-wide">
+                  Hivatkozási szám: {listing.id}
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- Divider -->
+          <div class="border-t-2 border-taupe/40"></div>
+
+          <!-- Description -->
+          <div>
+            <h2 class="font-old-style text-2xl text-charcoal tracking-wide">
+              Leírás
+            </h2>
+            <p
+              class="font-system-ui text-lg text-charcoal/80 leading-relaxed whitespace-pre-line"
+            >
+              {listing.description}
+            </p>
+          </div>
+
+          <!-- Divider -->
+          <div class="border-t-2 border-taupe/40"></div>
+
+          <!-- Key Features -->
+          <div>
+            <h2
+              class="font-old-style text-2xl text-charcoal mb-6 tracking-wide"
+            >
+              Főbb jellemzők
+            </h2>
+            <ul class="space-y-4">
+              {
+                listing.checklist.map((item) => (
+                  <li class="flex items-start gap-4">
+                    <div class="bg-navy/10 p-2 mt-0.5 flex-shrink-0">
+                      <Check size={20} class="text-navy" />
+                    </div>
+                    <p class="font-system-ui text-lg text-charcoal/80 leading-relaxed">
+                      {item}
+                    </p>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right Column - Price and Contact -->
+        <div class="order-1 lg:order-2 lg:col-span-1">
+          <div class="sticky top-20 space-y-6">
+            <!-- Price Card -->
+            <div class="bg-navy border-2 border-navy p-8">
+              <p
+                class="font-geometric-humanist text-xs text-cream/80 uppercase tracking-wider mb-3"
+              >
+                Kért ár
+              </p>
+              <p
+                class="font-old-style text-4xl text-cream font-bold tracking-wide mb-2"
+              >
+                {formattedPrice}
+              </p>
+            </div>
+
+            <!-- Property Details Card -->
+            <div
+              class="bg-cream-soft border-2 border-taupe/30 p-8 grid grid-cols-1 lg:grid-cols-2 gap-6"
+            >
+              <div class="flex items-center gap-4">
+                <div class="bg-navy/10 p-4">
+                  <Maximize2 size={32} class="text-navy" />
+                </div>
+                <div>
+                  <p
+                    class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1"
+                  >
+                    Alapterület
+                  </p>
+                  <p class="font-old-style text-xl text-charcoal font-bold">
+                    {listing.area} m²
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4">
+                <div class="bg-navy/10 p-4">
+                  {
+                    listing.propertyType === "house" ? (
+                      <House size={32} class="text-navy" />
+                    ) : (
+                      <Building2 size={32} class="text-navy" />
+                    )
+                  }
+                </div>
+                <div>
+                  <p
+                    class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1"
+                  >
+                    Típus
+                  </p>
+                  <p class="font-old-style text-xl text-charcoal font-bold">
+                    {propertyTypeLabels[listing.propertyType]}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Card -->
+            <div class="bg-cream-soft border-2 border-taupe/30 p-8 space-y-6">
+              <h3 class="font-old-style text-2xl text-charcoal tracking-wide">
+                Érdeklődés
+              </h3>
+              <p
+                class="font-system-ui text-sm text-charcoal/70 leading-relaxed"
+              >
+                Felkeltettük az érdeklődését? Keressen minket bizalommal!
+              </p>
+
+              <!-- CTA Buttons -->
+              <div class="space-y-3">
+                <a
+                  href="/idopontfoglalas"
+                  class="flex items-center justify-center gap-3 w-full px-6 py-4 bg-navy text-cream font-geometric-humanist text-sm tracking-widest uppercase font-semibold border-2 border-navy hover:bg-transparent hover:text-navy transition-colors duration-700"
+                >
+                  <Calendar size={20} />
+                  <span>Időpontfoglalás</span>
+                </a>
+
+                <a
+                  href="/kapcsolat"
+                  class="flex items-center justify-center gap-3 w-full px-6 py-4 bg-transparent text-navy font-geometric-humanist text-sm tracking-widest uppercase font-semibold border-2 border-navy hover:bg-navy hover:text-cream transition-colors duration-700"
+                >
+                  <Phone size={20} />
+                  <span>Kapcsolat</span>
+                </a>
+              </div>
+
+              <!-- Agent Info -->
+              <div class="pt-6 border-t border-taupe/40">
+                <p
+                  class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-4"
+                >
+                  Az Ön tanácsadója
+                </p>
+                <div class="flex items-center gap-4">
+                  <Image
+                    src={agentProfilePicture}
+                    alt="Kiss Zoltán"
+                    class="w-16 h-16 object-cover border-2 border-taupe/30"
+                  />
+                  <p class="font-old-style text-xl text-charcoal tracking-wide">
+                    Kiss Zoltán
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>
