@@ -2,6 +2,8 @@
 import { Image } from "astro:assets";
 import agentPlaceholder from "../../../images/agent-placeholder.jpg";
 import { HeadingCentered } from "../../common";
+
+import Links from "../../../util/links";
 ---
 
 <section class="py-20 lg:py-24 border-t border-camel/30 bg-cream-soft">
@@ -56,6 +58,14 @@ import { HeadingCentered } from "../../common";
             megoldást!
           </p>
         </div>
+      </div>
+      <div class="mt-16 text-center">
+        <a
+          href={Links.ABOUT}
+          class="inline-block px-8 py-4 bg-navy text-cream font-system-ui text-base tracking-wide uppercase border-2 border-navy hover:bg-transparent hover:text-navy transition-colors duration-700"
+        >
+          Tudjon meg többet rólunk
+        </a>
       </div>
     </div>
   </div>

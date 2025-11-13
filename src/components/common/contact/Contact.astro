@@ -3,10 +3,10 @@ import ContactCard from "./ContactCard.astro";
 import ScheduleCard from "./ScheduleCard.astro";
 import HeadingCentered from "../HeadingCentered.astro";
 
-const { ...props } = Astro.props;
+export const contactSectionId = "contact";
 ---
 
-<section class="py-20 bg-cream-soft" {...props}>
+<section class="py-20 bg-cream-soft" id={contactSectionId}>
   <div class="container mx-auto px-6 lg:px-12">
     <div class="max-w-6xl mx-auto">
       <HeadingCentered title="Lépjen kapcsolatba velünk" />
