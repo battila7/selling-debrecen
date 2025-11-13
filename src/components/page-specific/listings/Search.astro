@@ -5,6 +5,7 @@ import SearchIcon from "@lucide/astro/icons/search";
 ---
 
 <section
+  x-data="search"
   class="relative h-[32rem] md:h-[28rem] lg:h-[32rem] w-full overflow-hidden"
 >
   <div class="absolute inset-0 z-0">
@@ -50,6 +51,7 @@ import SearchIcon from "@lucide/astro/icons/search";
                     value="sale"
                     checked
                     class="peer sr-only"
+                    x-model="transactionType"
                   />
                   <span
                     class="flex items-center justify-center h-full px-4 py-4 lg:py-5 text-charcoal/60 cursor-pointer transition-all peer-checked:text-white peer-checked:bg-camel peer-checked:font-medium"
@@ -64,6 +66,7 @@ import SearchIcon from "@lucide/astro/icons/search";
                     name="transaction"
                     value="rent"
                     class="peer sr-only"
+                    x-model="transactionType"
                   />
                   <span
                     class="flex items-center justify-center h-full px-4 py-4 lg:py-5 text-charcoal/60 cursor-pointer transition-all peer-checked:text-white peer-checked:bg-camel peer-checked:font-medium"
@@ -81,6 +84,7 @@ import SearchIcon from "@lucide/astro/icons/search";
               <select
                 name="propertyType"
                 class="w-full h-full px-4 py-4 lg:py-5 text-charcoal bg-transparent border-0 focus:outline-none transition-all cursor-pointer"
+                x-model="propertyType"
               >
                 <option value="apartment">lakás</option>
                 <option value="house">ház</option>
@@ -100,6 +104,7 @@ import SearchIcon from "@lucide/astro/icons/search";
                 name="location"
                 placeholder="Helyszín"
                 class="w-full h-full px-4 py-4 lg:py-5 text-charcoal bg-transparent border-0 focus:outline-none transition-all placeholder:text-charcoal/50"
+                x-model="location"
               />
             </label>
           </div>
@@ -116,6 +121,7 @@ import SearchIcon from "@lucide/astro/icons/search";
                   inputmode="numeric"
                   pattern="[0-9]*"
                   class="w-full h-full px-2 py-4 lg:py-5 text-charcoal bg-transparent border-0 focus:outline-none transition-all placeholder:text-charcoal/50"
+                  x-model="priceMin"
                 />
               </label>
             </div>
@@ -132,11 +138,13 @@ import SearchIcon from "@lucide/astro/icons/search";
                   inputmode="numeric"
                   pattern="[0-9]*"
                   class="w-full h-full px-2 py-4 lg:py-5 text-charcoal bg-transparent border-0 focus:outline-none transition-all placeholder:text-charcoal/50"
+                  x-model="priceMax"
                 />
               </label>
             </div>
             <div
               class="flex items-center justify-center pl-1 pr-2 text-charcoal"
+              x-text="transactionType == 'sale' ? 'millió Ft' : 'ezer Ft'"
             >
               millió Ft
             </div>
@@ -149,11 +157,12 @@ import SearchIcon from "@lucide/astro/icons/search";
                 <span class="sr-only">Min.</span>
                 <input
                   type="text"
-                  name="sizeMin"
+                  name="areaMin"
                   placeholder="Min."
                   inputmode="numeric"
                   pattern="[0-9]*"
                   class="w-full h-full px-2 py-4 lg:py-5 text-charcoal bg-transparent border-0 focus:outline-none transition-all placeholder:text-charcoal/50"
+                  x-model="areaMin"
                 />
               </label>
             </div>
@@ -163,11 +172,12 @@ import SearchIcon from "@lucide/astro/icons/search";
                 <span class="sr-only">Max.</span>
                 <input
                   type="text"
-                  name="sizeMax"
+                  name="areaMax"
                   placeholder="Max."
                   inputmode="numeric"
                   pattern="[0-9]*"
                   class="w-full h-full px-2 py-4 lg:py-5 text-charcoal bg-transparent border-0 focus:outline-none transition-all placeholder:text-charcoal/50"
+                  x-model="areaMax"
                 />
               </label>
             </div>
@@ -181,9 +191,10 @@ import SearchIcon from "@lucide/astro/icons/search";
           <!-- Search Button -->
           <div class="lg:flex-none">
             <button
-              type="submit"
+              type="button"
               class="w-full lg:w-auto h-full px-8 py-4 lg:py-5 bg-navy text-white font-medium hover:bg-navy/90 focus:outline-none transition-all flex items-center justify-center gap-2"
               aria-label="Keresés"
+              @click="submitSearch"
             >
               <SearchIcon class="w-5 h-5" />
               <span class="lg:sr-only">Keresés</span>
@@ -194,3 +205,69 @@ import SearchIcon from "@lucide/astro/icons/search";
     </div>
   </div>
 </section>
+
+<script>
+  (function initSearch() {
+    document.addEventListener("alpine:init", () => {
+      Alpine.data("search", () => ({
+        transactionType: "sale",
+        propertyType: "apartment",
+        location: "",
+        priceMin: "",
+        priceMax: "",
+        areaMin: "",
+        areaMax: "",
+        isInitial: true,
+
+        init() {
+          this.submitSearch();
+
+          this.isInitial = false;
+        },
+
+        submitSearch() {
+          const query = {
+            transactionType: this.transactionType,
+            propertyType: this.propertyType,
+            location: this.location,
+            priceMin: this.toPrice(this.priceMin) ?? 0,
+            priceMax: this.toPrice(this.priceMax) ?? Number.MAX_SAFE_INTEGER,
+            areaMin: this.toArea(this.areaMin) ?? 0,
+            areaMax: this.toArea(this.areaMax) ?? Number.MAX_SAFE_INTEGER,
+            isInitial: this.isInitial,
+          };
+
+          console.log("search query");
+          console.log(query);
+
+          this.$dispatch("search", query);
+        },
+
+        toPrice(value: string) {
+          const valueNumber = this.toNumberOrMissing(value);
+
+          if (!valueNumber) {
+            return null;
+          }
+
+          return valueNumber * this.priceMultiplier;
+        },
+
+        toArea(value: string) {
+          return this.toNumberOrMissing(value);
+        },
+
+        get priceMultiplier() {
+          return this.transactionType == "sale" ? 1000000 : 1000;
+        },
+
+        toNumberOrMissing(value: string) {
+          if (value === "") {
+            return null;
+          }
+          return Number(value);
+        },
+      }));
+    });
+  })();
+</script>

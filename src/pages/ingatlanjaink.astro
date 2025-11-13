@@ -1,36 +1,102 @@
 ---
 import { PageLayout } from "../layouts";
-import { Search, ListingCard } from "../components/page-specific/listings";
-import type { Listing } from "../components/page-specific/listings/ListingCard.astro";
-import listingPlaceholder from "../images/listing-placeholder.jpg";
-
-// Example listing data
-const exampleListing: Listing = {
-  title: "Elegáns családi ház a belvárosban",
-  address: "Debrecen, Belváros, Piac utca 45.",
-  price: "125.000.000 Ft",
-  image: listingPlaceholder.src,
-  rooms: 5,
-  area: 180,
-  propertyType: "Családi ház",
-  listingType: "Eladó",
-  description:
-    "Kiváló elhelyezkedésű, gondosan felújított családi ház a belváros szívében. Tágas szobák, modern konyha, összkomfortos fürdőszobák. Csendes, nyugodt környezet, közel minden szolgáltatáshoz.",
-  link: "#",
-};
+import {
+  Search,
+  ListingCardAlpine,
+} from "../components/page-specific/listings";
 ---
 
-<PageLayout title="Ingatlanok" description="Ingatlanok Debrecenben">
+<PageLayout
+  x-data="listings"
+  @search.window="performSearch($event.detail)"
+  title="Ingatlanok"
+  description="Ingatlanok Debrecenben"
+>
   <Search />
 
   <!-- Example listing card -->
-  <section class="py-16 bg-cream">
+  <section x-ref="listingContainer" class="py-16 bg-cream">
     <div class="container mx-auto px-6 lg:px-12">
       <div class="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <ListingCard listing={exampleListing} />
-        <ListingCard listing={exampleListing} />
-        <ListingCard listing={exampleListing} />
+        <template x-for="listing in filteredListings">
+          <ListingCardAlpine clientSideListingProp="listing" />
+        </template>
       </div>
     </div>
   </section>
+
+  <script>
+    (function initListingSearch() {
+      type SearchQuery = {
+        transactionType: string;
+        propertyType: string;
+        location: string;
+        priceMin: number;
+        priceMax: number;
+        areaMin: number;
+        areaMax: number;
+        isInitial: boolean;
+      };
+
+      async function fetchListings() {
+        const response = await fetch("/listings.json");
+        const data = await response.json();
+        return data.listings;
+      }
+
+      document.addEventListener("alpine:init", () => {
+        Alpine.data("listings", () => ({
+          listings: [],
+          query: null,
+
+          async init() {
+            this.listings = await fetchListings();
+            this.$watch("query", () => void this.filteredListings);
+          },
+
+          performSearch(query: SearchQuery) {
+            console.log("search perform");
+            console.log(query);
+
+            this.query = query;
+
+            if (!this.query.isInitial) {
+              this.$refs.listingContainer.scrollIntoView(true);
+            }
+          },
+
+          get filteredListings() {
+            if (!this.query) {
+              return [];
+            }
+
+            let filtered = this.listings.filter(
+              (l) => l.transactionType === this.query.transactionType,
+            );
+
+            filtered = filtered.filter(
+              (l) => l.propertyType === this.query.propertyType,
+            );
+
+            filtered = filtered.filter((l) =>
+              l.address.includes(this.query.location),
+            );
+
+            filtered = filtered.filter(
+              (l) =>
+                l.price >= this.query.priceMin &&
+                l.price <= this.query.priceMax,
+            );
+
+            filtered = filtered.filter(
+              (l) =>
+                l.area >= this.query.areaMin && l.area <= this.query.areaMax,
+            );
+
+            return filtered;
+          },
+        }));
+      });
+    })();
+  </script>
 </PageLayout>

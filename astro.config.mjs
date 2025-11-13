@@ -5,6 +5,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 import sitemap from "@astrojs/sitemap";
 
+import alpinejs from "@astrojs/alpinejs";
+
 export default defineConfig({
   vite: {
     // Minification breaks the container class
@@ -18,6 +20,7 @@ export default defineConfig({
       HTML: false,
       JavaScript: false,
     }),
+    alpinejs(),
   ],
   compressHTML: false,
   output: "static",

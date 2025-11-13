@@ -1,0 +1,154 @@
+---
+import MapPin from "@lucide/astro/icons/map-pin";
+import House from "@lucide/astro/icons/house";
+import Maximize2 from "@lucide/astro/icons/maximize-2";
+
+interface Props {
+  clientSideListingProp: string;
+}
+
+const { clientSideListingProp } = Astro.props;
+---
+
+<article
+  x-data=`{
+    listing: ${clientSideListingProp},
+    get formattedPrice() {
+      return this.listing.price.toLocaleString('hu-HU') + ' Ft';
+    }
+  }
+  `
+  class="bg-cream-soft border-2 border-taupe/30 transition-all duration-700 hover:border-navy/40 group"
+>
+  <!-- Image Section -->
+  <a
+    x-bind:href="listing.link"
+    class="block relative overflow-hidden aspect-[16/10]"
+  >
+    <img
+      x-bind:src="listing.image"
+      x-bind:alt="listing.imageAlt ?? listing.title"
+      class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+    />
+
+    <!-- Badges Container -->
+    <div class="absolute top-0 left-0">
+      <div class="bg-navy px-4 py-2 flex flex-row gap-2 items-center">
+        <span
+          class="font-geometric-humanist text-xs text-cream tracking-widest uppercase font-semibold"
+          x-text="listing.transactionType"
+        >
+        </span>
+        <span
+          class="font-geometric-humanist text-xs text-cream tracking-widest uppercase font-semibold"
+          x-text="listing.propertyType"
+        >
+        </span>
+      </div>
+    </div>
+
+    <div x-show="listing.extra" class="absolute bottom-0 left-0">
+      <div class="bg-camel px-4 py-2 flex flex-row gap-2 items-center">
+        <span
+          x-text="listing.extra"
+          class="font-geometric-humanist text-xs text-cream tracking-widest uppercase font-semibold"
+        >
+        </span>
+      </div>
+    </div>
+  </a>
+
+  <!-- Content Section -->
+  <div class="p-5">
+    <!-- Title and Address -->
+    <a x-bind:href="listing.link" class="block mb-4">
+      <h3
+        class="font-old-style text-xl text-charcoal mb-2 tracking-wide transition-colors duration-500 group-hover:text-navy"
+        x-text="listing.title"
+      >
+      </h3>
+      <div class="flex items-start gap-2 text-charcoal/70">
+        <MapPin size={16} class="mt-0.5 flex-shrink-0" />
+        <p
+          class="font-geometric-humanist text-sm tracking-wide"
+          x-text="listing.address"
+        >
+        </p>
+      </div>
+    </a>
+
+    <!-- Divider -->
+    <div class="border-t border-taupe/40 mb-4"></div>
+
+    <!-- Property Details Grid -->
+    <div class="grid grid-cols-2 gap-4 mb-4">
+      <div x-show="listing.rooms" class="flex items-center gap-2.5">
+        <div class="bg-taupe/20 p-2">
+          <House size={20} class="text-navy" />
+        </div>
+        <div>
+          <p
+            class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider"
+          >
+            Szobák
+          </p>
+          <p
+            class="font-old-style text-lg text-charcoal font-semibold"
+            x-text="listing.rooms"
+          >
+          </p>
+        </div>
+      </div>
+      <div x-show="listing.area" class="flex items-center gap-2.5">
+        <div class="bg-taupe/20 p-2">
+          <Maximize2 size={20} class="text-navy" />
+        </div>
+        <div>
+          <p
+            class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider"
+          >
+            Terület
+          </p>
+          <p
+            class="font-old-style text-lg text-charcoal font-semibold"
+            x-text="listing.area + ' m²'"
+          >
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Description (if available) -->
+    <p
+      class="font-system-ui text-sm text-charcoal/70 leading-relaxed mb-4 line-clamp-2"
+      x-text="listing.description"
+    >
+    </p>
+
+    <!-- Divider -->
+    <div class="border-t border-taupe/40 mb-4"></div>
+
+    <!-- Price and CTA -->
+    <div class="flex items-center justify-between">
+      <div>
+        <p
+          class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1"
+        >
+          Ár
+        </p>
+        <p
+          class="font-old-style text-2xl text-navy font-bold tracking-wide"
+          x-text="formattedPrice"
+        >
+        </p>
+      </div>
+
+      <a
+        x-bind:href="listing.link"
+        class="inline-block px-5 py-2.5 bg-navy text-cream font-geometric-humanist text-xs tracking-widest uppercase font-semibold border-2 border-navy hover:bg-transparent hover:text-navy transition-colors duration-700"
+      >
+        Részletek
+      </a>
+    </div>
+  </div>
+</article>
