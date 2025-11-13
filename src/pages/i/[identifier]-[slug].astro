@@ -24,6 +24,7 @@ import Layers from "@lucide/astro/icons/layers";
 import Store from "@lucide/astro/icons/store";
 import Bus from "@lucide/astro/icons/bus";
 import Tram from "@lucide/astro/icons/tram-front";
+import FileDown from "@lucide/astro/icons/file-down";
 import { Carousel } from "../../components/page-specific/listing-detail";
 
 import type { GetStaticPaths } from "astro";
@@ -148,6 +149,7 @@ interface Props {
     terraceArea?: number;
     gardenArea?: number;
     floor?: number;
+    floorPlanLink?: string;
     propertyType: string;
     transactionType: string;
     description: string;
@@ -351,7 +353,9 @@ const propertyTypeLabels: Record<string, string> = {
 
           <!-- Description -->
           <div>
-            <h2 class="font-old-style text-2xl text-charcoal tracking-wide">
+            <h2
+              class="font-old-style text-2xl text-charcoal tracking-wide mb-6"
+            >
               Leírás
             </h2>
             <p
@@ -446,6 +450,36 @@ const propertyTypeLabels: Record<string, string> = {
               </div>
             </div>
           </div>
+
+          {
+            listing.floorPlanLink && (
+              <Fragment>
+                <div class="border-t-2 border-taupe/40" />
+
+                <a
+                  href={listing.floorPlanLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                  class="group block bg-cream-soft border-2 border-navy/20 p-8 hover:border-navy hover:bg-navy transition-all duration-700"
+                >
+                  <div class="flex items-center gap-6">
+                    <div class="flex-shrink-0 p-4 bg-navy/10 group-hover:bg-cream transition-colors duration-700">
+                      <FileDown class="w-8 h-8 text-navy" />
+                    </div>
+                    <div>
+                      <h3 class="font-old-style text-2xl text-navy group-hover:text-cream mb-2 tracking-wide transition-colors duration-700">
+                        Alaprajz letöltése
+                      </h3>
+                      <p class="font-system-ui text-sm text-charcoal/70 group-hover:text-cream/90 leading-relaxed transition-colors duration-700">
+                        Töltse le az ingatlan alaprajzát ide kattintva.
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              </Fragment>
+            )
+          }
         </div>
 
         <!-- Right Column - Price and Contact -->
