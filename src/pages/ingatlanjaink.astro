@@ -1,5 +1,7 @@
 ---
 import { PageLayout } from "../layouts";
+import { Contact } from "../components/common";
+
 import {
   Search,
   ListingCardAlpine,
@@ -93,7 +95,7 @@ import MessageCircle from "@lucide/astro/icons/message-circle";
 
             <!-- Contact Card -->
             <a
-              href="/idopontfoglalas"
+              href="#contact"
               class="group cursor-pointer block text-left bg-cream-soft border-2 border-navy/20 p-8 hover:border-navy hover:bg-navy transition-all duration-700"
             >
               <div class="flex items-start gap-4">
@@ -156,6 +158,8 @@ import MessageCircle from "@lucide/astro/icons/message-circle";
       </div>
     </div>
   </section>
+
+  <Contact id="contact" />
 
   <script>
     (function initListingSearch() {
