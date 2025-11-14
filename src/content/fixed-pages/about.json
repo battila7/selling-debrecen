@@ -1,0 +1,68 @@
+{
+  "hu": {
+    "title": "Rólunk",
+    "subtitle": "Helyi szakértelem, személyes figyelem, megbízható szolgáltatás",
+    "titleImage": "src/assets/images/for-buyers.jpg",
+    "storyTitle": "A mi történetünk",
+    "storyDescription": "Több mint egy évtizede vagyunk jelen Debrecen ingatlanpiacán. Amit egyszerű küldetéssel indítottunk – segíteni az embereknek megtalálni álmaik otthonát – mára a helyi ingatlanközvetítés egyik legmegbízhatóbb nevévé vált.",
+    "valuesTitle": "Értékeink",
+    "valuesSubtitle": "Amiben hiszünk",
+    "valuesDescription": "Ezek az alapelvek vezetnek minket minden nap, minden ügyletben.",
+    "valuesItems": [
+      {
+        "title": "Személyes figyelem",
+        "description": "Minden ügyfél egyedi, minden helyzet más. Időt szánunk arra, hogy megértsük az Ön igényeit, és személyre szabott megoldásokat kínáljunk. Nem számok vagyunk, hanem partnerek az Ön otthonteremtésében.",
+        "icon": "Heart"
+      },
+      {
+        "title": "Szakmai kiválóság",
+        "description": "Folyamatosan képezzük magunkat, hogy mindig naprakészek legyünk a piaci trendekkel, jogi szabályozásokkal és a legjobb gyakorlatokkal. Szakértelmünk garantálja, hogy minden ügylet gördülékenyen és biztonságosan zárul.",
+        "icon": "Award"
+      }
+    ]
+  },
+  "en": {
+    "title": "About us",
+    "subtitle": "Local expertise, personal attention, reliable service",
+    "titleImage": "src/assets/images/for-buyers.jpg",
+    "storyTitle": "Our story",
+    "storyDescription": "We have been present on the Debrecen real estate market for more than a decade. With a simple mission of helping people find their dream home, we have become one of the most reliable names in local real estate brokerage.",
+    "valuesTitle": "Our values",
+    "valuesSubtitle": "What we believe in",
+    "valuesDescription": "These are the principles that guide us every day, in every transaction.",
+    "valuesItems": [
+      {
+        "title": "Personal attention",
+        "description": "Every client is unique, every situation is different. We spend time understanding your needs and offering personalized solutions. We are not numbers, but partners in your home-building journey.",
+        "icon": "Heart"
+      },
+      {
+        "title": "Professional excellence",
+        "description": "We continuously train ourselves to be up-to-date with market trends, legal regulations, and best practices. Our expertise ensures that every transaction flows smoothly and securely.",
+        "icon": "Award"
+      }
+    ]
+  },
+  "de": {
+    "title": "Über uns",
+    "subtitle": "Lokale Expertise, persönliche Aufmerksamkeit, zuverlässige Service",
+    "titleImage": "src/assets/images/for-buyers.jpg",
+    "storyTitle": "Unsere Geschichte",
+    "storyDescription": "Wir haben mehr als eine Dekade auf dem Debrecen Immobilienmarkt präsent. Mit einer einfachen Mission, Menschen zu helfen, ihren Traumhaus zu finden, sind wir zu einer der zuverlässigsten Namen in der lokalen Immobilienvermittlung geworden.",
+    "valuesTitle": "Unsere Werte",
+    "valuesSubtitle": "Was wir glauben",
+    "valuesDescription": "Dies sind die Prinzipien, die uns jeden Tag leiten, in jeder Transaktion.",
+    "valuesItems": [
+      {
+        "title": "Persönliche Aufmerksamkeit",
+        "description": "Jeder Kunde ist einzigartig, jede Situation ist anders. Wir investieren Zeit, um Ihre Bedürfnisse zu verstehen und persönliche Lösungen anzubieten. Wir sind keine Zahlen, sondern Partner in Ihrer Wohnungsbaustelle.",
+        "icon": "Heart"
+      },
+      {
+        "title": "Professionelle Excellence",
+        "description": "Wir trainieren uns ständig, um mit den Markttrends, Rechtsvorschriften und besten Praktiken auf dem neuesten Stand zu bleiben. Unsere Expertise garantiert, dass jede Transaktion reibungslos und sicher abläuft.",
+        "icon": "Award"
+      }
+    ]
+  }
+}

@@ -1,15 +1,31 @@
 ---
 import { PageLayout } from "../../../layouts";
 import { Picture } from "astro:assets";
-import aboutHeroBg from "../../../images/for-buyers.jpg";
 import agentProfile from "../../../images/agent-profile-picture-placeholder.jpg";
 import ctaBg from "../../../images/hero-background.jpg";
-import { HeadingCentered, HeadingLeftAligned, Contact } from "../../common";
+import {
+  HeadingCentered,
+  HeadingLeftAligned,
+  Contact,
+  Prose,
+} from "../../common";
 
 import Heart from "@lucide/astro/icons/heart";
 import Award from "@lucide/astro/icons/award";
 import Users from "@lucide/astro/icons/users";
 import TrendingUp from "@lucide/astro/icons/trending-up";
+
+import { useI18n } from "../../../i18n/framework";
+import data from "../../../content/fixed-pages/about.json";
+import Assets from "../../../util/assets";
+import { icons } from "@lucide/astro";
+
+const { lang } = useI18n(Astro);
+const localizedData = data[lang as keyof typeof data];
+
+localizedData.valuesItems.forEach((item) => {
+  item.IconSvg = icons[item.icon as keyof typeof icons];
+});
 ---
 
 <PageLayout title="Rólunk" description="Rólunk">
@@ -19,7 +35,7 @@ import TrendingUp from "@lucide/astro/icons/trending-up";
   >
     <div class="absolute inset-0 z-0">
       <Picture
-        src={aboutHeroBg}
+        src={Assets.getImage(localizedData.titleImage)}
         alt=""
         formats={["webp"]}
         class="w-full h-full object-cover"
@@ -35,10 +51,10 @@ import TrendingUp from "@lucide/astro/icons/trending-up";
           <h1
             class="font-didone text-3xl md:text-4xl lg:text-5xl text-white tracking-wide mb-3 uppercase"
           >
-            Rólunk
+            {localizedData.title}
           </h1>
           <p class="text-white/90 text-base md:text-lg">
-            Helyi szakértelem, személyes figyelem, megbízható szolgáltatás
+            {localizedData.subtitle}
           </p>
         </hgroup>
       </div>
@@ -49,29 +65,11 @@ import TrendingUp from "@lucide/astro/icons/trending-up";
   <section class="py-20 bg-cream-soft border-t border-taupe/20">
     <div class="container mx-auto px-6 lg:px-12">
       <div class="max-w-4xl mx-auto">
-        <HeadingCentered title="A mi történetünk" />
-        <div class="prose prose-xl max-w-none space-y-6">
-          <p class="text-charcoal leading-relaxed">
-            Több mint egy évtizede vagyunk jelen Debrecen ingatlanpiacán. Amit
-            egyszerű küldetéssel indítottunk – segíteni az embereknek megtalálni
-            álmaik otthonát – mára a helyi ingatlanközvetítés egyik
-            legmegbízhatóbb nevévé vált.
-          </p>
-          <p class="text-charcoal leading-relaxed">
-            Munkánk során több száz családnak segítettünk új otthonhoz jutni, és
-            ugyanannyi eladónak biztosítottunk professzionális, átlátható
-            értékesítési folyamatot. Ez a tapasztalat megtanított minket arra,
-            hogy az ingatlanügylet nem csupán egy tranzakció – ez az életük egy
-            fontos állomása, amely megérdemli a teljes odafigyelést és
-            szakértelmet.
-          </p>
-          <p class="text-charcoal leading-relaxed">
-            Debrecent nemcsak munkaterületként, hanem otthonként is ismerjük.
-            Minden utcát, minden kerületet, minden lehetőséget. Ez a mély helyi
-            ismeret teszi lehetővé, hogy ügyfeleinknek ne csak ingatlanokat,
-            hanem életminőséget közvetítsünk.
-          </p>
-        </div>
+        <HeadingCentered title={localizedData.storyTitle} />
+        <Prose
+          class="prose-xl text-charcoal max-w-none space-y-6"
+          content={localizedData.storyDescription}
+        />
       </div>
     </div>
   </section>
@@ -81,107 +79,28 @@ import TrendingUp from "@lucide/astro/icons/trending-up";
     <div class="container mx-auto px-6 lg:px-12">
       <div class="max-w-6xl mx-auto">
         <HeadingLeftAligned
-          title="Értékeink"
-          subtitle="Amiben hiszünk"
-          description="Ezek az alapelvek vezetnek minket minden nap, minden ügyletben."
+          title={localizedData.valuesTitle}
+          subtitle={localizedData.valuesSubtitle}
+          description={localizedData.valuesDescription}
           titleColor="text-navy"
           descriptionColor="text-charcoal"
         />
         <div class="grid md:grid-cols-2 gap-8">
-          <!-- Value 1 -->
-          <div
-            class="bg-cream-soft p-8 border border-taupe/20 group hover:border-camel/40 transition-colors duration-300"
-          >
-            <div
-              class="flex items-center justify-center w-16 h-16 bg-navy/5 mb-6"
-            >
-              <Heart
-                class="w-8 h-8 text-navy"
-                stroke-width="1.5"
-                aria-hidden="true"
-              />
-            </div>
-            <h3 class="font-old-style text-2xl text-navy mb-4">
-              Személyes figyelem
-            </h3>
-            <p class="text-charcoal-dark leading-relaxed">
-              Minden ügyfél egyedi, minden helyzet más. Időt szánunk arra, hogy
-              megértsük az Ön igényeit, és személyre szabott megoldásokat
-              kínáljunk. Nem számok vagyunk, hanem partnerek az Ön
-              otthonteremtésében.
-            </p>
-          </div>
-
-          <!-- Value 2 -->
-          <div
-            class="bg-cream-soft p-8 border border-taupe/20 group hover:border-camel/40 transition-colors duration-300"
-          >
-            <div
-              class="flex items-center justify-center w-16 h-16 bg-navy/5 mb-6"
-            >
-              <Award
-                class="w-8 h-8 text-navy"
-                stroke-width="1.5"
-                aria-hidden="true"
-              />
-            </div>
-            <h3 class="font-old-style text-2xl text-navy mb-4">
-              Szakmai kiválóság
-            </h3>
-            <p class="text-charcoal-dark leading-relaxed">
-              Folyamatosan képezzük magunkat, hogy mindig naprakészek legyünk a
-              piaci trendekkel, jogi szabályozásokkal és a legjobb
-              gyakorlatokkal. Szakértelmünk garantálja, hogy minden ügylet
-              gördülékenyen és biztonságosan zárul.
-            </p>
-          </div>
-
-          <!-- Value 3 -->
-          <div
-            class="bg-cream-soft p-8 border border-taupe/20 group hover:border-camel/40 transition-colors duration-300"
-          >
-            <div
-              class="flex items-center justify-center w-16 h-16 bg-navy/5 mb-6"
-            >
-              <Users
-                class="w-8 h-8 text-navy"
-                stroke-width="1.5"
-                aria-hidden="true"
-              />
-            </div>
-            <h3 class="font-old-style text-2xl text-navy mb-4">
-              Őszinteség és átláthatóság
-            </h3>
-            <p class="text-charcoal-dark leading-relaxed">
-              Nyíltan kommunikálunk, reális elvárásokat közvetítünk, és soha nem
-              ígérünk lehetetlent. Az őszinteség és a bizalom a hosszú távú
-              kapcsolatok alapja – ezt minden nap bizonyítjuk ügyfeleink felé.
-            </p>
-          </div>
-
-          <!-- Value 4 -->
-          <div
-            class="bg-cream-soft p-8 border border-taupe/20 group hover:border-camel/40 transition-colors duration-300"
-          >
-            <div
-              class="flex items-center justify-center w-16 h-16 bg-navy/5 mb-6"
-            >
-              <TrendingUp
-                class="w-8 h-8 text-navy"
-                stroke-width="1.5"
-                aria-hidden="true"
-              />
-            </div>
-            <h3 class="font-old-style text-2xl text-navy mb-4">
-              Eredményesség
-            </h3>
-            <p class="text-charcoal-dark leading-relaxed">
-              A cél nem csupán eladni vagy vásárolni, hanem a lehető legjobb
-              eredményt elérni ügyfeleink számára. Hatékony marketingstratégiák,
-              ügyes tárgyalástechnikák és megfelelő időzítés – minden eszközt
-              bevetünk a siker érdekében.
-            </p>
-          </div>
+          {
+            localizedData.valuesItems.map(({ title, description, IconSvg }) => (
+              <div class="bg-cream-soft p-8 border border-taupe/20 group hover:border-camel/40 transition-colors duration-300">
+                <div class="flex items-center justify-center w-16 h-16 bg-navy/5 mb-6">
+                  <IconSvg
+                    class="w-8 h-8 text-navy"
+                    stroke-width="1.5"
+                    aria-hidden="true"
+                  />
+                </div>
+                <h3 class="font-old-style text-2xl text-navy mb-4">{title}</h3>
+                <p class="text-charcoal-dark leading-relaxed">{description}</p>
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>

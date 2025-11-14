@@ -98,3 +98,57 @@ collections:
           label: "Cta kép"
           widget: "image"
           i18n: duplicate
+    - label: "Rólunk"
+      name: "about"
+      file: "src/content/fixed-pages/about.json"
+      i18n: true
+      fields:
+        - name: "title"
+          label: "Cím"
+          widget: "string"
+          i18n: true
+        - name: "subtitle"
+          label: "Alcím"
+          widget: "string"
+          i18n: true
+        - name: "titleImage"
+          label: "Cím kép"
+          widget: "image"
+          i18n: duplicate
+        - name: "storyTitle"
+          label: "Történet cím"
+          widget: "string"
+          i18n: true
+        - name: "storyDescription"
+          label: "Történet leírás"
+          widget: "markdown"
+          i18n: true
+        - name: "valuesTitle"
+          label: "Értékeink cím"
+          widget: "string"
+          i18n: true
+        - name: "valuesSubtitle"
+          label: "Értékeink alcím"
+          widget: "string"
+          i18n: true
+        - name: "valuesDescription"
+          label: "Értékeink leírás"
+          widget: "text"
+          i18n: true
+        - name: "valuesItems"
+          label: "Értékeink elemei"
+          widget: "list"
+          i18n: true
+          fields:
+            - name: "title"
+              label: "Cím"
+              widget: "string"
+              i18n: true
+            - name: "description"
+              label: "Leírás"
+              widget: "text"
+              i18n: true
+            - name: "icon"
+              label: "Ikon"
+              widget: "string"
+              i18n: duplicate
