@@ -17,10 +17,84 @@ public_folder: "src/assets/images"
 
 
 i18n:
-  structure: multipl_folders
+  structure: multiple_folders
   locales: [hu, en, de]
   default_locale: hu
 
 collections:
-- name: "general"
-  label: "Általános beállítások"
+- name: "fixed-pages"
+  label: "Kötött oldalak"
+  i18n:
+    structure: single_file
+    locales: [hu, en, de]
+  files:
+    - label: "Kínálóknak"
+      name: "for-sellers"
+      file: "src/content/fixed-pages/for-sellers.json"
+      i18n: true
+      fields:
+        - name: "title"
+          label: "Cím"
+          widget: "string"
+          i18n: true
+        - name: "subtitle"
+          label: "Alcím"
+          widget: "string"
+          i18n: true
+        - name: "titleImage"
+          label: "Cím kép"
+          widget: "image"
+          i18n: duplicate
+        - name: "whyChooseUsTitle"
+          label: "Miért válasszon minket? cím"
+          widget: "string"
+          i18n: true
+        - name: "whyChooseUsDescription"
+          label: "Miért válasszon minket? leírás"
+          widget: "markdown"
+          i18n: true
+        - name: "servicesTitle"
+          label: "Szolgáltatásaink cím"
+          widget: "string"
+          i18n: true
+        - name: "servicesSubtitle"
+          label: "Szolgáltatásaink alcím"
+          widget: "string"
+          i18n: true
+        - name: "servicesDescription"
+          label: "Szolgáltatásaink leírás"
+          widget: "markdown"
+          i18n: true
+        - name: "servicesItems"
+          label: "Szolgáltatásaink elemei"
+          widget: "list"
+          i18n: true
+          fields:
+            - name: "title"
+              label: "Cím"
+              widget: "string"
+              i18n: true
+            - name: "description"
+              label: "Leírás"
+              widget: "text"
+              i18n: true
+            - name: "icon"
+              label: "Ikon"
+              widget: "string"
+              i18n: duplicate
+        - name: "ctaTitle"
+          label: "Cta cím"
+          widget: "string"
+          i18n: true
+        - name: "ctaDescription"
+          label: "Cta leírás"
+          widget: "text0"
+          i18n: true
+        - name: "ctaButtonText"
+          label: "Cta gomb szövege"
+          widget: "string"
+          i18n: true
+        - name: "ctaImage"
+          label: "Cta kép"
+          widget: "image"
+          i18n: duplicate

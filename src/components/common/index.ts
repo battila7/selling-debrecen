@@ -6,3 +6,4 @@ export { default as Footer } from "./Footer.astro";
 export { default as HeadingCentered } from "./HeadingCentered.astro";
 export { default as HeadingLeftAligned } from "./HeadingLeftAligned.astro";
 export { default as LanguageSelector } from "./LanguageSelector.astro";
+export { default as Prose } from "./Prose.astro";

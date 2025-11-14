@@ -1,13 +1,23 @@
 ---
 import { PageLayout } from "../../../layouts";
 import { Picture } from "astro:assets";
-import forSellersBg from "../../../images/for-sellers.jpg";
-import listingsBg2 from "../../../images/work-with-us.jpg";
-import { HeadingCentered, HeadingLeftAligned, Contact } from "../../common";
-import Search from "@lucide/astro/icons/search";
-import MapPin from "@lucide/astro/icons/map-pin";
-import Shield from "@lucide/astro/icons/shield";
-import Key from "@lucide/astro/icons/key";
+import {
+  HeadingCentered,
+  HeadingLeftAligned,
+  Contact,
+  Prose,
+} from "../../common";
+import { icons } from "@lucide/astro";
+import { useI18n } from "../../../i18n/framework";
+import data from "../../../content/fixed-pages/for-sellers.json";
+import Assets from "../../../util/assets";
+
+const { lang } = useI18n(Astro);
+const localizedData = data[lang as keyof typeof data];
+
+localizedData.servicesItems.forEach((item) => {
+  item.IconSvg = icons[item.icon as keyof typeof icons];
+});
 ---
 
 <PageLayout title="Kinalóknak" description="Kinalóknak">
@@ -17,7 +27,7 @@ import Key from "@lucide/astro/icons/key";
   >
     <div class="absolute inset-0 z-0">
       <Picture
-        src={forSellersBg}
+        src={Assets.getImage(localizedData.titleImage)}
         alt=""
         formats={["webp"]}
         class="w-full h-full object-cover"
@@ -33,10 +43,10 @@ import Key from "@lucide/astro/icons/key";
           <h1
             class="font-didone text-3xl md:text-4xl lg:text-5xl text-white tracking-wide mb-3 uppercase"
           >
-            Eladná vagy bérbe adna?
+            {localizedData.title}
           </h1>
           <p class="text-white/90 text-base md:text-lg">
-            Segítünk Önnek eladni vagy bérbe adni ingatlanát Debrecenben.
+            {localizedData.subtitle}
           </p>
         </hgroup>
       </div>
@@ -47,25 +57,11 @@ import Key from "@lucide/astro/icons/key";
   <section class="py-20 bg-cream-soft border-t border-taupe/20">
     <div class="container mx-auto px-6 lg:px-12">
       <div class="max-w-4xl mx-auto">
-        <HeadingCentered title="Miért válasszon minket?" />
-        <div class="prose prose-xl max-w-none">
-          <p class="text-charcoal">
-            Az otthonteremtés életre szóló döntés, amely meghatározza
-            mindennapjainkat. Szakértelmünkkel és helyi ismereteinkkel segítünk
-            megtalálni azt az ingatlant, amely tökéletesen illeszkedik az Ön
-            életviteléhez és elképzeléseihez.
-          </p>
-          <p class="text-charcoal">
-            Debrecen minden szegletét ismerjük: a csendes, családbarát
-            kerületektől a pezsgő belvárosig. Mindez lehetővé teszi, hogy ne
-            csak ingatlant, hanem otthont találjunk Önnek.
-          </p>
-          <p class="text-charcoal">
-            Célunk, hogy a vásárlás folyamata átlátható, biztonságos és
-            gördülékeny legyen. Minden lépésben mellette állunk, hogy
-            magabiztosan hozhassa meg élete egyik legfontosabb döntését.
-          </p>
-        </div>
+        <HeadingCentered title={localizedData.whyChooseUsTitle} />
+        <Prose
+          class="prose prose-xl max-w-none text-charcoal"
+          content={localizedData.whyChooseUsDescription}
+        />
       </div>
     </div>
   </section>
@@ -75,105 +71,32 @@ import Key from "@lucide/astro/icons/key";
     <div class="container mx-auto px-6 lg:px-12">
       <div class="max-w-6xl mx-auto">
         <HeadingLeftAligned
-          title="Szolgáltatásaink"
-          subtitle="Amit kínálunk"
-          description="Professzionális támogatás minden lépésben az otthonkeresés folyamatában."
+          title={localizedData.servicesTitle}
+          subtitle={localizedData.servicesSubtitle}
+          description={localizedData.servicesDescription}
           titleColor="text-navy"
           descriptionColor="text-charcoal"
         />
         <div class="grid md:grid-cols-2 gap-8">
-          <!-- Service 1 -->
-          <div
-            class="bg-navy p-8 border border-navy/10 group hover:border-camel/30 transition-colors duration-300"
-          >
-            <div
-              class="flex items-center justify-center w-16 h-16 bg-camel/10 mb-6"
-            >
-              <Search
-                class="w-8 h-8 text-camel"
-                stroke-width="1.5"
-                aria-hidden="true"
-              />
-            </div>
-            <h3 class="font-old-style text-2xl text-cream mb-4">
-              Személyre szabott keresés
-            </h3>
-            <p class="text-cream-soft leading-relaxed">
-              Alaposan megismerjük igényeit, majd átfogó keresést végzünk az Ön
-              számára legmegfelelőbb ingatlanok felkutatására. Csak olyan
-              ingatlanokat mutatunk be, amelyek valóban megfelelnek
-              elvárásainak.
-            </p>
-          </div>
-
-          <!-- Service 2 -->
-          <div
-            class="bg-navy p-8 border border-navy/10 group hover:border-camel/30 transition-colors duration-300"
-          >
-            <div
-              class="flex items-center justify-center w-16 h-16 bg-camel/10 mb-6"
-            >
-              <MapPin
-                class="w-8 h-8 text-camel"
-                stroke-width="1.5"
-                aria-hidden="true"
-              />
-            </div>
-            <h3 class="font-old-style text-2xl text-cream mb-4">
-              Környék és infrastruktúra
-            </h3>
-            <p class="text-cream-soft leading-relaxed">
-              Részletes információkat szolgáltatunk a környékről: iskolák,
-              óvodák, közlekedési lehetőségek, bevásárlóhelyek. Helyi
-              ismereteink révén valós képet kaphat a mindennapi életről.
-            </p>
-          </div>
-
-          <!-- Service 3 -->
-          <div
-            class="bg-navy p-8 border border-navy/10 group hover:border-camel/30 transition-colors duration-300"
-          >
-            <div
-              class="flex items-center justify-center w-16 h-16 bg-camel/10 mb-6"
-            >
-              <Shield
-                class="w-8 h-8 text-camel"
-                stroke-width="1.5"
-                aria-hidden="true"
-              />
-            </div>
-            <h3 class="font-old-style text-2xl text-cream mb-4">
-              Biztonságos vásárlás
-            </h3>
-            <p class="text-cream-soft leading-relaxed">
-              Teljes körű ellenőrzést végzünk: dokumentumok átvilágítása, jogi
-              háttér vizsgálata, értékbecslés. Gondoskodunk róla, hogy minden
-              szempontból nyugodt szívvel hozhassa meg döntését.
-            </p>
-          </div>
-
-          <!-- Service 4 -->
-          <div
-            class="bg-navy p-8 border border-navy/10 group hover:border-camel/30 transition-colors duration-300"
-          >
-            <div
-              class="flex items-center justify-center w-16 h-16 bg-camel/10 mb-6"
-            >
-              <Key
-                class="w-8 h-8 text-camel"
-                stroke-width="1.5"
-                aria-hidden="true"
-              />
-            </div>
-            <h3 class="font-old-style text-2xl text-cream mb-4">
-              Kulcsátadás és ügyintézés
-            </h3>
-            <p class="text-cream-soft leading-relaxed">
-              A szerződéskötéstől a kulcsátadásig minden részletről
-              gondoskodunk. Segítünk az átírásban, közműszolgáltatók
-              értesítésében és a beköltözés adminisztrációjában.
-            </p>
-          </div>
+          {
+            localizedData.servicesItems.map(
+              ({ title, description, IconSvg }) => (
+                <div class="bg-navy p-8 border border-navy/10 group hover:border-camel/30 transition-colors duration-300">
+                  <div class="flex items-center justify-center w-16 h-16 bg-camel/10 mb-6">
+                    <IconSvg
+                      class="w-8 h-8 text-camel"
+                      stroke-width="1.5"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <h3 class="font-old-style text-2xl text-cream mb-4">
+                    {title}
+                  </h3>
+                  <p class="text-cream-soft leading-relaxed">{description}</p>
+                </div>
+              ),
+            )
+          }
         </div>
       </div>
     </div>
@@ -184,7 +107,7 @@ import Key from "@lucide/astro/icons/key";
     <div class="absolute inset-0 z-0 parallax-container">
       <div class="parallax-bg">
         <Picture
-          src={listingsBg2}
+          src={Assets.getImage(localizedData.ctaImage)}
           alt=""
           formats={["webp"]}
           class="w-full h-full object-cover"
@@ -200,20 +123,18 @@ import Key from "@lucide/astro/icons/key";
         <h2
           class="font-didone text-4xl md:text-5xl text-cream mb-6 tracking-wide"
         >
-          Dolgozzunk együtt
+          {localizedData.ctaTitle}
         </h2>
         <div class="w-24 h-0.5 bg-camel mx-auto mb-8"></div>
-        <p class="text-cream-soft text-lg leading-relaxed mb-12">
-          Bízza ránk ingatlana értékesítését vagy bérbeadását. Professzionális
-          szolgáltatásunkkal biztosítjuk, hogy ingatlanja a lehető legjobb áron
-          és legrövidebb idő alatt talál gazdára. Tapasztalt csapatunk minden
-          lépésben támogatja Önt.
-        </p>
+        <Prose
+          class="text-cream-soft w-full max-w-none prose-p:w-full mb-12"
+          content={localizedData.ctaDescription}
+        />
         <a
           href="#contact"
           class="hidden lg:inline-block px-6 py-3 border-2 border-white text-white font-system-ui text-sm tracking-wide uppercase hover:border-camel hover:bg-camel hover:text-navy transition-colors duration-300"
         >
-          Vegye fel velünk a kapcsolatot
+          {localizedData.ctaButtonText}
         </a>
       </div>
     </div>

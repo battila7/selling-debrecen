@@ -1,0 +1,80 @@
+{
+  "hu": {
+    "title": "Eladna vagy bérbe adna?",
+    "subtitle": "Segítünk Önnek eladni vagy bérbe adni ingatlanát Debrecenben.",
+    "titleImage": "src/assets/images/for-sellers.jpg",
+    "whyChooseUsTitle": "Miért válasszon minket?",
+    "whyChooseUsDescription": "Az otthonteremtés életre szóló döntés, amely meghatározza mindennapjainkat. Szakértelmünkkel és helyi ismereteinkkel segítünk megtalálni azt az ingatlant, amely tökéletesen illeszkedik az Ön életviteléhez és elképzeléseihez.\n\nDebrecen minden szegletét ismerjük: a csendes, családbarát kerületektől a pezsgő belvárosig. Mindez lehetővé teszi, hogy ne csak ingatlant, hanem otthont találjunk Önnek.\n\nCélunk, hogy a vásárlás folyamata átlátható, biztonságos és gördülékeny legyen. Minden lépésben mellette állunk, hogy magabiztosan hozhassa meg élete egyik legfontosabb döntését.",
+    "servicesTitle": "Szolgáltatásaink",
+    "servicesSubtitle": "Amit kínálunk",
+    "servicesDescription": "Professzionális támogatás minden lépésben az otthonkeresés folyamatában.",
+    "servicesItems": [
+      {
+        "title": "Személyre szabott keresés",
+        "description": "Alaposan megismerjük igényeit, majd átfogó keresést végzünk az Ön számára legmegfelelőbb ingatlanok felkutatására. Csak olyan ingatlanokat mutatunk be, amelyek valóban megfelelnek elvárásainak.",
+        "icon": "Search"
+      },
+      {
+        "title": "Környék és infrastruktúra",
+        "description": "Részletes információkat szolgáltatunk a környékről: iskolák, óvodák, közlekedési lehetőségek, bevásárlóhelyek. Helyi ismereteink révén valós képet kaphat a mindennapi életről.",
+        "icon": "MapPin"
+      }
+    ],
+    "ctaTitle": "Dolgozzon velünk!",
+    "ctaDescription": "Bízza ránk ingatlana értékesítését vagy bérbeadását. Professzionális szolgáltatásunkkal biztosítjuk, hogy ingatlanja a lehető legjobb áron és legrövidebb idő alatt talál gazdára. Tapasztalt csapatunk minden lépésben támogatja Önt.",
+    "ctaButtonText": "Vegye fel velünk a kapcsolatot",
+    "ctaImage": "src/assets/images/work-with-us.jpg"
+  },
+  "en": {
+    "title": "For sellers",
+    "subtitle": "We help you sell or rent your property in Debrecen.",
+    "titleImage": "src/assets/images/for-sellers.jpg",
+    "whyChooseUsTitle": "Why choose us?",
+    "whyChooseUsDescription": "The home purchase is a lifelong decision that shapes our daily lives. With our expertise and local knowledge, we help you find a property that perfectly fits your lifestyle and aspirations.",
+    "servicesTitle": "Our services",
+    "servicesSubtitle": "What we offer",
+    "servicesDescription": "Professional support at every step of the home buying process.",
+    "servicesItems": [
+      {
+        "title": "Personalized search",
+        "description": "We thoroughly understand your needs and conduct a comprehensive search for the best properties available for you. We only show properties that truly meet your expectations.",
+        "icon": "Search"
+      },
+      {
+        "title": "Neighborhood and infrastructure",
+        "description": "We provide detailed information about the neighborhood: schools, kindergartens, transportation options, shopping centers. Our local knowledge allows you to get a realistic picture of everyday life.",
+        "icon": "MapPin"
+      }
+    ],
+    "ctaTitle": "Trust us with your property sale or rental.",
+    "ctaDescription": "Trust us with your property sale or rental. Our professional services ensure that your property is sold at the best price and in the shortest time possible. Our experienced team supports you at every step.",
+    "ctaButtonText": "Contact us",
+    "ctaImage": "src/assets/images/work-with-us.jpg"
+  },
+  "de": {
+    "title": "Für Verkäufer",
+    "subtitle": "Wir helfen Ihnen, Ihr Immobilienobjekt in Debrecen zu verkaufen oder zu vermieten.",
+    "titleImage": "src/assets/images/for-sellers.jpg",
+    "whyChooseUsTitle": "Warum uns wählen?",
+    "whyChooseUsDescription": "Das Immobilienkaufen ist eine lebenslange Entscheidung, die unseren Alltag bestimmt. Mit unserer Expertise und lokaler Kenntnis helfen wir Ihnen, eine Immobilie zu finden, die perfekt zu Ihrem Lebensstil und Ihren Vorstellungen passt.",
+    "servicesTitle": "Unsere Dienstleistungen",
+    "servicesSubtitle": "Was wir anbieten",
+    "servicesDescription": "Professionelle Unterstützung bei jedem Schritt des Immobilienerwerbs.",
+    "servicesItems": [
+      {
+        "title": "Persönliche Suche",
+        "description": "Wir verstehen Ihre Bedürfnisse gründlich und führen eine umfassende Suche nach den besten Immobilien durch. Wir zeigen nur Immobilien, die Ihren Erwartungen entsprechen.",
+        "icon": "Search"
+      },
+      {
+        "title": "Nachbarschaft und Infrastruktur",
+        "description": "Wir bieten detaillierte Informationen über die Nachbarschaft: Schulen, Kindergärten, Verkehrsmöglichkeiten, Einkaufsmöglichkeiten. Unsere lokale Kenntnis ermöglicht es Ihnen, eine realistische Vorstellung von dem täglichen Leben zu bekommen.",
+        "icon": "MapPin"
+      }
+    ],
+    "ctaTitle": "Vertrauen Sie uns mit der Verkauf oder Vermietung Ihrer Immobilie.",
+    "ctaDescription": "Vertrauen Sie uns mit der Verkauf oder Vermietung Ihrer Immobilie. Unsere professionelle Dienstleistung sorgt dafür, dass Ihre Immobilie zum besten Preis und in der kürzesten Zeit verkauft oder vermietet wird. Unsere erfahrene Team unterstützt Sie bei jedem Schritt.",
+    "ctaButtonText": "Kontaktieren Sie uns",
+    "ctaImage": "src/assets/images/work-with-us.jpg"
+  }
+}

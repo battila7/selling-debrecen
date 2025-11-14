@@ -11,5 +11,6 @@ export function useI18n(astro: AstroGlobal) {
   return {
     p,
     t,
+    lang: currentLanguageCode,
   };
 }

@@ -4,6 +4,8 @@ const decapImages = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/images/*.{jpeg,jpg,png,gif,webp}",
 );
 
+console.log(decapImages);
+
 const Assets = {
   getImage(relativePath: string) {
     return decapImages["/" + relativePath]();
