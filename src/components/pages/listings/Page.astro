@@ -1,0 +1,240 @@
+---
+import { PageLayout } from "../../../layouts";
+import { Contact } from "../../common";
+
+import Search from "./Search.astro";
+import ListingCardAlpine from "./ListingCard.alpine.astro";
+import SearchIcon from "@lucide/astro/icons/search";
+import SearchX from "@lucide/astro/icons/search-x";
+import RefreshCw from "@lucide/astro/icons/refresh-cw";
+import MessageCircle from "@lucide/astro/icons/message-circle";
+---
+
+<PageLayout
+  x-data="listings"
+  @search.window="performSearch($event.detail)"
+  title="Ingatlanok"
+  description="Ingatlanok Debrecenben"
+>
+  <Search />
+
+  <section x-ref="listingContainer" class="py-16 bg-cream">
+    <div class="container mx-auto px-6 lg:px-12">
+      <!-- Initial state - shown before first search -->
+      <div x-show="!query" class="max-w-2xl mx-auto text-center py-20">
+        <div
+          class="bg-cream-soft border-2 border-taupe/30 px-8 py-12 md:px-12 md:py-16"
+        >
+          <div class="inline-block p-4 bg-navy/5 rounded-full mb-6">
+            <SearchIcon class="w-12 h-12 text-navy" />
+          </div>
+          <h2
+            class="font-old-style text-3xl md:text-4xl text-charcoal mb-4 tracking-wide"
+          >
+            Kezdjen el keresni
+          </h2>
+          <p
+            class="font-system-ui text-base md:text-lg text-charcoal/70 leading-relaxed"
+          >
+            Használja a fenti keresőt, hogy megtalálja az Önnek legmegfelelőbb
+            ingatlant. Szűrhet típus, ár, terület és elhelyezkedés szerint.
+          </p>
+        </div>
+      </div>
+
+      <!-- Results state - shown when there are matching listings -->
+      <div x-cloak x-show="filteredListings.length > 0">
+        <div
+          class="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+        >
+          <template x-for="listing in filteredListings">
+            <ListingCardAlpine clientSideListingProp="listing" />
+          </template>
+        </div>
+
+        <!-- End marker - signals end of results -->
+        <div class="max-w-4xl mx-auto mt-20 mb-8">
+          <div class="w-32 mx-auto border-t border-taupe/40 mb-10"></div>
+
+          <p
+            class="font-old-style text-center text-xl md:text-2xl text-charcoal/60 mb-12 tracking-wide"
+          >
+            Elérte a találati lista végét
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
+            <!-- New Search Card -->
+            <button
+              type="button"
+              @click="scrollToSearch"
+              class="group cursor-pointer block text-left bg-cream-soft border-2 border-navy/20 p-8 hover:border-navy hover:bg-navy transition-all duration-700"
+            >
+              <div class="flex items-start gap-4">
+                <div
+                  class="flex-shrink-0 p-3 bg-navy/10 group-hover:bg-cream transition-colors duration-700"
+                >
+                  <RefreshCw class="w-8 h-8 text-navy group-hover:text-navy" />
+                </div>
+                <div class="flex-1">
+                  <h3
+                    class="font-old-style text-2xl text-navy group-hover:text-cream mb-3 tracking-wide transition-colors duration-700"
+                  >
+                    Új keresés
+                  </h3>
+                  <p
+                    class="font-system-ui text-sm text-charcoal/70 group-hover:text-cream/90 leading-relaxed transition-colors duration-700"
+                  >
+                    Módosítsa keresési feltételeit, és találja meg a tökéletes
+                    ingatlant új szempontok alapján.
+                  </p>
+                </div>
+              </div>
+            </button>
+
+            <!-- Contact Card -->
+            <a
+              href="#contact"
+              class="group cursor-pointer block text-left bg-cream-soft border-2 border-navy/20 p-8 hover:border-navy hover:bg-navy transition-all duration-700"
+            >
+              <div class="flex items-start gap-4">
+                <div
+                  class="flex-shrink-0 p-3 bg-navy/10 group-hover:bg-cream transition-colors duration-700"
+                >
+                  <MessageCircle
+                    class="w-8 h-8 text-navy group-hover:text-navy"
+                  />
+                </div>
+                <div class="flex-1">
+                  <h3
+                    class="font-old-style text-2xl text-navy group-hover:text-cream mb-3 tracking-wide transition-colors duration-700"
+                  >
+                    Időpontfoglalás
+                  </h3>
+                  <p
+                    class="font-system-ui text-sm text-charcoal/70 group-hover:text-cream/90 leading-relaxed transition-colors duration-700"
+                  >
+                    Ha nem találja a tökéletes ingatlant, ne habozzon, lépjen
+                    kapcsolatba velünk!
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty state - shown when search yields no results -->
+      <div
+        x-cloak
+        x-show="query && filteredListings.length === 0"
+        class="max-w-2xl mx-auto text-center py-20"
+      >
+        <div
+          class="bg-cream-soft border-2 border-taupe/30 px-8 py-12 md:px-12 md:py-16"
+        >
+          <div class="inline-block p-4 bg-taupe/10 mb-6">
+            <SearchX class="w-12 h-12 text-taupe" />
+          </div>
+          <h2
+            class="font-old-style text-3xl md:text-4xl text-charcoal mb-4 tracking-wide"
+          >
+            Nincs találat
+          </h2>
+          <p
+            class="font-system-ui text-base md:text-lg text-charcoal/70 leading-relaxed mb-6"
+          >
+            Sajnos nem találtunk a megadott feltételeknek megfelelő ingatlant.
+          </p>
+          <button
+            type="button"
+            @click="scrollToSearch"
+            class="cursor-pointer inline-block px-8 py-4 bg-navy text-cream font-system-ui text-base tracking-wide uppercase border-2 border-navy hover:bg-transparent hover:text-navy transition-colors duration-700"
+          >
+            Új keresés
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Contact />
+
+  <script>
+    (function initListingSearch() {
+      type SearchQuery = {
+        transactionType: string;
+        propertyType: string;
+        location: string;
+        priceMin: number;
+        priceMax: number;
+        areaMin: number;
+        areaMax: number;
+        isInitial: boolean;
+      };
+
+      async function fetchListings() {
+        const response = await fetch("/listings.json");
+        const data = await response.json();
+        return data.listings;
+      }
+
+      document.addEventListener("alpine:init", () => {
+        Alpine.data("listings", () => ({
+          listings: [],
+          query: null,
+
+          async init() {
+            this.listings = await fetchListings();
+            this.$watch("query", () => void this.filteredListings);
+          },
+
+          performSearch(query: SearchQuery) {
+            console.log("search perform");
+            console.log(query);
+
+            this.query = query;
+
+            if (!this.query.isInitial) {
+              this.$refs.listingContainer.scrollIntoView(true);
+            }
+          },
+
+          scrollToSearch() {
+            window.scrollTo(0, 0);
+          },
+
+          get filteredListings() {
+            if (!this.query) {
+              return [];
+            }
+
+            let filtered = this.listings.filter(
+              (l) => l.transactionType === this.query.transactionType,
+            );
+
+            filtered = filtered.filter(
+              (l) => l.propertyType === this.query.propertyType,
+            );
+
+            filtered = filtered.filter((l) =>
+              l.address.includes(this.query.location),
+            );
+
+            filtered = filtered.filter(
+              (l) =>
+                l.price >= this.query.priceMin &&
+                l.price <= this.query.priceMax,
+            );
+
+            filtered = filtered.filter(
+              (l) =>
+                l.area >= this.query.areaMin && l.area <= this.query.areaMax,
+            );
+
+            return filtered;
+          },
+        }));
+      });
+    })();
+  </script>
+</PageLayout>

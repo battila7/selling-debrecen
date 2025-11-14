@@ -7,12 +7,13 @@ import Search from "@lucide/astro/icons/search";
 import MapPin from "@lucide/astro/icons/map-pin";
 import Shield from "@lucide/astro/icons/shield";
 import Key from "@lucide/astro/icons/key";
-import Links from "../../../../util/links";
 import forSellersImage from "../../../../images/for-sellers.jpg";
 import forBuyersImage from "../../../../images/for-buyers-02.jpg";
 import Side, { type Service } from "./Side.astro";
 import { HeadingLeftAligned } from "../../../common";
+import { useI18n } from "../../../../i18n";
 
+const { p } = useI18n(Astro);
 const sellerServices: Service[] = [
   {
     title: "Ingatlan értékelés",
@@ -76,7 +77,7 @@ const buyerServices: Service[] = [
     image={forSellersImage}
     title="Eladóknak és bérbeadóknak"
     description="Ha ingatlanját szeretné értékesíteni, szakértő segítségünkkel a lehető legjobb áron és a legrövidebb idő alatt adhatja el. Teljes körű szolgáltatást nyújtunk az értékeléstől a szerződéskötésig."
-    link={Links.FOR_SELLERS}
+    link={p("for-sellers")}
     linkText="Eladni, kiadni szeretnék"
     services={sellerServices}
   />
@@ -85,7 +86,7 @@ const buyerServices: Service[] = [
     image={forBuyersImage}
     title="Keresőknek"
     description="Álmaik otthonának megtalálásában segítünk. Széles választékunkból választhatnak, és minden lépésben mellettük állunk a vásárlás folyamatában."
-    link={Links.FOR_BUYERS}
+    link={p("for-buyers")}
     linkText="Ingatlant keresek"
     services={buyerServices}
   />

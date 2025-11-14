@@ -1,0 +1,19 @@
+---
+import { BaseLayout } from "../../../layouts";
+import { Contact, Footer } from "../../common";
+import MobileHeader from "./MobileHeader.astro";
+import Hero from "./Hero.astro";
+import FeaturedListings from "./FeaturedListings.astro";
+import Intro from "./Intro.astro";
+import Services from "./services/Services.astro";
+---
+
+<BaseLayout title="Selling Debrecen" description="Ingatlanok Debrecenben">
+  <MobileHeader />
+  <Hero />
+  <FeaturedListings />
+  <Intro />
+  <Services />
+  <Contact />
+  <Footer />
+</BaseLayout>

@@ -1,15 +1,17 @@
 ---
 import { Picture } from "astro:assets";
-import forBuyersBg from "../../images/for-buyers-02.jpg";
-import listingsBg2 from "../../images/listings-bg-1.jpg";
-import { PageLayout } from "../../layouts";
-import { Contact, HeadingCentered, HeadingLeftAligned } from "../common";
-import Links from "../../util/links";
+import forBuyersBg from "../../../images/for-buyers-02.jpg";
+import listingsBg2 from "../../../images/listings-bg-1.jpg";
+import { PageLayout } from "../../../layouts";
+import { Contact, HeadingCentered, HeadingLeftAligned } from "../../common";
 
 import Search from "@lucide/astro/icons/search";
 import MapPin from "@lucide/astro/icons/map-pin";
 import Shield from "@lucide/astro/icons/shield";
 import Key from "@lucide/astro/icons/key";
+import { useI18n } from "../../../i18n";
+
+const { p } = useI18n(Astro);
 ---
 
 <PageLayout title="Keresőknek" description="Keresőknek">
@@ -211,7 +213,7 @@ import Key from "@lucide/astro/icons/key";
           kereskedelmi ingatlanok széles választéka várja Önt.
         </p>
         <a
-          href={Links.PROPERTIES}
+          href={p("properties")}
           class="hidden lg:inline-block px-6 py-3 border-2 border-white text-white font-system-ui text-sm tracking-wide uppercase hover:border-camel hover:bg-camel hover:text-navy transition-colors duration-300"
         >
           Megnézem az ingatlanokat

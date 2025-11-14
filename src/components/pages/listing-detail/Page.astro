@@ -1,0 +1,508 @@
+---
+import agentProfilePicture from "../../../images/agent-profile-picture-placeholder.jpg";
+import { PageLayout } from "../../../layouts";
+import { Image } from "astro:assets";
+import { Contact } from "../../common";
+
+import MapPin from "@lucide/astro/icons/map-pin";
+import House from "@lucide/astro/icons/house";
+import Maximize2 from "@lucide/astro/icons/maximize-2";
+import Building2 from "@lucide/astro/icons/building-2";
+import Hash from "@lucide/astro/icons/hash";
+import Phone from "@lucide/astro/icons/phone";
+import Check from "@lucide/astro/icons/check";
+import Copy from "@lucide/astro/icons/copy";
+import SearchIcon from "@lucide/astro/icons/search";
+import MessageCircle from "@lucide/astro/icons/message-circle";
+import DoorOpen from "@lucide/astro/icons/door-open";
+import Sun from "@lucide/astro/icons/sun";
+import Trees from "@lucide/astro/icons/trees";
+import Layers from "@lucide/astro/icons/layers";
+import Store from "@lucide/astro/icons/store";
+import Bus from "@lucide/astro/icons/bus";
+import Tram from "@lucide/astro/icons/tram-front";
+import FileDown from "@lucide/astro/icons/file-down";
+import Carousel from "./Carousel.astro";
+
+interface Props {
+  listing: {
+    id: string;
+    slug: string;
+    title: string;
+    address: string;
+    price: number;
+    image: string;
+    imageAlt: string;
+    images: Array<{ src: string; alt: string }>;
+    rooms: number;
+    area: number;
+    terraceArea?: number;
+    gardenArea?: number;
+    floor?: number;
+    floorPlanLink?: string;
+    propertyType: string;
+    transactionType: string;
+    description: string;
+    link: string;
+    extra: string;
+    checklist: string[];
+    nearby: string[];
+    publicTransport: {
+      type: string;
+      name: string;
+    }[];
+  };
+}
+
+const { listing } = Astro.props;
+
+const formattedPrice = listing.price.toLocaleString("hu-HU") + " Ft";
+
+const propertyTypeLabels: Record<string, string> = {
+  house: "Családi ház",
+  apartment: "Lakás",
+};
+---
+
+<PageLayout title={listing.title} description={listing.description}>
+  <Carousel images={listing.images} />
+
+  <!-- Main Content -->
+  <section class="bg-cream py-16">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <!-- Left Column - Main Details -->
+        <div class="order-2 lg:order-1 lg:col-span-2 space-y-12">
+          <!-- Title and Address -->
+          <div>
+            <h1
+              class="font-old-style text-4xl md:text-5xl text-charcoal mb-6 tracking-wide leading-tight"
+            >
+              {listing.title}
+            </h1>
+            <div class="flex flex-col lg:flex-row gap-3 lg:gap-6">
+              <div class="flex items-start gap-3 text-charcoal/70">
+                <MapPin size={24} class="mt-1 flex-shrink-0" />
+                <p class="font-geometric-humanist text-lg tracking-wide">
+                  {listing.address}
+                </p>
+              </div>
+              <div class="flex items-start gap-3 text-charcoal/70">
+                <Hash size={24} class="mt-1 flex-shrink-0" />
+                <p class="font-geometric-humanist text-lg tracking-wide">
+                  Hivatkozási szám: {listing.id}
+                </p>
+              </div>
+              <button
+                class="flex items-start gap-3 text-charcoal/70 hover:text-navy transition-colors duration-500 cursor-pointer"
+                type="button"
+                x-data=`{
+                  copied: false,
+                  link: '${listing.link}'
+                }`
+                x-on:click=`
+                  navigator.clipboard.writeText(link).then(() => {
+                    copied = true;
+                    setTimeout(() => copied = false, 2000);
+                  })
+                `
+              >
+                <Copy size={24} class="mt-1 flex-shrink-0" />
+                <p
+                  x-text="copied ? 'Másolva!' : 'Link másolása'"
+                  class="font-geometric-humanist text-lg tracking-wide"
+                >
+                  Link másolása
+                </p>
+              </button>
+            </div>
+          </div>
+
+          <!-- Property Details Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Area Card -->
+            <div
+              class="flex items-center gap-4 bg-cream-soft border-2 border-taupe/30 p-6"
+            >
+              <div class="bg-navy/10 p-4 flex-shrink-0">
+                <Maximize2 size={28} class="text-navy" />
+              </div>
+              <div>
+                <p
+                  class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1"
+                >
+                  Alapterület
+                </p>
+                <p class="font-old-style text-xl text-charcoal font-bold">
+                  {listing.area} m²
+                </p>
+              </div>
+            </div>
+
+            {
+              listing.terraceArea && (
+                <div class="flex items-center gap-4 bg-cream-soft border-2 border-taupe/30 p-6">
+                  <div class="bg-navy/10 p-4 flex-shrink-0">
+                    <Sun size={28} class="text-navy" />
+                  </div>
+                  <div>
+                    <p class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1">
+                      Terasz
+                    </p>
+                    <p class="font-old-style text-xl text-charcoal font-bold">
+                      {listing.terraceArea} m²
+                    </p>
+                  </div>
+                </div>
+              )
+            }
+
+            {
+              listing.gardenArea && (
+                <div class="flex items-center gap-4 bg-cream-soft border-2 border-taupe/30 p-6">
+                  <div class="bg-navy/10 p-4 flex-shrink-0">
+                    <Trees size={28} class="text-navy" />
+                  </div>
+                  <div>
+                    <p class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1">
+                      Kert
+                    </p>
+                    <p class="font-old-style text-xl text-charcoal font-bold">
+                      {listing.gardenArea} m²
+                    </p>
+                  </div>
+                </div>
+              )
+            }
+
+            <!-- Rooms Card -->
+            <div
+              class="flex items-center gap-4 bg-cream-soft border-2 border-taupe/30 p-6"
+            >
+              <div class="bg-navy/10 p-4 flex-shrink-0">
+                <DoorOpen size={28} class="text-navy" />
+              </div>
+              <div>
+                <p
+                  class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1"
+                >
+                  Szobák
+                </p>
+                <p class="font-old-style text-xl text-charcoal font-bold">
+                  {listing.rooms}
+                </p>
+              </div>
+            </div>
+
+            <!-- Property Type Card -->
+            <div
+              class="flex items-center gap-4 bg-cream-soft border-2 border-taupe/30 p-6"
+            >
+              <div class="bg-navy/10 p-4 flex-shrink-0">
+                {
+                  listing.propertyType === "house" ? (
+                    <House size={28} class="text-navy" />
+                  ) : (
+                    <Building2 size={28} class="text-navy" />
+                  )
+                }
+              </div>
+              <div>
+                <p
+                  class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1"
+                >
+                  Típus
+                </p>
+                <p class="font-old-style text-xl text-charcoal font-bold">
+                  {propertyTypeLabels[listing.propertyType]}
+                </p>
+              </div>
+            </div>
+
+            {
+              listing.floor !== undefined && (
+                <div class="flex items-center gap-4 bg-cream-soft border-2 border-taupe/30 p-6">
+                  <div class="bg-navy/10 p-4 flex-shrink-0">
+                    <Layers size={28} class="text-navy" />
+                  </div>
+                  <div>
+                    <p class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1">
+                      Emelet
+                    </p>
+                    <p class="font-old-style text-xl text-charcoal font-bold">
+                      {listing.floor}
+                    </p>
+                  </div>
+                </div>
+              )
+            }
+          </div>
+
+          <!-- Divider -->
+          <div class="border-t-2 border-taupe/40"></div>
+
+          <!-- Description -->
+          <div>
+            <h2
+              class="font-old-style text-2xl text-charcoal tracking-wide mb-6"
+            >
+              Leírás
+            </h2>
+            <p
+              class="font-system-ui text-lg text-charcoal/80 leading-relaxed whitespace-pre-line"
+            >
+              {listing.description}
+            </p>
+          </div>
+
+          <!-- Divider -->
+          <div class="border-t-2 border-taupe/40"></div>
+
+          <!-- Key Features -->
+          <div>
+            <h2
+              class="font-old-style text-2xl text-charcoal mb-6 tracking-wide"
+            >
+              Főbb jellemzők
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <!-- Checklist -->
+              <div>
+                <h3
+                  class="font-geometric-humanist text-sm text-charcoal/70 uppercase tracking-wider mb-4"
+                >
+                  Amiért jó választás
+                </h3>
+                <ul class="space-y-4">
+                  {
+                    listing.checklist.map((item) => (
+                      <li class="flex items-center gap-4">
+                        <div class="bg-navy/10 p-2 flex-shrink-0">
+                          <Check size={20} class="text-navy" />
+                        </div>
+                        <p class="font-system-ui text-lg text-charcoal/80 leading-relaxed">
+                          {item}
+                        </p>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+
+              <!-- Nearby -->
+              <div>
+                <h3
+                  class="font-geometric-humanist text-sm text-charcoal/70 uppercase tracking-wider mb-4"
+                >
+                  A közelben
+                </h3>
+                <ul class="space-y-4">
+                  {
+                    listing.nearby.map((place) => (
+                      <li class="flex items-center gap-4">
+                        <div class="bg-navy/10 p-2 flex-shrink-0">
+                          <Store size={20} class="text-navy" />
+                        </div>
+                        <p class="font-system-ui text-lg text-charcoal/80 leading-relaxed">
+                          {place}
+                        </p>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+
+              <!-- Public Transport -->
+              <div>
+                <h3
+                  class="font-geometric-humanist text-sm text-charcoal/70 uppercase tracking-wider mb-4"
+                >
+                  Tömegközlekedés
+                </h3>
+                <ul class="space-y-4">
+                  {
+                    listing.publicTransport.map((transport) => (
+                      <li class="flex items-center gap-4">
+                        <div class="bg-navy/10 p-2 flex-shrink-0">
+                          {transport.type === "bus" ? (
+                            <Bus size={20} class="text-navy" />
+                          ) : (
+                            <Tram size={20} class="text-navy" />
+                          )}
+                        </div>
+                        <p class="font-system-ui text-lg text-charcoal/80 leading-relaxed">
+                          {transport.name}
+                        </p>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {
+            listing.floorPlanLink && (
+              <Fragment>
+                <div class="border-t-2 border-taupe/40" />
+
+                <a
+                  href={listing.floorPlanLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                  class="group block bg-cream-soft border-2 border-navy/20 p-8 hover:border-navy hover:bg-navy transition-all duration-700"
+                >
+                  <div class="flex items-center gap-6">
+                    <div class="flex-shrink-0 p-4 bg-navy/10 group-hover:bg-cream transition-colors duration-700">
+                      <FileDown class="w-8 h-8 text-navy" />
+                    </div>
+                    <div>
+                      <h3 class="font-old-style text-2xl text-navy group-hover:text-cream mb-2 tracking-wide transition-colors duration-700">
+                        Alaprajz letöltése
+                      </h3>
+                      <p class="font-system-ui text-sm text-charcoal/70 group-hover:text-cream/90 leading-relaxed transition-colors duration-700">
+                        Töltse le az ingatlan alaprajzát ide kattintva.
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              </Fragment>
+            )
+          }
+        </div>
+
+        <!-- Right Column - Price and Contact -->
+        <div class="order-1 lg:order-2 lg:col-span-1">
+          <div class="sticky top-20 space-y-6">
+            <!-- Price Card -->
+            <div class="bg-navy border-2 border-navy p-8">
+              <p
+                class="font-geometric-humanist text-xs text-cream/80 uppercase tracking-wider mb-3"
+              >
+                Kért ár
+              </p>
+              <p
+                class="font-old-style text-4xl text-cream font-bold tracking-wide mb-2"
+              >
+                {formattedPrice}
+              </p>
+            </div>
+
+            <!-- Contact Card -->
+            <div class="bg-cream-soft border-2 border-taupe/30 p-8 space-y-6">
+              <h3 class="font-old-style text-2xl text-charcoal tracking-wide">
+                Érdeklődés
+              </h3>
+              <p
+                class="font-system-ui text-sm text-charcoal/70 leading-relaxed"
+              >
+                Felkeltettük az érdeklődését? Keressen minket bizalommal!
+              </p>
+
+              <!-- CTA Buttons -->
+              <div class="space-y-3">
+                <a
+                  href="#contact"
+                  class="flex items-center justify-center gap-3 w-full px-6 py-4 bg-navy text-cream font-geometric-humanist text-sm tracking-widest uppercase font-semibold border-2 border-navy hover:bg-transparent hover:text-navy transition-colors duration-700"
+                >
+                  <Phone size={20} />
+                  <span>Kapcsolat</span>
+                </a>
+              </div>
+
+              <!-- Agent Info -->
+              <div class="pt-6 border-t border-taupe/40">
+                <p
+                  class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-4"
+                >
+                  Az Ön tanácsadója
+                </p>
+                <div class="flex items-center gap-4">
+                  <Image
+                    src={agentProfilePicture}
+                    alt="Kiss Zoltán"
+                    class="w-16 h-16 object-cover border-2 border-taupe/30"
+                  />
+                  <p class="font-old-style text-xl text-charcoal tracking-wide">
+                    Kiss Zoltán
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- End marker -->
+      <div class="max-w-4xl mx-auto mt-20 mb-8">
+        <div class="w-32 mx-auto border-t border-taupe/40 mb-10"></div>
+
+        <p
+          class="font-old-style text-center text-xl md:text-2xl text-charcoal/60 mb-12 tracking-wide"
+        >
+          További ingatlanjaink
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
+          <!-- Browse Listings Card -->
+          <a
+            href="/ingatlanjaink"
+            class="group cursor-pointer block text-left bg-cream-soft border-2 border-navy/20 p-8 hover:border-navy hover:bg-navy transition-all duration-700"
+          >
+            <div class="flex items-start gap-4">
+              <div
+                class="flex-shrink-0 p-3 bg-navy/10 group-hover:bg-cream transition-colors duration-700"
+              >
+                <SearchIcon class="w-8 h-8 text-navy group-hover:text-navy" />
+              </div>
+              <div class="flex-1">
+                <h3
+                  class="font-old-style text-2xl text-navy group-hover:text-cream mb-3 tracking-wide transition-colors duration-700"
+                >
+                  Keresés
+                </h3>
+                <p
+                  class="font-system-ui text-sm text-charcoal/70 group-hover:text-cream/90 leading-relaxed transition-colors duration-700"
+                >
+                  Böngéssze teljes kínálatunkat, és találja meg az Önnek
+                  legmegfelelőbb ingatlant.
+                </p>
+              </div>
+            </div>
+          </a>
+
+          <!-- Contact Card -->
+          <a
+            href="#contact"
+            class="group cursor-pointer block text-left bg-cream-soft border-2 border-navy/20 p-8 hover:border-navy hover:bg-navy transition-all duration-700"
+          >
+            <div class="flex items-start gap-4">
+              <div
+                class="flex-shrink-0 p-3 bg-navy/10 group-hover:bg-cream transition-colors duration-700"
+              >
+                <MessageCircle
+                  class="w-8 h-8 text-navy group-hover:text-navy"
+                />
+              </div>
+              <div class="flex-1">
+                <h3
+                  class="font-old-style text-2xl text-navy group-hover:text-cream mb-3 tracking-wide transition-colors duration-700"
+                >
+                  Időpontfoglalás
+                </h3>
+                <p
+                  class="font-system-ui text-sm text-charcoal/70 group-hover:text-cream/90 leading-relaxed transition-colors duration-700"
+                >
+                  Személyre szabott ajánlatért és részletes tanácsadásért
+                  keressen minket bizalommal!
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Contact />
+</PageLayout>
