@@ -1,11 +1,14 @@
 ---
-import Links from "../../../util/links";
 import Menu from "@lucide/astro/icons/menu";
 import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
 import MobileMenuOverlay from "./MobileMenuOverlay.astro";
 import LanguageSelector from "../LanguageSelector.astro";
 
+import { useI18n } from "../../../i18n";
+
 const mobileMenuButtonId = "mobile-menu-button";
+
+const { p, t } = useI18n(Astro);
 ---
 
 <header
@@ -14,41 +17,41 @@ const mobileMenuButtonId = "mobile-menu-button";
 >
   <nav class="container mx-auto px-6 lg:px-12 py-4">
     <div class="hidden md:flex items-center justify-between">
-      <a href={Links.HOME} class="text-white text-xl flex items-center gap-4">
+      <a href={p("home")} class="text-white text-xl flex items-center gap-4">
         <SellingDebrecenLogo class="h-10 md:h-10 text-white inline-block" />
         <span class="text-white text-lg">Selling Debrecen</span>
       </a>
 
       <div class="flex items-center gap-8 text-sm">
         <a
-          href={Links.PROPERTIES}
+          href={p("properties")}
           class="text-white hover:text-gray-300 transition-colors text-md"
         >
-          Ingatlanjaink
+          {t("nav.properties")}
         </a>
         <a
-          href={Links.FOR_SELLERS}
+          href={p("for-sellers")}
           class="text-white hover:text-gray-300 transition-colors text-md"
         >
-          Kínálóknak
+          {t("nav.for-sellers")}
         </a>
         <a
-          href={Links.FOR_BUYERS}
+          href={p("for-buyers")}
           class="text-white hover:text-gray-300 transition-colors text-md"
         >
-          Keresőknek
+          {t("nav.for-buyers")}
         </a>
         <a
-          href={Links.ABOUT}
+          href={p("about")}
           class="text-white hover:text-gray-300 transition-colors text-md"
         >
-          Rólunk
+          {t("nav.about")}
         </a>
         <a
           href="#contact"
           class="bg-white text-black px-4 py-2 rounded hover:bg-gray-100 transition-colors"
         >
-          Időpontfoglalás
+          {t("nav.schedule")}
         </a>
         <LanguageSelector />
       </div>
@@ -59,7 +62,7 @@ const mobileMenuButtonId = "mobile-menu-button";
       <!-- Logo -->
       <a
         id="mobile-menu-logo"
-        href={Links.HOME}
+        href={p("home")}
         class="flex items-center gap-4 text-white text-xl font-semibold transition-all duration-300"
       >
         <SellingDebrecenLogo class="h-10 md:h-10 text-white inline-block" />

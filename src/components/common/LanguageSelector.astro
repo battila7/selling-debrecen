@@ -1,7 +1,7 @@
 ---
 import ChevronDown from "@lucide/astro/icons/chevron-down";
 import Globe from "@lucide/astro/icons/globe";
-import { availableLanguages, type Language } from "../../util/i18n";
+import { availableLanguages, getLangFromUrl, type Language } from "../../i18n";
 
 interface Props {
   class?: string;
@@ -9,7 +9,7 @@ interface Props {
 
 const { class: className = "" } = Astro.props;
 
-const currentLanguageCode = Astro.currentLocale?.toLowerCase() ?? "hu";
+const currentLanguageCode = getLangFromUrl(Astro.url);
 
 const shouldOpenUp = Astro.url.pathname === "/";
 ---

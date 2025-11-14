@@ -1,10 +1,11 @@
 ---
-import Links from "../../../util/links";
+import { useI18n } from "../../../i18n";
 import Menu from "@lucide/astro/icons/menu";
 import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
 import MobileMenuOverlay from "../../common/header/MobileMenuOverlay.astro";
 import LanguageSelector from "../../common/LanguageSelector.astro";
 
+const { p } = useI18n(Astro);
 const mobileMenuButtonId = "mobile-menu-button";
 const headerId = "site-header";
 ---
@@ -18,7 +19,7 @@ const headerId = "site-header";
       <!-- Logo -->
       <a
         id="mobile-menu-logo"
-        href={Links.HOME}
+        href={p("home")}
         class="opacity-0 flex items-center gap-4 text-white text-xl font-semibold transition-all duration-300"
       >
         <SellingDebrecenLogo class="h-10 md:h-10 text-white inline-block" />

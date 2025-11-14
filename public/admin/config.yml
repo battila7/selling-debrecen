@@ -7,13 +7,19 @@ local_backend: true
 slug:
   encoding: "ascii"
   clean_accents: true
-  sanitize_replacement: "_"
+  sanitize_replacement: "-"
 
 # Location where files will be stored in the repo.
 media_folder: "src/assets/images"
 
 # The src attribute for uploaded media.
 public_folder: "src/assets/images"
+
+
+i18n:
+  structure: multipl_folders
+  locales: [hu, en, de]
+  default_locale: hu
 
 collections:
 - name: "general"

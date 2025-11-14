@@ -3,7 +3,7 @@ import X from "@lucide/astro/icons/x";
 import Facebook from "../../../images/brands/facebook.svg";
 import Instagram from "../../../images/brands/instagram.svg";
 import Tiktok from "../../../images/brands/tiktok.svg";
-import Links from "../../../util/links";
+import { useI18n } from "../../../i18n";
 
 type Props = {
   mobileMenuButtonId: string;
@@ -22,6 +22,8 @@ const socialLinks = {
 };
 
 const calendlyUrl = "https://calendly.com/kisszoltan"; // Update with actual Calendly URL
+
+const { p, t } = useI18n(Astro);
 ---
 
 <div
@@ -46,28 +48,28 @@ const calendlyUrl = "https://calendly.com/kisszoltan"; // Update with actual Cal
     <!-- Menu Items -->
     <nav class="flex flex-col gap-6 text-center" aria-label="Mobile navigation">
       <a
-        href={Links.PROPERTIES}
+        href={p("properties")}
         class="mobile-menu-link font-old-style text-white text-2xl tracking-wide"
       >
-        Ingatlanjaink
+        {t("nav.properties")}
       </a>
       <a
-        href={Links.FOR_SELLERS}
+        href={p("for-sellers")}
         class="mobile-menu-link font-old-style text-white text-2xl tracking-wide"
       >
-        Kínálóknak
+        {t("nav.for-sellers")}
       </a>
       <a
-        href={Links.FOR_BUYERS}
+        href={p("for-buyers")}
         class="mobile-menu-link font-old-style text-white text-2xl tracking-wide"
       >
-        Keresőknek
+        {t("nav.for-buyers")}
       </a>
       <a
-        href={Links.ABOUT}
+        href={p("about")}
         class="mobile-menu-link font-old-style text-white text-2xl tracking-wide"
       >
-        Rólunk
+        {t("nav.about")}
       </a>
     </nav>
 
@@ -81,13 +83,13 @@ const calendlyUrl = "https://calendly.com/kisszoltan"; // Update with actual Cal
       rel="noopener noreferrer"
       class="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-white text-white font-system-ui text-sm tracking-widest uppercase hover:border-camel hover:bg-camel hover:text-navy transition-all duration-300"
     >
-      <span>Időpont Foglalása</span>
+      <span>{t("nav.schedule")}</span>
     </a>
 
     <!-- Social Media Icons -->
     <div class="flex flex-col items-center gap-4">
       <p class="text-white/70 text-sm uppercase tracking-wider">
-        Kövessen minket
+        {t("nav.follow-us")}
       </p>
       <div class="flex gap-4">
         <a
