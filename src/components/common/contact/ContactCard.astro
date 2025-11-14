@@ -1,8 +1,10 @@
 ---
+import { Image } from "astro:assets";
 import MapPin from "@lucide/astro/icons/map-pin";
 import Mail from "@lucide/astro/icons/mail";
 import Phone from "@lucide/astro/icons/phone";
 import Clock from "@lucide/astro/icons/clock";
+import agentProfile from "../../../images/agent-profile-picture-placeholder.jpg";
 
 // TODO: Update these with actual contact information
 const officeAddress = "Debrecen, Magyarország";
@@ -18,82 +20,104 @@ const { class: className, ...rest } = Astro.props;
 
 <div
   class:list={[
-    "order-2 lg:order-1 bg-white border border-taupe/20 p-10",
+    "order-2 lg:order-1 bg-white border border-taupe/20 p-10 flex flex-col",
     className,
   ]}
   {...rest}
 >
-  <h3 class="font-old-style text-2xl font-medium mb-8 text-navy">
-    Elérhetőségek
-  </h3>
-
-  <div class="space-y-8">
-    <!-- Office Address -->
-    <div class="flex gap-5">
-      <div class="flex-shrink-0">
-        <div class="flex items-center justify-center w-16 h-16 bg-camel/10">
-          <MapPin class="w-8 h-8 text-camel" aria-hidden="true" />
-        </div>
-      </div>
-      <div class="flex-1">
-        <h4 class="font-semibold text-charcoal mb-2">Iroda</h4>
-        <address class="text-charcoal/70 not-italic leading-relaxed">
-          {officeAddress}
-        </address>
-      </div>
+  <!-- Profile Section -->
+  <div class="flex items-center gap-6 pb-8 mb-8 border-b border-taupe/20">
+    <div class="flex-shrink-0">
+      <Image
+        src={agentProfile}
+        alt="Kiss Zoltán - Ingatlanközvetítő"
+        class="w-24 h-24 rounded-full object-cover border-2 border-camel/30 shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
+        loading="eager"
+        decoding="async"
+      />
     </div>
-
-    <!-- Email -->
-    <div class="flex gap-5">
-      <div class="flex-shrink-0">
-        <div class="flex items-center justify-center w-16 h-16 bg-camel/10">
-          <Mail class="w-8 h-8 text-camel" aria-hidden="true" />
-        </div>
-      </div>
-      <div class="flex-1">
-        <h4 class="font-semibold text-charcoal mb-2">Email</h4>
-        <a
-          href={`mailto:${email}`}
-          class="text-navy hover:text-camel transition-colors underline decoration-1 underline-offset-2"
-        >
-          {email}
-        </a>
-      </div>
+    <div class="flex-1">
+      <h3 class="font-didone text-2xl text-navy mb-1">Kiss Zoltán</h3>
+      <p class="text-camel font-old-style mb-2">Ingatlanközvetítő</p>
+      <p class="text-charcoal/70 text-sm leading-relaxed">
+        Helyi szakértelem, személyes figyelem
+      </p>
     </div>
+  </div>
 
-    <!-- Phone -->
-    <div class="flex gap-5">
-      <div class="flex-shrink-0">
-        <div class="flex items-center justify-center w-16 h-16 bg-camel/10">
-          <Phone class="w-8 h-8 text-camel" aria-hidden="true" />
+  <div class="flex-1">
+    <h3 class="font-old-style text-2xl font-medium mb-8 text-navy">
+      Elérhetőségek
+    </h3>
+
+    <div class="space-y-8">
+      <!-- Office Address -->
+      <div class="flex gap-5">
+        <div class="flex-shrink-0">
+          <div class="flex items-center justify-center w-16 h-16 bg-camel/10">
+            <MapPin class="w-8 h-8 text-camel" aria-hidden="true" />
+          </div>
+        </div>
+        <div class="flex-1">
+          <h4 class="font-semibold text-charcoal mb-2">Iroda</h4>
+          <address class="text-charcoal/70 not-italic leading-relaxed">
+            {officeAddress}
+          </address>
         </div>
       </div>
-      <div class="flex-1">
-        <h4 class="font-semibold text-charcoal mb-2">Telefon</h4>
-        <a
-          href={`tel:${phone.replace(/\s/g, "")}`}
-          class="text-navy hover:text-camel transition-colors underline decoration-1 underline-offset-2"
-        >
-          {phone}
-        </a>
-      </div>
-    </div>
 
-    <!-- Office Hours -->
-    <div class="flex gap-5">
-      <div class="flex-shrink-0">
-        <div class="flex items-center justify-center w-16 h-16 bg-camel/10">
-          <Clock class="w-8 h-8 text-camel" aria-hidden="true" />
+      <!-- Email -->
+      <div class="flex gap-5">
+        <div class="flex-shrink-0">
+          <div class="flex items-center justify-center w-16 h-16 bg-camel/10">
+            <Mail class="w-8 h-8 text-camel" aria-hidden="true" />
+          </div>
+        </div>
+        <div class="flex-1">
+          <h4 class="font-semibold text-charcoal mb-2">Email</h4>
+          <a
+            href={`mailto:${email}`}
+            class="text-navy hover:text-camel transition-colors underline decoration-1 underline-offset-2"
+          >
+            {email}
+          </a>
         </div>
       </div>
-      <div class="flex-1">
-        <h4 class="font-semibold text-charcoal mb-2">Nyitvatartás</h4>
-        <div class="text-charcoal/70 leading-relaxed space-y-1">
-          <p>Hétfő–Péntek: 9:00–18:00</p>
-          <p>Szombat: 10:00–14:00</p>
-          <p class="text-sm mt-2 italic">
-            Hétvégén előzetes egyeztetés alapján
-          </p>
+
+      <!-- Phone -->
+      <div class="flex gap-5">
+        <div class="flex-shrink-0">
+          <div class="flex items-center justify-center w-16 h-16 bg-camel/10">
+            <Phone class="w-8 h-8 text-camel" aria-hidden="true" />
+          </div>
+        </div>
+        <div class="flex-1">
+          <h4 class="font-semibold text-charcoal mb-2">Telefon</h4>
+          <a
+            href={`tel:${phone.replace(/\s/g, "")}`}
+            class="text-navy hover:text-camel transition-colors underline decoration-1 underline-offset-2"
+          >
+            {phone}
+          </a>
+        </div>
+      </div>
+
+      <!-- Office Hours -->
+      <div class="flex gap-5">
+        <div class="flex-shrink-0">
+          <div class="flex items-center justify-center w-16 h-16 bg-camel/10">
+            <Clock class="w-8 h-8 text-camel" aria-hidden="true" />
+          </div>
+        </div>
+        <div class="flex-1">
+          <h4 class="font-semibold text-charcoal mb-2">Nyitvatartás</h4>
+          <div class="text-charcoal/70 leading-relaxed space-y-1">
+            <p>Hétfő–Péntek: 9:00–18:00</p>
+            <p>Szombat: 10:00–14:00</p>
+            <p class="text-sm mt-2 italic">
+              Hétvégén előzetes egyeztetés alapján
+            </p>
+          </div>
         </div>
       </div>
     </div>
