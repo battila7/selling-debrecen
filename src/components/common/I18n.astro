@@ -1,0 +1,67 @@
+---
+import { availableLanguageCodes } from "../../util/i18n";
+
+const serverSideLanguageCode = Astro.currentLocale?.toLowerCase() ?? "hu";
+---
+
+<script
+  data-server-side-language={serverSideLanguageCode}
+  data-available-languages={JSON.stringify(availableLanguageCodes)}
+>
+  (function initI18n() {
+    const dataset = document.currentScript.dataset;
+
+    const serverSideLanguage = dataset.serverSideLanguage;
+    const availableLanguages = JSON.parse(dataset.availableLanguages);
+
+    function getPreferredLanguage() {
+      const storedLang = localStorage.getItem("language");
+      console.log("Stored language", storedLang);
+
+      if (storedLang) {
+        return storedLang;
+      }
+
+      if (navigator.languages && navigator.languages.length > 0) {
+        console.log("Navigator languages", navigator.languages);
+        for (const lang of navigator.languages) {
+          const langCode = lang.substring(0, 2).toLowerCase();
+          if (availableLanguages.includes(langCode)) {
+            console.log("Found language", langCode);
+            return langCode;
+          }
+        }
+      }
+
+      console.log(
+        "No language found, returning server side language",
+        serverSideLanguage,
+      );
+      return serverSideLanguage;
+    }
+
+    function setLanguage(code) {
+      console.log("Setting language to", code);
+
+      localStorage.setItem("language", code);
+      // TODO: Go to the appropriate, language-specific page
+      // window.location.href = ""
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const preferredLanguage = getPreferredLanguage();
+      if (preferredLanguage != serverSideLanguage) {
+        setLanguage(preferredLanguage);
+      }
+    });
+
+    document.addEventListener("setlanguage", (event) => {
+      console.log(
+        "Received setlanguage event, setting language to",
+        event.detail.language,
+      );
+      const language = event.detail.language;
+      setLanguage(language);
+    });
+  })();
+</script>

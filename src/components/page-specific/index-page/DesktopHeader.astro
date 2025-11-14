@@ -1,6 +1,7 @@
 ---
 import Links from "../../../util/links";
 import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
+import LanguageSelector from "../../common/LanguageSelector.astro";
 ---
 
 <style>
@@ -86,6 +87,8 @@ import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
         >
           Időpontfoglalás
         </a>
+
+        <LanguageSelector />
       </div>
     </div>
   </nav>
@@ -134,6 +137,14 @@ import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
           navLinks.classList.remove("push-to-the-right");
           navLinks.classList.add("translate-x-[-50%]");
         }
+
+        window.dispatchEvent(
+          new CustomEvent("desktop-header-sticky-state-changed", {
+            detail: {
+              isSticky,
+            },
+          }),
+        );
       }
     };
 

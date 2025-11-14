@@ -3,6 +3,7 @@ import Links from "../../../util/links";
 import Menu from "@lucide/astro/icons/menu";
 import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
 import MobileMenuOverlay from "./MobileMenuOverlay.astro";
+import LanguageSelector from "../LanguageSelector.astro";
 
 const mobileMenuButtonId = "mobile-menu-button";
 ---
@@ -49,6 +50,7 @@ const mobileMenuButtonId = "mobile-menu-button";
         >
           Időpontfoglalás
         </a>
+        <LanguageSelector />
       </div>
     </div>
 
@@ -65,14 +67,7 @@ const mobileMenuButtonId = "mobile-menu-button";
       </a>
 
       <div class="flex items-center gap-4">
-        <!-- Schedule Button -->
-        <a
-          href="#contact"
-          class="font-system-ui bg-white text-charcoal px-4 py-2 rounded text-sm hover:bg-gray-100 tracking-wider transition-colors"
-        >
-          Időpontfoglalás
-        </a>
-
+        <LanguageSelector />
         <!-- Drawer Toggle Button -->
         <button
           id={mobileMenuButtonId}

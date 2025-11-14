@@ -1,0 +1,94 @@
+---
+import ChevronDown from "@lucide/astro/icons/chevron-down";
+import Globe from "@lucide/astro/icons/globe";
+import { availableLanguages, type Language } from "../../util/i18n";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+
+const currentLanguageCode = Astro.currentLocale?.toLowerCase() ?? "hu";
+
+const shouldOpenUp = Astro.url.pathname === "/";
+---
+
+<div
+  class={`relative ${className}`}
+  x-data="languageSelector"
+  @click.away="open = false"
+  @desktop-header-sticky-state-changed.window="shouldOpenUp = !$event.detail.isSticky"
+>
+  <button
+    @click="open = !open"
+    class="flex items-center gap-2 text-white hover:text-gray-300 transition-colors px-3 py-2 rounded-md"
+    aria-label="Select language"
+    aria-expanded="false"
+    :aria-expanded="open.toString()"
+  >
+    <Globe class="w-4 h-4" />
+    <span x-text="currentLanguage.toUpperCase()" class="text-md font-medium"
+    ></span>
+    <ChevronDown
+      class="w-4 h-4 transition-transform"
+      :style="chevronRotation"
+    />
+  </button>
+
+  <div
+    x-show="open"
+    x-transition:enter="transition ease-out duration-200"
+    x-transition:enter-start="opacity-0 scale-95"
+    x-transition:enter-end="opacity-100 scale-100"
+    x-transition:leave="transition ease-in duration-150"
+    x-transition:leave-start="opacity-100 scale-100"
+    x-transition:leave-end="opacity-0 scale-95"
+    class="absolute right-0 w-32 bg-navy/95 backdrop-blur-sm border border-camel/70 rounded-md shadow-lg overflow-hidden z-50"
+    style="display: none;"
+    :style="shouldOpenUp ? { bottom: '100%', marginBottom: '0.5rem' } : { top: '100%', marginTop: '0.5rem' }"
+  >
+    {
+      availableLanguages.map((lang: Language) => (
+        <button
+          @click={"setLanguage(" + lang.code + ")"}
+          class="w-full text-left px-4 py-2 text-white hover:bg-camel/20 transition-colors text-md"
+          x-bind:class={`currentLanguage === '${lang.code}' && 'bg-camel/10'`}
+        >
+          {lang.label}
+        </button>
+      ))
+    }
+  </div>
+</div>
+
+<script
+  data-current-language={currentLanguageCode}
+  data-should-open-up={shouldOpenUp}
+>
+  (function initLanguageSelector() {
+    const dataset = document.currentScript.dataset;
+
+    const currentLanguage = dataset.currentLanguage;
+    const shouldOpenUp = dataset.shouldOpenUp === "true";
+
+    document.addEventListener("alpine:init", () => {
+      Alpine.data("languageSelector", () => ({
+        open: false,
+        currentLanguage,
+        shouldOpenUp,
+        get chevronRotation() {
+          const base = this.shouldOpenUp ? 180 : 0;
+          const delta = this.open ? 180 : 0;
+          return `transform: rotate(${(base + delta) % 360}deg)`;
+        },
+
+        setLanguage(code) {
+          console.log("Setting language to", code);
+          this.$dispatch("setlanguage", { language: code });
+          this.open = false;
+        },
+      }));
+    });
+  })();
+</script>
