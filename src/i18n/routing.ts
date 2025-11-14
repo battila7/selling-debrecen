@@ -7,6 +7,7 @@ export const routes: Record<AvailableLanguageCode, Record<string, string>> = {
     "for-sellers": "/kinaloknak",
     about: "/rolunk",
     "for-buyers": "/keresoknek",
+    "listing-detail-base": "/i/",
   },
   en: {
     home: "/",
@@ -14,6 +15,7 @@ export const routes: Record<AvailableLanguageCode, Record<string, string>> = {
     "for-sellers": "/for-sellers",
     about: "/about",
     "for-buyers": "/for-buyers",
+    "listing-detail-base": "/p/",
   },
   de: {
     home: "/",
@@ -21,6 +23,7 @@ export const routes: Record<AvailableLanguageCode, Record<string, string>> = {
     "for-sellers": "/verkaeufer",
     about: "/ueber-uns",
     "for-buyers": "/kaufer",
+    "listing-detail-base": "/i/",
   },
 } as const;
 

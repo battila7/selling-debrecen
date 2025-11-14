@@ -1,6 +1,7 @@
 ---
 import { PageLayout } from "../../../layouts";
 import { Contact } from "../../common";
+import { useI18n } from "../../../i18n";
 
 import Search from "./Search.astro";
 import ListingCardAlpine from "./ListingCard.alpine.astro";
@@ -8,6 +9,9 @@ import SearchIcon from "@lucide/astro/icons/search";
 import SearchX from "@lucide/astro/icons/search-x";
 import RefreshCw from "@lucide/astro/icons/refresh-cw";
 import MessageCircle from "@lucide/astro/icons/message-circle";
+
+const { p, t } = useI18n(Astro);
+const listingDetailBase = p("listing-detail-base");
 ---
 
 <PageLayout
@@ -59,7 +63,7 @@ import MessageCircle from "@lucide/astro/icons/message-circle";
           <p
             class="font-old-style text-center text-xl md:text-2xl text-charcoal/60 mb-12 tracking-wide"
           >
-            Elérte a találati lista végét
+            {t("listings.end-of-results")}
           </p>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
@@ -79,13 +83,12 @@ import MessageCircle from "@lucide/astro/icons/message-circle";
                   <h3
                     class="font-old-style text-2xl text-navy group-hover:text-cream mb-3 tracking-wide transition-colors duration-700"
                   >
-                    Új keresés
+                    {t("listings.new-search")}
                   </h3>
                   <p
                     class="font-system-ui text-sm text-charcoal/70 group-hover:text-cream/90 leading-relaxed transition-colors duration-700"
                   >
-                    Módosítsa keresési feltételeit, és találja meg a tökéletes
-                    ingatlant új szempontok alapján.
+                    {t("listings.new-search-description")}
                   </p>
                 </div>
               </div>
@@ -108,13 +111,12 @@ import MessageCircle from "@lucide/astro/icons/message-circle";
                   <h3
                     class="font-old-style text-2xl text-navy group-hover:text-cream mb-3 tracking-wide transition-colors duration-700"
                   >
-                    Időpontfoglalás
+                    {t("listings.schedule-appointment")}
                   </h3>
                   <p
                     class="font-system-ui text-sm text-charcoal/70 group-hover:text-cream/90 leading-relaxed transition-colors duration-700"
                   >
-                    Ha nem találja a tökéletes ingatlant, ne habozzon, lépjen
-                    kapcsolatba velünk!
+                    {t("listings.schedule-appointment-description")}
                   </p>
                 </div>
               </div>
@@ -138,19 +140,19 @@ import MessageCircle from "@lucide/astro/icons/message-circle";
           <h2
             class="font-old-style text-3xl md:text-4xl text-charcoal mb-4 tracking-wide"
           >
-            Nincs találat
+            {t("listings.no-results")}
           </h2>
           <p
             class="font-system-ui text-base md:text-lg text-charcoal/70 leading-relaxed mb-6"
           >
-            Sajnos nem találtunk a megadott feltételeknek megfelelő ingatlant.
+            {t("listings.no-results-description")}
           </p>
           <button
             type="button"
             @click="scrollToSearch"
             class="cursor-pointer inline-block px-8 py-4 bg-navy text-cream font-system-ui text-base tracking-wide uppercase border-2 border-navy hover:bg-transparent hover:text-navy transition-colors duration-700"
           >
-            Új keresés
+            {t("listings.new-search")}
           </button>
         </div>
       </div>
@@ -159,22 +161,19 @@ import MessageCircle from "@lucide/astro/icons/message-circle";
 
   <Contact />
 
-  <script>
+  <script data-listing-detail-base={listingDetailBase}>
     (function initListingSearch() {
-      type SearchQuery = {
-        transactionType: string;
-        propertyType: string;
-        location: string;
-        priceMin: number;
-        priceMax: number;
-        areaMin: number;
-        areaMax: number;
-        isInitial: boolean;
-      };
+      const dataset = document.currentScript.dataset;
+      const listingDetailBase = dataset.listingDetailBase;
 
       async function fetchListings() {
         const response = await fetch("/data/listings.json");
         const data = await response.json();
+
+        data.listings.forEach((listing) => {
+          listing.link = `${listingDetailBase}${listing.link}`;
+        });
+
         return data.listings;
       }
 
@@ -188,7 +187,7 @@ import MessageCircle from "@lucide/astro/icons/message-circle";
             this.$watch("query", () => void this.filteredListings);
           },
 
-          performSearch(query: SearchQuery) {
+          performSearch(query) {
             console.log("search perform");
             console.log(query);
 

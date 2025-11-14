@@ -6,7 +6,9 @@ import Facebook from "../../images/brands/facebook.svg";
 import Instagram from "../../images/brands/instagram.svg";
 import Tiktok from "../../images/brands/tiktok.svg";
 import Logo from "../../images/selling-debrecen-logo.svg";
-import Links from "../../util/links";
+import { useI18n } from "../../i18n";
+
+const { p, t } = useI18n(Astro);
 
 // TODO: Update these with actual contact information
 const officeAddress = "Debrecen, Magyarország";
@@ -21,11 +23,11 @@ const socialLinks = {
 };
 
 const navigationLinks = [
-  { href: Links.HOME, label: "Főoldal" },
-  { href: Links.PROPERTIES, label: "Ingatlanjaink" },
-  { href: Links.FOR_SELLERS, label: "Kínálóknak" },
-  { href: Links.FOR_BUYERS, label: "Keresőknek" },
-  { href: Links.ABOUT, label: "Rólunk" },
+  { href: p("home"), label: t("nav.home") },
+  { href: p("properties"), label: t("nav.properties") },
+  { href: p("for-sellers"), label: t("nav.for-sellers") },
+  { href: p("for-buyers"), label: t("nav.for-buyers") },
+  { href: p("about"), label: t("nav.about") },
 ];
 
 const legalLinks = [
@@ -40,7 +42,7 @@ const legalLinks = [
     <!-- Logo Section -->
     <div class="mb-12 pb-8 border-b border-taupe/20">
       <a
-        href={Links.HOME}
+        href={p("home")}
         class="inline-block hover:opacity-80 transition-opacity"
         aria-label="Selling Debrecen - Főoldal"
       >
@@ -54,7 +56,9 @@ const legalLinks = [
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
       <!-- Contact Info Column -->
       <div class="lg:col-span-1">
-        <h3 class="font-old-style text-lg text-navy mb-6">Kapcsolat</h3>
+        <h3 class="font-old-style text-lg text-navy mb-6">
+          {t("footer.contact")}
+        </h3>
         <ul class="space-y-5">
           <li>
             <a
@@ -102,7 +106,9 @@ const legalLinks = [
 
       <!-- Navigation Links Column -->
       <div class="lg:col-span-1">
-        <h3 class="font-old-style text-lg text-navy mb-6">Oldaltérkép</h3>
+        <h3 class="font-old-style text-lg text-navy mb-6">
+          {t("footer.navigation")}
+        </h3>
         <nav aria-label="Footer navigation">
           <ul class="space-y-3">
             {
@@ -123,7 +129,9 @@ const legalLinks = [
 
       <!-- Social Media Column -->
       <div class="lg:col-span-1">
-        <h3 class="font-old-style text-lg text-navy mb-6">Közösségi média</h3>
+        <h3 class="font-old-style text-lg text-navy mb-6">
+          {t("footer.social-media")}
+        </h3>
         <ul class="flex gap-4">
           <li>
             <a
@@ -163,7 +171,9 @@ const legalLinks = [
 
       <!-- Legal Column -->
       <div class="lg:col-span-1">
-        <h3 class="font-old-style text-lg text-navy mb-6">Jogi információk</h3>
+        <h3 class="font-old-style text-lg text-navy mb-6">
+          {t("footer.legal-information")}
+        </h3>
         <nav aria-label="Legal information">
           <ul class="space-y-3">
             {
@@ -188,7 +198,9 @@ const legalLinks = [
       class="mt-12 pt-8 border-t border-taupe/20 text-center text-sm text-charcoal/60"
     >
       <p>
-        &copy; {new Date().getFullYear()} Selling Debrecen. Minden jog fenntartva.
+        &copy; {new Date().getFullYear()} Selling Debrecen. {
+          t("footer.all-rights-reserved")
+        }
       </p>
     </div>
   </div>

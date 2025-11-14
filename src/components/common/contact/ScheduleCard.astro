@@ -1,8 +1,10 @@
 ---
 import Check from "@lucide/astro/icons/check";
+import { useI18n } from "../../../i18n";
 
 const calendlyUrl = "https://calendly.com/kisszoltan"; // Update with actual Calendly URL
 
+const { t } = useI18n(Astro);
 type Props = {
   class: string;
 };
@@ -81,6 +83,6 @@ const { class: className, ...rest } = Astro.props;
     rel="noopener noreferrer"
     class="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-white text-white font-system-ui tracking-wide uppercase hover:border-camel hover:bg-camel hover:text-navy transition-colors duration-300"
   >
-    <span>Időpont Foglalása</span>
+    <span>{t("contact.schedule-appointment")}</span>
   </a>
 </div>

@@ -2,14 +2,16 @@
 import ContactCard from "./ContactCard.astro";
 import ScheduleCard from "./ScheduleCard.astro";
 import HeadingCentered from "../HeadingCentered.astro";
+import { useI18n } from "../../../i18n";
 
+const { t } = useI18n(Astro);
 export const contactSectionId = "contact";
 ---
 
 <section class="py-20 bg-cream-soft" id={contactSectionId}>
   <div class="container mx-auto px-6 lg:px-12">
     <div class="max-w-6xl mx-auto">
-      <HeadingCentered title="Lépjen kapcsolatba velünk" />
+      <HeadingCentered title={t("contact.title")} />
 
       <div class="grid lg:grid-cols-2 gap-8 mb-12 lg:items-stretch">
         <ContactCard class="order-2 lg:order-1 h-full" />

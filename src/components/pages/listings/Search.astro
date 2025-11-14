@@ -2,6 +2,9 @@
 import { Picture } from "astro:assets";
 import listingsBg from "../../../images/listings-bg-1.jpg";
 import SearchIcon from "@lucide/astro/icons/search";
+import { useI18n } from "../../../i18n";
+
+const { t } = useI18n(Astro);
 ---
 
 <section
@@ -56,7 +59,7 @@ import SearchIcon from "@lucide/astro/icons/search";
                   <span
                     class="flex items-center justify-center h-full px-4 py-4 lg:py-5 text-charcoal/60 cursor-pointer transition-all peer-checked:text-white peer-checked:bg-camel peer-checked:font-medium"
                   >
-                    Eladó
+                    {t("listings.for-sale")}
                   </span>
                 </label>
                 <div class="w-px bg-taupe/30"></div>
@@ -71,7 +74,7 @@ import SearchIcon from "@lucide/astro/icons/search";
                   <span
                     class="flex items-center justify-center h-full px-4 py-4 lg:py-5 text-charcoal/60 cursor-pointer transition-all peer-checked:text-white peer-checked:bg-camel peer-checked:font-medium"
                   >
-                    Kiadó
+                    {t("listings.for-rent")}
                   </span>
                 </label>
               </div>
@@ -98,11 +101,11 @@ import SearchIcon from "@lucide/astro/icons/search";
           <!-- Location Input -->
           <div class="flex-2 min-w-0">
             <label class="block">
-              <span class="sr-only">Helyszín</span>
+              <span class="sr-only">{t("listings.location")}</span>
               <input
                 type="text"
                 name="location"
-                placeholder="Helyszín"
+                placeholder={t("listings.location")}
                 class="w-full h-full px-4 py-4 lg:py-5 text-charcoal bg-transparent border-0 focus:outline-none transition-all placeholder:text-charcoal/50"
                 x-model="location"
               />
@@ -144,9 +147,9 @@ import SearchIcon from "@lucide/astro/icons/search";
             </div>
             <div
               class="flex items-center justify-center pl-1 pr-2 text-charcoal"
-              x-text="transactionType == 'sale' ? 'millió Ft' : 'ezer Ft'"
+              x-text={`transactionType == 'sale' ? '${t("listings.million")} Ft' : '${t("listings.thousand")} Ft'`}
             >
-              millió Ft
+              {t("listings.million")} Ft
             </div>
           </div>
 
@@ -193,11 +196,11 @@ import SearchIcon from "@lucide/astro/icons/search";
             <button
               type="button"
               class="w-full lg:w-auto h-full px-8 py-4 lg:py-5 bg-navy text-white font-medium hover:bg-navy/90 focus:outline-none transition-all flex items-center justify-center gap-2"
-              aria-label="Keresés"
+              aria-label={t("listings.search")}
               @click="submitSearch"
             >
               <SearchIcon class="w-5 h-5" />
-              <span class="lg:sr-only">Keresés</span>
+              <span class="lg:sr-only">{t("listings.search")}</span>
             </button>
           </div>
         </form>

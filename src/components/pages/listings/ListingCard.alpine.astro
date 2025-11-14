@@ -2,7 +2,10 @@
 import MapPin from "@lucide/astro/icons/map-pin";
 import House from "@lucide/astro/icons/house";
 import Maximize2 from "@lucide/astro/icons/maximize-2";
+import Hash from "@lucide/astro/icons/hash";
+import { useI18n } from "../../../i18n";
 
+const { t } = useI18n(Astro);
 interface Props {
   clientSideListingProp: string;
 }
@@ -14,7 +17,7 @@ const { clientSideListingProp } = Astro.props;
   x-data=`{
     listing: ${clientSideListingProp},
     get formattedPrice() {
-      return this.listing.price.toLocaleString('hu-HU') + ' Ft';
+      return this.listing.price.toLocaleString() + ' Ft';
     }
   }
   `
@@ -67,11 +70,19 @@ const { clientSideListingProp } = Astro.props;
         x-text="listing.title"
       >
       </h3>
-      <div class="flex items-start gap-2 text-charcoal/70">
+      <div class="flex items-start gap-2 text-charcoal/70 mb-1">
         <MapPin size={16} class="mt-0.5 flex-shrink-0" />
         <p
           class="font-geometric-humanist text-sm tracking-wide"
           x-text="listing.address"
+        >
+        </p>
+      </div>
+      <div class="flex items-start gap-2 text-charcoal/70">
+        <Hash size={16} class="mt-0.5 flex-shrink-0" />
+        <p
+          class="font-geometric-humanist text-sm tracking-wide"
+          x-text="listing.id"
         >
         </p>
       </div>
@@ -90,7 +101,7 @@ const { clientSideListingProp } = Astro.props;
           <p
             class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider"
           >
-            Szobák
+            {t("listings.rooms")}
           </p>
           <p
             class="font-old-style text-lg text-charcoal font-semibold"
@@ -107,7 +118,7 @@ const { clientSideListingProp } = Astro.props;
           <p
             class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider"
           >
-            Terület
+            {t("listings.area")}
           </p>
           <p
             class="font-old-style text-lg text-charcoal font-semibold"
@@ -134,7 +145,7 @@ const { clientSideListingProp } = Astro.props;
         <p
           class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1"
         >
-          Ár
+          {t("listings.price")}
         </p>
         <p
           class="font-old-style text-2xl text-navy font-bold tracking-wide"
@@ -147,7 +158,7 @@ const { clientSideListingProp } = Astro.props;
         x-bind:href="listing.link"
         class="inline-block px-5 py-2.5 bg-navy text-cream font-geometric-humanist text-xs tracking-widest uppercase font-semibold border-2 border-navy hover:bg-transparent hover:text-navy transition-colors duration-700"
       >
-        Részletek
+        {t("listings.details")}
       </a>
     </div>
   </div>

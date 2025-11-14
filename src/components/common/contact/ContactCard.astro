@@ -5,7 +5,9 @@ import Mail from "@lucide/astro/icons/mail";
 import Phone from "@lucide/astro/icons/phone";
 import Clock from "@lucide/astro/icons/clock";
 import agentProfile from "../../../images/agent-profile-picture-placeholder.jpg";
+import { useI18n } from "../../../i18n";
 
+const { t } = useI18n(Astro);
 // TODO: Update these with actual contact information
 const officeAddress = "Debrecen, Magyarország";
 const email = "info@sellingdebrecen.hu";
@@ -47,7 +49,7 @@ const { class: className, ...rest } = Astro.props;
 
   <div class="flex-1">
     <h3 class="font-old-style text-2xl font-medium mb-8 text-navy">
-      Elérhetőségek
+      {t("contact.contact-information")}
     </h3>
 
     <div class="space-y-8">
@@ -59,7 +61,9 @@ const { class: className, ...rest } = Astro.props;
           </div>
         </div>
         <div class="flex-1">
-          <h4 class="font-semibold text-charcoal mb-2">Iroda</h4>
+          <h4 class="font-semibold text-charcoal mb-2">
+            {t("contact.office")}
+          </h4>
           <address class="text-charcoal/70 not-italic leading-relaxed">
             {officeAddress}
           </address>
@@ -74,7 +78,7 @@ const { class: className, ...rest } = Astro.props;
           </div>
         </div>
         <div class="flex-1">
-          <h4 class="font-semibold text-charcoal mb-2">Email</h4>
+          <h4 class="font-semibold text-charcoal mb-2">{t("contact.email")}</h4>
           <a
             href={`mailto:${email}`}
             class="text-navy hover:text-camel transition-colors underline decoration-1 underline-offset-2"
@@ -92,7 +96,7 @@ const { class: className, ...rest } = Astro.props;
           </div>
         </div>
         <div class="flex-1">
-          <h4 class="font-semibold text-charcoal mb-2">Telefon</h4>
+          <h4 class="font-semibold text-charcoal mb-2">{t("contact.phone")}</h4>
           <a
             href={`tel:${phone.replace(/\s/g, "")}`}
             class="text-navy hover:text-camel transition-colors underline decoration-1 underline-offset-2"
@@ -110,13 +114,12 @@ const { class: className, ...rest } = Astro.props;
           </div>
         </div>
         <div class="flex-1">
-          <h4 class="font-semibold text-charcoal mb-2">Nyitvatartás</h4>
+          <h4 class="font-semibold text-charcoal mb-2">
+            {t("contact.office-hours")}
+          </h4>
           <div class="text-charcoal/70 leading-relaxed space-y-1">
             <p>Hétfő–Péntek: 9:00–18:00</p>
             <p>Szombat: 10:00–14:00</p>
-            <p class="text-sm mt-2 italic">
-              Hétvégén előzetes egyeztetés alapján
-            </p>
           </div>
         </div>
       </div>

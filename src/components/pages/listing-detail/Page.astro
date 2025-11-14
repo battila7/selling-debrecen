@@ -3,6 +3,7 @@ import agentProfilePicture from "../../../images/agent-profile-picture-placehold
 import { PageLayout } from "../../../layouts";
 import { Image } from "astro:assets";
 import { Contact } from "../../common";
+import { useI18n, getLangFromUrl } from "../../../i18n";
 
 import MapPin from "@lucide/astro/icons/map-pin";
 import House from "@lucide/astro/icons/house";
@@ -55,8 +56,10 @@ interface Props {
 }
 
 const { listing } = Astro.props;
-
-const formattedPrice = listing.price.toLocaleString("hu-HU") + " Ft";
+const currentLanguageCode = getLangFromUrl(Astro.url);
+const { t } = useI18n(Astro);
+const formattedPrice =
+  listing.price.toLocaleString(currentLanguageCode) + " Ft";
 
 const propertyTypeLabels: Record<string, string> = {
   house: "Családi ház",
@@ -90,7 +93,7 @@ const propertyTypeLabels: Record<string, string> = {
               <div class="flex items-start gap-3 text-charcoal/70">
                 <Hash size={24} class="mt-1 flex-shrink-0" />
                 <p class="font-geometric-humanist text-lg tracking-wide">
-                  Hivatkozási szám: {listing.id}
+                  {t("listing-detail.reference-number")}: {listing.id}
                 </p>
               </div>
               <button
@@ -109,10 +112,10 @@ const propertyTypeLabels: Record<string, string> = {
               >
                 <Copy size={24} class="mt-1 flex-shrink-0" />
                 <p
-                  x-text="copied ? 'Másolva!' : 'Link másolása'"
+                  x-text=`copied ? '${t("listing-detail.copied")}' : '${t("listing-detail.copy-link")}'`
                   class="font-geometric-humanist text-lg tracking-wide"
                 >
-                  Link másolása
+                  {t("listing-detail.copy-link")}
                 </p>
               </button>
             </div>
@@ -131,7 +134,7 @@ const propertyTypeLabels: Record<string, string> = {
                 <p
                   class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1"
                 >
-                  Alapterület
+                  {t("listing-detail.area")}
                 </p>
                 <p class="font-old-style text-xl text-charcoal font-bold">
                   {listing.area} m²
@@ -147,7 +150,7 @@ const propertyTypeLabels: Record<string, string> = {
                   </div>
                   <div>
                     <p class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1">
-                      Terasz
+                      {t("listing-detail.terrace")}
                     </p>
                     <p class="font-old-style text-xl text-charcoal font-bold">
                       {listing.terraceArea} m²
@@ -165,7 +168,7 @@ const propertyTypeLabels: Record<string, string> = {
                   </div>
                   <div>
                     <p class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1">
-                      Kert
+                      {t("listing-detail.garden")}
                     </p>
                     <p class="font-old-style text-xl text-charcoal font-bold">
                       {listing.gardenArea} m²
@@ -186,7 +189,7 @@ const propertyTypeLabels: Record<string, string> = {
                 <p
                   class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1"
                 >
-                  Szobák
+                  {t("listing-detail.rooms")}
                 </p>
                 <p class="font-old-style text-xl text-charcoal font-bold">
                   {listing.rooms}
@@ -211,7 +214,7 @@ const propertyTypeLabels: Record<string, string> = {
                 <p
                   class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1"
                 >
-                  Típus
+                  {t("listing-detail.property-type")}
                 </p>
                 <p class="font-old-style text-xl text-charcoal font-bold">
                   {propertyTypeLabels[listing.propertyType]}
@@ -227,7 +230,7 @@ const propertyTypeLabels: Record<string, string> = {
                   </div>
                   <div>
                     <p class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-1">
-                      Emelet
+                      {t("listing-detail.floor")}
                     </p>
                     <p class="font-old-style text-xl text-charcoal font-bold">
                       {listing.floor}
@@ -246,7 +249,7 @@ const propertyTypeLabels: Record<string, string> = {
             <h2
               class="font-old-style text-2xl text-charcoal tracking-wide mb-6"
             >
-              Leírás
+              {t("listing-detail.description")}
             </h2>
             <p
               class="font-system-ui text-lg text-charcoal/80 leading-relaxed whitespace-pre-line"
@@ -263,7 +266,7 @@ const propertyTypeLabels: Record<string, string> = {
             <h2
               class="font-old-style text-2xl text-charcoal mb-6 tracking-wide"
             >
-              Főbb jellemzők
+              {t("listing-detail.key-features")}
             </h2>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
               <!-- Checklist -->
@@ -271,7 +274,7 @@ const propertyTypeLabels: Record<string, string> = {
                 <h3
                   class="font-geometric-humanist text-sm text-charcoal/70 uppercase tracking-wider mb-4"
                 >
-                  Amiért jó választás
+                  {t("listing-detail.why-good-choice")}
                 </h3>
                 <ul class="space-y-4">
                   {
@@ -294,7 +297,7 @@ const propertyTypeLabels: Record<string, string> = {
                 <h3
                   class="font-geometric-humanist text-sm text-charcoal/70 uppercase tracking-wider mb-4"
                 >
-                  A közelben
+                  {t("listing-detail.nearby")}
                 </h3>
                 <ul class="space-y-4">
                   {
@@ -317,7 +320,7 @@ const propertyTypeLabels: Record<string, string> = {
                 <h3
                   class="font-geometric-humanist text-sm text-charcoal/70 uppercase tracking-wider mb-4"
                 >
-                  Tömegközlekedés
+                  {t("listing-detail.public-transport")}
                 </h3>
                 <ul class="space-y-4">
                   {
@@ -359,10 +362,10 @@ const propertyTypeLabels: Record<string, string> = {
                     </div>
                     <div>
                       <h3 class="font-old-style text-2xl text-navy group-hover:text-cream mb-2 tracking-wide transition-colors duration-700">
-                        Alaprajz letöltése
+                        {t("listing-detail.download-floor-plan")}
                       </h3>
                       <p class="font-system-ui text-sm text-charcoal/70 group-hover:text-cream/90 leading-relaxed transition-colors duration-700">
-                        Töltse le az ingatlan alaprajzát ide kattintva.
+                        {t("listing-detail.download-floor-plan-description")}
                       </p>
                     </div>
                   </div>
@@ -380,7 +383,7 @@ const propertyTypeLabels: Record<string, string> = {
               <p
                 class="font-geometric-humanist text-xs text-cream/80 uppercase tracking-wider mb-3"
               >
-                Kért ár
+                {t("listing-detail.requested-price")}
               </p>
               <p
                 class="font-old-style text-4xl text-cream font-bold tracking-wide mb-2"
@@ -392,12 +395,12 @@ const propertyTypeLabels: Record<string, string> = {
             <!-- Contact Card -->
             <div class="bg-cream-soft border-2 border-taupe/30 p-8 space-y-6">
               <h3 class="font-old-style text-2xl text-charcoal tracking-wide">
-                Érdeklődés
+                {t("listing-detail.interest")}
               </h3>
               <p
                 class="font-system-ui text-sm text-charcoal/70 leading-relaxed"
               >
-                Felkeltettük az érdeklődését? Keressen minket bizalommal!
+                {t("listing-detail.interest-description")}
               </p>
 
               <!-- CTA Buttons -->
@@ -407,7 +410,7 @@ const propertyTypeLabels: Record<string, string> = {
                   class="flex items-center justify-center gap-3 w-full px-6 py-4 bg-navy text-cream font-geometric-humanist text-sm tracking-widest uppercase font-semibold border-2 border-navy hover:bg-transparent hover:text-navy transition-colors duration-700"
                 >
                   <Phone size={20} />
-                  <span>Kapcsolat</span>
+                  <span>{t("listing-detail.contact")}</span>
                 </a>
               </div>
 
@@ -416,7 +419,7 @@ const propertyTypeLabels: Record<string, string> = {
                 <p
                   class="font-geometric-humanist text-xs text-charcoal/60 uppercase tracking-wider mb-4"
                 >
-                  Az Ön tanácsadója
+                  {t("listing-detail.your-advisor")}
                 </p>
                 <div class="flex items-center gap-4">
                   <Image
@@ -441,7 +444,7 @@ const propertyTypeLabels: Record<string, string> = {
         <p
           class="font-old-style text-center text-xl md:text-2xl text-charcoal/60 mb-12 tracking-wide"
         >
-          További ingatlanjaink
+          {t("listing-detail.more-listings")}
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
@@ -460,13 +463,12 @@ const propertyTypeLabels: Record<string, string> = {
                 <h3
                   class="font-old-style text-2xl text-navy group-hover:text-cream mb-3 tracking-wide transition-colors duration-700"
                 >
-                  Keresés
+                  {t("listing-detail.search")}
                 </h3>
                 <p
                   class="font-system-ui text-sm text-charcoal/70 group-hover:text-cream/90 leading-relaxed transition-colors duration-700"
                 >
-                  Böngéssze teljes kínálatunkat, és találja meg az Önnek
-                  legmegfelelőbb ingatlant.
+                  {t("listing-detail.search-description")}
                 </p>
               </div>
             </div>
@@ -489,13 +491,12 @@ const propertyTypeLabels: Record<string, string> = {
                 <h3
                   class="font-old-style text-2xl text-navy group-hover:text-cream mb-3 tracking-wide transition-colors duration-700"
                 >
-                  Időpontfoglalás
+                  {t("listing-detail.schedule-appointment")}
                 </h3>
                 <p
                   class="font-system-ui text-sm text-charcoal/70 group-hover:text-cream/90 leading-relaxed transition-colors duration-700"
                 >
-                  Személyre szabott ajánlatért és részletes tanácsadásért
-                  keressen minket bizalommal!
+                  {t("listing-detail.schedule-appointment-description")}
                 </p>
               </div>
             </div>

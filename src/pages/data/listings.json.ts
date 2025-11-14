@@ -43,7 +43,7 @@ const listings = [
 ];
 
 listings.forEach((listing) => {
-  listing.link = `/i/${listing.id}-${listing.slug}`;
+  listing.link = `${listing.id}-${listing.slug}`;
 });
 
 export function GET({ request }: { request: Request }) {
