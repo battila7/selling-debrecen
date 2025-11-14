@@ -173,7 +173,7 @@ import MessageCircle from "@lucide/astro/icons/message-circle";
       };
 
       async function fetchListings() {
-        const response = await fetch("/listings.json");
+        const response = await fetch("/data/listings.json");
         const data = await response.json();
         return data.listings;
       }

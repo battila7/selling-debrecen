@@ -1,4 +1,4 @@
-import listingPlaceholder from "../images/listing-placeholder.jpg";
+import listingPlaceholder from "../../images/listing-placeholder.jpg";
 const listings = [
   {
     id: "32",
@@ -46,7 +46,7 @@ listings.forEach((listing) => {
   listing.link = `/i/${listing.id}-${listing.slug}`;
 });
 
-export function GET({ request }) {
+export function GET({ request }: { request: Request }) {
   const u = new URL(listingPlaceholder.src, request.url);
   const a = u.toString();
   console.log(a);
