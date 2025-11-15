@@ -1,12 +1,7 @@
 ---
 import ChevronDown from "@lucide/astro/icons/chevron-down";
 import Globe from "@lucide/astro/icons/globe";
-import {
-  availableLanguages,
-  getLangFromUrl,
-  type Language,
-  type AvailableLanguageCode,
-} from "../../i18n";
+import { availableLanguages, getLangFromUrl, type Language } from "../../i18n";
 
 interface Props {
   class?: string;
@@ -16,13 +11,9 @@ const { class: className = "" } = Astro.props;
 
 const currentLanguageCode = getLangFromUrl(Astro.url);
 
-const shouldOpenUp = Astro.url.pathname === "/";
+const indexPageUrls = ["/", "/en", "/de"];
 
-const baseUrls: Record<AvailableLanguageCode, string> = {
-  hu: "/",
-  en: "/en",
-  de: "/de",
-};
+const shouldOpenUp = indexPageUrls.includes(Astro.url.pathname);
 ---
 
 <div
@@ -61,13 +52,13 @@ const baseUrls: Record<AvailableLanguageCode, string> = {
   >
     {
       availableLanguages.map((lang: Language) => (
-        <a
-          class="block w-full text-left px-4 py-2 text-white hover:bg-camel/20 transition-colors text-md"
+        <button
+          @click={`setLanguage('${lang.code}')`}
+          class="cursor-pointer w-full text-left px-4 py-2 text-white hover:bg-camel/20 transition-colors text-md"
           x-bind:class={`currentLanguage === '${lang.code}' && 'bg-camel/10'`}
-          href={baseUrls[lang.code]}
         >
           {lang.label}
-        </a>
+        </button>
       ))
     }
   </div>
@@ -92,6 +83,12 @@ const baseUrls: Record<AvailableLanguageCode, string> = {
           const base = this.shouldOpenUp ? 180 : 0;
           const delta = this.open ? 180 : 0;
           return `transform: rotate(${(base + delta) % 360}deg)`;
+        },
+
+        setLanguage(code) {
+          console.log("Setting language to", code);
+          this.$dispatch("setlanguage", { language: code });
+          this.open = false;
         },
       }));
     });

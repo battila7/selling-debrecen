@@ -1,65 +1,121 @@
 ---
-import { availableLanguageCodes, getLangFromUrl } from "../../i18n";
+import {
+  availableLanguageCodes,
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+  type AvailableLanguageCode,
+} from "../../i18n";
 
 const serverSideLanguageCode = getLangFromUrl(Astro.url);
+
+const languageHomeUrls = availableLanguageCodes.reduce(
+  (acc, lang) => {
+    const translatePath = useTranslatedPath(lang);
+    acc[lang] = translatePath("home");
+    return acc;
+  },
+  {} as Record<AvailableLanguageCode, string>,
+);
+
+const languageBannerCopy = availableLanguageCodes.reduce(
+  (acc, lang) => {
+    const t = useTranslations(lang);
+    acc[lang] = {
+      message: t("language-banner.message"),
+      button: t("language-banner.button"),
+    };
+    return acc;
+  },
+  {} as Record<AvailableLanguageCode, { message: string; button: string }>,
+);
 ---
+
+<div
+  data-language-banner
+  hidden
+  lang={serverSideLanguageCode}
+  class="w-full border-b border-camel/40 bg-cream-soft text-navy"
+>
+  <div
+    class="mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
+  >
+    <p data-language-banner-message class="text-sm font-medium sm:text-base">
+    </p>
+    <button
+      type="button"
+      data-language-banner-action
+      class="inline-flex items-center justify-center rounded-full bg-navy px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-forest focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
+    ></button>
+  </div>
+</div>
 
 <script
   data-server-side-language={serverSideLanguageCode}
   data-available-languages={JSON.stringify(availableLanguageCodes)}
+  data-language-home-urls={JSON.stringify(languageHomeUrls)}
+  data-language-banner-copy={JSON.stringify(languageBannerCopy)}
 >
   (function initI18n() {
     const dataset = document.currentScript.dataset;
 
     const serverSideLanguage = dataset.serverSideLanguage;
-    const availableLanguages = JSON.parse(dataset.availableLanguages);
+    const availableLanguages = JSON.parse(dataset.availableLanguages ?? "[]");
+    const languageHomeUrls = JSON.parse(dataset.languageHomeUrls ?? "{}");
+    const languageBannerCopy = JSON.parse(dataset.languageBannerCopy ?? "{}");
 
     function getPreferredLanguage() {
-      const storedLang = localStorage.getItem("language");
-      console.log("Stored language", storedLang);
-
-      if (storedLang) {
-        return storedLang;
-      }
-
       if (navigator.languages && navigator.languages.length > 0) {
-        console.log("Navigator languages", navigator.languages);
         for (const lang of navigator.languages) {
           const langCode = lang.substring(0, 2).toLowerCase();
           if (availableLanguages.includes(langCode)) {
-            console.log("Found language", langCode);
             return langCode;
           }
         }
       }
 
-      console.log(
-        "No language found, returning server side language",
-        serverSideLanguage,
-      );
       return serverSideLanguage;
     }
 
     function setLanguage(code) {
-      console.log("Setting language to", code);
+      const targetUrl = languageHomeUrls[code];
+      if (!targetUrl) {
+        return;
+      }
 
-      localStorage.setItem("language", code);
-      // TODO: Go to the appropriate, language-specific page
-      // window.location.href = ""
+      window.location.href = targetUrl;
+    }
+
+    function showLanguageBanner(language) {
+      const banner = document.querySelector("[data-language-banner]");
+      const messageElement = banner?.querySelector(
+        "[data-language-banner-message]",
+      );
+      const actionButton = banner?.querySelector(
+        "[data-language-banner-action]",
+      );
+      const copy = languageBannerCopy[language];
+
+      if (!banner || !messageElement || !actionButton || !copy) {
+        return;
+      }
+
+      banner.hidden = false;
+      banner.setAttribute("lang", language);
+
+      messageElement.textContent = copy.message;
+      actionButton.textContent = copy.button;
+      actionButton.onclick = () => setLanguage(language);
     }
 
     document.addEventListener("DOMContentLoaded", () => {
       const preferredLanguage = getPreferredLanguage();
-      if (preferredLanguage != serverSideLanguage) {
-        setLanguage(preferredLanguage);
+      if (preferredLanguage !== serverSideLanguage) {
+        showLanguageBanner(preferredLanguage);
       }
     });
 
     document.addEventListener("setlanguage", (event) => {
-      console.log(
-        "Received setlanguage event, setting language to",
-        event.detail.language,
-      );
       const language = event.detail.language;
       setLanguage(language);
     });

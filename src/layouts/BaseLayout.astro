@@ -16,7 +16,7 @@ const lang = Astro.currentLocale ?? "hu";
 <html lang={lang} class="scroll-smooth">
   <Head title={title} description={description} />
   <body class="min-h-screen">
-    <slot />
     <I18n />
+    <slot />
   </body>
 </html>
