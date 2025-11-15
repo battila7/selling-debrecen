@@ -3,9 +3,10 @@ import ChevronLeft from "@lucide/astro/icons/chevron-left";
 import ChevronRight from "@lucide/astro/icons/chevron-right";
 import X from "@lucide/astro/icons/x";
 import { useI18n } from "../../../i18n";
+import type { Listing } from "../../../listings";
 
 type Props = {
-  images: { src: string; alt: string }[];
+  images: Listing["images"];
 };
 
 const { images } = Astro.props;

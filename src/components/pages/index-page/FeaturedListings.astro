@@ -1,66 +1,12 @@
 ---
-import ListingCard, { type Listing } from "./ListingCard.astro";
-import listingPlaceholder from "../../../images/listing-placeholder.jpg";
-import Links from "../../../util/links";
+import ListingCard from "./ListingCard.astro";
 import { HeadingLeftAligned } from "../../common";
+import { getFeaturedListings } from "../../../listings";
+import { useI18n } from "../../../i18n";
 
+const { p } = useI18n(Astro);
 // Mock data - this can be replaced with a content collection later
-const featuredListings: Listing[] = [
-  {
-    title: "Elegáns családi ház",
-    address: "Debrecen, Belváros",
-    price: "125.000.000 Ft",
-    image: listingPlaceholder.src,
-    rooms: 5,
-    area: 180,
-    propertyType: "Családi ház",
-  },
-  {
-    title: "Modern lakás",
-    address: "Debrecen, Egyetem tér",
-    price: "45.000.000 Ft",
-    image: listingPlaceholder.src,
-    rooms: 2,
-    area: 65,
-    propertyType: "Lakás",
-  },
-  {
-    title: "Prémium villa",
-    address: "Debrecen, Nagyerdő",
-    price: "280.000.000 Ft",
-    image: listingPlaceholder.src,
-    rooms: 7,
-    area: 320,
-    propertyType: "Villa",
-  },
-  {
-    title: "Tégla családi ház",
-    address: "Debrecen, Tócóskert",
-    price: "95.000.000 Ft",
-    image: listingPlaceholder.src,
-    rooms: 4,
-    area: 140,
-    propertyType: "Családi ház",
-  },
-  {
-    title: "Panorámás lakás",
-    address: "Debrecen, Doberdó utca",
-    price: "52.000.000 Ft",
-    image: listingPlaceholder.src,
-    rooms: 3,
-    area: 85,
-    propertyType: "Lakás",
-  },
-  {
-    title: "Kertesház",
-    address: "Debrecen, Széchenyi utca",
-    price: "78.000.000 Ft",
-    image: listingPlaceholder.src,
-    rooms: 4,
-    area: 120,
-    propertyType: "Családi ház",
-  },
-];
+const featuredListings = await getFeaturedListings("hu");
 ---
 
 <section class="py-20 bg-cream-soft">
@@ -81,7 +27,7 @@ const featuredListings: Listing[] = [
 
     <div class="mt-16 text-center">
       <a
-        href={Links.PROPERTIES}
+        href={p("properties")}
         class="inline-block px-8 py-4 bg-navy text-cream font-system-ui text-base tracking-wide uppercase border-2 border-navy hover:bg-transparent hover:text-navy transition-colors duration-700"
       >
         Összes ingatlan megtekintése

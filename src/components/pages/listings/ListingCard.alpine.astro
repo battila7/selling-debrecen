@@ -29,8 +29,8 @@ const { clientSideListingProp } = Astro.props;
     class="block relative overflow-hidden aspect-[16/10]"
   >
     <img
-      x-bind:src="listing.image"
-      x-bind:alt="listing.imageAlt ?? listing.title"
+      x-bind:src="listing.images[0].src"
+      x-bind:alt="listing.images[0].alt"
       class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
     />
 
@@ -39,12 +39,12 @@ const { clientSideListingProp } = Astro.props;
       <div class="bg-navy px-4 py-2 flex flex-row gap-2 items-center">
         <span
           class="font-geometric-humanist text-xs text-cream tracking-widest uppercase font-semibold"
-          x-text="listing.transactionType"
+          x-text="listing.transactionTypeLabel"
         >
         </span>
         <span
           class="font-geometric-humanist text-xs text-cream tracking-widest uppercase font-semibold"
-          x-text="listing.propertyType"
+          x-text="listing.propertyTypeLabel"
         >
         </span>
       </div>
@@ -82,7 +82,7 @@ const { clientSideListingProp } = Astro.props;
         <Hash size={16} class="mt-0.5 flex-shrink-0" />
         <p
           class="font-geometric-humanist text-sm tracking-wide"
-          x-text="listing.id"
+          x-text="listing.baseId"
         >
         </p>
       </div>

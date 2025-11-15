@@ -1,0 +1,23 @@
+{
+  "hu": {
+    "pageTitle": "Ingatlanjaink",
+    "pageDescription": "Találja meg álmai ingatlanát Debrecenben",
+    "title": "Ingatlanjaink",
+    "subtitle": "Találja meg álmai ingatlanát Debrecenben",
+    "titleImage": "src/assets/images/listings-bg-1.jpg"
+  },
+  "en": {
+    "pageTitle": "Our listings",
+    "pageDescription": "Find your dream property in Debrecen",
+    "title": "Our listings",
+    "subtitle": "Find your dream property in Debrecen",
+    "titleImage": "src/assets/images/listings-bg-1.jpg"
+  },
+  "de": {
+    "pageTitle": "Unsere Immobilien",
+    "pageDescription": "Finden Sie Ihr Traumhaus in Debrecen",
+    "title": "Unsere Immobilien",
+    "subtitle": "Finden Sie Ihr Traumhaus in Debrecen",
+    "titleImage": "src/assets/images/listings-bg-1.jpg"
+  }
+}

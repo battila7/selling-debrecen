@@ -1,10 +1,13 @@
 ---
 import { Picture } from "astro:assets";
-import listingsBg from "../../../images/listings-bg-1.jpg";
 import SearchIcon from "@lucide/astro/icons/search";
 import { useI18n } from "../../../i18n";
+import data from "../../../content/fixed-pages/properties.json";
+import Assets from "../../../util/assets";
 
-const { t } = useI18n(Astro);
+const { t, lang } = useI18n(Astro);
+const localizedData = data[lang as keyof typeof data];
+console.log(localizedData);
 ---
 
 <section
@@ -13,7 +16,7 @@ const { t } = useI18n(Astro);
 >
   <div class="absolute inset-0 z-0">
     <Picture
-      src={listingsBg}
+      src={Assets.getImage(localizedData.titleImage)}
       alt=""
       formats={["webp"]}
       class="w-full h-full object-cover"
@@ -29,10 +32,10 @@ const { t } = useI18n(Astro);
         <h1
           class="font-didone text-3xl md:text-4xl lg:text-5xl text-white tracking-wide mb-3 uppercase"
         >
-          Ingatlanjaink
+          {localizedData.title}
         </h1>
         <p class="text-white/90 text-base md:text-lg">
-          Találja meg álmai ingatlanát Debrecenben
+          {localizedData.subtitle}
         </p>
       </hgroup>
 
@@ -45,7 +48,7 @@ const { t } = useI18n(Astro);
         >
           <div class="flex-1 min-w-0">
             <fieldset class="h-full">
-              <legend class="sr-only">Vásárlás vagy bérlet</legend>
+              <legend class="sr-only">{t("listings.transaction-type")}</legend>
               <div class="flex h-full">
                 <label class="flex-1 relative">
                   <input
@@ -83,17 +86,17 @@ const { t } = useI18n(Astro);
 
           <div class="flex-1 min-w-0">
             <label class="block">
-              <span class="sr-only">Ingatlan típusa</span>
+              <span class="sr-only">{t("listings.property-type")}</span>
               <select
                 name="propertyType"
                 class="w-full h-full px-4 py-4 lg:py-5 text-charcoal bg-transparent border-0 focus:outline-none transition-all cursor-pointer"
                 x-model="propertyType"
               >
-                <option value="apartment">lakás</option>
-                <option value="house">ház</option>
-                <option value="plot">telek</option>
-                <option value="garage">garázs</option>
-                <option value="any">mindegy</option>
+                <option value="apartment">{t("apartment")}</option>
+                <option value="house">{t("house")}</option>
+                <option value="plot">{t("plot")}</option>
+                <option value="garage">{t("garage")}</option>
+                <option value="any">{t("any")}</option>
               </select>
             </label>
           </div>

@@ -9,16 +9,18 @@ import SearchIcon from "@lucide/astro/icons/search";
 import SearchX from "@lucide/astro/icons/search-x";
 import RefreshCw from "@lucide/astro/icons/refresh-cw";
 import MessageCircle from "@lucide/astro/icons/message-circle";
+import data from "../../../content/fixed-pages/properties.json";
 
-const { p, t } = useI18n(Astro);
-const listingDetailBase = p("listing-detail-base");
+const { p, t, lang } = useI18n(Astro);
+const localizedData = data[lang as keyof typeof data];
+const listingsDataUrl = p("listings-data");
 ---
 
 <PageLayout
   x-data="listings"
   @search.window="performSearch($event.detail)"
-  title="Ingatlanok"
-  description="Ingatlanok Debrecenben"
+  title={localizedData.pageTitle}
+  description={localizedData.pageDescription}
 >
   <Search />
 
@@ -161,20 +163,16 @@ const listingDetailBase = p("listing-detail-base");
 
   <Contact />
 
-  <script data-listing-detail-base={listingDetailBase}>
+  <script data-listings-data-url={listingsDataUrl}>
     (function initListingSearch() {
       const dataset = document.currentScript.dataset;
-      const listingDetailBase = dataset.listingDetailBase;
+      const listingsDataUrl = dataset.listingsDataUrl;
 
       async function fetchListings() {
-        const response = await fetch("/data/listings.json");
+        const response = await fetch(listingsDataUrl);
         const data = await response.json();
 
-        data.listings.forEach((listing) => {
-          listing.link = `${listingDetailBase}${listing.link}`;
-        });
-
-        return data.listings;
+        return data;
       }
 
       document.addEventListener("alpine:init", () => {

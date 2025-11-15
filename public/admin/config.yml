@@ -357,3 +357,139 @@ collections:
               label: "Leírás"
               widget: "text"
               i18n: true
+    - label: "Ingatlanok"
+      name: "properties"
+      file: "src/content/fixed-pages/properties.json"
+      i18n: true
+      fields:
+        - name: "pageTitle"
+          label: "Oldal címe"
+          widget: "string"
+          i18n: true
+        - name: "pageDescription"
+          label: "Oldal leírás"
+          widget: "text"
+          i18n: true
+        - name: "title"
+          label: "Cím"
+          widget: "string"
+          i18n: true
+        - name: "subtitle"
+          label: "Alcím"
+          widget: "string"
+          i18n: true
+        - name: "titleImage"
+          label: "Cím kép"
+          widget: "image"
+          i18n: duplicate
+- name: "listings"
+  label: "Ingatlanok"
+  i18n:
+    structure: multiple_files
+    locales: [hu, en, de]
+  folder: "src/content/listings/"
+  create: true
+  identifier_field: "id"
+  extension: "json"
+  format: "json"
+  fields:
+    - name: "id"
+      label: "Hivatkozási szám"
+      widget: "string"
+    - name: "slug"
+      label: "Link szegmens"
+      widget: "string"
+      i18n: true
+    - name: "featured"
+      label: "Kiemelt"
+      widget: "boolean"
+    - name: "title"
+      label: "Hirdetés címe"
+      widget: "string"
+      i18n: true
+    - name: "address"
+      label: "Ingatlan elhelyezkedése (címe)"
+      widget: "string"
+    - name: "price"
+      label: "Ár"
+      widget: "number"
+    - name: "galleryImages"
+      label: "Galéria"
+      widget: "list"
+      i18n: true
+      fields:
+        - name: "image"
+          label: "Kép"
+          widget: "image"
+          i18n: duplicate
+        - name: "alt"
+          label: "Képfelirat"
+          widget: "string"
+          i18n: true
+    - name: "rooms"
+      label: "Szobák"
+      widget: "number"
+    - name: "area"
+      label: "Alapterület"
+      widget: "number"
+    - name: "terraceArea"
+      label: "Terasz terület (üres, ha nincs)"
+      widget: "number"
+      required: false
+    - name: "gardenArea"
+      label: "Kert terület (üres, ha nincs)"
+      widget: "number"
+      required: false
+    - name: "floor"
+      label: "Emelet (0, ha földszint, üres, ha nem releváns)"
+      widget: "number"
+      required: false
+    - name: "propertyType"
+      label: "Ingatlan típusa"
+      widget: "select"
+      options: ["apartment", "house", "plot", "garage", "any"]
+    - name: "transactionType"
+      label: "Eladó vagy kiadó"
+      widget: "select"
+      options: ["sale", "rent"]
+    - name: "description"
+      label: "Leírás"
+      widget: "markdown"
+      i18n: true
+    - name: "extra"
+      label: "Kiemelt információ"
+      widget: "text"
+      i18n: true
+    - name: "checklist"
+      label: "Előnyök"
+      widget: "list"
+      i18n: true
+      fields:
+        - name: "item"
+          label: "Elem"
+          widget: "string"
+          i18n: true
+    - name: "nearby"
+      label: "A közelben"
+      widget: "list"
+      i18n: true
+      fields:
+        - name: "item"
+          label: "Elem"
+          widget: "string"
+          i18n: true
+    - name: "publicTransport"
+      label: "Tömegközlekedés"
+      widget: "list"
+      fields:
+        - name: "type"
+          label: "Tipus"
+          widget: "select"
+          options: ["bus", "tram", "trolley"]
+        - name: "name"
+          label: "Vonal"
+          widget: "string"
+    - name: "floorPlan"
+      label: "Alaprajz"
+      widget: "file"
+      required: false

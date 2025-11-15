@@ -41,6 +41,8 @@ export const ui: Record<AvailableLanguageCode, Record<string, string>> = {
       "Sajnos nem találtunk a megadott feltételeknek megfelelő ingatlant.",
     "listings.schedule-appointment-description":
       "Ha nem találja a tökéletes ingatlant, ne habozzon, lépjen kapcsatba velünk!",
+    "listings.transaction-type": "Vásárlás vagy bérlet",
+    "listings.property-type": "Ingatlan típusa",
     "listing-detail.previous-image": "Előző kép",
     "listing-detail.next-image": "Következő kép",
     "listing-detail.go-to-image": "Ugrás",
@@ -75,6 +77,13 @@ export const ui: Record<AvailableLanguageCode, Record<string, string>> = {
     "listing-detail.schedule-appointment": "Időpontfoglalás",
     "listing-detail.schedule-appointment-description":
       "Személyre szabott ajánlatért és részletes tanácsadásért keressen minket bizalommal!",
+    apartment: "lakás",
+    house: "ház",
+    plot: "telek",
+    garage: "garázs",
+    any: "mindegy",
+    sale: "eladó",
+    rent: "kiadó",
   },
   en: {
     "nav.home": "Home",
@@ -116,6 +125,8 @@ export const ui: Record<AvailableLanguageCode, Record<string, string>> = {
       "We couldn't find any properties that match your criteria.",
     "listings.schedule-appointment-description":
       "If you can't find the perfect property, don't hesitate to contact us!",
+    "listings.transaction-type": "Sale or rent",
+    "listings.property-type": "Property type",
     "listing-detail.previous-image": "Previous image",
     "listing-detail.next-image": "Next image",
     "listing-detail.go-to-image": "Go to image",
@@ -150,6 +161,13 @@ export const ui: Record<AvailableLanguageCode, Record<string, string>> = {
     "listing-detail.schedule-appointment": "Schedule appointment",
     "listing-detail.schedule-appointment-description":
       "For a personalized offer and detailed advice, contact us with confidence!",
+    apartment: "Apartment",
+    house: "House",
+    plot: "Plot",
+    garage: "Garage",
+    any: "Any",
+    sale: "Sale",
+    rent: "Rent",
   },
   de: {
     "nav.home": "Startseite",
@@ -191,6 +209,8 @@ export const ui: Record<AvailableLanguageCode, Record<string, string>> = {
       "Wir konnten keine Immobilien finden, die Ihren Kriterien entsprechen.",
     "listings.schedule-appointment-description":
       "Wenn Sie das perfekte Immobilienobjekt nicht finden, kontaktieren Sie uns bitte!",
+    "listings.transaction-type": "Verkaufen oder mieten",
+    "listings.property-type": "Eigentumsart",
     "listing-detail.previous-image": "Vorheriges Bild",
     "listing-detail.next-image": "Nächstes Bild",
     "listing-detail.go-to-image": "Zur Bild",
@@ -225,6 +245,13 @@ export const ui: Record<AvailableLanguageCode, Record<string, string>> = {
     "listing-detail.schedule-appointment": "Terminvereinbarung",
     "listing-detail.schedule-appointment-description":
       "Für ein persönliches Angebot und detaillierte Beratung kontaktieren Sie uns mit Vertrauen!",
+    apartment: "Wohnung",
+    house: "Haus",
+    plot: "Grundstück",
+    garage: "Garage",
+    any: "Alle",
+    sale: "Verkaufen",
+    rent: "Mieten",
   },
 } as const;
 

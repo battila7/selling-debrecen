@@ -4,6 +4,7 @@ import { PageLayout } from "../../../layouts";
 import { Image } from "astro:assets";
 import { Contact } from "../../common";
 import { useI18n, getLangFromUrl } from "../../../i18n";
+import type { Listing } from "../../../listings";
 
 import MapPin from "@lucide/astro/icons/map-pin";
 import House from "@lucide/astro/icons/house";
@@ -24,47 +25,17 @@ import Bus from "@lucide/astro/icons/bus";
 import Tram from "@lucide/astro/icons/tram-front";
 import FileDown from "@lucide/astro/icons/file-down";
 import Carousel from "./Carousel.astro";
+import ContactInformation from "../../../util/contact";
 
 interface Props {
-  listing: {
-    id: string;
-    slug: string;
-    title: string;
-    address: string;
-    price: number;
-    image: string;
-    imageAlt: string;
-    images: Array<{ src: string; alt: string }>;
-    rooms: number;
-    area: number;
-    terraceArea?: number;
-    gardenArea?: number;
-    floor?: number;
-    floorPlanLink?: string;
-    propertyType: string;
-    transactionType: string;
-    description: string;
-    link: string;
-    extra: string;
-    checklist: string[];
-    nearby: string[];
-    publicTransport: {
-      type: string;
-      name: string;
-    }[];
-  };
+  listing: Listing;
 }
 
 const { listing } = Astro.props;
 const currentLanguageCode = getLangFromUrl(Astro.url);
-const { t } = useI18n(Astro);
+const { t, lang } = useI18n(Astro);
 const formattedPrice =
   listing.price.toLocaleString(currentLanguageCode) + " Ft";
-
-const propertyTypeLabels: Record<string, string> = {
-  house: "Családi ház",
-  apartment: "Lakás",
-};
 ---
 
 <PageLayout title={listing.title} description={listing.description}>
@@ -93,7 +64,7 @@ const propertyTypeLabels: Record<string, string> = {
               <div class="flex items-start gap-3 text-charcoal/70">
                 <Hash size={24} class="mt-1 flex-shrink-0" />
                 <p class="font-geometric-humanist text-lg tracking-wide">
-                  {t("listing-detail.reference-number")}: {listing.id}
+                  {t("listing-detail.reference-number")}: {listing.baseId}
                 </p>
               </div>
               <button
@@ -217,7 +188,7 @@ const propertyTypeLabels: Record<string, string> = {
                   {t("listing-detail.property-type")}
                 </p>
                 <p class="font-old-style text-xl text-charcoal font-bold">
-                  {propertyTypeLabels[listing.propertyType]}
+                  {t(listing.propertyType)}
                 </p>
               </div>
             </div>
@@ -284,7 +255,7 @@ const propertyTypeLabels: Record<string, string> = {
                           <Check size={20} class="text-navy" />
                         </div>
                         <p class="font-system-ui text-lg text-charcoal/80 leading-relaxed">
-                          {item}
+                          {item.item}
                         </p>
                       </li>
                     ))
@@ -307,7 +278,7 @@ const propertyTypeLabels: Record<string, string> = {
                           <Store size={20} class="text-navy" />
                         </div>
                         <p class="font-system-ui text-lg text-charcoal/80 leading-relaxed">
-                          {place}
+                          {place.item}
                         </p>
                       </li>
                     ))
@@ -345,12 +316,12 @@ const propertyTypeLabels: Record<string, string> = {
           </div>
 
           {
-            listing.floorPlanLink && (
+            listing.floorPlan && (
               <Fragment>
                 <div class="border-t-2 border-taupe/40" />
 
                 <a
-                  href={listing.floorPlanLink}
+                  href={listing.floorPlan}
                   target="_blank"
                   rel="noopener noreferrer"
                   download
@@ -424,11 +395,11 @@ const propertyTypeLabels: Record<string, string> = {
                 <div class="flex items-center gap-4">
                   <Image
                     src={agentProfilePicture}
-                    alt="Kiss Zoltán"
+                    alt={`${ContactInformation.langDependent(lang).name} - ${ContactInformation.langDependent(lang).role}`}
                     class="w-16 h-16 object-cover border-2 border-taupe/30"
                   />
                   <p class="font-old-style text-xl text-charcoal tracking-wide">
-                    Kiss Zoltán
+                    {ContactInformation.langDependent(lang).name}
                   </p>
                 </div>
               </div>

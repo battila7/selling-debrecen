@@ -1,114 +1,20 @@
 ---
-import listingPlaceholder from "../../../images/listing-placeholder.jpg";
-import bathroom from "../../../images/bathroom.jpg";
-import kitchen from "../../../images/kitchen.jpg";
 import { ListingDetailPage } from "../../../components/pages";
-import type { GetStaticPaths } from "astro";
+import { getAllListings } from "../../../listings";
 
-export const getStaticPaths = (() => {
-  const listings = [
-    {
-      id: "32",
-      slug: "elegans-csaladi-haz-a-belvarosban",
-      title: "Elegáns családi ház a belvárosban",
-      address: "Debrecen, Belváros, Piac utca 45.",
-      price: 125000000,
-      image: listingPlaceholder.src,
-      imageAlt: "Elegáns családi ház a belvárosban",
-      images: [
-        { src: listingPlaceholder.src, alt: "Elegáns családi ház - Kívülről" },
-        { src: listingPlaceholder.src, alt: "Elegáns családi ház - Nappali" },
-        { src: listingPlaceholder.src, alt: "Elegáns családi ház - Konyha" },
-        { src: listingPlaceholder.src, alt: "Elegáns családi ház - Hálószoba" },
-        { src: listingPlaceholder.src, alt: "Elegáns családi ház - Kert" },
-      ],
-      rooms: 5,
-      area: 180,
-      terraceArea: 20,
-      gardenArea: 5,
-      floor: 1,
-      floorPlanLink: "https://www.google.com",
-      propertyType: "house",
-      transactionType: "sale",
-      description:
-        "Kiváló elhelyezkedésű, gondosan felújított családi ház a belváros szívében. Tágas szobák, modern konyha, összkomfortos fürdőszobák. Csendes, nyugodt környezet, közel minden szolgáltatáshoz.",
-      link: "",
-      extra: "Hatalmas kert",
-      checklist: ["Hatalmas kert", "Két kocsibeálló"],
-      nearby: ["Aldi", "Lidl", "Bölcsöde"],
-      publicTransport: [
-        {
-          type: "bus",
-          name: "30Y",
-        },
-        {
-          type: "tram",
-          name: "1",
-        },
-        {
-          type: "tram",
-          name: "2",
-        },
-      ],
-    },
-    {
-      id: "33",
-      slug: "modern-lakas-a-belvarosban",
-      title: "Modern lakás a belvárosban",
-      address: "Debrecen, Belváros, Egyetem tér 12.",
-      price: 45000000,
-      image: listingPlaceholder.src,
-      imageAlt: "Elegáns családi ház a belvárosban",
-      images: [
-        { src: listingPlaceholder.src, alt: "Modern lakás - Kívülről" },
-        { src: bathroom.src, alt: "Modern lakás - Fürdő" },
-        { src: kitchen.src, alt: "Modern lakás - Konyha" },
-      ],
-      rooms: 5,
-      area: 180,
-      terraceArea: 20,
-      gardenArea: 5,
-      floorPlanLink: "https://www.google.com",
-      floor: 1,
-      propertyType: "apartment",
-      transactionType: "sale",
-      description:
-        "Kiváló elhelyezkedésű, gondosan felújított családi ház a belváros szívében. Tágas szobák, modern konyha, összkomfortos fürdőszobák. Csendes, nyugodt környezet, közel minden szolgáltatáshoz.",
-      link: "",
-      extra: "Hatalmas kert",
-      checklist: ["Hatalmas kert", "Két kocsibeálló"],
-      nearby: ["Aldi", "Lidl", "Bölcsöde"],
-      publicTransport: [
-        {
-          type: "bus",
-          name: "30Y",
-        },
-        {
-          type: "tram",
-          name: "1",
-        },
-        {
-          type: "tram",
-          name: "2",
-        },
-      ],
-    },
-  ];
-
-  listings.forEach((listing) => {
-    listing.link = `/i/${listing.id}-${listing.slug}`;
-  });
+export async function getStaticPaths() {
+  const listings = await getAllListings("en");
 
   return listings.map((listing) => ({
     params: {
-      identifier: listing.id,
+      identifier: listing.baseId,
       slug: listing.slug,
     },
     props: {
       listing,
     },
   }));
-}) satisfies GetStaticPaths;
+}
 
 const { listing } = Astro.props;
 ---
