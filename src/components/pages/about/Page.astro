@@ -1,19 +1,18 @@
 ---
 import { PageLayout } from "../../../layouts";
 import { Picture } from "astro:assets";
-import agentProfile from "../../../images/agent-profile-picture-placeholder.jpg";
-import ctaBg from "../../../images/hero-background.jpg";
 import {
   HeadingCentered,
   HeadingLeftAligned,
-  Contact,
   Prose,
+  Contact,
 } from "../../common";
 
 import { useI18n } from "../../../i18n/framework";
 import data from "../../../content/fixed-pages/about.json";
 import Assets from "../../../util/assets";
 import { icons } from "@lucide/astro";
+import ContactInformation from "../../../util/contact";
 
 const { lang } = useI18n(Astro);
 const localizedData = data[lang as keyof typeof data];
@@ -109,32 +108,16 @@ localizedData.valuesItems.forEach((item) => {
     <div class="container mx-auto px-6 lg:px-12">
       <div class="max-w-4xl mx-auto">
         <HeadingLeftAligned
-          title="Miért Debrecen?"
-          subtitle="A mi városunk"
-          description="Debrecen több mint munkaterület számunkra – ez az otthonunk."
+          title={localizedData.whyDebrecenTitle}
+          subtitle={localizedData.whyDebrecenSubtitle}
+          description={localizedData.whyDebrecenDescription}
           titleColor="text-navy"
           descriptionColor="text-charcoal"
         />
-        <div class="prose prose-lg max-w-none space-y-6">
-          <p class="text-charcoal-dark leading-relaxed">
-            Debrecen dinamikusan fejlődő város, amely ötvözi a hagyományos
-            értékeket a modern lehetőségekkel. Magyarország második legnagyobb
-            városaként széles spektrumú ingatlanokat kínál: a csendes,
-            zöldövezeti családi házaktól a belváros pezsgő lakásáig.
-          </p>
-          <p class="text-charcoal-dark leading-relaxed">
-            Évek óta követjük a helyi piac mozgásait, ismerjük az egyes
-            kerületek sajátosságait, tudjuk, hol épülnek új fejlesztések, és hol
-            érdemes befektetni. Ez a tudás felbecsülhetetlen értéket jelent
-            ügyfeleink számára – segítünk kiválasztani nem csak a megfelelő
-            ingatlant, hanem a megfelelő környéket is.
-          </p>
-          <p class="text-charcoal-dark leading-relaxed">
-            Legyen szó egyetemi közelségről, nyugodt lakókörnyezetről vagy
-            üzleti lehetőségekről – helyi szakértelmünk révén mindig a legjobb
-            tanácsokkal szolgálunk.
-          </p>
-        </div>
+        <Prose
+          class="prose prose-lg max-w-none space-y-6"
+          content={localizedData.whyDebrecen}
+        />
       </div>
     </div>
   </section>
@@ -143,14 +126,14 @@ localizedData.valuesItems.forEach((item) => {
   <section class="py-20 bg-cream border-t border-taupe/20">
     <div class="container mx-auto px-6 lg:px-12">
       <div class="max-w-5xl mx-auto">
-        <HeadingCentered title="Ismerjük meg egymást" />
+        <HeadingCentered title={localizedData.introductionTitle} />
         <div
           class="flex flex-col lg:flex-row gap-12 items-center lg:items-start"
         >
           <div class="flex-shrink-0">
             <Picture
-              src={agentProfile}
-              alt="Kiss Zoltán - Ingatlanközvetítő"
+              src={Assets.getImage(localizedData.introductionImage)}
+              alt={ContactInformation.langDependent(lang).name}
               formats={["webp"]}
               class="w-64 h-64 lg:w-80 lg:h-80 object-cover border-4 border-navy/10"
               widths={[256, 320, 512, 640]}
@@ -158,37 +141,14 @@ localizedData.valuesItems.forEach((item) => {
             />
           </div>
           <div class="flex-1">
-            <h3 class="font-didone text-3xl text-navy mb-2">Kiss Zoltán</h3>
-            <p class="text-camel text-lg mb-6 font-old-style">
-              Alapító és vezető ingatlanközvetítő
-            </p>
+            <h3 class="font-didone text-3xl text-navy mb-2">
+              {ContactInformation.langDependent(lang).name}
+            </h3>
             <div class="space-y-4 text-charcoal-dark leading-relaxed">
-              <p>
-                Több mint 15 éve foglalkozom ingatlanközvetítéssel Debrecenben.
-                Amit egyszerű érdeklődésként kezdtem, az mára szenvedélyemmé
-                vált – segítek az embereknek megtalálni és megvásárolni álmaik
-                otthonát.
-              </p>
-              <p>
-                Az évek során megtanultam, hogy a sikeres ingatlanügylet nem
-                csak az ingatlan ismeretéről szól. A legfontosabb, hogy
-                megértsem ügyfeleim valódi igényeit, kérdéseit és félelmeit.
-                Minden ügyfél más, és mindegyikük megérdemli, hogy egyedi
-                figyelmet és szakmai támogatást kapjon.
-              </p>
-              <p>
-                Büszke vagyok arra, hogy sok ügyfelemmel hosszú távú kapcsolat
-                alakult ki – sokan visszatérnek hozzám, amikor újabb
-                ingatlantémában gondolkodnak, vagy ajánlanak ismerőseiknek.
-                Számomra ez a legnagyobb elismerés.
-              </p>
-            </div>
-            <div class="mt-8 p-6 bg-cream-soft border-l-4 border-camel">
-              <p class="text-charcoal italic">
-                "Az ingatlanközvetítés nem üzlet számomra – ez szolgálat. Minden
-                ügyfelem elégedettsége megerősít abban, hogy jó úton járok."
-              </p>
-              <p class="text-navy font-old-style mt-3">— Kiss Zoltán</p>
+              <Prose
+                class="prose prose-lg max-w-none space-y-6"
+                content={localizedData.introduction}
+              />
             </div>
           </div>
         </div>
@@ -201,7 +161,7 @@ localizedData.valuesItems.forEach((item) => {
     <div class="absolute inset-0 z-0 parallax-container">
       <div class="parallax-bg">
         <Picture
-          src={ctaBg}
+          src={Assets.getImage(localizedData.workTogetherImage)}
           alt=""
           formats={["webp"]}
           class="w-full h-full object-cover"
@@ -217,20 +177,17 @@ localizedData.valuesItems.forEach((item) => {
         <h2
           class="font-didone text-4xl md:text-5xl text-cream mb-6 tracking-wide"
         >
-          Dolgozzunk együtt
+          {localizedData.workTogetherTitle}
         </h2>
         <div class="w-24 h-0.5 bg-camel mx-auto mb-8"></div>
         <p class="text-cream-soft text-lg leading-relaxed mb-12">
-          Legyen szó vásárlásról, értékesítésről vagy bérbeadásról –
-          szakértelmünk és tapasztalatunk az Ön rendelkezésére áll. Vegye fel
-          velünk a kapcsolatot, és beszéljük meg, hogyan segíthetünk
-          megvalósítani ingatlannal kapcsolatos terveit.
+          {localizedData.workTogetherDescription}
         </p>
         <a
           href="#contact"
           class="hidden lg:inline-block px-6 py-3 border-2 border-white text-white font-system-ui text-sm tracking-wide uppercase hover:border-camel hover:bg-camel hover:text-navy transition-colors duration-300"
         >
-          Kapcsolatfelvétel
+          {localizedData.workTogetherButtonText}
         </a>
       </div>
     </div>

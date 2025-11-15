@@ -367,6 +367,50 @@ collections:
               label: "Ikon"
               widget: "string"
               i18n: duplicate
+        - name: "whyDebrecenTitle"
+          label: "Miért Debrecen? cím"
+          widget: "string"
+          i18n: true
+        - name: "whyDebrecenSubtitle"
+          label: "Miért Debrecen? alcím"
+          widget: "string"
+          i18n: true
+        - name: "whyDebrecenDescription"
+          label: "Miért Debrecen? leírás"
+          widget: "text"
+          i18n: true
+        - name: "whyDebrecen"
+          label: "Miért Debrecen?"
+          widget: "markdown"
+          i18n: true
+        - name: "introductionTitle"
+          label: "Bemutatkozás cím"
+          widget: "string"
+          i18n: true
+        - name: "introduction"
+          label: "Bemutatkozás"
+          widget: "markdown"
+          i18n: true
+        - name: "introductionImage"
+          label: "Bemutatkozás kép"
+          widget: "image"
+          i18n: duplicate
+        - name: "workTogetherTitle"
+          label: "Dolgozzunk együtt cím"
+          widget: "string"
+          i18n: true
+        - name: "workTogetherDescription"
+          label: "Dolgozzunk együtt leírás"
+          widget: "text"
+          i18n: true
+        - name: "workTogetherButtonText"
+          label: "Dolgozzunk együtt gomb szövege"
+          widget: "string"
+          i18n: true
+        - name: "workTogetherImage"
+          label: "Dolgozzunk együtt kép"
+          widget: "image"
+          i18n: duplicate
     - label: "Keresőknek"
       name: "for-buyers"
       file: "src/content/fixed-pages/for-buyers.json"
