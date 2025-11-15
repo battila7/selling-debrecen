@@ -1,0 +1,122 @@
+{
+  "hu": {
+    "pageTitle": "Selling Debrecen",
+    "pageDescription": "Selling Debrecen",
+    "featuredListingsTitle": "Kiemelt ingatlanjaink",
+    "featuredListingsSubtitle": "A Selling Debrecen ajánlata",
+    "featuredListingsDescription": "Fedezze fel válogatott ingatlanjaink különleges kínálatát. Minden ingatlan gondosan kiválasztott, hogy az Ön igényeinek megfelelő otthont találhassa meg Debrecenben.",
+    "featuredListingsLinkText": "Összes ingatlan megtekintése",
+    "introductionTitle": "Bemutatkozás",
+    "introduction": "Üdvözöljük a Selling Debrecen oldalán! Mi vagyunk a Debrecenben működő ingatlanközvetítő cég, amelynek célja, hogy segítsük Önnek megtalálni a tökéletes otthont Debrecenben.",
+    "introductionImage": "src/assets/images/agent-placeholder.jpg",
+    "introductionLinkText": "Tudjon meg többet rólunk",
+    "featuredServicesTitle": "Amit kínálunk",
+    "featuredServicesSubtitle": "Átfogó szolgáltatások",
+    "featuredServicesDescription": "Professzionális megoldásokkal támogatjuk Önt az ingatlanügyletek során.",
+    "forSellersServicesTitle": "Eladóknak és bérbeadóknak",
+    "forSellersServicesDescription": "Ha ingatlanját szeretné értékesíteni, szakértő segítségünkkel a lehető legjobb áron és a legrövidebb idő alatt adhatja el. Teljes körű szolgáltatást nyújtunk az értékeléstől a szerződéskötésig.",
+    "forSellersServicesLinkText": "Eladni, kiadni szeretnék",
+    "forSellersServices": [
+      {
+        "title": "Ingatlan értékelés",
+        "description": "Professzionális értékelés az optimális eladási ár meghatározásához",
+        "icon": "TrendingUp"
+      },
+      {
+        "title": "Fotózás és marketing",
+        "description": "Professzionális fotózás és hatékony marketing stratégia",
+        "icon": "Camera"
+      }
+    ],
+    "forBuyersServicesTitle": "Keresőknek",
+    "forBuyersServicesDescription": "Álmaik otthonának megtalálásában segítünk. Széles választékunkból választhatnak, és minden lépésben mellettük állunk a vásárlás folyamatában.",
+    "forBuyersServicesLinkText": "Keresni szeretnék",
+    "forBuyersServices": [
+      {
+        "title": "Ingatlan keresés",
+        "description": "Személyre szabott keresés az Ön igényei szerint",
+        "icon": "Search"
+      }
+    ]
+  },
+  "en": {
+    "pageTitle": "Selling Debrecen",
+    "pageDescription": "Selling Debrecen",
+    "featuredListingsTitle": "Kiemelt ingatlanjaink",
+    "featuredListingsSubtitle": "A Selling Debrecen ajánlata",
+    "featuredListingsDescription": "Fedezze fel válogatott ingatlanjaink különleges kínálatát. Minden ingatlan gondosan kiválasztott, hogy az Ön igényeinek megfelelő otthont találhassa meg Debrecenben.",
+    "featuredListingsLinkText": "Összes ingatlan megtekintése",
+    "introductionTitle": "Bemutatkozás",
+    "introduction": "Üdvözöljük a Selling Debrecen oldalán! Mi vagyunk a Debrecenben működő ingatlanközvetítő cég, amelynek célja, hogy segítsük Önnek megtalálni a tökéletes otthont Debrecenben.",
+    "introductionImage": "src/assets/images/agent-placeholder.jpg",
+    "introductionLinkText": "Tudjon meg többet rólunk",
+    "featuredServicesTitle": "Amit kínálunk",
+    "featuredServicesSubtitle": "Átfogó szolgáltatások",
+    "featuredServicesDescription": "Professzionális megoldásokkal támogatjuk Önt az ingatlanügyletek során.",
+    "forSellersServicesTitle": "Eladóknak és bérbeadóknak",
+    "forSellersServicesDescription": "Ha ingatlanját szeretné értékesíteni, szakértő segítségünkkel a lehető legjobb áron és a legrövidebb idő alatt adhatja el. Teljes körű szolgáltatást nyújtunk az értékeléstől a szerződéskötésig.",
+    "forSellersServicesLinkText": "Eladni, kiadni szeretnék",
+    "forSellersServices": [
+      {
+        "title": "Ingatlan értékelés",
+        "description": "Professzionális értékelés az optimális eladási ár meghatározásához",
+        "icon": "TrendingUp"
+      },
+      {
+        "title": "Fotózás és marketing",
+        "description": "Professzionális fotózás és hatékony marketing stratégia",
+        "icon": "Camera"
+      }
+    ],
+    "forBuyersServicesTitle": "Keresőknek",
+    "forBuyersServicesDescription": "Álmaik otthonának megtalálásában segítünk. Széles választékunkból választhatnak, és minden lépésben mellettük állunk a vásárlás folyamatában.",
+    "forBuyersServicesLinkText": "Keresni szeretnék",
+    "forBuyersServices": [
+      {
+        "title": "Ingatlan keresés",
+        "description": "Személyre szabott keresés az Ön igényei szerint",
+        "icon": "Search"
+      }
+    ]
+  },
+  "de": {
+    "pageTitle": "Selling Debrecen",
+    "pageDescription": "Selling Debrecen",
+    "featuredListingsTitle": "Kiemelt ingatlanjaink",
+    "featuredListingsSubtitle": "A Selling Debrecen ajánlata",
+    "featuredListingsDescription": "Fedezze fel válogatott ingatlanjaink különleges kínálatát. Minden ingatlan gondosan kiválasztott, hogy az Ön igényeinek megfelelő otthont találhassa meg Debrecenben.",
+    "featuredListingsLinkText": "Összes ingatlan megtekintése",
+    "introductionTitle": "Bemutatkozás",
+    "introduction": "Üdvözöljük a Selling Debrecen oldalán! Mi vagyunk a Debrecenben működő ingatlanközvetítő cég, amelynek célja, hogy segítsük Önnek megtalálni a tökéletes otthont Debrecenben.",
+    "introductionImage": "src/assets/images/agent-placeholder.jpg",
+    "introductionLinkText": "Tudjon meg többet rólunk",
+    "featuredServicesTitle": "Amit kínálunk",
+    "featuredServicesSubtitle": "Átfogó szolgáltatások",
+    "featuredServicesDescription": "Professzionális megoldásokkal támogatjuk Önt az ingatlanügyletek során.",
+    "forSellersServicesTitle": "Eladóknak és bérbeadóknak",
+    "forSellersServicesDescription": "Ha ingatlanját szeretné értékesíteni, szakértő segítségünkkel a lehető legjobb áron és a legrövidebb idő alatt adhatja el. Teljes körű szolgáltatást nyújtunk az értékeléstől a szerződéskötésig.",
+    "forSellersServicesLinkText": "Eladni, kiadni szeretnék",
+    "forSellersServices": [
+      {
+        "title": "Ingatlan értékelés",
+        "description": "Professzionális értékelés az optimális eladási ár meghatározásához",
+        "icon": "TrendingUp"
+      },
+      {
+        "title": "Fotózás és marketing",
+        "description": "Professzionális fotózás és hatékony marketing stratégia",
+        "icon": "Camera"
+      }
+    ],
+    "forBuyersServicesTitle": "Keresőknek",
+    "forBuyersServicesDescription": "Álmaik otthonának megtalálásában segítünk. Széles választékunkból választhatnak, és minden lépésben mellettük állunk a vásárlás folyamatában.",
+    "forBuyersServicesLinkText": "Keresni szeretnék",
+    "forBuyersServices": [
+      {
+        "title": "Ingatlan keresés",
+        "description": "Személyre szabott keresés az Ön igényei szerint",
+        "icon": "Search"
+      }
+    ]
+  }
+}

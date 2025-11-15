@@ -1,15 +1,15 @@
 ---
-import type { AstroComponent } from "@lucide/astro";
+import { icons } from "@lucide/astro";
 
 type Props = {
-  icon: AstroComponent;
+  icon: string;
   title: string;
   description: string;
 };
 
 const { icon, title, description } = Astro.props;
 
-const Icon = icon;
+const Icon = icons[icon as keyof typeof icons];
 ---
 
 <div class="bg-navy-light border border-taupe/20 p-8">

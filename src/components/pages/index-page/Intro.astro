@@ -1,21 +1,25 @@
 ---
 import { Image } from "astro:assets";
-import agentPlaceholder from "../../../images/agent-placeholder.jpg";
-import { HeadingCentered } from "../../common";
+import { HeadingCentered, Prose } from "../../common";
+import { useI18n } from "../../../i18n";
+import data from "../../../content/fixed-pages/home.json";
+import Assets from "../../../util/assets";
+import Contact from "../../../util/contact";
 
-import Links from "../../../util/links";
+const { lang, p } = useI18n(Astro);
+const localizedData = data[lang as keyof typeof data];
 ---
 
 <section class="py-20 lg:py-24 border-t border-camel/30 bg-cream-soft">
   <div class="container mx-auto px-6 lg:px-12">
-    <HeadingCentered title="Bemutatkozás" />
+    <HeadingCentered title={localizedData.introductionTitle} />
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
         <!-- Image on the left -->
         <div class="w-full lg:w-2/5 flex-shrink-0 lg:sticky lg:top-[82px]">
           <Image
-            src={agentPlaceholder}
-            alt="Kiss Zoltán - Ingatlanügynök"
+            src={Assets.getImage(localizedData.introductionImage)}
+            alt={Contact.langDependent(lang).name}
             class="w-full rounded shadow-[0_4px_16px_rgba(0,0,0,0.08)] object-cover aspect-[3/4]"
             loading="lazy"
             decoding="async"
@@ -23,48 +27,17 @@ import Links from "../../../util/links";
         </div>
 
         <!-- Intro text on the right -->
-        <div class="w-full lg:w-3/5 space-y-7 font-neo-grotesque">
-          <p class="text-lg/10 lg:text-xl/10 text-charcoal">
-            Üdvözöljük a Selling Debrecen oldalán! Én vagyok Kiss Zoltán,
-            tapasztalt ingatlanügynök, aki több mint egy évtizede segít
-            embereknek álmaik otthonát megtalálni Debrecenben és környékén.
-            Szakértelmem és elkötelezettségem révén számos sikeres üzletet
-            bonyolítottam le, és hosszú távú, megbízható kapcsolatokat építettem
-            ki ügyfeleimmel.
-          </p>
-
-          <p class="text-lg/10 lg:text-xl/10 text-charcoal">
-            Hitvallásom, hogy minden ingatlan egyedi történetet rejt magában, és
-            minden ügyfél egyedi igényekkel rendelkezik. Ezért személyre szabott
-            megközelítést alkalmazok, figyelembe véve nemcsak a pénzügyi
-            lehetőségeket, hanem az életstílust, a jövőbeli terveket és az
-            érzelmi szempontokat is. Célom, hogy minden ügyfelem olyan ingatlant
-            találjon, amely nem csak egy lakás vagy ház, hanem valódi otthon.
-          </p>
-
-          <p class="text-lg/10 lg:text-xl/10 text-charcoal">
-            Debrecen városának és környékének minden részletét ismerem, a
-            belvárosi lakásoktól a családi házakig, a modern újépítésű
-            ingatlanoktól a történelmi értékű ingatlanokig. Széles hálózattal
-            rendelkezem, amely lehetővé teszi, hogy gyorsan és hatékonyan
-            találjam meg az ideális ingatlant, legyen szó vásárlásról vagy
-            eladásról.
-          </p>
-
-          <p class="text-lg/10 lg:text-xl/10 text-charcoal">
-            Ha Ön is álmodik egy új otthonról Debrecenben, vagy szeretné
-            értékesíteni jelenlegi ingatlanját, szívesen segítek. Várjuk
-            megkeresését, és együtt találjuk meg az Ön számára tökéletes
-            megoldást!
-          </p>
-        </div>
+        <Prose
+          class="prose w-full lg:w-3/5 space-y-7 font-neo-grotesque text-charcoal"
+          content={localizedData.introduction}
+        />
       </div>
       <div class="mt-16 text-center">
         <a
-          href={Links.ABOUT}
+          href={p("about")}
           class="inline-block px-8 py-4 bg-navy text-cream font-system-ui text-base tracking-wide uppercase border-2 border-navy hover:bg-transparent hover:text-navy transition-colors duration-700"
         >
-          Tudjon meg többet rólunk
+          {localizedData.introductionLinkText}
         </a>
       </div>
     </div>

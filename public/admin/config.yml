@@ -114,6 +114,119 @@ collections:
     structure: single_file
     locales: [hu, en, de]
   files:
+    - label: "Kezdőlap"
+      name: "home"
+      file: "src/content/fixed-pages/home.json"
+      i18n: true
+      fields:
+        - name: "pageTitle"
+          label: "Oldal címe"
+          widget: "string"
+          i18n: true
+        - name: "pageDescription"
+          label: "Oldal leírás"
+          widget: "text"
+          i18n: true
+        - name: "featuredListingsTitle"
+          label: "Kiemelt ingatlanjaink cím"
+          widget: "string"
+          i18n: true
+        - name: "featuredListingsSubtitle"
+          label: "Kiemelt ingatlanjaink alcím"
+          widget: "string"
+          i18n: true
+        - name: "featuredListingsDescription"
+          label: "Kiemelt ingatlanjaink leírás"
+          widget: "text"
+          i18n: true
+        - name: "featuredListingsLinkText"
+          label: "Kiemelt ingatlanjaink link szövege"
+          widget: "string"
+          i18n: true
+        - name: "introductionTitle"
+          label: "Bemutatkozás cím"
+          widget: "string"
+          i18n: true
+        - name: "introduction"
+          label: "Bemutatkozás"
+          widget: "markdown"
+          i18n: true
+        - name: "introductionImage"
+          label: "Bemutatkozás kép"
+          widget: "image"
+          i18n: duplicate
+        - name: "introductionLinkText"
+          label: "Bemutatkozás link szövege"
+          widget: "string"
+          i18n: true
+        - name: "featuredServicesTitle"
+          label: "Kiemelt szolgáltatások cím"
+          widget: "string"
+          i18n: true
+        - name: "featuredServicesSubtitle"
+          label: "Kiemelt szolgáltatások alcím"
+          widget: "string"
+          i18n: true
+        - name: "featuredServicesDescription"
+          label: "Kiemelt szolgáltatások leírás"
+          widget: "text"
+          i18n: true
+        - name: "forSellersServicesTitle"
+          label: "Eladóknak szolgáltatások cím"
+          widget: "string"
+          i18n: true
+        - name: "forSellersServicesDescription"
+          label: "Eladóknak szolgáltatások leírás"
+          widget: "string"
+          i18n: true
+        - name: "forSellersServicesLinkText"
+          label: "Eladóknak szolgáltatások link szövege"
+          widget: "string"
+          i18n: true
+        - name: "forSellersServices"
+          label: "Eladóknak szolgáltatások"
+          widget: "list"
+          i18n: true
+          fields:
+            - name: "title"
+              label: "Cím"
+              widget: "string"
+              i18n: true
+            - name: "description"
+              label: "Leírás"
+              widget: "text"
+              i18n: true
+            - name: "icon"
+              label: "Ikon"
+              widget: "string"
+        - name: "forBuyersServicesTitle"
+          label: "Keresőknak szolgáltatások cím"
+          widget: "string"
+          i18n: true
+        - name: "forBuyersServicesDescription"
+          label: "Keresőknak szolgáltatások leírás"
+          widget: "text"
+          i18n: true
+        - name: "forBuyersServicesLinkText"
+          label: "Keresőknak szolgáltatások link szövege"
+          widget: "string"
+          i18n: true
+        - name: "forBuyersServices"
+          label: "Keresőknak szolgáltatások"
+          widget: "list"
+          i18n: true
+          fields:
+            - name: "title"
+              label: "Cím"
+              widget: "string"
+              i18n: true
+            - name: "description"
+              label: "Leírás"
+              widget: "text"
+              i18n: true
+            - name: "icon"
+              label: "Ikon"
+              widget: "string"
     - label: "Kínálóknak"
       name: "for-sellers"
       file: "src/content/fixed-pages/for-sellers.json"

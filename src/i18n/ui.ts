@@ -9,7 +9,7 @@ export const ui: Record<AvailableLanguageCode, Record<string, string>> = {
     "nav.about": "Rólunk",
     "nav.schedule": "Időpontfoglalás",
     "nav.follow-us": "Kövessen minket",
-    "contact.title": "Lépjen kapcsatba velünk",
+    "contact.title": "Lépjen kapcsolatba velünk",
     "contact.contact-information": "Elérhetőségek",
     "contact.office": "Iroda",
     "contact.email": "Email",
@@ -40,7 +40,7 @@ export const ui: Record<AvailableLanguageCode, Record<string, string>> = {
     "listings.no-results-description":
       "Sajnos nem találtunk a megadott feltételeknek megfelelő ingatlant.",
     "listings.schedule-appointment-description":
-      "Ha nem találja a tökéletes ingatlant, ne habozzon, lépjen kapcsatba velünk!",
+      "Ha nem találja a tökéletes ingatlant, ne habozzon, lépjen kapcsolatba velünk!",
     "listings.transaction-type": "Vásárlás vagy bérlet",
     "listings.property-type": "Ingatlan típusa",
     "listing-detail.previous-image": "Előző kép",

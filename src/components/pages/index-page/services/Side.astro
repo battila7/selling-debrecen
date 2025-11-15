@@ -1,14 +1,12 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-
-import type { AstroComponent } from "@lucide/astro";
 import ServiceCard from "./ServiceCard.astro";
 
 export type Service = {
   title: string;
   description: string;
-  icon: AstroComponent;
+  icon: string;
 };
 
 type Props = {

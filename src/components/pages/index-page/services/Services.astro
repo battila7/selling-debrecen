@@ -1,93 +1,41 @@
 ---
-import TrendingUp from "@lucide/astro/icons/trending-up";
-import Camera from "@lucide/astro/icons/camera";
-import FileText from "@lucide/astro/icons/file-text";
-import Handshake from "@lucide/astro/icons/handshake";
-import Search from "@lucide/astro/icons/search";
-import MapPin from "@lucide/astro/icons/map-pin";
-import Shield from "@lucide/astro/icons/shield";
-import Key from "@lucide/astro/icons/key";
 import forSellersImage from "../../../../images/for-sellers.jpg";
 import forBuyersImage from "../../../../images/for-buyers-02.jpg";
-import Side, { type Service } from "./Side.astro";
+import Side from "./Side.astro";
 import { HeadingLeftAligned } from "../../../common";
 import { useI18n } from "../../../../i18n";
+import data from "../../../../content/fixed-pages/home.json";
 
-const { p } = useI18n(Astro);
-const sellerServices: Service[] = [
-  {
-    title: "Ingatlan értékelés",
-    description:
-      "Professzionális értékelés az optimális eladási ár meghatározásához",
-    icon: TrendingUp,
-  },
-  {
-    title: "Fotózás és marketing",
-    description: "Professzionális fotózás és hatékony marketing stratégia",
-    icon: Camera,
-  },
-  {
-    title: "Ügyintézés",
-    description: "Teljes körű ügyintézés a dokumentumoktól a szerződéskötésig",
-    icon: FileText,
-  },
-  {
-    title: "Érdeklődők kezelése",
-    description: "Megbízható érdeklődők kiválasztása és megfelelő kommunikáció",
-    icon: Handshake,
-  },
-];
-
-const buyerServices: Service[] = [
-  {
-    title: "Ingatlan keresés",
-    description: "Személyre szabott keresés az Ön igényei szerint",
-    icon: Search,
-  },
-  {
-    title: "Környék ismertetés",
-    description: "Részletes információk a környékről és infrastruktúráról",
-    icon: MapPin,
-  },
-  {
-    title: "Biztonságos vásárlás",
-    description: "Teljes körű ellenőrzés és jogi védelem a vásárlás során",
-    icon: Shield,
-  },
-  {
-    title: "Kulcs átadás",
-    description: "Zökkenőmentes átadás-átvétel és bejelentkezési segítség",
-    icon: Key,
-  },
-];
+const { p, lang } = useI18n(Astro);
+const localizedData = data[lang as keyof typeof data];
 ---
 
 <section class="pt-20 bg-navy overflow-hidden">
   <div class="container mx-auto px-6 lg:px-12">
     <HeadingLeftAligned
-      title="Amit kínálunk"
+      title={localizedData.featuredServicesTitle}
       titleColor="text-cream"
       descriptionColor="text-cream-soft"
-      subtitle="Átfogó szolgáltatások"
-      description="Professzionális megoldásokkal támogatjuk Önt az ingatlanügyletek során."
+      subtitle={localizedData.featuredServicesSubtitle}
+      description={localizedData.featuredServicesDescription}
     />
   </div>
 
   <Side
     image={forSellersImage}
-    title="Eladóknak és bérbeadóknak"
-    description="Ha ingatlanját szeretné értékesíteni, szakértő segítségünkkel a lehető legjobb áron és a legrövidebb idő alatt adhatja el. Teljes körű szolgáltatást nyújtunk az értékeléstől a szerződéskötésig."
+    title={localizedData.forSellersServicesTitle}
+    description={localizedData.forSellersServicesDescription}
     link={p("for-sellers")}
-    linkText="Eladni, kiadni szeretnék"
-    services={sellerServices}
+    linkText={localizedData.forSellersServicesLinkText}
+    services={localizedData.forSellersServices}
   />
 
   <Side
     image={forBuyersImage}
-    title="Keresőknek"
-    description="Álmaik otthonának megtalálásában segítünk. Széles választékunkból választhatnak, és minden lépésben mellettük állunk a vásárlás folyamatában."
+    title={localizedData.forBuyersServicesTitle}
+    description={localizedData.forBuyersServicesDescription}
     link={p("for-buyers")}
-    linkText="Ingatlant keresek"
-    services={buyerServices}
+    linkText={localizedData.forBuyersServicesLinkText}
+    services={localizedData.forBuyersServices}
   />
 </section>
