@@ -28,6 +28,19 @@ collections:
     structure: single_file
     locales: [hu, en, de]
   files:
+    - label: "Branding"
+      name: "branding"
+      file: "src/content/general/branding.json"
+      i18n: true
+      fields:
+        - name: "logo"
+          label: "Logó"
+          widget: "image"
+          i18n: duplicate
+        - name: "slogan"
+          label: "Szlogen"
+          widget: "string"
+          i18n: true
     - label: "Elérhetőségek és profil"
       name: "contact-information"
       file: "src/content/general/contact-information.json"

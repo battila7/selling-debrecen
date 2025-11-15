@@ -1,8 +1,15 @@
 ---
 import { useI18n } from "../../../i18n";
-import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
 import LanguageSelector from "../../common/LanguageSelector.astro";
-const { p, t } = useI18n(Astro);
+const { p, t, lang } = useI18n(Astro);
+
+import Assets from "../../../util/assets";
+import branding from "../../../content/general/branding.json";
+const localizedData = branding[lang as keyof typeof branding];
+const logo = await Assets.getSvg(localizedData.logo, {
+  addClasses: "h-10 md:h-10 text-white inline-block",
+  strokeWidth: 2,
+});
 ---
 
 <style>
@@ -50,7 +57,7 @@ const { p, t } = useI18n(Astro);
         id="logo-link"
         class="opacity-0 text-white text-xl flex items-center gap-4 transition-opacity duration-500"
       >
-        <SellingDebrecenLogo class="h-10 md:h-10 text-white inline-block" />
+        <Fragment set:html={logo} />
         <span class="text-white text-lg">Selling Debrecen</span>
       </a>
 

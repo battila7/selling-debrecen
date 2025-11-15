@@ -1,11 +1,17 @@
 ---
 import { useI18n } from "../../../i18n";
 import Menu from "@lucide/astro/icons/menu";
-import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
 import MobileMenuOverlay from "../../common/header/MobileMenuOverlay.astro";
 import LanguageSelector from "../../common/LanguageSelector.astro";
+import Assets from "../../../util/assets";
+import branding from "../../../content/general/branding.json";
 
-const { p } = useI18n(Astro);
+const { p, lang } = useI18n(Astro);
+const localizedData = branding[lang as keyof typeof branding];
+const logo = await Assets.getSvg(localizedData.logo, {
+  addClasses: "h-10 md:h-10 text-white inline-block",
+  strokeWidth: 2,
+});
 const mobileMenuButtonId = "mobile-menu-button";
 const headerId = "site-header";
 ---
@@ -22,7 +28,7 @@ const headerId = "site-header";
         href={p("home")}
         class="opacity-0 flex items-center gap-4 text-white text-xl font-semibold transition-all duration-300"
       >
-        <SellingDebrecenLogo class="h-10 md:h-10 text-white inline-block" />
+        <Fragment set:html={logo} />
         Selling Debrecen
       </a>
 

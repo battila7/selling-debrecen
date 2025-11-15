@@ -5,11 +5,16 @@ import Phone from "@lucide/astro/icons/phone";
 import Facebook from "../../images/brands/facebook.svg";
 import Instagram from "../../images/brands/instagram.svg";
 import Tiktok from "../../images/brands/tiktok.svg";
-import Logo from "../../images/selling-debrecen-logo.svg";
 import { useI18n } from "../../i18n";
 import Contact from "../../util/contact";
-
-const { p, t } = useI18n(Astro);
+import Assets from "../../util/assets";
+import branding from "../../content/general/branding.json";
+const { p, t, lang } = useI18n(Astro);
+const localizedData = branding[lang as keyof typeof branding];
+const logo = await Assets.getSvg(localizedData.logo, {
+  addClasses: "h-16 w-auto text-navy",
+  strokeWidth: 2,
+});
 
 const navigationLinks = [
   { href: p("home"), label: t("nav.home") },
@@ -35,10 +40,10 @@ const legalLinks = [
         class="inline-block hover:opacity-80 transition-opacity"
         aria-label="Selling Debrecen - Főoldal"
       >
-        <Logo class="h-16 w-auto text-navy" aria-hidden="true" />
+        <Fragment set:html={logo} />
       </a>
       <p class="mt-4 text-charcoal/70 max-w-md leading-relaxed">
-        Megbízható ingatlanközvetítés Debrecenben
+        {localizedData.slogan}
       </p>
     </div>
 

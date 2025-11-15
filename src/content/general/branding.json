@@ -1,0 +1,14 @@
+{
+  "hu": {
+    "logo": "src/assets/images/selling-debrecen-logo.svg",
+    "slogan": "Prémium ingatlanok Debrecenben"
+  },
+  "en": {
+    "logo": "src/assets/images/selling-debrecen-logo.svg",
+    "slogan": "Premium properties in Debrecen"
+  },
+  "de": {
+    "logo": "src/assets/images/selling-debrecen-logo.svg",
+    "slogan": "Premium Immobilien in Debrecen"
+  }
+}

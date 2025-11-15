@@ -1,8 +1,18 @@
 ---
 import heroBackgroundVideo from "../../../images/hero-background-video.mp4";
 import heroBackgroundVideoPoster from "../../../images/hero-background-video-poster.jpg";
-import SellingDebrecenLogo from "../../../images/selling-debrecen-logo.svg";
 import DesktopHeader from "./DesktopHeader.astro";
+import Assets from "../../../util/assets";
+import branding from "../../../content/general/branding.json";
+import { useI18n } from "../../../i18n";
+
+const { lang } = useI18n(Astro);
+const localizedData = branding[lang as keyof typeof branding];
+
+const logo = await Assets.getSvg(localizedData.logo, {
+  addClasses: "h-34 md:h-34 text-navy",
+  strokeWidth: 2,
+});
 ---
 
 <section
@@ -26,7 +36,7 @@ import DesktopHeader from "./DesktopHeader.astro";
     <div class="absolute inset-0 bg-cream/80 z-0"></div>
     <div class="relative z-10 md:px-4">
       <div class="w-full flex items-center gap-6">
-        <SellingDebrecenLogo class="h-34 md:h-34 text-navy" />
+        <Fragment set:html={logo} />
         <hgroup>
           <h1
             class="font-didone italic text-5xl md:text-8xl text-navy tracking-tight"
@@ -36,7 +46,7 @@ import DesktopHeader from "./DesktopHeader.astro";
           <p
             class="font-old-style font-lighter text-xl md:text-3xl text-navy/90"
           >
-            Prémium ingatlanok Hajdú-Bihar megyében
+            {localizedData.slogan}
           </p>
         </hgroup>
       </div>
