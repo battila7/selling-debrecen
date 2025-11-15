@@ -1,4 +1,3 @@
-- rövid leírás bevezetése a listinghez
 - i18n a kezdőlapra
 - i18n az about lapra
 - title és desc ellenőrzése, hogy van-e mindenütt

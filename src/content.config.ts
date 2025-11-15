@@ -47,6 +47,7 @@ const listingsCollection = defineCollection({
       propertyType: z.string(),
       transactionType: z.string(),
       description: z.string(),
+      shortDescription: z.string(),
       extra: z.string(),
       checklist: z.array(
         z.object({

@@ -16,6 +16,24 @@ export type Listing = Omit<ListingData, "galleryImages"> & {
   propertyTypeLabel: string;
 };
 
+export type ShortListing = Pick<
+  Listing,
+  | "id"
+  | "baseId"
+  | "title"
+  | "price"
+  | "images"
+  | "link"
+  | "address"
+  | "rooms"
+  | "shortDescription"
+  | "transactionType"
+  | "transactionTypeLabel"
+  | "propertyType"
+  | "propertyTypeLabel"
+  | "area"
+>;
+
 export async function getAllListings(lang: AvailableLanguageCode) {
   const entries = await getCollection("listings", (entry) => {
     return isLang(entry, lang);
@@ -29,29 +47,30 @@ export async function getAllListings(lang: AvailableLanguageCode) {
   return listings;
 }
 
-export async function getFeaturedListings(lang: AvailableLanguageCode) {
+export async function getAllShortListings(lang: AvailableLanguageCode) {
+  const entries = await getCollection("listings", (entry) => {
+    return isLang(entry, lang);
+  });
+
+  const listings = [];
+  for (const entry of entries) {
+    listings.push(await convertEntryToShortListing(entry, lang));
+  }
+
+  return listings;
+}
+
+export async function getFeaturedShortListings(lang: AvailableLanguageCode) {
   const entries = await getCollection("listings", (entry) => {
     return isLang(entry, lang) && entry.data.featured;
   });
 
   const listings = [];
   for (const entry of entries) {
-    listings.push(await convertEntryToListing(entry, lang));
+    listings.push(await convertEntryToShortListing(entry, lang));
   }
 
   return listings;
-}
-
-export async function getListingById(id: string, lang: AvailableLanguageCode) {
-  const entries = await getCollection("listings", (entry) => {
-    return isLang(entry, lang) && entry.data.baseId === id;
-  });
-
-  if (entries.length === 0) {
-    return null;
-  }
-
-  return await convertEntryToListing(entries[0], lang);
 }
 
 function isLang(entry: ListingEntry, lang: AvailableLanguageCode) {
@@ -80,5 +99,29 @@ async function convertEntryToListing(
     images,
     transactionTypeLabel: t(entry.data.transactionType),
     propertyTypeLabel: t(entry.data.propertyType),
+  };
+}
+
+async function convertEntryToShortListing(
+  entry: ListingEntry,
+  lang: AvailableLanguageCode,
+): Promise<ShortListing> {
+  const listing = await convertEntryToListing(entry, lang);
+
+  return {
+    id: listing.id,
+    baseId: listing.baseId,
+    title: listing.title,
+    price: listing.price,
+    images: listing.images,
+    link: listing.link,
+    address: listing.address,
+    rooms: listing.rooms,
+    shortDescription: listing.shortDescription,
+    transactionType: listing.transactionType,
+    transactionTypeLabel: listing.transactionTypeLabel,
+    propertyType: listing.propertyType,
+    propertyTypeLabel: listing.propertyTypeLabel,
+    area: listing.area,
   };
 }

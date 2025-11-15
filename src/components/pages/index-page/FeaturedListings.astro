@@ -1,12 +1,12 @@
 ---
 import ListingCard from "./ListingCard.astro";
 import { HeadingLeftAligned } from "../../common";
-import { getFeaturedListings } from "../../../listings";
+import { getFeaturedShortListings } from "../../../listings";
 import { useI18n } from "../../../i18n";
 
 const { p } = useI18n(Astro);
 // Mock data - this can be replaced with a content collection later
-const featuredListings = await getFeaturedListings("hu");
+const featuredListings = await getFeaturedShortListings("hu");
 ---
 
 <section class="py-20 bg-cream-soft">

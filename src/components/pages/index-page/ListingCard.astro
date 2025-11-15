@@ -1,13 +1,13 @@
 ---
-import type { Listing } from "../../../listings";
+import type { ShortListing } from "../../../listings";
 import { useI18n } from "../../../i18n";
 
 interface Props {
-  listing: Listing;
+  listing: ShortListing;
 }
 
 const { listing } = Astro.props;
-const { t } = useI18n(Astro);
+const { t, lang } = useI18n(Astro);
 ---
 
 <a href={listing.link} class="block group">
@@ -37,7 +37,7 @@ const { t } = useI18n(Astro);
         {listing.address}
       </p>
       <p class="font-old-style text-2xl text-camel font-medium tracking-wide">
-        {listing.price}
+        {listing.price.toLocaleString(lang)} Ft
       </p>
 
       <!-- Additional details - visible on mobile/tablet, appear on hover on desktop -->

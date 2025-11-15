@@ -456,6 +456,10 @@ collections:
       label: "Leírás"
       widget: "markdown"
       i18n: true
+    - name: "shortDescription"
+      label: "Rövid leírás"
+      widget: "text"
+      i18n: true
     - name: "extra"
       label: "Kiemelt információ"
       widget: "text"

@@ -1,12 +1,12 @@
 import { availableLanguageCodes, type AvailableLanguageCode } from "../../i18n";
-import { getAllListings } from "../../listings";
+import { getAllShortListings } from "../../listings";
 
 export async function GET({
   params,
 }: {
   params: { lang: AvailableLanguageCode };
 }) {
-  const listings = await getAllListings(params.lang);
+  const listings = await getAllShortListings(params.lang);
 
   return new Response(JSON.stringify(listings));
 }
