@@ -4,3 +4,5 @@ export { default as ForSellersPage } from "./for-sellers/Page.astro";
 export { default as ListingsPage } from "./listings/Page.astro";
 export { default as AboutPage } from "./about/Page.astro";
 export { default as ListingDetailPage } from "./listing-detail/Page.astro";
+export { default as PrivacyPolicyPage } from "./privacy-policy/Page.astro";
+export { default as TermsOfServicePage } from "./terms-of-service/Page.astro";

@@ -1,6 +1,3 @@
-- title és desc ellenőrzése, hogy van-e mindenütt
 - opengraph dolgok generálása
-- szlogen és logó CMS-esítése
 - emailek hozzáadása a netlify id-hez
 - nyelvváltás
-- adatvédelmi témarépa

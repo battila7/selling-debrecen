@@ -84,6 +84,10 @@ export const ui: Record<AvailableLanguageCode, Record<string, string>> = {
     any: "mindegy",
     sale: "eladó",
     rent: "kiadó",
+    "privacy-policy.title": "Adatkezelési tájékoztató",
+    "privacy-policy.description": "Adatkezelési tájékoztató",
+    "terms-of-service.title": "Általános szerződési feltételek",
+    "terms-of-service.description": "ÁSZF",
   },
   en: {
     "nav.home": "Home",
@@ -168,6 +172,10 @@ export const ui: Record<AvailableLanguageCode, Record<string, string>> = {
     any: "Any",
     sale: "Sale",
     rent: "Rent",
+    "privacy-policy.title": "Privacy Policy",
+    "privacy-policy.description": "Privacy Policy",
+    "terms-of-service.title": "Terms of Service",
+    "terms-of-service.description": "Terms of Service",
   },
   de: {
     "nav.home": "Startseite",
@@ -252,6 +260,10 @@ export const ui: Record<AvailableLanguageCode, Record<string, string>> = {
     any: "Alle",
     sale: "Verkaufen",
     rent: "Mieten",
+    "privacy-policy.title": "Datenschutzerklärung",
+    "privacy-policy.description": "Datenschutzerklärung",
+    "terms-of-service.title": "Allgemeine Geschäftsbedingungen",
+    "terms-of-service.description": "Allgemeine Geschäftsbedingungen",
   },
 } as const;
 

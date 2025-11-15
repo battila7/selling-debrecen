@@ -1,0 +1,14 @@
+---
+import { LegalPageLayout } from "../../../layouts";
+import data from "../../../content/general/legal.json";
+import { useI18n } from "../../../i18n";
+
+const { t, lang } = useI18n(Astro);
+const localizedData = data[lang as keyof typeof data];
+---
+
+<LegalPageLayout
+  title={t("terms-of-service.title")}
+  description={t("terms-of-service.description")}
+  content={localizedData.termsOfService}
+/>

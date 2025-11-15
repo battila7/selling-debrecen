@@ -41,6 +41,19 @@ collections:
           label: "Szlogen"
           widget: "string"
           i18n: true
+    - label: "Jogi oldalak"
+      name: "legal-pages"
+      file: "src/content/general/legal.json"
+      i18n: true
+      fields:
+        - name: "privacyPolicy"
+          label: "Adatkezelési tájékoztató"
+          widget: "markdown"
+          i18n: true
+        - name: "termsOfService"
+          label: "ÁSZF"
+          widget: "markdown"
+          i18n: true
     - label: "Elérhetőségek és profil"
       name: "contact-information"
       file: "src/content/general/contact-information.json"

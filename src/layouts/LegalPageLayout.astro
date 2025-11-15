@@ -1,0 +1,40 @@
+---
+import PageLayout from "./PageLayout.astro";
+import { Prose } from "../components/common";
+
+interface Props {
+  title: string;
+  description: string;
+  content: string;
+}
+
+const { title, description, content } = Astro.props;
+---
+
+<PageLayout title={title} description={description}>
+  <section
+    class="relative bg-navy h-[20rem] md:h-[20rem] lg:h-[20rem] w-full overflow-hidden"
+  >
+    <div class="relative z-10 container mx-auto px-6 lg:px-12 h-full">
+      <div class="flex flex-col items-center justify-center h-full gap-8">
+        <hgroup class="text-center">
+          <h1
+            class="font-didone text-3xl md:text-4xl lg:text-5xl text-white tracking-wide mb-3 uppercase"
+          >
+            {title}
+          </h1>
+        </hgroup>
+      </div>
+    </div>
+  </section>
+  <section class="py-12 bg-cream-soft">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="max-w-4xl mx-auto">
+        <Prose
+          class="prose prose-xl text-charcoal max-w-none"
+          content={content}
+        />
+      </div>
+    </div>
+  </section>
+</PageLayout>

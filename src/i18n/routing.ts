@@ -9,6 +9,8 @@ export const routes: Record<AvailableLanguageCode, Record<string, string>> = {
     "for-buyers": "/keresoknek",
     "listing-detail-base": "/i/",
     "listings-data": "/data/listings.hu.json",
+    "privacy-policy": "/adatkezelesi-tajekoztato",
+    "terms-of-service": "/altalanos-szerzodesi-feltetelek",
   },
   en: {
     home: "/",
@@ -18,6 +20,8 @@ export const routes: Record<AvailableLanguageCode, Record<string, string>> = {
     "for-buyers": "/for-buyers",
     "listing-detail-base": "/p/",
     "listings-data": "/data/listings.en.json",
+    "privacy-policy": "/privacy-policy",
+    "terms-of-service": "/terms-of-service",
   },
   de: {
     home: "/",
@@ -27,6 +31,8 @@ export const routes: Record<AvailableLanguageCode, Record<string, string>> = {
     "for-buyers": "/kaufer",
     "listing-detail-base": "/i/",
     "listings-data": "/data/listings.de.json",
+    "privacy-policy": "/datenschutzerklaerung",
+    "terms-of-service": "/allgemeine-geschaeftsbedingungen",
   },
 } as const;
 

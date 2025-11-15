@@ -1,0 +1,14 @@
+{
+  "hu": {
+    "privacyPolicy": "Adatkezelési tájékoztató",
+    "termsOfService": "ÁSZF"
+  },
+  "en": {
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service"
+  },
+  "de": {
+    "privacyPolicy": "Datenschutzerklärung",
+    "termsOfService": "Allgemeine Geschäftsbedingungen"
+  }
+}
