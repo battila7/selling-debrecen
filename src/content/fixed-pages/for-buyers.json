@@ -1,0 +1,121 @@
+{
+  "hu": {
+    "pageTitle": "Keresőknek",
+    "pageDescription": "Találja meg álmai ingatlanát Debrecenben",
+    "title": "Keresőknek",
+    "subtitle": "Találja meg álmai ingatlanát Debrecenben",
+    "titleImage": "src/assets/images/for-buyers-02.jpg",
+    "whyChooseUsTitle": "Miért válasszon minket?",
+    "whyChooseUsDescription": "Az otthonteremtés életre szóló döntés, amely meghatározza mindennapjainkat. Szakértelmünkkel és helyi ismereteinkkel segítünk megtalálni azt az ingatlant, amely tökéletesen illeszkedik az Ön életviteléhez és elképzeléseihez.\n\nDebrecen minden szegletét ismerjük: a csendes, családbarát kerületektől a pezsgő belvárosig. Mindez lehetővé teszi, hogy ne csak ingatlant, hanem otthont találjunk Önnek.\n\nCélunk, hogy a vásárlás folyamata átlátható, biztonságos és gördülékeny legyen. Minden lépésben mellette állunk, hogy magabiztosan hozhassa meg élete egyik legfontosabb döntését.",
+    "servicesTitle": "Szolgáltatásaink",
+    "servicesSubtitle": "Amit kínálunk",
+    "servicesDescription": "Professzionális támogatás minden lépésben az otthonkeresés folyamatában.",
+    "servicesItems": [
+      {
+        "title": "Személyre szabott keresés",
+        "description": "Alaposan megismerjük igényeit, majd átfogó keresést végzünk az Ön számára legmegfelelőbb ingatlanok felkutatására. Csak olyan ingatlanokat mutatunk be, amelyek valóban megfelelnek elvárásainak.",
+        "icon": "Search"
+      },
+      {
+        "title": "Környék és infrastruktúra",
+        "description": "Részletes információkat szolgáltatunk a környékről: iskolák, óvodák, közlekedési lehetőségek, bevásárlóhelyek. Helyi ismereteink révén valós képet kaphat a mindennapi életről.",
+        "icon": "MapPin"
+      }
+    ],
+    "ctaTitle": "Tekintse meg kínálatunkat",
+    "ctaDescription": "Böngésszen aktuális kínálatunkban és találja meg álmai otthonát Debrecenben. Folyamatosan frissülő portfóliónkban lakások, házak és kereskedelmi ingatlanok széles választéka várja Önt.",
+    "ctaButtonText": "Megnézem az ingatlanokat",
+    "ctaImage": "src/assets/images/listings-bg-1.jpg",
+    "processTitle": "Ilyen, ha velünk dolgozik",
+    "processSubtitle": "A keresési folyamat",
+    "processDescription": "A keresési folyamat során minden lépésben segítünk Önnek.",
+    "processItems": [
+      {
+        "title": "Ismerkedés és igényfelmérés",
+        "description": "Találkozzunk személyesen vagy online, és beszéljük át elképzeléseit: milyen típusú ingatlant keres, mekkora a költségvetése, mely városrészeket preferálja. Ez alapján állítjuk össze a keresési stratégiát.",
+        "icon": "Users"
+      },
+      {
+        "title": "Ingatlanok bemutatása",
+        "description": "Az ingatlanok bemutatása során minden lépésben segítünk Önnek. Megvizsgáljuk az ingatlanokat, és megadunk részletes információkat a környékről.",
+        "icon": "MapPin"
+      }
+    ]
+  },
+  "en": {
+    "pageTitle": "For buyers",
+    "pageDescription": "Find your dream property in Debrecen",
+    "title": "For buyers",
+    "subtitle": "Find your dream property in Debrecen",
+    "titleImage": "src/assets/images/for-buyers-02.jpg",
+    "whyChooseUsTitle": "Why choose us?",
+    "whyChooseUsDescription": "The home purchase is a lifelong decision that shapes our daily lives. With our expertise and local knowledge, we help you find a property that perfectly fits your lifestyle and aspirations.\n\nDebrecen every neighborhood is known: from the quiet, family-friendly districts to the vibrant city center. This allows us not only to find a property, but also a home for you.\n\nOur goal is to make the purchase process transparent, safe and smooth. We are with you at every step, so you can confidently make one of the most important decisions of your life.",
+    "servicesTitle": "Our services",
+    "servicesSubtitle": "What we offer",
+    "servicesDescription": "Professional support at every step of the home buying process.",
+    "servicesItems": [
+      {
+        "title": "Personalized search",
+        "description": "We thoroughly understand your needs and conduct a comprehensive search for the best properties available for you. We only show properties that truly meet your expectations.",
+        "icon": "Search"
+      }
+    ],
+    "ctaTitle": "View our listings",
+    "ctaDescription": "Browse our current listings and find your dream home in Debrecen. Our portfolio is constantly updated with a wide range of properties: apartments, houses and commercial properties. We are waiting for you.",
+    "ctaButtonText": "View the properties",
+    "ctaImage": "src/assets/images/listings-bg-1.jpg",
+    "processTitle": "As with us",
+    "processSubtitle": "The buying process",
+    "processDescription": "The buying process is a lifelong decision that shapes our daily lives. With our expertise and local knowledge, we help you find a property that perfectly fits your lifestyle and aspirations.",
+    "processItems": [
+      {
+        "title": "Introduction and needs assessment",
+        "description": "Meet personally or online, and discuss your ideas: what type of property you are looking for, what is your budget, which neighborhoods you prefer. Based on this, we compile the search strategy.",
+        "icon": "Users"
+      },
+      {
+        "title": "Property presentation",
+        "description": "The property presentation is a lifelong decision that shapes our daily lives. With our expertise and local knowledge, we help you find a property that perfectly fits your lifestyle and aspirations.",
+        "icon": "MapPin"
+      }
+    ]
+  },
+  "de": {
+    "pageTitle": "Für Käufer",
+    "pageDescription": "Finden Sie Ihr Traumhaus in Debrecen",
+    "title": "Für Käufer",
+    "subtitle": "Finden Sie Ihr Traumhaus in Debrecen",
+    "titleImage": "src/assets/images/for-buyers-02.jpg",
+    "whyChooseUsTitle": "Warum uns wählen?",
+    "whyChooseUsDescription": "Das Immobilienkaufen ist eine lebenslange Entscheidung, die unseren Alltag bestimmt. Mit unserer Expertise und lokaler Kenntnis helfen wir Ihnen, eine Immobilie zu finden, die perfekt zu Ihrem Lebensstil und Ihren Vorstellungen passt.",
+    "servicesTitle": "Unsere Dienstleistungen",
+    "servicesSubtitle": "Was wir anbieten",
+    "servicesDescription": "Professionelle Unterstützung bei jedem Schritt des Immobilienerwerbs.",
+    "servicesItems": [
+      {
+        "title": "Persönliche Suche",
+        "description": "Wir verstehen Ihre Bedürfnisse gründlich und führen eine umfassende Suche nach den besten Immobilien durch. Wir zeigen nur Immobilien, die Ihren Erwartungen entsprechen.",
+        "icon": "Search"
+      }
+    ],
+    "ctaTitle": "Unsere Immobilien ansehen",
+    "ctaDescription": "Blättern Sie durch unsere aktuellen Immobilien und finden Sie Ihr Traumhaus in Debrecen. Unser Portfolio wird ständig mit einer großen Auswahl von Immobilien aktualisiert: Wohnungen, Häuser und Geschäftsimmobilien. Wir freuen uns auf Sie.",
+    "ctaButtonText": "Die Immobilien ansehen",
+    "ctaImage": "src/assets/images/listings-bg-1.jpg",
+    "processTitle": "Als mit uns",
+    "processSubtitle": "Der Kaufprozess",
+    "processDescription": "Der Kaufprozess ist eine lebenslange Entscheidung, die unseren Alltag bestimmt. Mit unserer Expertise und lokaler Kenntnis helfen wir Ihnen, eine Immobilie zu finden, die perfekt zu Ihrem Lebensstil und Ihren Vorstellungen passt.",
+    "processItems": [
+      {
+        "title": "Einführung und Bedarfserfassung",
+        "description": "Treffen Sie sich persönlich oder online und besprechen Sie Ihre Ideen: Welche Art von Immobilie Sie suchen, welches Budget Sie haben, welche Stadtteile Sie bevorzugen. Basierend auf diesen Informationen erstellen wir die Suchstrategie.",
+        "icon": "Users"
+      },
+      {
+        "title": "Immobilienpräsentation",
+        "description": "Die Immobilienpräsentation ist eine lebenslange Entscheidung, die unseren Alltag bestimmt. Mit unserer Expertise und lokaler Kenntnis helfen wir Ihnen, eine Immobilie zu finden, die perfekt zu Ihrem Lebensstil und Ihren Vorstellungen passt.",
+        "icon": "MapPin"
+      }
+    ]
+  }
+}

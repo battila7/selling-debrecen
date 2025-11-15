@@ -7,20 +7,9 @@ import Instagram from "../../images/brands/instagram.svg";
 import Tiktok from "../../images/brands/tiktok.svg";
 import Logo from "../../images/selling-debrecen-logo.svg";
 import { useI18n } from "../../i18n";
+import Contact from "../../util/contact";
 
 const { p, t } = useI18n(Astro);
-
-// TODO: Update these with actual contact information
-const officeAddress = "Debrecen, Magyarország";
-const email = "info@sellingdebrecen.hu";
-const phone = "+36 XX XXX XXXX";
-
-// TODO: Update with actual social media URLs
-const socialLinks = {
-  facebook: "https://facebook.com/sellingdebrecen",
-  instagram: "https://instagram.com/sellingdebrecen",
-  tiktok: "https://tiktok.com/@sellingdebrecen",
-};
 
 const navigationLinks = [
   { href: p("home"), label: t("nav.home") },
@@ -62,7 +51,7 @@ const legalLinks = [
         <ul class="space-y-5">
           <li>
             <a
-              href={`tel:${phone.replace(/\s/g, "")}`}
+              href={`tel:${Contact.general.phone.replace(/\s/g, "")}`}
               class="flex items-start gap-3"
             >
               <div class="flex-shrink-0">
@@ -72,11 +61,14 @@ const legalLinks = [
                   <Phone class="w-5 h-5 text-camel" aria-hidden="true" />
                 </div>
               </div>
-              <span class="text-charcoal mt-2.5">{phone}</span>
+              <span class="text-charcoal mt-2.5">{Contact.general.phone}</span>
             </a>
           </li>
           <li>
-            <a href={`mailto:${email}`} class="flex items-start gap-3">
+            <a
+              href={`mailto:${Contact.general.email}`}
+              class="flex items-start gap-3"
+            >
               <div class="flex-shrink-0">
                 <div
                   class="flex items-center justify-center w-12 h-12 bg-camel/10"
@@ -84,7 +76,9 @@ const legalLinks = [
                   <Mail class="w-5 h-5 text-camel" aria-hidden="true" />
                 </div>
               </div>
-              <span class="text-charcoal mt-2.5 break-all">{email}</span>
+              <span class="text-charcoal mt-2.5 break-all"
+                >{Contact.general.email}</span
+              >
             </a>
           </li>
           <li>
@@ -97,7 +91,7 @@ const legalLinks = [
                 </div>
               </div>
               <address class="text-charcoal not-italic mt-2.5">
-                {officeAddress}
+                {Contact.general.office}
               </address>
             </div>
           </li>
@@ -135,7 +129,7 @@ const legalLinks = [
         <ul class="flex gap-4">
           <li>
             <a
-              href={socialLinks.facebook}
+              href={Contact.general.facebook}
               target="_blank"
               rel="noopener noreferrer"
               class="flex items-center justify-center w-12 h-12 bg-camel/10 hover:bg-camel/20 transition-colors"
@@ -146,7 +140,7 @@ const legalLinks = [
           </li>
           <li>
             <a
-              href={socialLinks.instagram}
+              href={Contact.general.instagram}
               target="_blank"
               rel="noopener noreferrer"
               class="flex items-center justify-center w-12 h-12 bg-camel/10 hover:bg-camel/20 transition-colors"
@@ -157,7 +151,7 @@ const legalLinks = [
           </li>
           <li>
             <a
-              href={socialLinks.tiktok}
+              href={Contact.general.tiktok}
               target="_blank"
               rel="noopener noreferrer"
               class="flex items-center justify-center w-12 h-12 bg-camel/10 hover:bg-camel/20 transition-colors"

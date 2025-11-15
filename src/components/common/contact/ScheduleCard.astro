@@ -1,15 +1,18 @@
 ---
 import Check from "@lucide/astro/icons/check";
 import { useI18n } from "../../../i18n";
+import Contact from "../../../util/contact";
+import contactSection from "../../../content/general/contact-section.json";
 
-const calendlyUrl = "https://calendly.com/kisszoltan"; // Update with actual Calendly URL
+const { lang } = useI18n(Astro);
 
-const { t } = useI18n(Astro);
 type Props = {
   class: string;
 };
 
 const { class: className, ...rest } = Astro.props;
+
+const localizedData = contactSection[lang as keyof typeof contactSection];
 ---
 
 <div
@@ -21,68 +24,37 @@ const { class: className, ...rest } = Astro.props;
 >
   <div>
     <h3 class="font-old-style text-2xl font-medium mb-6">
-      Egyeztessen időpontot
+      {localizedData.bookAppointmentTitle}
     </h3>
     <p class="text-white/90 leading-relaxed mb-8">
-      Foglaljon időpontot egy személyes vagy online konzultációra, ahol
-      részletesen megbeszélhetjük az Ön ingatlannal kapcsolatos céljait és
-      elvárásait.
+      {localizedData.bookAppointmentDescription}
     </p>
 
     <ul class="space-y-4 mb-10">
-      <li class="flex items-start gap-4 group">
-        <div class="flex-shrink-0 mt-0.5">
-          <div
-            class="flex items-center justify-center w-6 h-6 border-2 border-camel/60 bg-camel/10"
-          >
-            <Check class="w-4 h-4 text-camel stroke-[3]" aria-hidden="true" />
-          </div>
-        </div>
-        <span class="text-white/95 leading-relaxed">Ingyenes konzultáció</span>
-      </li>
-      <li class="flex items-start gap-4 group">
-        <div class="flex-shrink-0 mt-0.5">
-          <div
-            class="flex items-center justify-center w-6 h-6 border-2 border-camel/60 bg-camel/10"
-          >
-            <Check class="w-4 h-4 text-camel stroke-[3]" aria-hidden="true" />
-          </div>
-        </div>
-        <span class="text-white/95 leading-relaxed"
-          >Személyre szabott tanácsadás</span
-        >
-      </li>
-      <li class="flex items-start gap-4 group">
-        <div class="flex-shrink-0 mt-0.5">
-          <div
-            class="flex items-center justify-center w-6 h-6 border-2 border-camel/60 bg-camel/10"
-          >
-            <Check class="w-4 h-4 text-camel stroke-[3]" aria-hidden="true" />
-          </div>
-        </div>
-        <span class="text-white/95 leading-relaxed">Piaci értékbecslés</span>
-      </li>
-      <li class="flex items-start gap-4 group">
-        <div class="flex-shrink-0 mt-0.5">
-          <div
-            class="flex items-center justify-center w-6 h-6 border-2 border-camel/60 bg-camel/10"
-          >
-            <Check class="w-4 h-4 text-camel stroke-[3]" aria-hidden="true" />
-          </div>
-        </div>
-        <span class="text-white/95 leading-relaxed"
-          >Átfogó stratégiatervezés</span
-        >
-      </li>
+      {
+        localizedData.bookAppointmentChecklist.map(({ element }) => (
+          <li class="flex items-start gap-4 group">
+            <div class="flex-shrink-0 mt-0.5">
+              <div class="flex items-center justify-center w-6 h-6 border-2 border-camel/60 bg-camel/10">
+                <Check
+                  class="w-4 h-4 text-camel stroke-[3]"
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+            <span class="text-white/95 leading-relaxed">{element}</span>
+          </li>
+        ))
+      }
     </ul>
   </div>
 
   <a
-    href={calendlyUrl}
+    href={Contact.general.scheduleAppointmentLink}
     target="_blank"
     rel="noopener noreferrer"
     class="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-white text-white font-system-ui tracking-wide uppercase hover:border-camel hover:bg-camel hover:text-navy transition-colors duration-300"
   >
-    <span>{t("contact.schedule-appointment")}</span>
+    <span>{localizedData.bookAppointmentButtonText}</span>
   </a>
 </div>

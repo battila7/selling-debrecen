@@ -22,6 +22,92 @@ i18n:
   default_locale: hu
 
 collections:
+- name: "general"
+  label: "Általános"
+  i18n:
+    structure: single_file
+    locales: [hu, en, de]
+  files:
+    - label: "Elérhetőségek és profil"
+      name: "contact-information"
+      file: "src/content/general/contact-information.json"
+      i18n: true
+      fields:
+        - name: "name"
+          label: "Név"
+          widget: "string"
+          i18n: true
+        - name: "role"
+          label: "Szerep"
+          widget: "string"
+          i18n: true
+        - name: "description"
+          label: "Rövid leírás"
+          widget: "string"
+          i18n: true
+        - name: "profileImage"
+          label: "Profil kép"
+          widget: "image"
+        - name: "facebook"
+          label: "Facebook"
+          widget: "string"
+        - name: "instagram"
+          label: "Instagram"
+          widget: "string"
+        - name: "tiktok"
+          label: "Tiktok"
+          widget: "string"
+        - name: "office"
+          label: "Iroda"
+          widget: "string"
+        - name: "email"
+          label: "Email"
+          widget: "string"
+        - name: "phone"
+          label: "Telefon"
+          widget: "string"
+        - name: "officeHoursItems"
+          label: "Nyitvatartás elemek"
+          widget: "list"
+          i18n: true
+          fields:
+            - name: "element"
+              label: "Elem"
+              widget: "string"
+              i18n: true
+        - name: "scheduleAppointmentLink"
+          label: "Időpontfoglalás link"
+          widget: "string"
+    - label: "Kapcsolat szekció"
+      name: "contact-section"
+      file: "src/content/general/contact-section.json"
+      i18n: true
+      fields:
+        - name: "title"
+          label: "Cím"
+          widget: "string"
+          i18n: true
+        - name: "bookAppointmentTitle"
+          label: "Időpontfoglalás cím"
+          widget: "string"
+          i18n: true
+        - name: "bookAppointmentDescription"
+          label: "Időpontfoglalás leírás"
+          widget: "text"
+          i18n: true
+        - name: "bookAppointmentButtonText"
+          label: "Időpontfoglalás gomb szövege"
+          widget: "string"
+          i18n: true
+        - name: "bookAppointmentChecklist"
+          label: "Időpontfoglalás checklist"
+          widget: "list"
+          i18n: true
+          fields:
+            - name: "element"
+              label: "Elem"
+              widget: "string"
+              i18n: true
 - name: "fixed-pages"
   label: "Kötött oldalak"
   i18n:
@@ -33,6 +119,14 @@ collections:
       file: "src/content/fixed-pages/for-sellers.json"
       i18n: true
       fields:
+        - name: "pageTitle"
+          label: "Oldal címe"
+          widget: "string"
+          i18n: true
+        - name: "pageDescription"
+          label: "Oldal leírás"
+          widget: "text"
+          i18n: true
         - name: "title"
           label: "Cím"
           widget: "string"
@@ -103,6 +197,14 @@ collections:
       file: "src/content/fixed-pages/about.json"
       i18n: true
       fields:
+        - name: "pageTitle"
+          label: "Oldal címe"
+          widget: "string"
+          i18n: true
+        - name: "pageDescription"
+          label: "Oldal leírás"
+          widget: "text"
+          i18n: true
         - name: "title"
           label: "Cím"
           widget: "string"
@@ -152,3 +254,106 @@ collections:
               label: "Ikon"
               widget: "string"
               i18n: duplicate
+    - label: "Keresőknek"
+      name: "for-buyers"
+      file: "src/content/fixed-pages/for-buyers.json"
+      i18n: true
+      fields:
+        - name: "pageTitle"
+          label: "Oldal címe"
+          widget: "string"
+          i18n: true
+        - name: "pageDescription"
+          label: "Oldal leírás"
+          widget: "text"
+          i18n: true
+        - name: "title"
+          label: "Cím"
+          widget: "string"
+          i18n: true
+        - name: "subtitle"
+          label: "Alcím"
+          widget: "string"
+          i18n: true
+        - name: "titleImage"
+          label: "Cím kép"
+          widget: "image"
+          i18n: duplicate
+        - name: "whyChooseUsTitle"
+          label: "Miért válasszon minket? cím"
+          widget: "string"
+          i18n: true
+        - name: "whyChooseUsDescription"
+          label: "Miért válasszon minket? leírás"
+          widget: "markdown"
+          i18n: true
+        - name: "servicesTitle"
+          label: "Szolgáltatásaink cím"
+          widget: "string"
+          i18n: true
+        - name: "servicesSubtitle"
+          label: "Szolgáltatásaink alcím"
+          widget: "string"
+          i18n: true
+        - name: "servicesDescription"
+          label: "Szolgáltatásaink leírás"
+          widget: "markdown"
+          i18n: true
+        - name: "servicesItems"
+          label: "Szolgáltatásaink elemei"
+          widget: "list"
+          i18n: true
+          fields:
+            - name: "title"
+              label: "Cím"
+              widget: "string"
+              i18n: true
+            - name: "description"
+              label: "Leírás"
+              widget: "text"
+              i18n: true
+            - name: "icon"
+              label: "Ikon"
+              widget: "string"
+              i18n: duplicate
+        - name: "ctaTitle"
+          label: "Cta cím"
+          widget: "string"
+          i18n: true
+        - name: "ctaDescription"
+          label: "Cta leírás"
+          widget: "text"
+          i18n: true
+        - name: "ctaButtonText"
+          label: "Cta gomb szövege"
+          widget: "string"
+          i18n: true
+        - name: "ctaImage"
+          label: "Cta kép"
+          widget: "image"
+          i18n: duplicate
+        - name: "processTitle"
+          label: "Folyamat cím"
+          widget: "string"
+          i18n: true
+        - name: "processSubtitle"
+          label: "Folyamat alcím"
+          widget: "string"
+          i18n: true
+        - name: "processDescription"
+          label: "Folyamat leírás"
+          widget: "markdown"
+          i18n: true
+        - name: "processItems"
+          label: "Folyamat elemei"
+          widget: "list"
+          i18n: true
+          fields:
+            - name: "title"
+              label: "Cím"
+              widget: "string"
+              i18n: true
+            - name: "description"
+              label: "Leírás"
+              widget: "text"
+              i18n: true

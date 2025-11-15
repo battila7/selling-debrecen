@@ -10,11 +10,6 @@ import {
   Prose,
 } from "../../common";
 
-import Heart from "@lucide/astro/icons/heart";
-import Award from "@lucide/astro/icons/award";
-import Users from "@lucide/astro/icons/users";
-import TrendingUp from "@lucide/astro/icons/trending-up";
-
 import { useI18n } from "../../../i18n/framework";
 import data from "../../../content/fixed-pages/about.json";
 import Assets from "../../../util/assets";
@@ -28,7 +23,10 @@ localizedData.valuesItems.forEach((item) => {
 });
 ---
 
-<PageLayout title="Rólunk" description="Rólunk">
+<PageLayout
+  title={localizedData.pageTitle}
+  description={localizedData.pageDescription}
+>
   <!-- Hero Section -->
   <section
     class="relative h-[32rem] md:h-[28rem] lg:h-[32rem] w-full overflow-hidden"

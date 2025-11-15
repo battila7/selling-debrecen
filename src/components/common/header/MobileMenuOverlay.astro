@@ -4,6 +4,7 @@ import Facebook from "../../../images/brands/facebook.svg";
 import Instagram from "../../../images/brands/instagram.svg";
 import Tiktok from "../../../images/brands/tiktok.svg";
 import { useI18n } from "../../../i18n";
+import Contact from "../../../util/contact";
 
 type Props = {
   mobileMenuButtonId: string;
@@ -13,15 +14,6 @@ const { mobileMenuButtonId } = Astro.props;
 
 const mobileMenuOverlayId = "mobile-menu-overlay";
 const mobileMenuCloseButtonId = "mobile-menu-close-button";
-
-// TODO: Update with actual social media URLs
-const socialLinks = {
-  facebook: "https://facebook.com/sellingdebrecen",
-  instagram: "https://instagram.com/sellingdebrecen",
-  tiktok: "https://tiktok.com/@sellingdebrecen",
-};
-
-const calendlyUrl = "https://calendly.com/kisszoltan"; // Update with actual Calendly URL
 
 const { p, t } = useI18n(Astro);
 ---
@@ -78,7 +70,7 @@ const { p, t } = useI18n(Astro);
 
     <!-- Schedule Button -->
     <a
-      href={calendlyUrl}
+      href={Contact.general.scheduleAppointmentLink}
       target="_blank"
       rel="noopener noreferrer"
       class="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-white text-white font-system-ui text-sm tracking-widest uppercase hover:border-camel hover:bg-camel hover:text-navy transition-all duration-300"
@@ -93,7 +85,7 @@ const { p, t } = useI18n(Astro);
       </p>
       <div class="flex gap-4">
         <a
-          href={socialLinks.facebook}
+          href={Contact.general.facebook}
           target="_blank"
           rel="noopener noreferrer"
           class="flex items-center justify-center w-12 h-12 bg-camel"
@@ -102,7 +94,7 @@ const { p, t } = useI18n(Astro);
           <Facebook class="w-5 h-5 text-white" aria-hidden="true" />
         </a>
         <a
-          href={socialLinks.instagram}
+          href={Contact.general.instagram}
           target="_blank"
           rel="noopener noreferrer"
           class="flex items-center justify-center w-12 h-12 bg-camel"
@@ -111,7 +103,7 @@ const { p, t } = useI18n(Astro);
           <Instagram class="w-5 h-5 text-white" aria-hidden="true" />
         </a>
         <a
-          href={socialLinks.tiktok}
+          href={Contact.general.tiktok}
           target="_blank"
           rel="noopener noreferrer"
           class="flex items-center justify-center w-12 h-12 bg-camel"

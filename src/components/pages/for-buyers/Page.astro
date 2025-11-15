@@ -1,27 +1,33 @@
 ---
 import { Picture } from "astro:assets";
-import forBuyersBg from "../../../images/for-buyers-02.jpg";
-import listingsBg2 from "../../../images/listings-bg-1.jpg";
 import { PageLayout } from "../../../layouts";
 import { Contact, HeadingCentered, HeadingLeftAligned } from "../../common";
 
-import Search from "@lucide/astro/icons/search";
-import MapPin from "@lucide/astro/icons/map-pin";
-import Shield from "@lucide/astro/icons/shield";
-import Key from "@lucide/astro/icons/key";
 import { useI18n } from "../../../i18n";
+import data from "../../../content/fixed-pages/for-buyers.json";
+import Assets from "../../../util/assets";
+import { icons } from "@lucide/astro";
+import { Prose } from "../../common";
 
-const { p } = useI18n(Astro);
+const { p, lang } = useI18n(Astro);
+const localizedData = data[lang as keyof typeof data];
+
+localizedData.servicesItems.forEach((item) => {
+  item.IconSvg = icons[item.icon as keyof typeof icons];
+});
 ---
 
-<PageLayout title="Keresőknek" description="Keresőknek">
+<PageLayout
+  title={localizedData.pageTitle}
+  description={localizedData.pageDescription}
+>
   <!-- Hero Section -->
   <section
     class="relative h-[32rem] md:h-[28rem] lg:h-[32rem] w-full overflow-hidden"
   >
     <div class="absolute inset-0 z-0">
       <Picture
-        src={forBuyersBg}
+        src={Assets.getImage(localizedData.titleImage)}
         alt=""
         formats={["webp"]}
         class="w-full h-full object-cover"
@@ -37,10 +43,10 @@ const { p } = useI18n(Astro);
           <h1
             class="font-didone text-3xl md:text-4xl lg:text-5xl text-white tracking-wide mb-3 uppercase"
           >
-            Ingatlant keres?
+            {localizedData.title}
           </h1>
           <p class="text-white/90 text-base md:text-lg">
-            Találja meg álmai ingatlanát Debrecenben
+            {localizedData.subtitle}
           </p>
         </hgroup>
       </div>
@@ -51,25 +57,11 @@ const { p } = useI18n(Astro);
   <section class="py-20 bg-cream-soft border-t border-taupe/20">
     <div class="container mx-auto px-6 lg:px-12">
       <div class="max-w-4xl mx-auto">
-        <HeadingCentered title="Miért válasszon minket?" />
-        <div class="prose prose-xl max-w-none">
-          <p class="text-charcoal">
-            Az otthonteremtés életre szóló döntés, amely meghatározza
-            mindennapjainkat. Szakértelmünkkel és helyi ismereteinkkel segítünk
-            megtalálni azt az ingatlant, amely tökéletesen illeszkedik az Ön
-            életviteléhez és elképzeléseihez.
-          </p>
-          <p class="text-charcoal">
-            Debrecen minden szegletét ismerjük: a csendes, családbarát
-            kerületektől a pezsgő belvárosig. Mindez lehetővé teszi, hogy ne
-            csak ingatlant, hanem otthont találjunk Önnek.
-          </p>
-          <p class="text-charcoal">
-            Célunk, hogy a vásárlás folyamata átlátható, biztonságos és
-            gördülékeny legyen. Minden lépésben mellette állunk, hogy
-            magabiztosan hozhassa meg élete egyik legfontosabb döntését.
-          </p>
-        </div>
+        <HeadingCentered title={localizedData.whyChooseUsTitle} />
+        <Prose
+          class="prose prose-xl text-charcoal max-w-none"
+          content={localizedData.whyChooseUsDescription}
+        />
       </div>
     </div>
   </section>
@@ -79,105 +71,32 @@ const { p } = useI18n(Astro);
     <div class="container mx-auto px-6 lg:px-12">
       <div class="max-w-6xl mx-auto">
         <HeadingLeftAligned
-          title="Szolgáltatásaink"
-          subtitle="Amit kínálunk"
-          description="Professzionális támogatás minden lépésben az otthonkeresés folyamatában."
+          title={localizedData.servicesTitle}
+          subtitle={localizedData.servicesSubtitle}
+          description={localizedData.servicesDescription}
           titleColor="text-navy"
           descriptionColor="text-charcoal"
         />
         <div class="grid md:grid-cols-2 gap-8">
-          <!-- Service 1 -->
-          <div
-            class="bg-navy p-8 border border-navy/10 group hover:border-camel/30 transition-colors duration-300"
-          >
-            <div
-              class="flex items-center justify-center w-16 h-16 bg-camel/10 mb-6"
-            >
-              <Search
-                class="w-8 h-8 text-camel"
-                stroke-width="1.5"
-                aria-hidden="true"
-              />
-            </div>
-            <h3 class="font-old-style text-2xl text-cream mb-4">
-              Személyre szabott keresés
-            </h3>
-            <p class="text-cream-soft leading-relaxed">
-              Alaposan megismerjük igényeit, majd átfogó keresést végzünk az Ön
-              számára legmegfelelőbb ingatlanok felkutatására. Csak olyan
-              ingatlanokat mutatunk be, amelyek valóban megfelelnek
-              elvárásainak.
-            </p>
-          </div>
-
-          <!-- Service 2 -->
-          <div
-            class="bg-navy p-8 border border-navy/10 group hover:border-camel/30 transition-colors duration-300"
-          >
-            <div
-              class="flex items-center justify-center w-16 h-16 bg-camel/10 mb-6"
-            >
-              <MapPin
-                class="w-8 h-8 text-camel"
-                stroke-width="1.5"
-                aria-hidden="true"
-              />
-            </div>
-            <h3 class="font-old-style text-2xl text-cream mb-4">
-              Környék és infrastruktúra
-            </h3>
-            <p class="text-cream-soft leading-relaxed">
-              Részletes információkat szolgáltatunk a környékről: iskolák,
-              óvodák, közlekedési lehetőségek, bevásárlóhelyek. Helyi
-              ismereteink révén valós képet kaphat a mindennapi életről.
-            </p>
-          </div>
-
-          <!-- Service 3 -->
-          <div
-            class="bg-navy p-8 border border-navy/10 group hover:border-camel/30 transition-colors duration-300"
-          >
-            <div
-              class="flex items-center justify-center w-16 h-16 bg-camel/10 mb-6"
-            >
-              <Shield
-                class="w-8 h-8 text-camel"
-                stroke-width="1.5"
-                aria-hidden="true"
-              />
-            </div>
-            <h3 class="font-old-style text-2xl text-cream mb-4">
-              Biztonságos vásárlás
-            </h3>
-            <p class="text-cream-soft leading-relaxed">
-              Teljes körű ellenőrzést végzünk: dokumentumok átvilágítása, jogi
-              háttér vizsgálata, értékbecslés. Gondoskodunk róla, hogy minden
-              szempontból nyugodt szívvel hozhassa meg döntését.
-            </p>
-          </div>
-
-          <!-- Service 4 -->
-          <div
-            class="bg-navy p-8 border border-navy/10 group hover:border-camel/30 transition-colors duration-300"
-          >
-            <div
-              class="flex items-center justify-center w-16 h-16 bg-camel/10 mb-6"
-            >
-              <Key
-                class="w-8 h-8 text-camel"
-                stroke-width="1.5"
-                aria-hidden="true"
-              />
-            </div>
-            <h3 class="font-old-style text-2xl text-cream mb-4">
-              Kulcsátadás és ügyintézés
-            </h3>
-            <p class="text-cream-soft leading-relaxed">
-              A szerződéskötéstől a kulcsátadásig minden részletről
-              gondoskodunk. Segítünk az átírásban, közműszolgáltatók
-              értesítésében és a beköltözés adminisztrációjában.
-            </p>
-          </div>
+          {
+            localizedData.servicesItems.map(
+              ({ title, description, IconSvg }) => (
+                <div class="bg-navy p-8 border border-navy/10 group hover:border-camel/30 transition-colors duration-300">
+                  <div class="flex items-center justify-center w-16 h-16 bg-camel/10 mb-6">
+                    <IconSvg
+                      class="w-8 h-8 text-camel"
+                      stroke-width="1.5"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <h3 class="font-old-style text-2xl text-cream mb-4">
+                    {title}
+                  </h3>
+                  <p class="text-cream-soft leading-relaxed">{description}</p>
+                </div>
+              ),
+            )
+          }
         </div>
       </div>
     </div>
@@ -188,7 +107,7 @@ const { p } = useI18n(Astro);
     <div class="absolute inset-0 z-0 parallax-container">
       <div class="parallax-bg">
         <Picture
-          src={listingsBg2}
+          src={Assets.getImage(localizedData.ctaImage)}
           alt=""
           formats={["webp"]}
           class="w-full h-full object-cover"
@@ -204,19 +123,17 @@ const { p } = useI18n(Astro);
         <h2
           class="font-didone text-4xl md:text-5xl text-cream mb-6 tracking-wide"
         >
-          Tekintse meg kínálatunkat
+          {localizedData.ctaTitle}
         </h2>
         <div class="w-24 h-0.5 bg-camel mx-auto mb-8"></div>
         <p class="text-cream-soft text-lg leading-relaxed mb-12">
-          Böngésszen aktuális kínálatunkban és találja meg álmai otthonát
-          Debrecenben. Folyamatosan frissülő portfóliónkban lakások, házak és
-          kereskedelmi ingatlanok széles választéka várja Önt.
+          {localizedData.ctaDescription}
         </p>
         <a
           href={p("properties")}
           class="hidden lg:inline-block px-6 py-3 border-2 border-white text-white font-system-ui text-sm tracking-wide uppercase hover:border-camel hover:bg-camel hover:text-navy transition-colors duration-300"
         >
-          Megnézem az ingatlanokat
+          {localizedData.ctaButtonText}
         </a>
       </div>
     </div>
@@ -227,86 +144,28 @@ const { p } = useI18n(Astro);
     <div class="container mx-auto px-6 lg:px-12">
       <div class="max-w-4xl mx-auto">
         <HeadingLeftAligned
-          title="Ilyen, ha velünk dolgozik"
-          subtitle="A keresési folyamat"
-          description="A keresési folyamat során minden lépésben segítünk Önnek."
+          title={localizedData.processTitle}
+          subtitle={localizedData.processSubtitle}
+          description={localizedData.processDescription}
           titleColor="text-navy"
           descriptionColor="text-charcoal"
         />
         <div class="space-y-8">
-          <div class="flex gap-6">
-            <div
-              class="flex-shrink-0 w-12 h-12 bg-navy text-cream rounded-full flex items-center justify-center font-didone text-xl"
-            >
-              1
-            </div>
-            <div>
-              <h3 class="font-didone text-2xl text-navy mb-3">
-                Ismerkedés és igényfelmérés
-              </h3>
-              <p class="text-charcoal-dark text-base leading-relaxed">
-                Találkozzunk személyesen vagy online, és beszéljük át
-                elképzeléseit: milyen típusú ingatlant keres, mekkora a
-                költségvetése, mely városrészeket preferálja. Ez alapján
-                állítjuk össze a keresési stratégiát.
-              </p>
-            </div>
-          </div>
-
-          <div class="flex gap-6">
-            <div
-              class="flex-shrink-0 w-12 h-12 bg-navy text-cream rounded-full flex items-center justify-center font-didone text-xl"
-            >
-              2
-            </div>
-            <div>
-              <h3 class="font-didone text-2xl text-navy mb-3">
-                Ingatlanok bemutatása
-              </h3>
-              <p class="text-charcoal-dark text-base leading-relaxed">
-                Előválogatott ingatlanokat mutatunk be Önnek, amelyek
-                megfelelnek kritériumainak. Közösen meglátogatjuk ezeket,
-                részletes információkkal szolgálunk az ingatlanról és a
-                környékről.
-              </p>
-            </div>
-          </div>
-
-          <div class="flex gap-6">
-            <div
-              class="flex-shrink-0 w-12 h-12 bg-navy text-cream rounded-full flex items-center justify-center font-didone text-xl"
-            >
-              3
-            </div>
-            <div>
-              <h3 class="font-didone text-2xl text-navy mb-3">
-                Döntéstámogatás és ajánlattétel
-              </h3>
-              <p class="text-charcoal-dark text-base leading-relaxed">
-                Segítünk kiválasztani a legmegfelelőbb ingatlant. Tanácsot adunk
-                az ár tárgyalásához, és képviseljük érdekeit az eladóval
-                szemben. Elkészítjük és benyújtjuk hivatalos ajánlatát.
-              </p>
-            </div>
-          </div>
-
-          <div class="flex gap-6">
-            <div
-              class="flex-shrink-0 w-12 h-12 bg-navy text-cream rounded-full flex items-center justify-center font-didone text-xl"
-            >
-              4
-            </div>
-            <div>
-              <h3 class="font-didone text-2xl text-navy mb-3">
-                Szerződés és átadás
-              </h3>
-              <p class="text-charcoal-dark text-base leading-relaxed">
-                Koordináljuk a jogi folyamatokat, ellenőrizzük a dokumentumokat
-                és segítünk a szerződéskötésben. A kulcsátadásig és azon túl is
-                rendelkezésére állunk minden felmerülő kérdésben.
-              </p>
-            </div>
-          </div>
+          {
+            localizedData.processItems.map(({ title, description }, index) => (
+              <div class="flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 bg-navy text-cream rounded-full flex items-center justify-center font-didone text-xl">
+                  {index + 1}
+                </div>
+                <div>
+                  <h3 class="font-didone text-2xl text-navy mb-3">{title}</h3>
+                  <p class="text-charcoal-dark text-base leading-relaxed">
+                    {description}
+                  </p>
+                </div>
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>

@@ -1,0 +1,53 @@
+{
+  "hu": {
+    "title": "Lépjen kapcsolatba velünk",
+    "bookAppointmentTitle": "Egyeztessen időpontot",
+    "bookAppointmentDescription": "Foglaljon időpontot egy személyes vagy online konzultációra, ahol részletesen megbeszélhetjük az Ön ingatlannal kapcsolatos céljait és elvárásait.",
+    "bookAppointmentButtonText": "Időpontfoglalás",
+    "bookAppointmentChecklist": [
+      {
+        "element": "Ingyenes konzultáció"
+      },
+      {
+        "element": "Személyre szabott tanácsadás"
+      },
+      {
+        "element": "Gyors válasz"
+      }
+    ]
+  },
+  "en": {
+    "title": "Contact us",
+    "bookAppointmentTitle": "Book an appointment",
+    "bookAppointmentDescription": "Book an appointment with us for a personal or online consultation, where we can discuss your goals and expectations in detail.",
+    "bookAppointmentButtonText": "Book an appointment",
+    "bookAppointmentChecklist": [
+      {
+        "element": "Free consultation"
+      },
+      {
+        "element": "Custom advice"
+      },
+      {
+        "element": "Fast response"
+      }
+    ]
+  },
+  "de": {
+    "title": "Kontaktieren Sie uns",
+    "bookAppointmentTitle": "Termin vereinbaren",
+    "bookAppointmentDescription": "Veinbaren Sie einen Termin mit uns für eine persönliche oder online Beratung, wo wir Ihre Ziele und Erwartungen im Detail besprechen können.",
+    "bookAppointmentButtonText": "Termin vereinbaren",
+    "bookAppointmentChecklist": [
+      {
+        "element": "Kostenlose Beratung"
+      },
+      {
+        "element": "Sachgerechte Beratung"
+      },
+      {
+        "element": "Schnelle Antwort"
+      }
+    ]
+  }
+}

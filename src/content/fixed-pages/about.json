@@ -1,5 +1,7 @@
 {
   "hu": {
+    "pageTitle": "Rólunk",
+    "pageDescription": "Helyi szakértelem, személyes figyelem, megbízható szolgáltatás",
     "title": "Rólunk",
     "subtitle": "Helyi szakértelem, személyes figyelem, megbízható szolgáltatás",
     "titleImage": "src/assets/images/for-buyers.jpg",
@@ -22,6 +24,8 @@
     ]
   },
   "en": {
+    "pageTitle": "About us",
+    "pageDescription": "Local expertise, personal attention, reliable service",
     "title": "About us",
     "subtitle": "Local expertise, personal attention, reliable service",
     "titleImage": "src/assets/images/for-buyers.jpg",
@@ -44,6 +48,8 @@
     ]
   },
   "de": {
+    "pageTitle": "Über uns",
+    "pageDescription": "Lokale Expertise, persönliche Aufmerksamkeit, zuverlässige Service",
     "title": "Über uns",
     "subtitle": "Lokale Expertise, persönliche Aufmerksamkeit, zuverlässige Service",
     "titleImage": "src/assets/images/for-buyers.jpg",

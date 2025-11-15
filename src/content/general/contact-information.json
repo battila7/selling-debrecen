@@ -1,0 +1,65 @@
+{
+  "hu": {
+    "name": "Kiss Zoltán",
+    "role": "Ingatlanközvetítő",
+    "description": "Helyi szakértelem, személyes figyelem",
+    "profileImage": "src/assets/images/agent-profile-picture-placeholder.jpg",
+    "facebook": "https://facebook.com/kisszoltan",
+    "instagram": "https://instagram.com/kisszoltan",
+    "tiktok": "https://tiktok.com/@kisszoltan",
+    "office": "Debrecen",
+    "email": "info@sellingdebrecen.hu",
+    "phone": "+36 XX XXX XXXX",
+    "scheduleAppointmentLink": "https://calendly.com/sellingdebrecen",
+    "officeHoursItems": [
+      {
+        "element": "Hétfő-Péntek: 9:00-18:00"
+      },
+      {
+        "element": "Szombat: 10:00-14:00"
+      }
+    ]
+  },
+  "en": {
+    "name": "Zoltán Kiss",
+    "role": "Real Estate Agent",
+    "description": "Local expertise, personal attention",
+    "profileImage": "src/assets/images/agent-profile-picture-placeholder.jpg",
+    "facebook": "https://facebook.com/kisszoltan",
+    "instagram": "https://instagram.com/kisszoltan",
+    "tiktok": "https://tiktok.com/@kisszoltan",
+    "office": "Debrecen",
+    "email": "info@sellingdebrecen.hu",
+    "phone": "+36 XX XXX XXXX",
+    "scheduleAppointmentLink": "https://calendly.com/sellingdebrecen",
+    "officeHoursItems": [
+      {
+        "element": "Monday-Friday: 9:00-18:00"
+      },
+      {
+        "element": "Saturday: 10:00-14:00"
+      }
+    ]
+  },
+  "de": {
+    "name": "Zoltán Kiss",
+    "role": "Immobilienmakler",
+    "description": "Lokale Expertise, persönliche Aufmerksamkeit",
+    "profileImage": "src/assets/images/agent-profile-picture-placeholder.jpg",
+    "facebook": "https://facebook.com/kisszoltan",
+    "instagram": "https://instagram.com/kisszoltan",
+    "tiktok": "https://tiktok.com/@kisszoltan",
+    "office": "Debrecen",
+    "email": "info@sellingdebrecen.hu",
+    "phone": "+36 XX XXX XXXX",
+    "scheduleAppointmentLink": "https://calendly.com/sellingdebrecen",
+    "officeHoursItems": [
+      {
+        "element": "Montag-Freitag: 9:00-18:00"
+      },
+      {
+        "element": "Samstag: 10:00-14:00"
+      }
+    ]
+  }
+}

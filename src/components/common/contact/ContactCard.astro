@@ -4,14 +4,11 @@ import MapPin from "@lucide/astro/icons/map-pin";
 import Mail from "@lucide/astro/icons/mail";
 import Phone from "@lucide/astro/icons/phone";
 import Clock from "@lucide/astro/icons/clock";
-import agentProfile from "../../../images/agent-profile-picture-placeholder.jpg";
 import { useI18n } from "../../../i18n";
+import Contact from "../../../util/contact";
+import Assets from "../../../util/assets";
 
-const { t } = useI18n(Astro);
-// TODO: Update these with actual contact information
-const officeAddress = "Debrecen, Magyarország";
-const email = "info@sellingdebrecen.hu";
-const phone = "+36 XX XXX XXXX";
+const { t, lang } = useI18n(Astro);
 
 type Props = {
   class: string;
@@ -31,18 +28,22 @@ const { class: className, ...rest } = Astro.props;
   <div class="flex items-center gap-6 pb-8 mb-8 border-b border-taupe/20">
     <div class="flex-shrink-0">
       <Image
-        src={agentProfile}
-        alt="Kiss Zoltán - Ingatlanközvetítő"
+        src={Assets.getImage(Contact.general.profileImage)}
+        alt={`${Contact.langDependent(lang).name} - ${Contact.langDependent(lang).role}`}
         class="w-24 h-24 rounded-full object-cover border-2 border-camel/30 shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
         loading="eager"
         decoding="async"
       />
     </div>
     <div class="flex-1">
-      <h3 class="font-didone text-2xl text-navy mb-1">Kiss Zoltán</h3>
-      <p class="text-camel font-old-style mb-2">Ingatlanközvetítő</p>
+      <h3 class="font-didone text-2xl text-navy mb-1">
+        {Contact.langDependent(lang).name}
+      </h3>
+      <p class="text-camel font-old-style mb-2">
+        {Contact.langDependent(lang).role}
+      </p>
       <p class="text-charcoal/70 text-sm leading-relaxed">
-        Helyi szakértelem, személyes figyelem
+        {Contact.langDependent(lang).description}
       </p>
     </div>
   </div>
@@ -65,7 +66,7 @@ const { class: className, ...rest } = Astro.props;
             {t("contact.office")}
           </h4>
           <address class="text-charcoal/70 not-italic leading-relaxed">
-            {officeAddress}
+            {Contact.general.office}
           </address>
         </div>
       </div>
@@ -80,10 +81,10 @@ const { class: className, ...rest } = Astro.props;
         <div class="flex-1">
           <h4 class="font-semibold text-charcoal mb-2">{t("contact.email")}</h4>
           <a
-            href={`mailto:${email}`}
+            href={`mailto:${Contact.general.email}`}
             class="text-navy hover:text-camel transition-colors underline decoration-1 underline-offset-2"
           >
-            {email}
+            {Contact.general.email}
           </a>
         </div>
       </div>
@@ -98,10 +99,10 @@ const { class: className, ...rest } = Astro.props;
         <div class="flex-1">
           <h4 class="font-semibold text-charcoal mb-2">{t("contact.phone")}</h4>
           <a
-            href={`tel:${phone.replace(/\s/g, "")}`}
+            href={`tel:${Contact.general.phone.replace(/\s/g, "")}`}
             class="text-navy hover:text-camel transition-colors underline decoration-1 underline-offset-2"
           >
-            {phone}
+            {Contact.general.phone}
           </a>
         </div>
       </div>
@@ -118,8 +119,11 @@ const { class: className, ...rest } = Astro.props;
             {t("contact.office-hours")}
           </h4>
           <div class="text-charcoal/70 leading-relaxed space-y-1">
-            <p>Hétfő–Péntek: 9:00–18:00</p>
-            <p>Szombat: 10:00–14:00</p>
+            {
+              Contact.langDependent(lang).officeHoursItems.map((item) => (
+                <p>{item}</p>
+              ))
+            }
           </div>
         </div>
       </div>
