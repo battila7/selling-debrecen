@@ -11,7 +11,7 @@ const { class: className = "" } = Astro.props;
 
 const currentLanguageCode = getLangFromUrl(Astro.url);
 
-const indexPageUrls = ["/", "/en", "/de"];
+const indexPageUrls = ["/", "/en/", "/de/"];
 
 const shouldOpenUp = indexPageUrls.includes(Astro.url.pathname);
 ---
