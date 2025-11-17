@@ -21,6 +21,10 @@ const openGraphPage = getPageByUrl(Astro.url.pathname);
       />
       <meta property="og:type" content={openGraphPage.kind} />
       <meta property="og:site_name" content="Selling Debrecen" />
+      <meta
+        property="og:logo"
+        content={new URL("/selling-debrecen-logo.png", Astro.site!).toString()}
+      />
     </Fragment>
   )
 }
