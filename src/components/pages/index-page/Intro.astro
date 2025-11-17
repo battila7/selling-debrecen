@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import { HeadingCentered, Prose } from "../../common";
 import { useI18n } from "../../../i18n";
 import data from "../../../content/fixed-pages/home.json";
@@ -17,12 +17,10 @@ const localizedData = data[lang as keyof typeof data];
       <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
         <!-- Image on the left -->
         <div class="w-full lg:w-2/5 flex-shrink-0 lg:sticky lg:top-[82px]">
-          <Image
+          <Picture
             src={Assets.getImage(localizedData.introductionImage)}
             alt={Contact.langDependent(lang).name}
             class="w-full rounded shadow-[0_4px_16px_rgba(0,0,0,0.08)] object-cover aspect-[3/4]"
-            loading="lazy"
-            decoding="async"
           />
         </div>
 

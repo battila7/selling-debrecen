@@ -23,6 +23,7 @@ const localizedData = data[lang as keyof typeof data];
 
   <Side
     image={forSellersImage}
+    imageAlt={localizedData.forSellersServicesTitle}
     title={localizedData.forSellersServicesTitle}
     description={localizedData.forSellersServicesDescription}
     link={p("for-sellers")}
@@ -32,6 +33,7 @@ const localizedData = data[lang as keyof typeof data];
 
   <Side
     image={forBuyersImage}
+    imageAlt={localizedData.forBuyersServicesTitle}
     title={localizedData.forBuyersServicesTitle}
     description={localizedData.forBuyersServicesDescription}
     link={p("for-buyers")}
