@@ -100,31 +100,31 @@
       {
         "title": "Bewertung",
         "description": "Den Wert einer Immobilie durch eine vergleichende Marktanalyse ermitteln und anschließend eine Verkaufsstrategie entwickeln, um den Angebotspreis der Immobilie festzulegen.",
-        "icon": "Valuation"
+        "icon": "CircleDollarSign"
       },
       {
         "title": "Marketing",
         "description": "Professionelle Fotos und ein Präsentationsvideo sowie die Erstellung eines Grundrisses und die Vermarktung der Immobilie auf verschiedenen Plattformen.\n\n",
-        "icon": "Marketing"
+        "icon": "Presentation"
       },
       {
         "description": "Die vollständige Steuerung der Kommunikation und der Verhandlungen zwischen den Parteien, um einen erfolgreichen Vertragsabschluss zu erzielen, und gegebenenfalls die Bereitstellung rechtlicher Unterstützung für den Vertragsabschluss.\n\n",
-        "icon": "Representation",
+        "icon": "Handshake",
         "title": "Vertretung"
       },
       {
         "title": "Home staging",
         "description": "Die professionelle Aufbereitung von Immobilien für den Verkauf oder die Vermietung zielt darauf ab, ein möglichst attraktives und wohnliches Interieur für potenzielle Käufer zu schaffen. Diese Methode ermöglicht es, Immobilien schneller und zu einem höheren Preis zu verkaufen.\n\n",
-        "icon": "Home"
+        "icon": "HouseHeart"
       },
       {
-        "title": "Deep cleaning",
+        "title": "Tiefenreinigung",
         "description": "Die Reinigung von Immobilien für den Verkauf oder die Vermietung ist ein gründlicherer und umfassenderer Reinigungsprozess als die reguläre Reinigung. Sie beinhaltet die Reinigung schwer zugänglicher, selten gereinigter Bereiche, Ritzen und Stellen unter Möbeln sowie die Desinfektion.\n\n",
-        "icon": "Cleaning"
+        "icon": "BrushCleaning"
       },
       {
-        "title": "Cosmetic repairs",
-        "icon": "Renovation",
+        "title": "Kosmetische Reparaturen",
+        "icon": "Drill",
         "description": "Geringfügige Verbesserungen der ästhetischen Parameter des Gebäudes. Dies kann Malerarbeiten, kleinere Reparaturen und Gartenarbeiten umfassen.\n\n"
       }
     ],
