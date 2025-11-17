@@ -1,26 +1,16 @@
 {
-  "id": "33",
-  "slug": "modern-lakas-a-belvarosban",
-  "featured": true,
-  "title": "Modern lakás a belvárosban",
-  "address": "Debrecen, Belváros, Egyetem tér 12.",
-  "price": 45000000,
-  "galleryImages": [
+  "shortDescription": "Kiváló elhelyezkedésű, gondosan felújított családi ház a belváros szívében.",
+  "publicTransport": [
     {
-      "image": "src/assets/images/listing-placeholder.jpg",
-      "alt": "Modern lakás a belvárosban"
+      "type": "bus",
+      "name": "30Y"
+    },
+    {
+      "type": "tram",
+      "name": "1"
     }
   ],
-  "rooms": 5,
-  "area": 180,
-  "terraceArea": 20,
   "gardenArea": 5,
-  "floor": 1,
-  "propertyType": "apartment",
-  "transactionType": "sale",
-  "description": "Kiváló elhelyezkedésű, gondosan felújított családi ház a belváros szívében. Tágas szobák, modern konyha, összkomfortos fürdőszobák. Csendes, nyugodt környezet, közel minden szolgáltatáshoz.",
-  "shortDescription": "Kiváló elhelyezkedésű, gondosan felújított családi ház a belváros szívében.",
-  "extra": "Hatalmas kert",
   "checklist": [
     {
       "item": "Hatalmas kert"
@@ -29,6 +19,26 @@
       "item": "Két kocsibeálló"
     }
   ],
+  "price": 45000000,
+  "galleryImages": [
+    {
+      "image": "src/assets/images/listing-placeholder.jpg",
+      "alt": "Modern lakás a belvárosban"
+    }
+  ],
+  "slug": "modern-lakas-a-belvarosban",
+  "floor": 1,
+  "area": 180,
+  "featured": true,
+  "propertyType": "apartment",
+  "extra": "Hatalmas kert",
+  "address": "Debrecen, Belváros, Egyetem tér 12.",
+  "title": "Modern lakás a belvárosban",
+  "rooms": 5,
+  "transactionType": "sale",
+  "id": "33",
+  "description": "Kiváló elhelyezkedésű, gondosan felújított családi ház a belváros szívében. Tágas szobák, modern konyha, összkomfortos fürdőszobák. Csendes, nyugodt környezet, közel minden szolgáltatáshoz.",
+  "terraceArea": 20,
   "nearby": [
     {
       "item": "Aldi"
@@ -38,16 +48,6 @@
     },
     {
       "item": "Bölcsöde"
-    }
-  ],
-  "publicTransport": [
-    {
-      "type": "bus",
-      "name": "30Y"
-    },
-    {
-      "type": "tram",
-      "name": "1"
     }
   ]
 }
