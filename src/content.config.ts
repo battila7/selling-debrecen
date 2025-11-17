@@ -19,8 +19,6 @@ const listingsCollection = defineCollection({
       });
     }
 
-    console.log(entries);
-
     return entries;
   },
   schema: () =>

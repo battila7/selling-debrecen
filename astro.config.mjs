@@ -24,5 +24,5 @@ export default defineConfig({
   ],
   compressHTML: false,
   output: "static",
-  site: "https://selling-debrecen.hu",
+  site: "https://selling-debrecen.netlify.app",
 });
