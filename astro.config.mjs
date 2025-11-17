@@ -14,7 +14,19 @@ export default defineConfig({
   },
 
   integrations: [
-    sitemap(),
+    sitemap({
+      filter(page) {
+        return !page.includes("/admin/");
+      },
+      i18n: {
+        defaultLocale: "hu",
+        locales: {
+          hu: "hu-HU",
+          en: "en-US",
+          de: "de-DE",
+        },
+      },
+    }),
     (await import("@playform/compress")).default({
       CSS: false,
       HTML: false,
