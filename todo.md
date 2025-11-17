@@ -1,2 +1,1 @@
-- opengraph dolgok generálása
 - emailek hozzáadása a netlify id-hez

@@ -1,5 +1,7 @@
 {
   "hu": {
+    "pageTitle": "Eladóknak és bérbeadóknak",
+    "pageDescription": "Segítünk Önnek eladni vagy bérbe adni ingatlanát Debrecenben.",
     "title": "Eladna vagy bérbe adna?",
     "subtitle": "Segítünk Önnek eladni vagy bérbe adni ingatlanát Debrecenben.",
     "titleImage": "src/assets/images/for-sellers.jpg",
@@ -26,6 +28,8 @@
     "ctaImage": "src/assets/images/work-with-us.jpg"
   },
   "en": {
+    "pageTitle": "For sellers",
+    "pageDescription": "We help you sell or rent your property in Debrecen.",
     "title": "For sellers",
     "subtitle": "We help you sell or rent your property in Debrecen.",
     "titleImage": "src/assets/images/for-sellers.jpg",
@@ -52,6 +56,8 @@
     "ctaImage": "src/assets/images/work-with-us.jpg"
   },
   "de": {
+    "pageTitle": "Für Verkäufer",
+    "pageDescription": "Wir helfen Ihnen, Ihr Immobilienobjekt in Debrecen zu verkaufen oder zu vermieten.",
     "title": "Für Verkäufer",
     "subtitle": "Wir helfen Ihnen, Ihr Immobilienobjekt in Debrecen zu verkaufen oder zu vermieten.",
     "titleImage": "src/assets/images/for-sellers.jpg",
