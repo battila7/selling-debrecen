@@ -121,5 +121,15 @@ export const pagesBySlug = Object.fromEntries(
 );
 
 export function getPageByUrl(url: string): OpenGraphPage | undefined {
-  return pagesByUrl[url];
+  const pageWithSlash = pagesByUrl[url];
+  if (pageWithSlash) {
+    return pageWithSlash;
+  }
+
+  const pageWithoutTrailingSlash = pagesByUrl[url.replace(/\/$/, "")];
+  if (pageWithoutTrailingSlash) {
+    return pageWithoutTrailingSlash;
+  }
+
+  return undefined;
 }
