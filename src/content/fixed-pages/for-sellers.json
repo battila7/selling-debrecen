@@ -4,32 +4,32 @@
       {
         "title": "Értékbecslés ",
         "description": "Ingatlan értékének meghatározása piaci összehasonlító elemzéssel, majd az értékesítési stratégia kidolgozásával az ingatlan hirdetési árának kialakítása.",
-        "icon": "Valuation"
+        "icon": "CirckeDollarSign"
       },
       {
         "title": "Marketing",
         "description": "Profi fotók és bemutatóvideó, továbbá alaprajz készítése és az ingatlan hirdetése különböző platformokon.",
-        "icon": "Marketing"
+        "icon": "Presentation"
       },
       {
         "title": "Képviselet",
         "description": "A felek közötti kommunikáció és tárgyalások teljes körű lebonyolítása a sikeres üzletkötés érdekében, szükség esetén a szerződéskötéshez ügyvédi háttér biztosítása.",
-        "icon": "Representation"
+        "icon": "Handshake"
       },
       {
         "title": "Home staging",
         "description": "Az eladásra vagy bérbeadásra szánt ingatlanok szakszerű felkészítése, amelynek célja a potenciális vevők számára a lehető legvonzóbb és legélhetőbb enteriőr kialakítása. Ezzel a módszerrel az ingatlanok gyorsabban és magasabb áron kelhetnek el. ",
-        "icon": "Home "
+        "icon": "HouseHeart"
       },
       {
         "title": "Deep cleaning",
         "description": "Az eladásra vagy bérbeadásra szánt ingatlanok takarítása, ami a rendszeres takarításnál alaposabb, átfogóbb tisztítási folyamat. Ez magában foglalja a nehezen elérhető, ritkán tisztított területek, rések és a bútorok alatti részek megtisztítását, valamint a fertőtlenítést.",
-        "icon": "Cleaning"
+        "icon": "BrushCleaning"
       },
       {
         "title": "Kozmetikai javítások",
         "description": "Az épület esztétikai paramétereinek kisebb javítása. Ez magában foglalhatja a festést, apróbb javításokat, valamint a kertrendezést.",
-        "icon": "Renovation"
+        "icon": "Drill"
       }
     ],
     "titleImage": "src/assets/images/for-sellers.jpg",
@@ -52,32 +52,32 @@
       {
         "title": "Property valuation",
         "description": "Determining the value of a property through a comparative market analysis, then developing a sales strategy to establish the advertising price of the property.",
-        "icon": "Valuation"
+        "icon": "CirckeDollarSign"
       },
       {
         "title": "Marketing",
         "description": "Professional photos and presentation video, as well as creating a floor plan and advertising the property on various platforms.",
-        "icon": "Marketing"
+        "icon": "Presentation"
       },
       {
-        "icon": "Representation",
+        "icon": "Handshake",
         "description": "Full management of communication and negotiations between the parties in order to successfully conclude a deal, and if necessary, providing legal support for the conclusion of the contract.",
         "title": "Representation"
       },
       {
-        "icon": "Home",
+        "icon": "HouseHeart",
         "title": "Home staging",
         "description": "The professional preparation of properties for sale or rental, with the aim of creating the most attractive and livable interior possible for potential buyers. This method allows properties to sell faster and for a higher price."
       },
       {
         "title": "Deep cleaning",
-        "icon": "Cleaning",
+        "icon": "BrushCleaning",
         "description": "Cleaning of properties for sale or rental, which is a more thorough, comprehensive cleaning process than regular cleaning. It includes cleaning hard-to-reach, rarely cleaned areas, crevices, and under furniture, as well as disinfection."
       },
       {
         "title": "Cosmetic Renovations",
         "description": "Minor improvements to the aesthetic parameters of the building. This may include painting, minor repairs, and landscaping.",
-        "icon": "Renovation"
+        "icon": "Drill"
       }
     ],
     "titleImage": "src/assets/images/for-sellers.jpg",
