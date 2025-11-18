@@ -34,6 +34,11 @@
         "icon": "CircleDollarSign"
       },
       {
+        "title": "Marketing",
+        "description": "A jó minőségű professzionális fotók és a bemutatóvideó készítése, továbbá a pontos alaprajz és egy vonzó, részletes leírás segít a vevőknek a tájékozódásban. Fontos meghatározni, hogy ki a célközönség és a marketingüzenetet, valamint a hirdetési csatornákat hozzájuk igazítani.",
+        "icon": "Presentation"
+      },
+      {
         "title": "Képviselet",
         "description": "A felek közötti kommunikáció és tárgyalások teljes körű lebonyolítása a sikeres üzletkötés érdekében. Bérbeadás esetén a bérlők előszűrése és a bérbeadás lebonyolítása. Szükség esetén a szerződéskötéshez ügyvédi háttér biztosítása.",
         "icon": "Handshake"
@@ -51,7 +56,7 @@
       {
         "title": "Kozmetikai javítások",
         "description": "Az épület esztétikai paramétereinek kisebb javítása. Ez magában foglalhatja a festést, apróbb javításokat, valamint a kertrendezést.",
-        "icon": "Drill"
+        "icon": "Presentation"
       }
     ],
     "featuredServicesTitle": "Amit kínálunk",
