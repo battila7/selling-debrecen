@@ -34,11 +34,6 @@
         "icon": "CircleDollarSign"
       },
       {
-        "title": "Marketing",
-        "description": "A jó minőségű professzionális fotók és a bemutatóvideó készítése, továbbá a pontos alaprajz és egy vonzó, részletes leírás segít a vevőknek a tájékozódásban. Fontos meghatározni, hogy ki a célközönség és a marketingüzenetet, valamint a hirdetési csatornákat hozzájuk igazítani.",
-        "icon": "Presentation"
-      },
-      {
         "title": "Képviselet",
         "description": "A felek közötti kommunikáció és tárgyalások teljes körű lebonyolítása a sikeres üzletkötés érdekében. Bérbeadás esetén a bérlők előszűrése és a bérbeadás lebonyolítása. Szükség esetén a szerződéskötéshez ügyvédi háttér biztosítása.",
         "icon": "Handshake"
@@ -156,30 +151,58 @@
     "featuredServicesSubtitle": "Umfassende Dienstleistungen",
     "forBuyersServices": [
       {
-        "title": "Ingatlan keresés",
-        "description": "Személyre szabott keresés az Ön igényei szerint",
+        "title": "Persönliche Suche",
+        "description": "Wir verstehen Ihre Bedürfnisse gründlich und führen eine umfassende Suche nach den besten Immobilien durch. Wir zeigen nur Immobilien, die Ihren Erwartungen entsprechen. Wir bieten Ihnen detaillierte Informationen über die Gegend. Unsere Ortskenntnisse vermitteln Ihnen ein realistisches Bild des Alltags.",
         "icon": "Search"
       },
-      {},
-      {},
-      {}
+      {
+        "title": "Vertretung",
+        "description": "Die vollständige Steuerung der Kommunikation und der Verhandlungen zwischen den Parteien, um einen erfolgreichen Vertragsabschluss zu erzielen, und gegebenenfalls die Bereitstellung rechtlicher Unterstützung für den Vertragsabschluss.",
+        "icon": "Handshake"
+      },
+      {
+        "title": "Finanzberatung",
+        "description": "Dazu gehört der Vergleich und die Auswahl verschiedener Darlehensstrukturen und staatlicher Subventionen (z. B. CSOK, Mutterschaftsgeld), um die günstigsten Konditionen zu finden.",
+        "icon": "CircleDollarSign"
+      },
+      {
+        "title": "Anlagestrategie",
+        "description": "Für Immobilieninvestoren helfen wir, Ziele und Risikoprofil zu bestimmen und empfehlen langfristig profitable Investitionsmöglichkeiten, die in das Portfolio passen.",
+        "icon": "Landmark"
+      }
     ],
     "pageTitle": "Selling Debrecen Group",
     "forSellersServices": [
       {
-        "title": "Ingatlan értékelés",
-        "description": "Professzionális értékelés az optimális eladási ár meghatározásához",
-        "icon": "TrendingUp"
+        "title": "Bewertung",
+        "description": "Den Wert einer Immobilie durch eine vergleichende Marktanalyse ermitteln und anschließend eine Verkaufsstrategie entwickeln, um den Angebotspreis der Immobilie festzulegen.",
+        "icon": "CircleDollarSign"
       },
       {
-        "title": "Fotózás és marketing",
-        "description": "Professzionális fotózás és hatékony marketing stratégia",
-        "icon": "Camera"
+        "title": "Marketing",
+        "description": "Hochwertige, professionelle Fotos und eine Videopräsentation sowie ein präziser Grundriss und eine ansprechende, detaillierte Beschreibung erleichtern potenziellen Käufern die Orientierung in der Immobilie. Wichtig ist es, die Zielgruppe zu definieren und die Marketingbotschaft sowie die Werbekanäle entsprechend anzupassen.",
+        "icon": "Presentation"
       },
-      {},
-      {},
-      {},
-      {}
+      {
+        "title": "Vertretung",
+        "description": "Umfassende Kommunikation und Verhandlung zwischen den Parteien gewährleisten einen erfolgreichen Vertragsabschluss. Im Falle von Mietverträgen erfolgt die Vorprüfung der Mieter und die Vertragsabwicklung. Bei Bedarf wird rechtliche Unterstützung beim Vertragsabschluss geleistet.",
+        "icon": "Handshake"
+      },
+      {
+        "title": "Home staging",
+        "description": "Die professionelle Aufbereitung von Immobilien für den Verkauf oder die Vermietung zielt darauf ab, ein möglichst attraktives und wohnliches Interieur für potenzielle Käufer zu schaffen. Diese Methode ermöglicht es, Immobilien schneller und zu einem höheren Preis zu verkaufen.",
+        "icon": "HouseHeart"
+      },
+      {
+        "title": "Tiefenreinigung",
+        "description": "Die Reinigung von Immobilien für den Verkauf oder die Vermietung ist ein gründlicherer und umfassenderer Reinigungsprozess als die reguläre Reinigung. ",
+        "icon": "BrushCleaning"
+      },
+      {
+        "title": "Kosmetische Reparaturen",
+        "description": "Geringfügige Verbesserungen der ästhetischen Parameter des Gebäudes. Dies kann Malerarbeiten, kleinere Reparaturen und Gartenarbeiten umfassen.",
+        "icon": "Drill"
+      }
     ],
     "featuredServicesTitle": " Was wir bieten",
     "pageDescription": "Selling Debrecen Group",
