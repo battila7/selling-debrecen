@@ -8,8 +8,8 @@
       },
       {
         "title": "Képviselet",
-        "description": "geg",
-        "icon": "MapPin"
+        "description": "A felek közötti kommunikáció és tárgyalások teljes körű lebonyolítása a sikeres üzletkötés érdekében, szükség esetén a szerződéskötéshez ügyvédi háttér biztosítása.",
+        "icon": "Handshake"
       }
     ],
     "titleImage": "src/assets/images/for-buyers-02.jpg",
@@ -49,7 +49,11 @@
         "description": "We thoroughly understand your needs and conduct a comprehensive search for the best properties available for you. We only show properties that truly meet your expectations. We provide detailed information about the area: schools, kindergartens, transportation options, shopping places. Our local knowledge gives you a real picture of everyday life.",
         "icon": "Search"
       },
-      {}
+      {
+        "title": "Representation",
+        "description": "Full management of communication and negotiations between the parties in order to successfully conclude a deal, and if necessary, providing legal support for the conclusion of the contract.",
+        "icon": "Handshake"
+      }
     ],
     "titleImage": "src/assets/images/for-buyers-02.jpg",
     "processSubtitle": "The buying process",
