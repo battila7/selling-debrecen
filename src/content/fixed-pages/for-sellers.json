@@ -13,7 +13,7 @@
       },
       {
         "title": "Képviselet",
-        "description": "A felek közötti kommunikáció és tárgyalások teljes körű lebonyolítása a sikeres üzletkötés érdekében, szükség esetén a szerződéskötéshez ügyvédi háttér biztosítása.",
+        "description": "A felek közötti kommunikáció és tárgyalások teljes körű lebonyolítása a sikeres üzletkötés érdekében. Bérbeadás esetén a bérlők előszűrése és a bérbeadás lebonyolítása. Szükség esetén a szerződéskötéshez ügyvédi háttér biztosítása.",
         "icon": "Handshake"
       },
       {
@@ -61,7 +61,7 @@
       },
       {
         "icon": "Handshake",
-        "description": "Full management of communication and negotiations between the parties in order to successfully conclude a deal, and if necessary, providing legal support for the conclusion of the contract.",
+        "description": "Full communication and negotiation between the parties to ensure a successful deal. In the case of leasing, pre-screening of tenants and leasing. If necessary, providing legal support for the conclusion of the contract.",
         "title": "Representation"
       },
       {
@@ -108,7 +108,7 @@
         "icon": "Presentation"
       },
       {
-        "description": "Die vollständige Steuerung der Kommunikation und der Verhandlungen zwischen den Parteien, um einen erfolgreichen Vertragsabschluss zu erzielen, und gegebenenfalls die Bereitstellung rechtlicher Unterstützung für den Vertragsabschluss.\n\n",
+        "description": "Umfassende Kommunikation und Verhandlung zwischen den Parteien gewährleisten einen erfolgreichen Vertragsabschluss. Im Falle von Mietverträgen erfolgt die Vorprüfung der Mieter und die Vertragsabwicklung. Bei Bedarf wird rechtliche Unterstützung beim Vertragsabschluss geleistet.\n\n",
         "icon": "Handshake",
         "title": "Vertretung"
       },
