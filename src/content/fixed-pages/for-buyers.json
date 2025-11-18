@@ -10,6 +10,11 @@
         "title": "Képviselet",
         "description": "A felek közötti kommunikáció és tárgyalások teljes körű lebonyolítása a sikeres üzletkötés érdekében, szükség esetén a szerződéskötéshez ügyvédi háttér biztosítása.",
         "icon": "Handshake"
+      },
+      {
+        "title": "Pénzügyi tanácsadás",
+        "description": "Magában foglalja a különböző hitelkonstrukciók, állami támogatások (pl. CSOK, babaváró támogatás) összehasonlítását és kiválasztását, a legkedvezőbb feltételek megtalálása érdekében.",
+        "icon": "CircleDollarSign"
       }
     ],
     "titleImage": "src/assets/images/for-buyers-02.jpg",
@@ -53,6 +58,11 @@
         "title": "Representation",
         "description": "Full management of communication and negotiations between the parties in order to successfully conclude a deal, and if necessary, providing legal support for the conclusion of the contract.",
         "icon": "Handshake"
+      },
+      {
+        "title": "Financial advise",
+        "description": "Includes the comparison and selection of different loan structures and state subsidies (e.g. CSOK, maternity benefits) in order to find the most favorable conditions.",
+        "icon": "CircleDollarSign"
       }
     ],
     "titleImage": "src/assets/images/for-buyers-02.jpg",
@@ -93,9 +103,14 @@
         "icon": "Search"
       },
       {
-        "title": "Representation",
-        "description": "geg",
-        "icon": "MapPin"
+        "title": "Vertretung",
+        "description": "Die vollständige Steuerung der Kommunikation und der Verhandlungen zwischen den Parteien, um einen erfolgreichen Vertragsabschluss zu erzielen, und gegebenenfalls die Bereitstellung rechtlicher Unterstützung für den Vertragsabschluss.",
+        "icon": "Handshake"
+      },
+      {
+        "title": "Finanzberatung",
+        "description": "Dazu gehört der Vergleich und die Auswahl verschiedener Darlehensstrukturen und staatlicher Subventionen (z. B. CSOK, Mutterschaftsgeld), um die günstigsten Konditionen zu finden.",
+        "icon": "CircleDollarSign"
       }
     ],
     "titleImage": "src/assets/images/for-buyers-02.jpg",
