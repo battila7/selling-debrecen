@@ -1,65 +1,65 @@
 {
   "hu": {
-    "name": "Kiss Zoltán",
-    "role": "Ingatlanközvetítő",
-    "description": "Helyi szakértelem, személyes figyelem",
-    "profileImage": "src/assets/images/agent-profile-picture-placeholder.jpg",
-    "facebook": "https://facebook.com/kisszoltan",
-    "instagram": "https://instagram.com/kisszoltan",
-    "tiktok": "https://tiktok.com/@kisszoltan",
-    "office": "Debrecen",
-    "email": "info@sellingdebrecen.hu",
-    "phone": "+36 XX XXX XXXX",
     "scheduleAppointmentLink": "https://calendly.com/sellingdebrecen",
+    "facebook": "https://facebook.com/kisszoltan",
+    "name": "Kiss Zoltán",
     "officeHoursItems": [
       {
         "element": "Hétfő-Péntek: 9:00-18:00"
       },
       {
-        "element": "Szombat: 10:00-14:00"
+        "element": "Hétvégén: Előzetes egyeztetés alapján"
       }
-    ]
-  },
-  "en": {
-    "name": "Zoltán Kiss",
-    "role": "Real Estate Agent",
-    "description": "Local expertise, personal attention",
+    ],
+    "phone": "+36 30 231 7187",
     "profileImage": "src/assets/images/agent-profile-picture-placeholder.jpg",
-    "facebook": "https://facebook.com/kisszoltan",
     "instagram": "https://instagram.com/kisszoltan",
+    "role": "Ügyvezető / Ingatlanbróker ",
     "tiktok": "https://tiktok.com/@kisszoltan",
     "office": "Debrecen",
     "email": "info@sellingdebrecen.hu",
-    "phone": "+36 XX XXX XXXX",
+    "description": "Helyi szakértelem, személyes figyelem"
+  },
+  "en": {
     "scheduleAppointmentLink": "https://calendly.com/sellingdebrecen",
+    "facebook": "https://facebook.com/kisszoltan",
+    "name": "Zoltán Kiss",
     "officeHoursItems": [
       {
         "element": "Monday-Friday: 9:00-18:00"
       },
       {
-        "element": "Saturday: 10:00-14:00"
+        "element": "Weekends: By appointment"
       }
-    ]
-  },
-  "de": {
-    "name": "Zoltán Kiss",
-    "role": "Immobilienmakler",
-    "description": "Lokale Expertise, persönliche Aufmerksamkeit",
+    ],
+    "phone": "+36 XX XXX XXXX",
     "profileImage": "src/assets/images/agent-profile-picture-placeholder.jpg",
-    "facebook": "https://facebook.com/kisszoltan",
     "instagram": "https://instagram.com/kisszoltan",
+    "role": "CEO / Real Estate Broker",
     "tiktok": "https://tiktok.com/@kisszoltan",
     "office": "Debrecen",
     "email": "info@sellingdebrecen.hu",
-    "phone": "+36 XX XXX XXXX",
+    "description": "Local expertise, personal attention"
+  },
+  "de": {
     "scheduleAppointmentLink": "https://calendly.com/sellingdebrecen",
+    "facebook": "https://facebook.com/kisszoltan",
+    "name": "Zoltán Kiss",
     "officeHoursItems": [
       {
         "element": "Montag-Freitag: 9:00-18:00"
       },
       {
-        "element": "Samstag: 10:00-14:00"
+        "element": "Wochenende: Nach Vereinbarung"
       }
-    ]
+    ],
+    "phone": "+36 XX XXX XXXX",
+    "profileImage": "src/assets/images/agent-profile-picture-placeholder.jpg",
+    "instagram": "https://instagram.com/kisszoltan",
+    "role": "CEO / Immobilienbroker",
+    "tiktok": "https://tiktok.com/@kisszoltan",
+    "office": "Debrecen",
+    "email": "info@sellingdebrecen.hu",
+    "description": "Lokale Expertise, persönliche Aufmerksamkeit"
   }
 }
