@@ -13,5 +13,185 @@
   </head>
   <body>
     <script src="https://unpkg.com/decap-cms@3.9.0/dist/decap-cms.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      function isLucideIcon(value) {
+        return (
+          typeof lucide !== "undefined" && lucide.icons && value in lucide.icons
+        );
+      }
+
+      const LucideIconControl = createClass({
+        INVALID_ICON_MESSAGE:
+          "Invalid icon name. Must be a valid Lucide icon name. Please check for typos.",
+
+        getInitialState() {
+          return {
+            value: this.props.value || "",
+          };
+        },
+
+        componentDidUpdate(prevProps) {
+          if (prevProps.value !== this.props.value) {
+            this.setState({ value: this.props.value || "" });
+          }
+        },
+
+        handleChange(e) {
+          var newValue = e.target.value;
+          this.setState({ value: newValue });
+          this.props.onChange(newValue);
+        },
+
+        isValid() {
+          const iconName = this.props.value;
+
+          if (this._isEmpty(iconName)) {
+            return true;
+          }
+
+          if (isLucideIcon(iconName)) {
+            return true;
+          }
+
+          return {
+            error: {
+              message: this.INVALID_ICON_MESSAGE,
+            },
+          };
+        },
+
+        render() {
+          const isValidIcon = this.isValid() === true;
+
+          return h(
+            "div",
+            {},
+            h("input", {
+              id: this.props.forID,
+              className: this.props.classNameWrapper,
+              type: "text",
+              value: this.state.value,
+              onChange: this.handleChange,
+              placeholder: "Enter Lucide icon name (e.g., Home, User, Mail)",
+              style: {
+                borderColor: isValidIcon ? "" : "#dc2626",
+                backgroundColor: isValidIcon ? "" : "#fee2e2",
+              },
+            }),
+            !isValidIcon &&
+              h(
+                "div",
+                {
+                  style: {
+                    color: "#dc2626",
+                    fontSize: "0.875rem",
+                    marginTop: "0.25rem",
+                  },
+                },
+                `⚠️ ${this.INVALID_ICON_MESSAGE}`,
+              ),
+          );
+        },
+
+        _isEmpty(value) {
+          return !value || value.trim() === "";
+        },
+      });
+
+      var LucideIconPreview = createClass({
+        componentDidMount() {
+          this.renderIcon();
+        },
+
+        componentDidUpdate() {
+          this.renderIcon();
+        },
+
+        renderIcon() {
+          const iconName = this.props.value;
+          const iconContainer = this.iconContainerRef;
+
+          if (!iconContainer) {
+            return;
+          }
+
+          iconContainer.innerHTML = "";
+
+          if (isLucideIcon(iconName)) {
+            try {
+              const iconElement = lucide.createElement(lucide.icons[iconName], {
+                "stroke-width": 2,
+                width: 24,
+                height: 24,
+              });
+              iconContainer.appendChild(iconElement);
+            } catch (e) {
+              console.error("Error rendering icon:", e);
+            }
+          }
+        },
+
+        setIconContainerRef(element) {
+          this.iconContainerRef = element;
+        },
+
+        render() {
+          const iconName = this.props.value;
+
+          if (!iconName) {
+            return h(
+              "div",
+              {
+                style: {
+                  color: "#6b7280",
+                  fontStyle: "italic",
+                },
+              },
+              "No icon selected",
+            );
+          }
+
+          const isValid = isLucideIcon(iconName);
+
+          return h(
+            "div",
+            {
+              style: {
+                display: "flex",
+                alignItems: "center",
+                gap: "0.75rem",
+              },
+            },
+            isValid &&
+              h("div", {
+                ref: this.setIconContainerRef,
+                style: {
+                  display: "flex",
+                  alignItems: "center",
+                  color: "#374151",
+                },
+              }),
+            h(
+              "code",
+              {
+                style: {
+                  backgroundColor: isValid ? "#f3f4f6" : "#fee2e2",
+                  padding: "0.25rem 0.5rem",
+                  borderRadius: "0.25rem",
+                  fontFamily: "monospace",
+                },
+              },
+              iconName,
+            ),
+            isValid
+              ? h("span", { style: { color: "#059669" } }, "✓ Valid")
+              : h("span", { style: { color: "#dc2626" } }, "✗ Invalid"),
+          );
+        },
+      });
+
+      CMS.registerWidget("lucide-icon", LucideIconControl, LucideIconPreview);
+    </script>
   </body>
 </html>

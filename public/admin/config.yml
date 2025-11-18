@@ -1,6 +1,8 @@
 backend:
-  name: git-gateway
+  name: local-backend
   branch: master
+
+local_backend: true
 
 slug:
   encoding: "ascii"
@@ -222,7 +224,7 @@ collections:
               i18n: true
             - name: "icon"
               label: "Ikon"
-              widget: "string"
+              widget: "lucide-icon"
         - name: "forBuyersServicesTitle"
           label: "Keresőknak szolgáltatások cím"
           widget: "string"
@@ -250,7 +252,7 @@ collections:
               i18n: true
             - name: "icon"
               label: "Ikon"
-              widget: "string"
+              widget: "lucide-icon"
     - label: "Kínálóknak"
       name: "for-sellers"
       file: "src/content/fixed-pages/for-sellers.json"
@@ -311,7 +313,7 @@ collections:
               i18n: true
             - name: "icon"
               label: "Ikon"
-              widget: "string"
+              widget: "lucide-icon"
               i18n: duplicate
         - name: "ctaTitle"
           label: "Cta cím"
@@ -389,7 +391,7 @@ collections:
               i18n: true
             - name: "icon"
               label: "Ikon"
-              widget: "string"
+              widget: "lucide-icon"
               i18n: duplicate
         - name: "whyDebrecenTitle"
           label: "Miért Debrecen? cím"
@@ -495,7 +497,7 @@ collections:
               i18n: true
             - name: "icon"
               label: "Ikon"
-              widget: "string"
+              widget: "lucide-icon"
               i18n: duplicate
         - name: "ctaTitle"
           label: "Cta cím"
