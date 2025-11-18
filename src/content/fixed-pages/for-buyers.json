@@ -30,7 +30,7 @@
     "ctaImage": "src/assets/images/listings-bg-1.jpg",
     "ctaDescription": "Böngésszen aktuális kínálatunkban és találja meg álmai otthonát Debrecenben. Folyamatosan frissülő portfóliónkban lakások, házak és kereskedelmi ingatlanok széles választéka várja Önt.",
     "pageDescription": "Találja meg álmai ingatlanát Debrecenben",
-    "processDescription": "A keresési folyamat során minden lépésben segítünk Önnek.",
+    "processDescription": "Ingatlanvásárlás egy életre szóló döntés, amely meghatározza mindennapjainkat. Szakértelmünkkel és helyismeretünkkel segítünk megtalálni az Ön életstílusának és preferenciáinak tökéletesen megfelelő ingatlant.",
     "ctaButtonText": "Megnézem az ingatlanokat",
     "processItems": [
       {
@@ -129,10 +129,10 @@
       }
     ],
     "titleImage": "src/assets/images/for-buyers-02.jpg",
-    "processSubtitle": "Der Kaufprozess",
+    "processSubtitle": "Der Suchprozess",
     "ctaTitle": "Unsere Immobilien ansehen",
-    "pageTitle": "Käufer",
-    "processTitle": "Kaufen Sie mit uns",
+    "pageTitle": "Suchen",
+    "processTitle": "Suchen Sie mit uns",
     "ctaImage": "src/assets/images/listings-bg-1.jpg",
     "ctaDescription": "Blättern Sie durch unsere aktuellen Immobilien und finden Sie Ihr Traumhaus in Debrecen. Unser Portfolio wird ständig mit einer großen Auswahl von Immobilien aktualisiert: Wohnungen, Häuser und Geschäftsimmobilien. Wir freuen uns auf Sie.",
     "pageDescription": "Finden Sie Ihr Traumhaus in Debrecen",
@@ -152,7 +152,7 @@
     ],
     "servicesSubtitle": "Was wir anbieten",
     "subtitle": "Finden Sie Ihr Traumhaus in Debrecen",
-    "title": "Käufer",
+    "title": "Suchen",
     "servicesTitle": "Unsere Dienstleistungen",
     "whyChooseUsTitle": "Warum uns wählen?",
     "servicesDescription": "Professionelle Unterstützung bei jedem Schritt des Immobilienerwerbs.",
