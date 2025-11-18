@@ -23,7 +23,7 @@
       },
       {
         "title": "Deep cleaning",
-        "description": "Az eladásra vagy bérbeadásra szánt ingatlanok takarítása, ami a rendszeres takarításnál alaposabb, átfogóbb tisztítási folyamat. Ez magában foglalja a nehezen elérhető, ritkán tisztított területek, rések és a bútorok alatti részek megtisztítását, valamint a fertőtlenítést.",
+        "description": "Az eladásra vagy bérbeadásra szánt ingatlanok takarítása, ami a rendszeres takarításnál alaposabb, átfogóbb tisztítási folyamat. ",
         "icon": "BrushCleaning"
       },
       {
@@ -72,7 +72,7 @@
       {
         "title": "Deep cleaning",
         "icon": "BrushCleaning",
-        "description": "Cleaning of properties for sale or rental, which is a more thorough, comprehensive cleaning process than regular cleaning. It includes cleaning hard-to-reach, rarely cleaned areas, crevices, and under furniture, as well as disinfection."
+        "description": "Cleaning of properties for sale or rental, which is a more thorough, comprehensive cleaning process than regular cleaning. "
       },
       {
         "title": "Cosmetic renovations",
