@@ -45,7 +45,7 @@
     "servicesTitle": "Szolgáltatásaink",
     "whyChooseUsTitle": "Miért válasszon minket?",
     "servicesDescription": "Professzionális támogatás minden lépésben az otthonkeresés folyamatában.",
-    "whyChooseUsDescription": "Az otthonteremtés életre szóló döntés, amely meghatározza mindennapjainkat. Szakértelmünkkel és helyi ismereteinkkel segítünk megtalálni azt az ingatlant, amely tökéletesen illeszkedik az Ön életviteléhez és elképzeléseihez.\n\nDebrecen minden szegletét ismerjük: a csendes, családbarát kerületektől a pezsgő belvárosig. Mindez lehetővé teszi, hogy ne csak ingatlant, hanem otthont találjunk Önnek.\n\nCélunk, hogy a vásárlás folyamata átlátható, biztonságos és gördülékeny legyen. Minden lépésben mellette állunk, hogy magabiztosan hozhassa meg élete egyik legfontosabb döntését."
+    "whyChooseUsDescription": "Az egyik legfontosabb döntés, amit meg kell hoznia, hogy kiválassza a megfelelő ingatlanügynököt otthona eladásához. Ez jelentheti a különbséget aközött, hogy otthona hónapokig a piacon áll, vagy gyorsan elkel, a lehető legmagasabb áron.\n\n Az otthona egy nagyon személyes, fontos és értékes vagyontárgy, érzelmileg megterhelő és bonyolult vállalkozás lehet eladni, különösen a mai kihívásokkal teli piacon. Számos kérdésre és aggályra kell választ adni, és a kapott tanácsok és konzultációk óriási különbséget jelenthetnek az eredményekben.\n\n A marketing és reklám, az átalakítás és/vagy korszerűsítés, a fotózás, az internetes megjelenés, a home staging, az alaprajzi ábrázolás, a videók készítése, az ingatlan bemutatása, az ügynökökkel való kapcsolattartás, a nyílt napok, az árazás és tucatnyi további apró lépés mind-mind hozzájárul a kudarc és a sikeres eladás közötti különbséghez.\n\nCélunk, hogy a eladás folyamata átlátható, biztonságos és gördülékeny legyen. Minden lépésben önök állunk, hogy magabiztosan hozhassa meg  döntését."
   },
   "en": {
     "servicesItems": [
@@ -82,18 +82,18 @@
     ],
     "titleImage": "src/assets/images/for-sellers.jpg",
     "ctaTitle": "Trust us with your property sale or rental.",
-    "pageTitle": "Sellers",
+    "pageTitle": "List with us",
     "ctaImage": "src/assets/images/work-with-us.jpg",
     "ctaDescription": "Trust us with your property sale or rental. Our professional services ensure that your property is sold at the best price and in the shortest time possible. Our experienced team supports you at every step.",
     "pageDescription": "We help you sell or rent your property in Debrecen.",
     "ctaButtonText": "Contact us",
     "servicesSubtitle": "What we offer",
     "subtitle": "We help you sell or rent your property in Debrecen.",
-    "title": "Sellers",
+    "title": "List with us",
     "servicesTitle": "Our services",
     "whyChooseUsTitle": "Why choose us?",
     "servicesDescription": "Professional support at every step of the home buying process.",
-    "whyChooseUsDescription": "The home purchase is a lifelong decision that shapes our daily lives. With our expertise and local knowledge, we help you find a property that perfectly fits your lifestyle and aspirations."
+    "whyChooseUsDescription": "One of the most important decisions you will make is choosing the right real estate agent to sell your home. It can mean the difference between your home sitting on the market for months or selling quickly for the highest possible price.\n\nYour home is a very personal, important and valuable asset, and selling it can be an emotionally charged and complicated undertaking, especially in today’s challenging market. There are many questions and concerns to be answered, and the advice and consultation you receive can make a huge difference in the results.\n\nMarketing and advertising, remodeling and/or updating, photography, online presence, home staging, floor plans, video production, showing the property, liaising with agents, open houses, pricing and dozens of other small steps all contribute to the difference between a failed sale and a successful one.\n\nOur goal is to make the selling process transparent, safe and smooth. We are with you every step of the way so you can make your decision with confidence."
   },
   "de": {
     "servicesItems": [
@@ -130,17 +130,17 @@
     ],
     "titleImage": "src/assets/images/for-sellers.jpg",
     "ctaTitle": "Vertrauen Sie uns mit der Verkauf oder Vermietung Ihrer Immobilie.",
-    "pageTitle": "Verkäufer",
+    "pageTitle": "List mit uns",
     "ctaImage": "src/assets/images/work-with-us.jpg",
     "ctaDescription": "Vertrauen Sie uns mit der Verkauf oder Vermietung Ihrer Immobilie. Unsere professionelle Dienstleistung sorgt dafür, dass Ihre Immobilie zum besten Preis und in der kürzesten Zeit verkauft oder vermietet wird. Unsere erfahrene Team unterstützt Sie bei jedem Schritt.",
     "pageDescription": "Wir helfen Ihnen, Ihr Immobilienobjekt in Debrecen zu verkaufen oder zu vermieten.",
     "ctaButtonText": "Kontaktieren Sie uns",
     "servicesSubtitle": "Was wir anbieten",
     "subtitle": "Wir helfen Ihnen, Ihr Immobilienobjekt in Debrecen zu verkaufen oder zu vermieten.",
-    "title": "Verkäufer",
+    "title": "Möchten Sie verkaufen oder vermieten? ",
     "servicesTitle": "Unsere Dienstleistungen",
-    "whyChooseUsTitle": "Warum uns wählen?",
+    "whyChooseUsTitle": "Warum wählen Sie uns?",
     "servicesDescription": "Professionelle Unterstützung bei jedem Schritt des Immobilienerwerbs.",
-    "whyChooseUsDescription": "Das Immobilienkaufen ist eine lebenslange Entscheidung, die unseren Alltag bestimmt. Mit unserer Expertise und lokaler Kenntnis helfen wir Ihnen, eine Immobilie zu finden, die perfekt zu Ihrem Lebensstil und Ihren Vorstellungen passt."
+    "whyChooseUsDescription": "Eine der wichtigsten Entscheidungen beim Hausverkauf ist die Wahl des richtigen Immobilienmaklers. Sie kann darüber entscheiden, ob Ihr Heim monatelang auf dem Markt bleibt oder schnell zum bestmöglichen Preis verkauft wird. \n\nIhr Heim ist ein sehr persönliches, wichtiges und wertvolles Gut, und der Verkauf kann, insbesondere im heutigen herausfordernden Markt, eine emotional belastende und komplexe Angelegenheit sein. Viele Fragen und Bedenken müssen geklärt werden, und die Beratung, die Sie erhalten, kann den Erfolg maßgeblich beeinflussen. \n\nMarketing und Werbung, Renovierung und/oder Modernisierung, Fotos, Online-Präsenz, Home Staging, Grundrisse, Videoproduktion, Besichtigungen, die Zusammenarbeit mit anderen Maklern, Tage der offenen Tür, die Preisgestaltung und viele weitere kleine Schritte tragen dazu bei, ob ein Verkauf scheitert oder erfolgreich ist. \n\nUnser Ziel ist es, den Verkaufsprozess transparent, sicher und reibungslos zu gestalten. Wir begleiten Sie auf jedem Schritt Ihres Weges, damit Sie Ihre Entscheidung mit Zuversicht treffen können."
   }
 }
