@@ -151,15 +151,18 @@
   },
   "de": {
     "introductionImage": "src/assets/images/agent-placeholder.jpg",
-    "introductionLinkText": "Tudjon meg többet rólunk",
-    "featuredListingsLinkText": "Összes ingatlan megtekintése",
-    "featuredServicesSubtitle": "Átfogó szolgáltatások",
+    "introductionLinkText": "Erfahren Sie mehr über uns",
+    "featuredListingsLinkText": "Alle anzeigen",
+    "featuredServicesSubtitle": "Umfassende Dienstleistungen",
     "forBuyersServices": [
       {
         "title": "Ingatlan keresés",
         "description": "Személyre szabott keresés az Ön igényei szerint",
         "icon": "Search"
-      }
+      },
+      {},
+      {},
+      {}
     ],
     "pageTitle": "Selling Debrecen Group",
     "forSellersServices": [
@@ -172,21 +175,25 @@
         "title": "Fotózás és marketing",
         "description": "Professzionális fotózás és hatékony marketing stratégia",
         "icon": "Camera"
-      }
+      },
+      {},
+      {},
+      {},
+      {}
     ],
-    "featuredServicesTitle": "Amit kínálunk",
+    "featuredServicesTitle": " Was wir bieten",
     "pageDescription": "Selling Debrecen Group",
     "forBuyersServicesLinkText": "Keresni szeretnék",
-    "forSellersServicesTitle": "Eladóknak és bérbeadóknak",
-    "forSellersServicesLinkText": "Eladni, kiadni szeretnék",
-    "featuredServicesDescription": "Professzionális megoldásokkal támogatjuk Önt az ingatlanügyletek során.",
+    "forSellersServicesTitle": "Immobilienbesitzer",
+    "forSellersServicesLinkText": "List mit uns",
+    "featuredServicesDescription": "Wir unterstützen Sie mit professionellen Lösungen bei Immobilientransaktionen.",
     "forBuyersServicesTitle": "Keresőknek",
-    "forSellersServicesDescription": "Ha ingatlanját szeretné értékesíteni, szakértő segítségünkkel a lehető legjobb áron és a legrövidebb idő alatt adhatja el. Teljes körű szolgáltatást nyújtunk az értékeléstől a szerződéskötésig.",
+    "forSellersServicesDescription": "Möchten Sie Ihre Immobilie verkaufen oder vermieten? Mit unserer fachkundigen Unterstützung erzielen Sie den bestmöglichen Preis und erzielen eine schnelle Abwicklung. Wir bieten Ihnen alle Leistungen von der Bewertung bis zum Vertragsabschluss.",
     "forBuyersServicesDescription": "Álmaik otthonának megtalálásában segítünk. Széles választékunkból választhatnak, és minden lépésben mellettük állunk a vásárlás folyamatában.",
-    "featuredListingsSubtitle": "A Selling Debrecen ajánlata",
+    "featuredListingsSubtitle": "",
     "introduction": "Üdvözöljük a Selling Debrecen oldalán! Mi vagyunk a Debrecenben működő ingatlanközvetítő cég, amelynek célja, hogy segítsük Önnek megtalálni a tökéletes otthont Debrecenben.",
-    "featuredListingsTitle": "Kiemelt ingatlanjaink",
+    "featuredListingsTitle": "Sonderangebote",
     "introductionTitle": "Bemutatkozás",
-    "featuredListingsDescription": "Fedezze fel válogatott ingatlanjaink különleges kínálatát. Minden ingatlan gondosan kiválasztott, hogy az Ön igényeinek megfelelő otthont találhassa meg Debrecenben."
+    "featuredListingsDescription": "Entdecken Sie unsere exklusive Auswahl an ausgewählten Immobilien. Jede Immobilie wurde sorgfältig ausgewählt, damit Sie in Debrecen ein Zuhause finden, das Ihren Bedürfnissen entspricht."
   }
 }
