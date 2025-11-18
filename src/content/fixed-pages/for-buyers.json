@@ -15,6 +15,11 @@
         "title": "Pénzügyi tanácsadás",
         "description": "Magában foglalja a különböző hitelkonstrukciók, állami támogatások (pl. CSOK, babaváró támogatás) összehasonlítását és kiválasztását, a legkedvezőbb feltételek megtalálása érdekében.",
         "icon": "CircleDollarSign"
+      },
+      {
+        "title": "Befektetési stratégia kidolgozása",
+        "description": "Ingatlanbefektetők esetén segítünk meghatározni a célokat, a kockázati profilt, és a portfólióba illeszkedő, hosszú távon jövedelmező befektetési lehetőségeket javasolunk. ",
+        "icon": "Landmark"
       }
     ],
     "titleImage": "src/assets/images/for-buyers-02.jpg",
@@ -63,6 +68,11 @@
         "title": "Financial advise",
         "description": "Includes the comparison and selection of different loan structures and state subsidies (e.g. CSOK, maternity benefits) in order to find the most favorable conditions.",
         "icon": "CircleDollarSign"
+      },
+      {
+        "title": "Investment strategy",
+        "description": "For real estate investors, we help determine goals, risk profile, and recommend long-term profitable investment opportunities that fit into the portfolio.",
+        "icon": "Landmark"
       }
     ],
     "titleImage": "src/assets/images/for-buyers-02.jpg",
@@ -111,6 +121,11 @@
         "title": "Finanzberatung",
         "description": "Dazu gehört der Vergleich und die Auswahl verschiedener Darlehensstrukturen und staatlicher Subventionen (z. B. CSOK, Mutterschaftsgeld), um die günstigsten Konditionen zu finden.",
         "icon": "CircleDollarSign"
+      },
+      {
+        "title": "Anlagestrategie",
+        "description": "Für Immobilieninvestoren helfen wir, Ziele und Risikoprofil zu bestimmen und empfehlen langfristig profitable Investitionsmöglichkeiten, die in das Portfolio passen.",
+        "icon": "Landmark"
       }
     ],
     "titleImage": "src/assets/images/for-buyers-02.jpg",
