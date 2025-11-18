@@ -16,10 +16,10 @@
     "whyDebrecenTitle": "Miért Debrecen?",
     "whyDebrecenSubtitle": "A mi városunk",
     "title": "Rólunk",
-    "introduction": "Több mint 15 éve vagyunk jelen Debrecen ingatlanpiacán. Amit egyszerű küldetéssel indítottunk – segíteni az embereknek megtalálni álmaik otthonát – mára a helyi ingatlanközvetítés egyik legmegbízhatóbb nevévé vált.",
+    "introduction": "A Selling Debrecen Group egy professzionális ingatlanközvetítő iroda, amely prémium ingatlanok vevőit és eladóit szolgálja ki Debrecenben és környékén. Cégünket tehetséges szakemberek szoros csoportja alkotja, élükön a cég ügyvezetőjével és alapítójával, Kiss Zoltánnal, aki az ingatlanok értékesítésének területén több mint egy évtizedes tapasztalattal rendelkezik.",
     "valuesDescription": "Ezek az alapelvek vezetnek minket minden nap, minden ügyletben.",
     "valuesSubtitle": "Amiben hiszünk",
-    "whyDebrecenDescription": "Debrecen dinamikusan fejlődő város, amely ötvözi a hagyományos értékeket a modern lehetőségekkel. Magyarország második legnagyobb városaként széles spektrumú ingatlanokat kínál: a csendes, zöldövezeti családi házaktól a belváros pezsgő lakásáig.",
+    "whyDebrecenDescription": "Debrecen a cívisváros ahol a történelmi és jelenkori értékek találkoznak egymással.",
     "introductionTitle": "Ismerjük meg egymást",
     "valuesItems": [
       {
@@ -35,36 +35,36 @@
     ]
   },
   "en": {
-    "whyDebrecen": "Debrecen dinamikusan fejlődő város, amely ötvözi a hagyományos értékeket a modern lehetőségekkel. Magyarország második legnagyobb városaként széles spektrumú ingatlanokat kínál: a csendes, zöldövezeti családi házaktól a belváros pezsgő lakásáig.",
+    "whyDebrecen": "Debrecen is a dynamically developing city that combines traditional values ​​with modern opportunities. As the second largest city in Hungary, it offers a wide range of real estate: from quiet, green family houses to vibrant apartments in the city center.",
     "introductionImage": "src/assets/images/agent-placeholder.jpg",
     "titleImage": "src/assets/images/for-buyers.jpg",
-    "storyTitle": "Our story",
+    "storyTitle": "Our Story",
     "storyDescription": "We have been present in the Debrecen real estate market for over a decade. What started with a simple mission – to help people find the home of their dreams – has now become one of the most trusted names in local real estate brokerage.",
     "pageTitle": "About Us",
-    "workTogetherButtonText": "Kapcsolatfelvétel",
-    "workTogetherTitle": "Dolgozzunk együtt",
+    "workTogetherButtonText": "Contact Us",
+    "workTogetherTitle": "Work Together",
     "pageDescription": "Local expertise, personal attention, reliable service",
     "workTogetherImage": "src/assets/images/agent-placeholder.jpg",
-    "workTogetherDescription": "Ha szeretné Önnek is segíteni megtalálni álmaik otthonát Debrecenben, szívesen segítünk. Várjuk megkeresését, és együtt találjuk meg az Ön számára tökéletes megoldást!",
-    "valuesTitle": "Értékeink",
+    "workTogetherDescription": "If you would like to help you find the home of your dreams in Debrecen, we are happy to help. We look forward to hearing from you and together we will find the perfect solution for you!",
+    "valuesTitle": "Our Values",
     "subtitle": "Local expertise, personal attention, reliable service",
-    "whyDebrecenTitle": "Miért Debrecen?",
-    "whyDebrecenSubtitle": "A mi városunk",
+    "whyDebrecenTitle": "Why Debrecen?",
+    "whyDebrecenSubtitle": "It's our city",
     "title": "About Us",
-    "introduction": "Több mint 15 éve vagyunk jelen Debrecen ingatlanpiacán. Amit egyszerű küldetéssel indítottunk – segíteni az embereknek megtalálni álmaik otthonát – mára a helyi ingatlanközvetítés egyik legmegbízhatóbb nevévé vált.",
-    "valuesDescription": "Ezek az alapelvek vezetnek minket minden nap, minden ügyletben.",
-    "valuesSubtitle": "Amiben hiszünk",
-    "whyDebrecenDescription": "Debrecen dinamikusan fejlődő város, amely ötvözi a hagyományos értékeket a modern lehetőségekkel. Magyarország második legnagyobb városaként széles spektrumú ingatlanokat kínál: a csendes, zöldövezeti családi házaktól a belváros pezsgő lakásáig.",
-    "introductionTitle": "Ismerjük meg egymást",
+    "introduction": "The Selling Debrecen Group is a professional real estate agency serving buyers and sellers of premium properties in Debrecen and its surroundings. Our company is composed of a close group of talented professionals, led by the company's CEO and founder, Zoltán Kiss, who has over a decade of experience in the field of real estate sales.",
+    "valuesDescription": "These principles guide us every day, in every transaction.",
+    "valuesSubtitle": "Our Beliefs",
+    "whyDebrecenDescription": "Debrecen is the city where historical and contemporary values ​​meet.\n\n",
+    "introductionTitle": "Let's know each other",
     "valuesItems": [
       {
-        "title": "Személyes figyelem",
-        "description": "Minden ügyfél egyedi, minden helyzet más. Időt szánunk arra, hogy megértsük az Ön igényeit, és személyre szabott megoldásokat kínáljunk. Nem számok vagyunk, hanem partnerek az Ön otthonteremtésében.",
+        "title": "Personal attention",
+        "description": "Every client is unique, every situation is different. We take the time to understand your needs and offer personalized solutions. We are not numbers, but partners in creating your home.",
         "icon": "Heart"
       },
       {
-        "title": "Szakmai kiválóság",
-        "description": "Folyamatosan képezzük magunkat, hogy mindig naprakészek legyünk a piaci trendekkel, jogi szabályozásokkal és a legjobb gyakorlatokkal. Szakértelmünk garantálja, hogy minden ügylet gördülékenyen és biztonságosan zárul.",
+        "title": "Professional excellence",
+        "description": "We continuously educate ourselves to stay up to date with market trends, legal regulations and best practices. Our expertise guarantees that every transaction is completed smoothly and securely.",
         "icon": "Award"
       }
     ]
