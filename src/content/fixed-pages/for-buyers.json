@@ -30,7 +30,7 @@
     "ctaImage": "src/assets/images/listings-bg-1.jpg",
     "ctaDescription": "Böngésszen aktuális kínálatunkban és találja meg álmai otthonát Debrecenben. Folyamatosan frissülő portfóliónkban lakások, házak és kereskedelmi ingatlanok széles választéka várja Önt.",
     "pageDescription": "Találja meg álmai ingatlanát Debrecenben",
-    "processDescription": "Ingatlanvásárlás egy életre szóló döntés, amely meghatározza mindennapjainkat. Szakértelmünkkel és helyismeretünkkel segítünk megtalálni az Ön életstílusának és preferenciáinak tökéletesen megfelelő ingatlant.",
+    "processDescription": "Ingatlanvásárlás és bérlés egy komoly döntés, amely meghatározza mindennapjainkat. Szakértelmünkkel és helyismeretünkkel segítünk megtalálni az Ön életstílusának és preferenciáinak tökéletesen megfelelő ingatlant.",
     "ctaButtonText": "Megnézem az ingatlanokat",
     "processItems": [
       {
@@ -76,14 +76,14 @@
       }
     ],
     "titleImage": "src/assets/images/for-buyers-02.jpg",
-    "processSubtitle": "The buying process",
+    "processSubtitle": "The searching process",
     "ctaTitle": "View our listings",
     "pageTitle": "Property seekers",
-    "processTitle": "Buy with us",
+    "processTitle": "Buy or rent with us",
     "ctaImage": "src/assets/images/listings-bg-1.jpg",
     "ctaDescription": "Browse our current listings and find your dream home in Debrecen. Our portfolio is constantly updated with a wide range of properties: apartments, houses and commercial properties. We are waiting for you.",
     "pageDescription": "Find your dream property in Debrecen",
-    "processDescription": "The buying process is a lifelong decision that shapes our daily lives. With our expertise and local knowledge, we help you find a property that perfectly fits your lifestyle and aspirations.",
+    "processDescription": "Buying or renting a property is a serious decision that will define our everyday lives. With our expertise and local knowledge, we will help you find the perfect property to suit your lifestyle and preferences.",
     "ctaButtonText": "View the properties",
     "processItems": [
       {
@@ -102,7 +102,7 @@
     "title": "Property seekers",
     "servicesTitle": "Our services",
     "whyChooseUsTitle": "Why choose us?",
-    "servicesDescription": "Professional support at every step of the home buying process.",
+    "servicesDescription": "Professional support at every step of the home search process.",
     "whyChooseUsDescription": "The home purchase is a lifelong decision that shapes our daily lives. With our expertise and local knowledge, we help you find a property that perfectly fits your lifestyle and aspirations.\n\nDebrecen every neighborhood is known: from the quiet, family-friendly districts to the vibrant city center. This allows us not only to find a property, but also a home for you.\n\nOur goal is to make the purchase process transparent, safe and smooth. We are with you at every step, so you can confidently make one of the most important decisions of your life."
   },
   "de": {
@@ -131,12 +131,12 @@
     "titleImage": "src/assets/images/for-buyers-02.jpg",
     "processSubtitle": "Der Suchprozess",
     "ctaTitle": "Unsere Immobilien ansehen",
-    "pageTitle": "Suchen",
+    "pageTitle": "Immobiliensuchende",
     "processTitle": "Suchen Sie mit uns",
     "ctaImage": "src/assets/images/listings-bg-1.jpg",
     "ctaDescription": "Blättern Sie durch unsere aktuellen Immobilien und finden Sie Ihr Traumhaus in Debrecen. Unser Portfolio wird ständig mit einer großen Auswahl von Immobilien aktualisiert: Wohnungen, Häuser und Geschäftsimmobilien. Wir freuen uns auf Sie.",
-    "pageDescription": "Finden Sie Ihr Traumhaus in Debrecen",
-    "processDescription": "Der Kaufprozess ist eine lebenslange Entscheidung, die unseren Alltag bestimmt. Mit unserer Expertise und lokaler Kenntnis helfen wir Ihnen, eine Immobilie zu finden, die perfekt zu Ihrem Lebensstil und Ihren Vorstellungen passt.",
+    "pageDescription": "Finden Sie Ihr Traumheim in Debrecen",
+    "processDescription": "Der Kauf oder die Anmietung einer Immobilie ist eine wichtige Entscheidung, die unseren Alltag prägt. Mit unserer Expertise und Ortskenntnis helfen wir Ihnen, die Immobilie zu finden, die perfekt zu Ihrem Lebensstil und Ihren Vorlieben passt.",
     "ctaButtonText": "Die Immobilien ansehen",
     "processItems": [
       {
@@ -151,10 +151,10 @@
       }
     ],
     "servicesSubtitle": "Was wir anbieten",
-    "subtitle": "Finden Sie Ihr Traumhaus in Debrecen",
-    "title": "Suchen",
+    "subtitle": "Finden Sie Ihr Traumheim in Debrecen",
+    "title": "Immobiliensuchende",
     "servicesTitle": "Unsere Dienstleistungen",
-    "whyChooseUsTitle": "Warum uns wählen?",
+    "whyChooseUsTitle": "Warum wählen Sie uns?",
     "servicesDescription": "Professionelle Unterstützung bei jedem Schritt des Immobilienerwerbs.",
     "whyChooseUsDescription": "Das Immobilienkaufen ist eine lebenslange Entscheidung, die unseren Alltag bestimmt. Mit unserer Expertise und lokaler Kenntnis helfen wir Ihnen, eine Immobilie zu finden, die perfekt zu Ihrem Lebensstil und Ihren Vorstellungen passt.\n\nWir kennen Debrecen in- und auswendig: von den ruhigen, familienfreundlichen Vierteln bis zum pulsierenden Stadtzentrum. So können wir Ihnen nicht nur eine Immobilie, sondern ein Zuhause finden.\n\nUnser Ziel ist es, den Kaufprozess transparent, sicher und reibungslos zu gestalten. Wir begleiten Sie auf jedem Schritt Ihres Weges, damit Sie eine der wichtigsten Entscheidungen Ihres Lebens mit Zuversicht treffen können."
   }
