@@ -36,5 +36,5 @@ export default defineConfig({
   ],
   compressHTML: false,
   output: "static",
-  site: "https://selling-debrecen.netlify.app",
+  site: "https://www.sdgroup.hu",
 });

@@ -1,14 +1,14 @@
 {
   "hu": {
     "logo": "src/assets/images/selling-debrecen-logo.svg",
-    "slogan": "Prémium ingatlanok Debrecenben"
+    "slogan": "Ingatlan"
   },
   "en": {
     "logo": "src/assets/images/selling-debrecen-logo.svg",
-    "slogan": "Premium properties in Debrecen"
+    "slogan": "Real Estate"
   },
   "de": {
     "logo": "src/assets/images/selling-debrecen-logo.svg",
-    "slogan": "Premium Immobilien in Debrecen"
+    "slogan": "Immobilien"
   }
 }
