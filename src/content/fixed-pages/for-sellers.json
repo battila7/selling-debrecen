@@ -8,12 +8,12 @@
       },
       {
         "title": "Marketing",
-        "description": "Profi fotók és bemutatóvideó, továbbá alaprajz készítése és az ingatlan hirdetése különböző platformokon.",
+        "description": "A jó minőségű professzionális fotók és a bemutatóvideó készítése, továbbá a pontos alaprajz és egy vonzó, részletes leírás segít a vevőknek a tájékozódásban. Fontos meghatározni, hogy ki a célközönség (pl. fiatal párok, családosok, befektetők), és a marketingüzenetet, valamint a hirdetési csatornákat hozzájuk igazítani.",
         "icon": "Presentation"
       },
       {
         "title": "Képviselet",
-        "description": "A felek közötti kommunikáció és tárgyalások teljes körű lebonyolítása a sikeres üzletkötés érdekében, szükség esetén a szerződéskötéshez ügyvédi háttér biztosítása.",
+        "description": "A felek közötti kommunikáció és tárgyalások teljes körű lebonyolítása a sikeres üzletkötés érdekében. Bérbeadás esetén a bérlők előszűrése és a bérbeadás lebonyolítása. Szükség esetén a szerződéskötéshez ügyvédi háttér biztosítása.",
         "icon": "Handshake"
       },
       {
@@ -23,7 +23,7 @@
       },
       {
         "title": "Deep cleaning",
-        "description": "Az eladásra vagy bérbeadásra szánt ingatlanok takarítása, ami a rendszeres takarításnál alaposabb, átfogóbb tisztítási folyamat. Ez magában foglalja a nehezen elérhető, ritkán tisztított területek, rések és a bútorok alatti részek megtisztítását, valamint a fertőtlenítést.",
+        "description": "Az eladásra vagy bérbeadásra szánt ingatlanok takarítása, ami a rendszeres takarításnál alaposabb, átfogóbb tisztítási folyamat. ",
         "icon": "BrushCleaning"
       },
       {
@@ -45,7 +45,7 @@
     "servicesTitle": "Szolgáltatásaink",
     "whyChooseUsTitle": "Miért válasszon minket?",
     "servicesDescription": "Professzionális támogatás minden lépésben az otthonkeresés folyamatában.",
-    "whyChooseUsDescription": "Az otthonteremtés életre szóló döntés, amely meghatározza mindennapjainkat. Szakértelmünkkel és helyi ismereteinkkel segítünk megtalálni azt az ingatlant, amely tökéletesen illeszkedik az Ön életviteléhez és elképzeléseihez.\n\nDebrecen minden szegletét ismerjük: a csendes, családbarát kerületektől a pezsgő belvárosig. Mindez lehetővé teszi, hogy ne csak ingatlant, hanem otthont találjunk Önnek.\n\nCélunk, hogy a vásárlás folyamata átlátható, biztonságos és gördülékeny legyen. Minden lépésben mellette állunk, hogy magabiztosan hozhassa meg élete egyik legfontosabb döntését."
+    "whyChooseUsDescription": "Az egyik legfontosabb döntés, amit meg kell hoznia, hogy kiválassza a megfelelő ingatlanügynököt otthona eladásához. Ez jelentheti a különbséget aközött, hogy otthona hónapokig a piacon áll, vagy gyorsan elkel, a lehető legmagasabb áron.\n\n Az otthona egy nagyon személyes, fontos és értékes vagyontárgy, érzelmileg megterhelő és bonyolult vállalkozás lehet eladni, különösen a mai kihívásokkal teli piacon. Számos kérdésre és aggályra kell választ adni, és a kapott tanácsok és konzultációk óriási különbséget jelenthetnek az eredményekben.\n\n A marketing és reklám, az átalakítás és/vagy korszerűsítés, a fotózás, az internetes megjelenés, a home staging, az alaprajzi ábrázolás, a videók készítése, az ingatlan bemutatása, az ügynökökkel való kapcsolattartás, a nyílt napok, az árazás és tucatnyi további apró lépés mind-mind hozzájárul a kudarc és a sikeres eladás közötti különbséghez.\n\nCélunk, hogy a eladás folyamata átlátható, biztonságos és gördülékeny legyen. Minden lépésben önök állunk, hogy magabiztosan hozhassa meg  döntését."
   },
   "en": {
     "servicesItems": [
@@ -56,12 +56,12 @@
       },
       {
         "title": "Marketing",
-        "description": "Professional photos and presentation video, as well as creating a floor plan and advertising the property on various platforms.",
+        "description": "High-quality professional photos and a video presentation, as well as an accurate floor plan and an attractive, detailed description, will help buyers navigate the property. It is important to determine who the target audience is (e.g. young couples, families, investors) and tailor the marketing message and advertising channels to them.",
         "icon": "Presentation"
       },
       {
         "icon": "Handshake",
-        "description": "Full management of communication and negotiations between the parties in order to successfully conclude a deal, and if necessary, providing legal support for the conclusion of the contract.",
+        "description": "Full communication and negotiation between the parties to ensure a successful deal. In the case of leasing, pre-screening of tenants and leasing. If necessary, providing legal support for the conclusion of the contract.",
         "title": "Representation"
       },
       {
@@ -72,28 +72,28 @@
       {
         "title": "Deep cleaning",
         "icon": "BrushCleaning",
-        "description": "Cleaning of properties for sale or rental, which is a more thorough, comprehensive cleaning process than regular cleaning. It includes cleaning hard-to-reach, rarely cleaned areas, crevices, and under furniture, as well as disinfection."
+        "description": "Cleaning of properties for sale or rental, which is a more thorough, comprehensive cleaning process than regular cleaning. "
       },
       {
-        "title": "Cosmetic Renovations",
+        "title": "Cosmetic renovations",
         "description": "Minor improvements to the aesthetic parameters of the building. This may include painting, minor repairs, and landscaping.",
         "icon": "Drill"
       }
     ],
     "titleImage": "src/assets/images/for-sellers.jpg",
-    "ctaTitle": "Trust us with your property sale or rental.",
-    "pageTitle": "Sellers",
+    "ctaTitle": "List with us!",
+    "pageTitle": "List with us",
     "ctaImage": "src/assets/images/work-with-us.jpg",
     "ctaDescription": "Trust us with your property sale or rental. Our professional services ensure that your property is sold at the best price and in the shortest time possible. Our experienced team supports you at every step.",
     "pageDescription": "We help you sell or rent your property in Debrecen.",
     "ctaButtonText": "Contact us",
     "servicesSubtitle": "What we offer",
     "subtitle": "We help you sell or rent your property in Debrecen.",
-    "title": "Sellers",
+    "title": "Would you like to sell or rent it out?",
     "servicesTitle": "Our services",
     "whyChooseUsTitle": "Why choose us?",
     "servicesDescription": "Professional support at every step of the home buying process.",
-    "whyChooseUsDescription": "The home purchase is a lifelong decision that shapes our daily lives. With our expertise and local knowledge, we help you find a property that perfectly fits your lifestyle and aspirations."
+    "whyChooseUsDescription": "One of the most important decisions you will make is choosing the right real estate agent to sell your home. It can mean the difference between your home sitting on the market for months or selling quickly for the highest possible price.\n\nYour home is a very personal, important and valuable asset, and selling it can be an emotionally charged and complicated undertaking, especially in today’s challenging market. There are many questions and concerns to be answered, and the advice and consultation you receive can make a huge difference in the results.\n\nMarketing and advertising, remodeling and/or updating, photography, online presence, home staging, floor plans, video production, showing the property, liaising with agents, open houses, pricing and dozens of other small steps all contribute to the difference between a failed sale and a successful one.\n\nOur goal is to make the selling process transparent, safe and smooth. We are with you every step of the way so you can make your decision with confidence."
   },
   "de": {
     "servicesItems": [
@@ -104,11 +104,11 @@
       },
       {
         "title": "Marketing",
-        "description": "Professionelle Fotos und ein Präsentationsvideo sowie die Erstellung eines Grundrisses und die Vermarktung der Immobilie auf verschiedenen Plattformen.\n\n",
+        "description": "Hochwertige, professionelle Fotos und eine Videopräsentation sowie ein präziser Grundriss und eine ansprechende, detaillierte Beschreibung erleichtern potenziellen Käufern die Orientierung in der Immobilie. Wichtig ist es, die Zielgruppe zu definieren und die Marketingbotschaft sowie die Werbekanäle entsprechend anzupassen.\n\n",
         "icon": "Presentation"
       },
       {
-        "description": "Die vollständige Steuerung der Kommunikation und der Verhandlungen zwischen den Parteien, um einen erfolgreichen Vertragsabschluss zu erzielen, und gegebenenfalls die Bereitstellung rechtlicher Unterstützung für den Vertragsabschluss.\n\n",
+        "description": "Umfassende Kommunikation und Verhandlung zwischen den Parteien gewährleisten einen erfolgreichen Vertragsabschluss. Im Falle von Mietverträgen erfolgt die Vorprüfung der Mieter und die Vertragsabwicklung. Bei Bedarf wird rechtliche Unterstützung beim Vertragsabschluss geleistet.\n\n",
         "icon": "Handshake",
         "title": "Vertretung"
       },
@@ -119,7 +119,7 @@
       },
       {
         "title": "Tiefenreinigung",
-        "description": "Die Reinigung von Immobilien für den Verkauf oder die Vermietung ist ein gründlicherer und umfassenderer Reinigungsprozess als die reguläre Reinigung. Sie beinhaltet die Reinigung schwer zugänglicher, selten gereinigter Bereiche, Ritzen und Stellen unter Möbeln sowie die Desinfektion.\n\n",
+        "description": "Die Reinigung von Immobilien für den Verkauf oder die Vermietung ist ein gründlicherer und umfassenderer Reinigungsprozess als die reguläre Reinigung. \n\n",
         "icon": "BrushCleaning"
       },
       {
@@ -129,18 +129,18 @@
       }
     ],
     "titleImage": "src/assets/images/for-sellers.jpg",
-    "ctaTitle": "Vertrauen Sie uns mit der Verkauf oder Vermietung Ihrer Immobilie.",
-    "pageTitle": "Verkäufer",
+    "ctaTitle": "List mit uns!",
+    "pageTitle": "List mit uns",
     "ctaImage": "src/assets/images/work-with-us.jpg",
     "ctaDescription": "Vertrauen Sie uns mit der Verkauf oder Vermietung Ihrer Immobilie. Unsere professionelle Dienstleistung sorgt dafür, dass Ihre Immobilie zum besten Preis und in der kürzesten Zeit verkauft oder vermietet wird. Unsere erfahrene Team unterstützt Sie bei jedem Schritt.",
     "pageDescription": "Wir helfen Ihnen, Ihr Immobilienobjekt in Debrecen zu verkaufen oder zu vermieten.",
     "ctaButtonText": "Kontaktieren Sie uns",
     "servicesSubtitle": "Was wir anbieten",
     "subtitle": "Wir helfen Ihnen, Ihr Immobilienobjekt in Debrecen zu verkaufen oder zu vermieten.",
-    "title": "Verkäufer",
+    "title": "Möchten Sie verkaufen oder vermieten? ",
     "servicesTitle": "Unsere Dienstleistungen",
-    "whyChooseUsTitle": "Warum uns wählen?",
+    "whyChooseUsTitle": "Warum wählen Sie uns?",
     "servicesDescription": "Professionelle Unterstützung bei jedem Schritt des Immobilienerwerbs.",
-    "whyChooseUsDescription": "Das Immobilienkaufen ist eine lebenslange Entscheidung, die unseren Alltag bestimmt. Mit unserer Expertise und lokaler Kenntnis helfen wir Ihnen, eine Immobilie zu finden, die perfekt zu Ihrem Lebensstil und Ihren Vorstellungen passt."
+    "whyChooseUsDescription": "Eine der wichtigsten Entscheidungen beim Hausverkauf ist die Wahl des richtigen Immobilienmaklers. Sie kann darüber entscheiden, ob Ihr Heim monatelang auf dem Markt bleibt oder schnell zum bestmöglichen Preis verkauft wird. \n\nIhr Heim ist ein sehr persönliches, wichtiges und wertvolles Gut, und der Verkauf kann, insbesondere im heutigen herausfordernden Markt, eine emotional belastende und komplexe Angelegenheit sein. Viele Fragen und Bedenken müssen geklärt werden, und die Beratung, die Sie erhalten, kann den Erfolg maßgeblich beeinflussen. \n\nMarketing und Werbung, Renovierung und/oder Modernisierung, Fotos, Online-Präsenz, Home Staging, Grundrisse, Videoproduktion, Besichtigungen, die Zusammenarbeit mit anderen Maklern, Tage der offenen Tür, die Preisgestaltung und viele weitere kleine Schritte tragen dazu bei, ob ein Verkauf scheitert oder erfolgreich ist. \n\nUnser Ziel ist es, den Verkaufsprozess transparent, sicher und reibungslos zu gestalten. Wir begleiten Sie auf jedem Schritt Ihres Weges, damit Sie Ihre Entscheidung mit Zuversicht treffen können."
   }
 }
