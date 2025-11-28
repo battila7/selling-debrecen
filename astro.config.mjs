@@ -37,4 +37,7 @@ export default defineConfig({
   compressHTML: false,
   output: "static",
   site: "https://www.sdgroup.hu",
+  experimental: {
+    svgo: true,
+  },
 });
