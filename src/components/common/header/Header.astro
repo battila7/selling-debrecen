@@ -2,19 +2,13 @@
 import Menu from "@lucide/astro/icons/menu";
 import MobileMenuOverlay from "./MobileMenuOverlay.astro";
 import LanguageSelector from "../LanguageSelector.astro";
-import Assets from "../../../util/assets";
-import branding from "../../../content/general/branding.json";
 import { useI18n } from "../../../i18n";
+import whiteLogo from "../../../images/sdg-logo-white.png";
+import { Image } from "astro:assets";
 
 const mobileMenuButtonId = "mobile-menu-button";
 
-const { p, t, lang } = useI18n(Astro);
-
-const localizedData = branding[lang as keyof typeof branding];
-const logo = await Assets.getSvg(localizedData.logo, {
-  addClasses: "h-10 md:h-10 text-white inline-block",
-  strokeWidth: 2,
-});
+const { p, t } = useI18n(Astro);
 ---
 
 <header
@@ -24,8 +18,11 @@ const logo = await Assets.getSvg(localizedData.logo, {
   <nav class="container mx-auto px-6 lg:px-12 py-4">
     <div class="hidden md:flex items-center justify-between">
       <a href={p("home")} class="text-white text-xl flex items-center gap-4">
-        <Fragment set:html={logo} />
-        <span class="text-white text-lg">Selling Debrecen Group</span>
+        <Image
+          src={whiteLogo}
+          alt="Selling Debrecen Group Logo"
+          class="h-10 w-auto"
+        />
       </a>
 
       <div class="flex items-center gap-8 text-sm">
@@ -71,8 +68,11 @@ const logo = await Assets.getSvg(localizedData.logo, {
         href={p("home")}
         class="flex items-center gap-4 text-white text-xl font-semibold transition-all duration-300"
       >
-        <Fragment set:html={logo} />
-        Selling Debrecen Group
+        <Image
+          src={whiteLogo}
+          alt="Selling Debrecen Group Logo"
+          class="h-10 w-auto"
+        />
       </a>
 
       <div class="flex items-center gap-4">

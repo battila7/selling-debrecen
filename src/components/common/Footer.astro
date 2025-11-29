@@ -7,14 +7,11 @@ import Instagram from "../../images/brands/instagram.svg";
 import Tiktok from "../../images/brands/tiktok.svg";
 import { useI18n } from "../../i18n";
 import Contact from "../../util/contact";
-import Assets from "../../util/assets";
 import branding from "../../content/general/branding.json";
 const { p, t, lang } = useI18n(Astro);
 const localizedData = branding[lang as keyof typeof branding];
-const logo = await Assets.getSvg(localizedData.logo, {
-  addClasses: "h-16 w-auto text-navy",
-  strokeWidth: 2,
-});
+import navyLogo from "../../images/sdg-logo-navy.png";
+import { Image } from "astro:assets";
 
 const navigationLinks = [
   { href: p("home"), label: t("nav.home") },
@@ -39,7 +36,11 @@ const legalLinks = [
         class="inline-block hover:opacity-80 transition-opacity"
         aria-label="Selling Debrecen - Főoldal"
       >
-        <Fragment set:html={logo} />
+        <Image
+          src={navyLogo}
+          alt="Selling Debrecen Group Logo"
+          class="h-16 w-auto"
+        />
       </a>
       <p class="mt-4 text-charcoal/70 max-w-md leading-relaxed">
         {localizedData.slogan}

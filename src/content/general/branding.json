@@ -1,14 +1,11 @@
 {
   "hu": {
-    "logo": "src/assets/images/selling-debrecen-logo.svg",
     "slogan": "Prémium Ingatlanok"
   },
   "en": {
-    "logo": "src/assets/images/selling-debrecen-logo.svg",
     "slogan": "Premium Properties"
   },
   "de": {
-    "logo": "src/assets/images/selling-debrecen-logo.svg",
     "slogan": "Premium Immobilien"
   }
 }

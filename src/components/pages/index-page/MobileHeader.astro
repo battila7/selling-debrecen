@@ -3,15 +3,10 @@ import { useI18n } from "../../../i18n";
 import Menu from "@lucide/astro/icons/menu";
 import MobileMenuOverlay from "../../common/header/MobileMenuOverlay.astro";
 import LanguageSelector from "../../common/LanguageSelector.astro";
-import Assets from "../../../util/assets";
-import branding from "../../../content/general/branding.json";
+import whiteLogo from "../../../images/sdg-logo-white.png";
+import { Image } from "astro:assets";
 
-const { p, lang } = useI18n(Astro);
-const localizedData = branding[lang as keyof typeof branding];
-const logo = await Assets.getSvg(localizedData.logo, {
-  addClasses: "h-10 md:h-10 text-white inline-block",
-  strokeWidth: 2,
-});
+const { p } = useI18n(Astro);
 const mobileMenuButtonId = "mobile-menu-button";
 const headerId = "site-header";
 ---
@@ -28,8 +23,11 @@ const headerId = "site-header";
         href={p("home")}
         class="opacity-0 flex items-center gap-4 text-white text-xl font-semibold transition-all duration-300"
       >
-        <Fragment set:html={logo} />
-        Selling Debrecen Group
+        <Image
+          src={whiteLogo}
+          alt="Selling Debrecen Group Logo"
+          class="h-10 w-auto"
+        />
       </a>
 
       <div class="flex items-center gap-4">

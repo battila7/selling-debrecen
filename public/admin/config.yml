@@ -31,10 +31,6 @@ collections:
       file: "src/content/general/branding.json"
       i18n: true
       fields:
-        - name: "logo"
-          label: "Logó"
-          widget: "image"
-          i18n: duplicate
         - name: "slogan"
           label: "Szlogen"
           widget: "string"
