@@ -4,6 +4,8 @@ import heroBackgroundVideoPoster from "../../../images/hero-background-video-pos
 import DesktopHeader from "./DesktopHeader.astro";
 import branding from "../../../content/general/branding.json";
 import { useI18n } from "../../../i18n";
+import navyLogo from "../../../images/sdg-logo-navy.png";
+import { Image } from "astro:assets";
 
 const { lang } = useI18n(Astro);
 const localizedData = branding[lang as keyof typeof branding];
@@ -26,22 +28,18 @@ const localizedData = branding[lang as keyof typeof branding];
     <source src={heroBackgroundVideo} type="video/mp4" />
   </video>
 
-  <div class="relative flex-1 flex items-center ps-10 md:ps-20">
+  <div class="relative flex-1 flex items-center w-full">
     <div class="absolute inset-0 bg-cream/80 z-0"></div>
-    <div class="relative z-10 md:px-4">
-      <div class="w-full flex items-center gap-6">
-        <hgroup>
-          <h1
-            class="font-didone uppercase text-5xl md:text-8xl text-navy tracking-tight"
-          >
-            Selling Debrecen<br />Group
-          </h1>
-          <p
-            class="font-old-style font-lighter text-xl md:text-3xl text-navy/90"
-          >
-            {localizedData.slogan}
-          </p>
-        </hgroup>
+    <div class="relative z-10 w-full">
+      <div class="w-full flex flex-col items-center gap-6">
+        <Image
+          src={navyLogo}
+          alt="Selling Debrecen Group Logo"
+          class="h-32 md:h-40 w-auto"
+        />
+        <p class="font-old-style font-lighter text-xl md:text-3xl text-navy/90">
+          {localizedData.slogan}
+        </p>
       </div>
     </div>
   </div>
