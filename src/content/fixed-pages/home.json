@@ -1,6 +1,6 @@
 {
   "hu": {
-    "introductionImage": "src/assets/images/agent-placeholder.jpg",
+    "introductionImage": "src/assets/images/iroda.jpeg",
     "introductionLinkText": "Tudjon meg többet rólunk",
     "featuredListingsLinkText": "Összes ingatlan megtekintése",
     "featuredServicesSubtitle": "Átfogó szolgáltatások",
@@ -75,7 +75,7 @@
     "featuredListingsDescription": "Fedezze fel válogatott ingatlanjaink különleges kínálatát. Minden ingatlan gondosan kiválasztott, hogy az Ön igényeinek megfelelő otthont találhassa meg Debrecenben."
   },
   "en": {
-    "introductionImage": "src/assets/images/agent-placeholder.jpg",
+    "introductionImage": "src/assets/images/iroda.jpeg",
     "introductionLinkText": "Learn more about us",
     "featuredListingsLinkText": "View all properties",
     "featuredServicesSubtitle": "Comprehensive services",
@@ -150,7 +150,7 @@
     "featuredListingsDescription": "Discover our special selection of  properties. Each property has been carefully selected to help you find a home in Debrecen that meets your needs."
   },
   "de": {
-    "introductionImage": "src/assets/images/agent-placeholder.jpg",
+    "introductionImage": "src/assets/images/iroda.jpeg",
     "introductionLinkText": "Erfahren Sie mehr über uns",
     "featuredListingsLinkText": "Alle anzeigen",
     "featuredServicesSubtitle": "Umfassende Dienstleistungen",
