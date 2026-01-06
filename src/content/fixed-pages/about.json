@@ -1,7 +1,7 @@
 {
   "hu": {
     "whyDebrecen": "Debrecen dinamikusan fejlődő város, amely ötvözi a hagyományos értékeket a modern lehetőségekkel. Magyarország második legnagyobb városaként széles spektrumú ingatlanokat kínál: a csendes, zöldövezeti családi házaktól a belváros pezsgő lakásáig.",
-    "introductionImage": "src/assets/images/agent-placeholder.jpg",
+    "introductionImage": "src/assets/images/iroda.jpeg",
     "titleImage": "src/assets/images/for-buyers.jpg",
     "storyTitle": "A mi történetünk",
     "storyDescription": "Több mint egy évtizede vagyunk jelen Debrecen ingatlanpiacán. Amit egyszerű küldetéssel indítottunk – segíteni az embereknek megtalálni álmaik otthonát – mára a helyi ingatlanközvetítés egyik legmegbízhatóbb nevévé váltunk.",
@@ -36,7 +36,7 @@
   },
   "en": {
     "whyDebrecen": "Debrecen is a dynamically developing city that combines traditional values ​​with modern opportunities. As the second largest city in Hungary, it offers a wide range of real estate: from quiet, green family houses to vibrant apartments in the city center.",
-    "introductionImage": "src/assets/images/agent-placeholder.jpg",
+    "introductionImage": "src/assets/images/iroda.jpeg",
     "titleImage": "src/assets/images/for-buyers.jpg",
     "storyTitle": "Our Story",
     "storyDescription": "We have been present in the Debrecen real estate market for over a decade. What started with a simple mission – to help people find the home of their dreams – has now become one of the most trusted names in local real estate brokerage.",
@@ -71,7 +71,7 @@
   },
   "de": {
     "whyDebrecen": "Debrecen ist eine dynamisch wachsende Stadt, die traditionelle Werte mit modernen Möglichkeiten verbindet. Als zweitgrößte Stadt Ungarns bietet sie ein breites Spektrum an Immobilien: von ruhigen, grünen Einfamilienhäusern bis hin zu lebhaften Apartments im Stadtzentrum.",
-    "introductionImage": "src/assets/images/agent-placeholder.jpg",
+    "introductionImage": "src/assets/images/iroda.jpeg",
     "titleImage": "src/assets/images/for-buyers.jpg",
     "storyTitle": "Unsere Story",
     "storyDescription": "Wir sind seit über einem Jahrzehnt auf dem Immobilienmarkt von Debrecen präsent. Was mit einer einfachen Mission begann – Menschen dabei zu helfen, ihr Traumhaus zu finden – hat sich mittlerweile zu einem der vertrauenswürdigsten Namen in der lokalen Immobilienbranche entwickelt.",
