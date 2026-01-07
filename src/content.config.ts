@@ -8,7 +8,13 @@ const listingsCollection = defineCollection({
     const entries = [];
     for (const file of filesInDir) {
       const filePath = `./src/content/listings/${file}`;
+
+      if (!filePath.endsWith(".json")) {
+        continue;
+      }
+
       const fileContent = await readFile(filePath, "utf-8");
+
       const entry = JSON.parse(fileContent);
       const lang = file.split(".")[1];
       entries.push({
